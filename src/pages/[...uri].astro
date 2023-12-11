@@ -1,0 +1,93 @@
+---
+export const prerender = true;
+import Layout from "../layouts/Layout.astro";
+
+import Archive from "../components/templates/Archive.astro";
+import Single from "../components/templates/Single.astro";
+import SingleNewsArticle from "../components/templates/SingleNewsArticle.astro";
+import SingleGamePage from "../components/templates/SingleGamePage.astro";
+import NewsArchiveCategory from "../components/templates/NewsArchiveCategory.astro";
+import SingleCasinoSchool from "../components/templates/SingleCasinoSchool.astro";
+import { getNodeByURI, getAllUris } from "../lib/api";
+import SingleKnowledgeBase from "../components/templates/SingleKnowledgeBase.astro";
+import GuidesSectionArchive from "../components/templates/GuidesSectionArchive.astro";
+const uri = `/${Astro.params.uri}/`;
+const data = await getNodeByURI(uri);
+const node = data.nodeByUri;
+
+
+//console.log(node.basepress.edges.map(item => item.node.title));
+// Access the slug value if it exists in the node
+//const slug = node.slug || null; // Replace null with a default value if needed
+
+// Now you have both uri and slug available
+//console.log("URI:", uri);
+//console.log("Slug:", slug);
+//console.log(node.__typename);
+
+export async function getStaticPaths(){
+    return await getAllUris();
+}
+
+function resolveContentTemplate(node){ 
+    let template;
+    switch(node.__typename){
+        case 'Post':
+            // Check if the uri includes the word "news"
+            if (uri.includes('news')) {
+                template = SingleNewsArticle;
+            }
+            else {
+                template = SingleGamePage;
+            }
+            break; 
+
+        case 'Category':
+
+            if (uri.includes('news')) {
+                template = NewsArchiveCategory;
+            }
+            else {
+                template = Archive;
+            }
+            break; 
+            
+        case 'Page':
+
+            if(uri.includes('casino-school')){
+                template = SingleCasinoSchool;
+            }
+            else{
+                template = Single;
+            }
+            break; 
+
+        case 'Basepress':
+            template = SingleKnowledgeBase;
+            break;
+            
+        case 'SectionBasepress':
+            template = GuidesSectionArchive;
+            break;     
+        
+        case 'Tag':
+            template = Archive;
+            break; 
+        default: 
+            template = Single;
+    }
+
+    return template;
+}
+
+const Template = resolveContentTemplate(node)
+
+---
+
+<Layout 
+ title={ node.title || node.name}
+>
+	<main>
+        <Template node={node}></Template>
+	</main>
+</Layout>

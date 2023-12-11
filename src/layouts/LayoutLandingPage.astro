@@ -1,0 +1,92 @@
+---
+interface Props {
+  title: string;
+}
+
+const { title } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Astro description" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+      <style>
+
+@font-face {
+    font-family: 'Gilroy-Light';
+    src: url('/fonts/Gilroy-Light.woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gilroy-Bold';
+    src: url('/fonts/Gilroy-Bold.woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gilroy-Medium';
+    src: url('/fonts/Gilroy-Medium.woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gilroy-Regular';
+    src: url('/fonts/Gilroy-Regular.woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Gilroy-ExtraBold';
+    src: url('/fonts/Gilroy-ExtraBold.woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+</style>
+   
+  </head>
+  <body>
+    <slot />
+
+    <script>
+      const termsButtons = document.querySelectorAll('.terms');
+      const popupSections = document.querySelectorAll('.popup');
+      const closeButtons = document.querySelectorAll('.close');
+  
+      termsButtons.forEach((btn, index) => {
+          btn.addEventListener('click', () => {
+              // Use the specific index to access the corresponding popupSection
+              popupSections[index].classList.remove('hidden');
+          });
+      });
+  
+      closeButtons.forEach((closeButton, index) => {
+          closeButton.addEventListener('click', () => {
+              // Use the specific index to access the corresponding popupSection
+              popupSections[index].classList.add('hidden');
+          });
+      });
+  </script>
+  
+  
+  
+
+  </body>
+
+</html>

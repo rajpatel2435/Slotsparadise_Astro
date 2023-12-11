@@ -1,0 +1,40 @@
+---
+import LayoutLandingPage from "../../layouts/LayoutLandingPage.astro";
+import HeaderLandingPage from "../../components/LandingPage/HeaderLandingPage.astro"
+import DesktopDesign from "../../components/LandingPage/DesktopDesign.astro"
+import TabLandingPage from "../../components/LandingPage/TabLandingPage.astro"
+import MobileLandingPage from "../../components/LandingPage/MobileLandingPage.astro"
+
+---
+<LayoutLandingPage title="Roulette-online" />
+
+    <div class="main flex flex-col lg:flex-row">
+        <div class="main-header">
+            <HeaderLandingPage />
+        </div>
+        <div class="main-content w-full">
+            <div class="desktop-design hidden lg:block">
+                <DesktopDesign  h1= "250%" h2="UP TO $2,500" logo_image="https://slotsparadise.com/the-beach/images/2023/01/live-slot-logo.png" bg_image = "https://slotsstg.wpengine.com/wp-content/uploads/2023/01/SlotsParadise-LPs-Roulette.png" 
+                                footer_image = "https://slotsparadise.com/the-beach/images/2023/01/live-dealer-footer-banner.png" bg_btn = "bg-[#4b1e5e]"/> 
+            </div>
+
+            <div class="tab-design hidden md:block lg:hidden">
+                <TabLandingPage h1= "250%" h2="$2,500" logo_image="https://slotsparadise.com/the-beach/images/2023/01/live-slot-logo.png" bg_image = "https://slotsstg.wpengine.com/wp-content/uploads/2023/01/SlotsParadise-LPs-Roulette.png" 
+                                footer_image_1 = "https://slotsstg.wpengine.com/the-beach/images/2023/01/support.png"
+                                footer_image_2 = "https://slotsstg.wpengine.com/the-beach/images/2023/01/crypto-currency.png" bg_btn = "bg-[#4b1e5e]"/> 
+            </div>
+
+            <div class="mobile-design block md:hidden">
+                <MobileLandingPage h1= "250%" h2="UP TO $2,500" logo_image="https://slotsparadise.com/the-beach/images/2023/01/live-slot-logo.png" bg_image = "https://slotsstg.wpengine.com/wp-content/uploads/2023/01/SlotsParadise-LPs-Roulette-mob.png" 
+                                footer_image_1 = "https://slotsstg.wpengine.com/the-beach/images/2023/01/support.png"
+                                footer_image_2 = "https://slotsstg.wpengine.com/the-beach/images/2023/01/crypto-currency.png" bg_btn = "bg-[#4b1e5e]"/> 
+            </div>
+              
+        </div>
+
+        
+    </div>
+    
+  
+      
+      

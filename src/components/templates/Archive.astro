@@ -1,0 +1,20 @@
+---
+//import SingleNewsArticleCard from '../SingleNewsArticleCard.astro';
+const { node } = Astro.props;
+//console.log(node.children.edges[0].node.posts.edges[0].node.title);
+---     
+
+
+<!-- Page to be designed for Archive -->
+
+ <h1>{node.name} - Archive</h1>
+
+<!-- { node.children.edges.map(childEdge =>
+  childEdge.node.posts.edges.map(post =>{
+    return (
+        <SingleNewsArticleCard post= {post}></SingleNewsArticleCard >
+    )
+  }
+    
+  )
+)} -->

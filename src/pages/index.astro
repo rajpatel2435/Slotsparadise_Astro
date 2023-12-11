@@ -1,0 +1,132 @@
+---
+import Layout from "../layouts/Layout.astro";
+import HomePosts from "../components/Home/HomePosts.astro";
+import CasinoNews from "../components/Home/CasinoNews.astro";
+import OnlineCasinoGuides from "../components/Home/OnlineCasinoGuides.astro";
+import Promos from "../components/Home/Promos.astro";
+import Recommend from "../components/Home/Recommend.astro";
+import Reviews from "../components/Reviews.astro"
+import WhySlots from "../components/Home/WhySlots.astro";
+---
+
+<Layout title="Welcome to Astro.">
+  <main>
+    <section class="top_casino_section max-w-[1440px] mx-auto">
+      <div class="home-first-column">
+        <div class="the-beach-new-page">
+          <h1
+            class="wp-block-heading text-center text-3xl sm:text-[40px] font-bold capitalize font-giloryBold"
+          >
+            Top casino games to play online
+          </h1>
+
+          <div
+            class="beach-games flex justify-center items-center sm:justify-between mt-10 flex-wrap font-giloryBold"
+          >
+            <div class="w-full sm:w-1/2 md:w-1/4 p-4">
+              <div
+                class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom"
+              >
+                <figure class="">
+                  <img
+                    class="w-full"
+                    width="686"
+                    height="386"
+                    src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-blackjack.webp"
+                    alt=""
+                  />
+                </figure>
+
+                <h3 class="image-block-text font-semibold py-3 text-2xl">
+                  BlackJack
+                </h3>
+              </div>
+            </div>
+
+            <div class="w-full sm:w-1/2 md:w-1/4 p-4">
+              <div
+                class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom"
+              >
+                <figure class="">
+                  <img
+                    class="w-full"
+                    width="686"
+                    height="386"
+                    src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-slots-1.webp"
+                    alt=""
+                  />
+                </figure>
+
+                <h3 class="image-block-text font-semibold py-3 text-2xl">
+                  Slots
+                </h3>
+              </div>
+            </div>
+            <div class="w-full sm:w-1/2 md:w-1/4 p-4">
+              <div
+                class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom"
+              >
+                <figure class="">
+                  <img
+                    class="w-full"
+                    width="686"
+                    height="386"
+                    src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-roulette.webp"
+                    alt=""
+                  />
+                </figure>
+
+                <h3 class="image-block-text font-semibold py-3 text-2xl">
+                  Roulette
+                </h3>
+              </div>
+            </div>
+
+            <div class="w-full sm:w-1/2 md:w-1/4 p-4">
+              <div
+                class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom"
+              >
+                <figure class="">
+                  <img
+                    class="w-full"
+                    width="686"
+                    height="386"
+                    src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-baccarat.webp"
+                    alt=""
+                  />
+                </figure>
+
+                <h3 class="image-block-text font-semibold py-3 text-2xl">
+                  Table Games
+                </h3>
+              </div>
+            </div>
+          </div>
+
+          <div class="">
+            <div class="more-casino-games-btn text-center">
+              <a
+                class="mt-5 bg-[#a64485] inline-block text-white font-giloryExtrabold text-lg px-10 py-2 rounded-[25px] font-semibold uppercase hover:bg-[#ff93aa] cursor-pointer transition-all"
+                >More Casino Games</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <HomePosts />
+    <CasinoNews />
+    <OnlineCasinoGuides />
+    <div class="review_container flex flex-col lg:flex-row max-w-[1440px] mx-auto px-4">
+     <div class="w-full lg:w-[64%] mr-[5%]"><WhySlots /></div> 
+     <div class="w-full lg:w-[31%]"><Reviews /></div>
+    </div>
+    
+    <Promos />
+    <Recommend />
+    
+  </main>
+</Layout>
+
+

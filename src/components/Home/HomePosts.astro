@@ -1,0 +1,74 @@
+---
+import { wpquery } from '../../data/wordpress';
+import { Image } from "astro:assets";
+
+const data = await wpquery({
+  query: `
+  query HomePosts {
+  posts(where: {in: [992, 1244, 1285, 1287, 1250, 1289, 1252, 2218]}) {
+    edges {
+      node {
+        title
+        slug
+        featuredImage {
+          node {
+            altText
+            title
+            sourceUrl
+          }
+        }
+        link
+      }
+    }
+  }
+}
+  `,
+});
+---
+
+<!-- Slider main container -->
+<div class="swiper swiper1 py-20 my-12 bg-[#eee]">
+
+  <div class=" flex justify-between px-2 mb-4">
+    <h3 class="text-[#ff688b] text-3xl font-bold font-giloryExtrabold">Game Reviews</h3>
+    <h3><a href="" class="text-lg font-bold text-[#1c8fdf] font-giloryRegular">More Game Reviews</a></h3>
+  </div>
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    {
+      data.posts.edges.map((post: any) => (
+    <!-- Slides -->
+      <article class="home-slider-article swiper-slide rounded-[3px] bg-white shadow-homePosts overflow-hidden h-[283px]">
+        <a class="entry-featured-image-url mb-5" href={post.node.link}>
+          <Image
+            class="games-Image reco w-full h-[228px]"
+            width="328"
+            height="223"
+            alt={post.node.title}
+            title={post.node.title}
+            src={post.node.featuredImage.node.sourceUrl}
+          />
+        </a>
+
+        <h4 class="entry-title pl-5 h-[55px] leading-[55px] text-[#2f0536] font-extrabold text-[18px] whitespace-nowrap font-gilorybold">
+          <a href="">{post.node.title}</a>
+        </h4>
+      </article>
+      ))
+  }
+
+  </div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+</div>
+
+
+
+<script src="../../scripts/local.js"></script>
+
+
+
+

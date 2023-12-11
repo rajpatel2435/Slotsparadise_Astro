@@ -1,0 +1,26 @@
+{
+  "name": "regular-rotation",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.8.7",
+    "@astrojs/netlify": "^3.1.1",
+    "@astrojs/tailwind": "^5.0.3",
+    "@types/swiper": "^6.0.0",
+    "astro": "^4.0.3",
+    "astro-icon": "^0.8.1",
+    "graphql": "^16.8.1",
+    "swiper": "^11.0.1",
+    "tailwindcss": "^3.3.6"
+  },
+  "devDependencies": {
+    "dotenv": "^16.3.1"
+  }
+}

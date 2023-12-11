@@ -1,0 +1,59 @@
+---
+import { wpquery } from '../../data/wordpress';
+
+const data = await wpquery({
+  query: `
+  query RecommendPosts {
+  posts(where: {categoryId: 61}, first: 5) {
+    edges {
+      node {
+        title
+        featuredImage {
+          node {
+            sourceUrl
+            title
+          }
+        }
+        link
+      }
+    }
+  }
+}
+  `,
+});
+---
+
+<section class="recommended_block max-w-[1440px] mx-auto px-4 my-16">
+
+    <div>
+        <div class="title">
+            <h2 class="text-[#ff688b] pb-4 font-medium font-giloryExtrabold text-3xl">Recommended</h2>
+        </div>
+
+        <div class="recommend_block grid grid-cols-1 sm:grid-cols-3 md:grid-cols-5 gap-10 overflow-hidden">
+            {
+              data.posts.edges.map((post: any) => (
+            <!-- Slides -->
+              <article class="w-full">
+                <a class="mb-5" href={post.node.link}>
+                  <img
+                    class="w-full rounded-lg"
+                    width="328"
+                    height="223"
+                    alt={post.node.title}
+                    title={post.node.title}
+                    src={post.node.featuredImage.node.sourceUrl}
+                  />
+                </a>
+        
+                <h4 class="entry-title leading-6 text-[#2f0536] font-bold text-[18px] font-giloryRegular">
+                  <a href={post.node.link}>{post.node.title}</a>
+                </h4>
+              </article>
+              ))
+          }
+        
+          </div>
+    </div>
+    
+</section>
