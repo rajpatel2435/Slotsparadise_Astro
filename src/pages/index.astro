@@ -1,11 +1,12 @@
 ---
+export const prerender = true;
 import Layout from "../layouts/Layout.astro";
 import HomePosts from "../components/Home/HomePosts.astro";
 import CasinoNews from "../components/Home/CasinoNews.astro";
 import OnlineCasinoGuides from "../components/Home/OnlineCasinoGuides.astro";
 import Promos from "../components/Home/Promos.astro";
 import Recommend from "../components/Home/Recommend.astro";
-import Reviews from "../components/Reviews.astro"
+import Reviews from "../components/Reviews.astro";
 import WhySlots from "../components/Home/WhySlots.astro";
 ---
 
@@ -118,15 +119,14 @@ import WhySlots from "../components/Home/WhySlots.astro";
     <HomePosts />
     <CasinoNews />
     <OnlineCasinoGuides />
-    <div class="review_container flex flex-col lg:flex-row max-w-[1440px] mx-auto px-4">
-     <div class="w-full lg:w-[64%] mr-[5%]"><WhySlots /></div> 
-     <div class="w-full lg:w-[31%]"><Reviews /></div>
+    <div
+      class="review_container flex flex-col lg:flex-row max-w-[1440px] mx-auto px-4"
+    >
+      <div class="w-full lg:w-[64%] mr-[5%]"><WhySlots /></div>
+      <div class="w-full lg:w-[31%]"><Reviews /></div>
     </div>
-    
+
     <Promos />
     <Recommend />
-    
   </main>
 </Layout>
-
-

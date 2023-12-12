@@ -1,5 +1,4 @@
 ---
-export const prerender = true;
 import Layout from "../layouts/Layout.astro";
 
 import Archive from "../components/templates/Archive.astro";
@@ -15,79 +14,70 @@ const uri = `/${Astro.params.uri}/`;
 const data = await getNodeByURI(uri);
 const node = data.nodeByUri;
 
-
 //console.log(node.basepress.edges.map(item => item.node.title));
 // Access the slug value if it exists in the node
-//const slug = node.slug || null; // Replace null with a default value if needed
+const slug = node.slug || null; // Replace null with a default value if needed
 
 // Now you have both uri and slug available
-//console.log("URI:", uri);
-//console.log("Slug:", slug);
-//console.log(node.__typename);
+console.log("URI:", uri);
+console.log("Slug:", slug);
+console.log(node.__typename);
 
-export async function getStaticPaths(){
-    return await getAllUris();
+export async function getStaticPaths() {
+  return await getAllUris();
 }
 
-function resolveContentTemplate(node){ 
-    let template;
-    switch(node.__typename){
-        case 'Post':
-            // Check if the uri includes the word "news"
-            if (uri.includes('news')) {
-                template = SingleNewsArticle;
-            }
-            else {
-                template = SingleGamePage;
-            }
-            break; 
+function resolveContentTemplate(node) {
+  let template;
+  switch (node.__typename) {
+    case "Post":
+      // Check if the uri includes the word "news"
+      if (uri.includes("news")) {
+        template = SingleNewsArticle;
+      } else {
+        template = SingleGamePage;
+      }
+      break;
 
-        case 'Category':
+    case "Category":
+      if (uri.includes("news")) {
+        template = NewsArchiveCategory;
+      } else {
+        template = Archive;
+      }
+      break;
 
-            if (uri.includes('news')) {
-                template = NewsArchiveCategory;
-            }
-            else {
-                template = Archive;
-            }
-            break; 
-            
-        case 'Page':
+    case "Page":
+      if (uri.includes("casino-school")) {
+        template = SingleCasinoSchool;
+      } else {
+        template = Single;
+      }
+      break;
 
-            if(uri.includes('casino-school')){
-                template = SingleCasinoSchool;
-            }
-            else{
-                template = Single;
-            }
-            break; 
+    case "Basepress":
+      template = SingleKnowledgeBase;
+      break;
 
-        case 'Basepress':
-            template = SingleKnowledgeBase;
-            break;
-            
-        case 'SectionBasepress':
-            template = GuidesSectionArchive;
-            break;     
-        
-        case 'Tag':
-            template = Archive;
-            break; 
-        default: 
-            template = Single;
-    }
+    case "SectionBasepress":
+      template = GuidesSectionArchive;
+      break;
 
-    return template;
+    case "Tag":
+      template = Archive;
+      break;
+    default:
+      template = Single;
+  }
+
+  return template;
 }
 
-const Template = resolveContentTemplate(node)
-
+const Template = resolveContentTemplate(node);
 ---
 
-<Layout 
- title={ node.title || node.name}
->
-	<main>
-        <Template node={node}></Template>
-	</main>
+<Layout title={node.title || node.name}>
+  <main>
+    <Template node={node} />
+  </main>
 </Layout>
