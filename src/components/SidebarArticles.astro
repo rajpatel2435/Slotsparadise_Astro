@@ -1,7 +1,6 @@
 ---
-
 import { Image } from "astro:assets";
-import { wpquery } from '../data/wordpress';
+import { wpquery } from "../data/wordpress";
 
 const data = await wpquery({
   query: `
@@ -24,32 +23,38 @@ const data = await wpquery({
 }
   `,
 });
---- 
+---
 
-{data.posts.edges.slice(1, 4).map((post: any) =>
-  <div class="right_block">
+{
+  data.posts.edges.slice(1, 4).map((post: any) => (
+    <div class="right_block">
       <article class=" flex items-center justify-between border-b pb-4">
-  <a class="block w-[40%] h-40 rounded-lg overflow-hidden" href={post.node.link}>
-    <Image
-      class="w-full h-40 object-cover shadow-casinoNews"
-      width="214"
-      height="160"
-      alt={post.node.title}
-      title={post.node.title}
-      src={post.node.featuredImage?.node?.sourceUrl}
-    />
-  </a>
-   <div class="w-[55%]">
-    <h4 class="text-[#6A6C6E] font-giloryBold text-xl leading-[1.1]">
-      <a href="{post.node.link}">{post.node.title}</a>
-    </h4>
-    <div class="line-clamp-3 mt-2"><a class="text-[#2F0536] font-giloryRegular text-base font-semibold" href={post.node.link} set:html={post.node.excerpt}></a></div>
-
-  </div>
-</article>
-
-  </div>
-
-)}
-   
-                
+        <a
+          class="block w-[40%] h-40 rounded-lg overflow-hidden"
+          href={post.node.link}
+        >
+          <Image
+            class="w-full h-40 object-cover shadow-casinoNews"
+            width="214"
+            height="160"
+            alt={post.node.title}
+            title={post.node.title}
+            src={post.node.featuredImage?.node?.sourceUrl}
+          />
+        </a>
+        <div class="w-[55%]">
+          <h4 class="text-[#6A6C6E] font-giloryBold text-xl leading-[1.1]">
+            <a href="{post.node.link}">{post.node.title}</a>
+          </h4>
+          <div class="line-clamp-3 mt-2">
+            <a
+              class="text-[#2F0536] font-giloryRegular text-base font-semibold"
+              href={post.node.link}
+              set:html={post.node.excerpt}
+            />
+          </div>
+        </div>
+      </article>
+    </div>
+  ))
+}

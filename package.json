@@ -12,6 +12,7 @@
   "dependencies": {
     "@apollo/client": "^3.8.7",
     "@astrojs/netlify": "^3.1.1",
+    "@astrojs/node": "^7.0.1",
     "@astrojs/tailwind": "^5.0.3",
     "@types/swiper": "^6.0.0",
     "astro": "^4.0.3",
