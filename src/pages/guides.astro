@@ -1,5 +1,5 @@
 ---
-export const prerender = true;
+/* export const prerender = true; */
 import Layout from "../layouts/Layout.astro";
 import CasinoGuideSidebar from "../components/CasinoGuideSidebar.astro";
 import { CasinoGuidesArticles } from "../lib/api";
@@ -30,9 +30,7 @@ const sections = data.sectionsBasepress.edges;
           <span
             ><span><a href="https://slotsparadise.com/the-beach/">Home</a></span
             > &gt;
-            <span
-              ><a href="http://localhost:3000/guides/">Casino Guides</a></span
-            >
+            <span><a href="/guides/">Casino Guides</a></span>
           </span>
         </p>
 
