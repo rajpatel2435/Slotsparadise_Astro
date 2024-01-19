@@ -1,6 +1,14 @@
 ---
-import CasinoSchoolSidebar from "../CasinoSchoolSidebar.astro";
+import CasinoGuideSidebar from "../CasinoGuideSidebar.astro";
+import SearchWidget from "../SearchWidget.astro";
+import { formatDate } from "../../scripts/utils";
+import Layout from "../../layouts/Layout.astro";
 const { node } = Astro.props;
+
+//console.log(node);
+//console.log(node.databaseId);
+
+var postId = node.databaseId;
 
 const uriParts = node.uri.split("/");
 // Get the second-to-last value for guides categories
@@ -9,50 +17,90 @@ const guidesCategory = guidesCat.replace(/-/g, " ");
 //console.log(guidesCat);
 ---
 
-<div class="main_container">
-  <div
-    class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/08/casino-guides-header-v23.jpg')] bg-cover bg-center h-52 flex items-center text-white font-giloryRegular"
-  >
-    <div class="header-content-row w-[80%] mx-auto">
-      <div class="page-title">
-        <h1 class="entry-title text-2xl md:text-3xl font-giloryExtrabold mb-2">
-          {node.title}
-        </h1>
+<Layout title="casino guide">
+  <div class="main_container">
+    <div
+      class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/07/thebeach-guides.jpg')] bg-cover bg-center py-16 flex items-center text-white font-giloryRegular"
+    >
+      <div class="header-content-row w-[80%] mx-auto">
+        <div class="page-title text-center">
+          <h1
+            class="entry-title text-2xl md:text-3xl font-giloryExtrabold mb-2 text-center"
+          >
+            Online Casino Guides
+          </h1>
+
+          <SearchWidget />
+        </div>
       </div>
     </div>
-  </div>
 
-  <div
-    class="casino_school_main max-w-[1440px] w-4/5 mx-auto px-2 mt-10 font-giloryRegular"
-  >
-    <div class="post-bread font-semibold">
-      <div class="">
-        <p>
-          <span
-            ><span><a href="https://slotsparadise.com/the-beach/">Home</a></span
-            > &gt;
-            <span><a href="/guides/">Casino Guides</a></span> &gt;
+    <div
+      class="casino_school_main max-w-[1200px] w-4/5 mx-auto px-2 mt-10 font-giloryRegular"
+    >
+      <div class="post-bread font-semibold text-[#555]">
+        <div class="">
+          <p>
             <span
-              ><a href=`/guides/${guidesCat}` class="capitalize"
-                >{guidesCategory}</a
-              ></span
-            > &gt;
-            <span><a href="#">{node.title}</a></span></span
-          >
-        </p>
-      </div>
+              ><span
+                ><a href="https://slotsparadise.com/the-beach/">Home</a></span
+              > &gt;
+              <span><a href="/guides/">Casino Guides</a></span> &gt;
+              <span
+                ><a href=`/guides/${guidesCat}` class="capitalize"
+                  >{guidesCategory}</a
+                ></span
+              > &gt;
+              <span><a href="#">{node.title}</a></span></span
+            >
+          </p>
+        </div>
 
-      <div
-        class="casino_single_container mt-10 font-giloryRegular font-semibold"
-      >
-        <div class="inner_container flex flex-col md:flex-row justify-between">
-          <CasinoSchoolSidebar />
-          <div class="content-container w-full md:w-3/5 mt-5 md:mt-0">
-            <h1 class="text-[#ff688b] font-giloryExtrabold">{node.title}</h1>
-            <article set:html={node.content} />
+        <div
+          class="casino_single_container mt-10 font-giloryRegular font-semibold"
+        >
+          <div
+            class="inner_container flex flex-col md:flex-row justify-between"
+          >
+            <CasinoGuideSidebar />
+            <div class="content-container w-full md:w-[70%] mt-5 md:mt-0">
+              <h1 class="text-[#ff688b] font-giloryExtrabold">{node.title}</h1>
+              <div class="bpress-post-meta text-[#777] text-sm mb-4 opacity-70">
+                <span class="bpress-post-views inline-block mr-4"
+                  ><span class="bp-eye inline-block mr-1"
+                    ><i class="fa-solid fa-eye"></i></span
+                  ><span id="view-container"></span></span
+                >
+                <span class="bpress-post-date inline-block mr-4"
+                  ><span class="bp-clock inline-block mr-1"
+                    ><i class="fa-solid fa-clock"></i></span
+                  >{formatDate(node.date)}</span
+                >
+              </div>
+              <article set:html={node.content} />
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</Layout>
+
+<script define:vars={{ postId }}>
+  document.addEventListener("DOMContentLoaded", function () {
+    const ajaxurl = "https://slotsstg.wpengine.com/wp-admin/admin-ajax.php";
+    // Make the AJAX request
+    fetch(ajaxurl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      },
+      body: `action=display_basepress_views&databaseId=${postId}`,
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        //console.log(data); // Log the data received from the server
+        document.getElementById("view-container").innerHTML = data;
+      });
+  });
+</script>

@@ -1,5 +1,4 @@
 ---
-
 //console.log(lastPart);
 
 const query = `query GetPostsBySlug {
@@ -10,7 +9,7 @@ const query = `query GetPostsBySlug {
         blocks {
           ... on CoreShortcodeBlock {
             attributesJSON
-            dynamicContent
+            originalContent
           }
         }
       }
@@ -18,43 +17,26 @@ const query = `query GetPostsBySlug {
   }
 }`;
 
-
-
-const response = await fetch(
-  `https://slotsstg.wpengine.com/graphql`,
-  {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({ query }),
+const response = await fetch(`https://slotsstg.wpengine.com/graphql`, {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
   },
-).then((response) => response.json());
+  body: JSON.stringify({ query }),
+}).then((response) => response.json());
 
 //console.log(response);
 const posts = response.data.posts.edges;
-
 ---
 
-<!-- Your container to display the shortcode result -->
+<!-- Your container to display the shortcode result -->{
+  posts.map((post) => {
+    const firstDynamicBlock = post.node.blocks.find(
+      (block) => block.originalContent
+    );
 
-
- {posts.map((post) => {
-  
-    const firstDynamicBlock = post.node.blocks.find((block) => block.dynamicContent);
-  
     if (firstDynamicBlock) {
-      return (
-            <div>
-              {firstDynamicBlock.dynamicContent}
-            </div>
-          );
-        }
+      return <div>{firstDynamicBlock.originalContent}</div>;
     }
-    )}  
-
-
-
-
-
-
+  })
+}

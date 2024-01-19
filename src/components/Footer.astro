@@ -2,315 +2,791 @@
 import { Image } from "astro:assets";
 ---
 
+<!-- Scroll to top button -->
+<button
+  class="scroll-top bg-gray-400 rounded-lg cursor-pointer fixed bottom-[125px] text-white transition-all duration-200 ease-in-out h-[50px] w-[50px] z-50"
+>
+  <div class="arrow up"></div>
+</button>
 
-<footer class="new-footer mt-16">
-    <div class="footer-palm bg-[#a64485]">
+<footer class="new-footer">
+  <div class="footer-palm bg-[#a64485]">
     <div class="footer-lg">
-    <ul class="social_media_follow max-w-[300px] mx-auto grid grid-cols-4 grid-gap-5 py-8">
-    <li>
-    <a href="https://www.facebook.com/Slots-Paradise-Online-Casino-102884869007853" class="icon"  title="Follow on Facebook" target="_blank">
-    <Image width={50} height={50} src = "https://slotspressdev.wpengine.com/wp-content/themes/slotsparadise/images/facebook-f.ico" alt="Follow on Facebook" title="Follow on Facebook"></a>
-</li>
-    
-    <li>
-    <a href="https://twitter.com/SlotsParadiseOC" class="icon"  title="Follow on X" target="_blank">
-        <Image width={50} height={50} src = "https://slotspressdev.wpengine.com/wp-content/themes/slotsparadise/images/twitterx.png" alt="Follow on X" title="Follow on X"></a>
-    </li>
+      <ul
+        class="social_media_follow max-w-[300px] mx-auto grid grid-cols-4 grid-gap-2 py-8"
+      >
+        <li>
+          <a
+            href="https://www.facebook.com/Slots-Paradise-Online-Casino-102884869007853"
+            class="icon"
+            title="Follow on Facebook"
+            target="_blank"
+          >
+            <Image
+              width={35}
+              height={35}
+              src="https://slotspressdev.wpengine.com/wp-content/themes/slotsparadise/images/facebook-f.ico"
+              alt="Follow on Facebook"
+              title="Follow on Facebook"
+            />
+          </a>
 
-    <li>
-    <a href="https://www.instagram.com/slots_paradise/" class="icon" title="Follow on Instagram" target="_blank">
-        <Image width={50} height={50}src = "https://slotspressdev.wpengine.com/wp-content/themes/slotsparadise/images/instagram.png" alt="Follow on Instagram" title="Follow on Instagram"></a></a>
-    </li>
+          <li>
+            <a
+              href="https://twitter.com/SlotsParadiseOC"
+              class="icon"
+              title="Follow on X"
+              target="_blank"
+            >
+              <Image
+                width={35}
+                height={35}
+                src="https://slotspressdev.wpengine.com/wp-content/themes/slotsparadise/images/twitterx.png"
+                alt="Follow on X"
+                title="Follow on X"
+              />
+            </a>
 
-    <li>
-    <a href="https://www.youtube.com/channel/UC5dR09Mik0u19oz77cDZmsw/about" class="icon " title="Follow on Youtube" target="_blank">
-        <Image width={50} height={50}src = "https://slotspressdev.wpengine.com/wp-content/themes/slotsparadise/images/youtube.png" alt="Follow on Youtube" title="Follow on Youtube"></a></a>
-    </li>
-    </ul>
-    </div>
-    </div>
-    
-    
+            <li>
+              <a
+                href="https://www.instagram.com/slots_paradise/"
+                class="icon"
+                title="Follow on Instagram"
+                target="_blank"
+              >
+                <Image
+                  width={35}
+                  height={35}
+                  src="https://slotspressdev.wpengine.com/wp-content/themes/slotsparadise/images/instagram.png"
+                  alt="Follow on Instagram"
+                  title="Follow on Instagram"
+                /></a
+              >
+            </li>
 
-    <!-- Slider main container -->
-<div class="carousel-container px-10 py-5 bg-[#7c2c70] swiper swiper3">
-    <!-- Additional required wrapper -->
-    <div class="swiper-wrapper flex items-center">
-      <!-- Slides -->
-    
-    <div class="swiper-slide">
-    <Image width="195" height="32" alt="zeusplay-icon" title="zeusplay-icon"  src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/zeusplay-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-        <Image width="201" height="32" alt="allwayspin-icon" title="allwayspin-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/allwayspin-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="180" height="48" alt="apollo-icon" title="apollo-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/apollo-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="43" height="48" alt="bet2tech-icon" title="bet2tech-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/bet2tech-ico-1.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="107" height="32" alt="betsoft-icon" title="betsoft-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/betsoft-ico-1.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="130" height="24" alt="bgaming-icon" title="bgaming-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/bgaming-ico-1.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="215" height="32" alt="blue-whale-icon" title="blue-whale-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/blue-whale-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="163" height="32" alt="bolegaming-icon" title="bolegaming-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/bolegaming-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="81" height="56" alt="cool-games-icon" title="cool-games-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/cool-games-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="186" height="32" alt="cyberslot-icon" title="cyberslot-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/cyberslot-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="166" height="32" alt="dragon-gaming-icon" title="dragon-gaming-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/dragon-gaming-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="123" height="32" alt="felix-gaming-icon" title="felix-gaming-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/felix-gaming-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="185" height="40" alt="fresh-deck-ico" title="fresh-deck-ico" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/fresh-deck-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="122" height="40" alt="funky-games-icon" title="funky-games-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/funky-games-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="170" height="32" alt="funta-gaming-icon" title="funta-gaming-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/funta-gaming-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="145" height="32" alt="gamzix-icon" title="gamzix-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/gamzix-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="96" height="48" alt="inbet-icon" title="inbet-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/inbet-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="207" height="48" alt="ka-gaming-icon" title="ka-gaming-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/ka-gaming-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="168" height="32" alt="justplay-icon" title="justplay-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/justplay-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="97" height="32" alt="liw-icon" title="liw-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/zeusplay-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="86" height="48" alt="mg-games-icon" title="mg-games-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/mg-games-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="144" height="32" alt="mr-slotty-icon" title="mr-slotty-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/mr-slotty-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="180" height="48" alt="nucleus-icon" title="nucleus-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/nucleus-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="128" height="32" alt="orbital-icon" title="orbital-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/orbital-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="128" height="32" alt="playbro-icon" title="playbro-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/playbro-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="109" height="48" alt="rival-icon" title="rival-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/rival-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="134" height="48" alt="sa-gaming-icon" title="sa-gaming-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/sa-gaming-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="135" height="40" alt="simpleplay-icon" title="simpleplay-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/simpleplay-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="86" height="56" alt="slot-factory-icon" title="slot-factory-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/slot-factory-ico-1.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="179" height="32" alt="spadegaming-icon" title="spadegaming-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/spadegaming-ico-1.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="166" height="32" alt="superlotto-icon" title="superlotto-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/superlotto-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="92" height="32" alt="spinthon-icon" title="spinthon-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/spinthon-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="139" height="32" alt="super-spade-icon" title="super-spade-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/super-spade-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-        <Image width="228" height="40" alt="thunderspin-icon" title="thunderspin-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/thunderspin-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="122" height="40" alt="triple-profit-games-icon" title="triple-profit-games-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/triple-profit-games-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="164" height="48" alt="turbo-games-icon" title="turbo-games-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/turbo-games-ico.png">
-    </div>
-    
-    <div class="swiper-slide">
-    <Image width="128" height="40" alt="tvbet-icon" title="tvbet-icon" src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/tvbet-ico.png">
-    </div>
-    
+            <li>
+              <a
+                href="https://www.youtube.com/channel/UC5dR09Mik0u19oz77cDZmsw/about"
+                class="icon"
+                title="Follow on Youtube"
+                target="_blank"
+              >
+                <Image
+                  width={35}
+                  height={35}
+                  src="https://slotspressdev.wpengine.com/wp-content/themes/slotsparadise/images/youtube.png"
+                  alt="Follow on Youtube"
+                  title="Follow on Youtube"
+                /></a
+              >
+            </li>
+          </li>
+        </li>
+      </ul>
 
-</div>
-    <!-- If we need navigation buttons -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-  
-  </div>
-    
-    
-    <!--Menu Blocks -->
-<div class="footer-div bg-[#51135a] py-20">
-    <div class="max-w-[1140px] mx-auto grid grid-cols-2 sm:grid-cols-4 gap-5 px-4">
-        <div class="footer_col_1">
+      <!-- Slider main container -->
+      <div class="carousel-container px-10 py-5 bg-[#7c2c70] swiper swiper3">
+        <!-- Additional required wrapper -->
+        <div class="swiper-wrapper flex items-center">
+          <!-- Slides -->
+
+          <div class="swiper-slide">
+            <Image
+              width="195"
+              height="32"
+              alt="zeusplay-icon"
+              title="zeusplay-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/zeusplay-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="201"
+              height="32"
+              alt="allwayspin-icon"
+              title="allwayspin-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/allwayspin-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="180"
+              height="48"
+              alt="apollo-icon"
+              title="apollo-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/apollo-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide bet2tech-icon">
+            <Image
+              width="43"
+              height="48"
+              alt="bet2tech-icon"
+              title="bet2tech-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/bet2tech-ico-1.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="107"
+              height="32"
+              alt="betsoft-icon"
+              title="betsoft-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/betsoft-ico-1.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="130"
+              height="24"
+              alt="bgaming-icon"
+              title="bgaming-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/bgaming-ico-1.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="215"
+              height="32"
+              alt="blue-whale-icon"
+              title="blue-whale-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/blue-whale-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="163"
+              height="32"
+              alt="bolegaming-icon"
+              title="bolegaming-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/bolegaming-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="81"
+              height="56"
+              alt="cool-games-icon"
+              title="cool-games-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/cool-games-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="186"
+              height="32"
+              alt="cyberslot-icon"
+              title="cyberslot-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/cyberslot-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="166"
+              height="32"
+              alt="dragon-gaming-icon"
+              title="dragon-gaming-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/dragon-gaming-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="123"
+              height="32"
+              alt="felix-gaming-icon"
+              title="felix-gaming-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/felix-gaming-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="185"
+              height="40"
+              alt="fresh-deck-ico"
+              title="fresh-deck-ico"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/fresh-deck-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="122"
+              height="40"
+              alt="funky-games-icon"
+              title="funky-games-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/funky-games-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="170"
+              height="32"
+              alt="funta-gaming-icon"
+              title="funta-gaming-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/funta-gaming-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="145"
+              height="32"
+              alt="gamzix-icon"
+              title="gamzix-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/gamzix-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="96"
+              height="48"
+              alt="inbet-icon"
+              title="inbet-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/inbet-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="207"
+              height="48"
+              alt="ka-gaming-icon"
+              title="ka-gaming-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/ka-gaming-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="168"
+              height="32"
+              alt="justplay-icon"
+              title="justplay-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/justplay-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="97"
+              height="32"
+              alt="liw-icon"
+              title="liw-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/zeusplay-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="86"
+              height="48"
+              alt="mg-games-icon"
+              title="mg-games-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/mg-games-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="144"
+              height="32"
+              alt="mr-slotty-icon"
+              title="mr-slotty-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/mr-slotty-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="180"
+              height="48"
+              alt="nucleus-icon"
+              title="nucleus-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/nucleus-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="128"
+              height="32"
+              alt="orbital-icon"
+              title="orbital-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/orbital-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="128"
+              height="32"
+              alt="playbro-icon"
+              title="playbro-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/playbro-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="109"
+              height="48"
+              alt="rival-icon"
+              title="rival-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/rival-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="134"
+              height="48"
+              alt="sa-gaming-icon"
+              title="sa-gaming-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/sa-gaming-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="135"
+              height="40"
+              alt="simpleplay-icon"
+              title="simpleplay-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/simpleplay-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="86"
+              height="56"
+              alt="slot-factory-icon"
+              title="slot-factory-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/slot-factory-ico-1.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="179"
+              height="32"
+              alt="spadegaming-icon"
+              title="spadegaming-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/spadegaming-ico-1.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="166"
+              height="32"
+              alt="superlotto-icon"
+              title="superlotto-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/superlotto-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="92"
+              height="32"
+              alt="spinthon-icon"
+              title="spinthon-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/spinthon-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="139"
+              height="32"
+              alt="super-spade-icon"
+              title="super-spade-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/super-spade-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="228"
+              height="40"
+              alt="thunderspin-icon"
+              title="thunderspin-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/thunderspin-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="122"
+              height="40"
+              alt="triple-profit-games-icon"
+              title="triple-profit-games-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/triple-profit-games-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="164"
+              height="48"
+              alt="turbo-games-icon"
+              title="turbo-games-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/turbo-games-ico.png"
+            />
+          </div>
+
+          <div class="swiper-slide">
+            <Image
+              width="128"
+              height="40"
+              alt="tvbet-icon"
+              title="tvbet-icon"
+              src="https://slotsstg.wpengine.com//wp-content/uploads/2022/07/tvbet-ico.png"
+            />
+          </div>
+        </div>
+        <!-- If we need navigation buttons -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+      </div>
+
+      <!--Menu Blocks -->
+      <div class="footer-div bg-[#51135a] py-20">
+        <div
+          class="max-w-[1140px] mx-auto grid grid-cols-2 sm:grid-cols-4 gap-5 px-4"
+        >
+          <div class="footer_col_1">
             <div class="footer_menu_title">
-                <h4 class="text-[#a64485] md:text-2xl lg:text-3xl font-giloryExtrabold mb-4">Casino Games</h4>
+              <h4
+                class="text-[#a64485] md:text-2xl lg:text-3xl font-giloryExtrabold mb-4"
+              >
+                Casino Games
+              </h4>
             </div>
             <div class="footer-col-menu">
-                <ul id="menu-casino-games" class="list-none text-white">
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/slots">Slots</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/progressive-slots">Progressive Slots</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/table-games">Table Games</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/live-dealer">Live Dealer</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/video-games">Video Poker</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/blackjack">Blackjack</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/jackpot-games">Jackpot Games</a></li>
-                    </ul>
+              <ul id="menu-casino-games" class="list-none text-white">
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com//slots">Slots</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com//progressive-slots"
+                    >Progressive Slots</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/table-games">Table Games</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/live-dealer">Live Dealer</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/video-games">Video Poker</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/blackjack">Blackjack</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/jackpot-games"
+                    >Jackpot Games</a
+                  >
+                </li>
+              </ul>
             </div>
-        </div>
+          </div>
 
-        <div class="footer_col_2">
+          <div class="footer_col_2">
             <div class="footer_menu_title">
-                <h4 class="text-[#a64485] md:text-2xl lg:text-3xl font-giloryExtrabold mb-4">Information</h4>
+              <h4
+                class="text-[#a64485] md:text-2xl lg:text-3xl font-giloryExtrabold mb-4"
+              >
+                Information
+              </h4>
             </div>
             <div class="footer-col-menu">
-                <ul id="menu-footer-information" class="list-none text-white">
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/banking">Banking</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/faq">FAQ’s</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/privacy-policy">Privacy Policy</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/terms-conditions">Terms and Conditions</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/responsible-gaming">Responsible Gaming</a></li>
-                    </ul>
+              <ul id="menu-footer-information" class="list-none text-white">
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/banking">Banking</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/faq">FAQ’s</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/privacy-policy"
+                    >Privacy Policy</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/terms-conditions"
+                    >Terms and Conditions</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/responsible-gaming"
+                    >Responsible Gaming</a
+                  >
+                </li>
+              </ul>
             </div>
-        </div>
+          </div>
 
-        <div class="footer_col_3">
+          <div class="footer_col_3">
             <div class="footer_menu_title">
-                <h4 class="text-[#a64485] md:text-2xl lg:text-3xl font-giloryExtrabold mb-4">In Paradise</h4>
+              <h4
+                class="text-[#a64485] md:text-2xl lg:text-3xl font-giloryExtrabold mb-4"
+              >
+                In Paradise
+              </h4>
             </div>
             <div class="footer-col-menu">
-                <ul id="menu-footer-the-paradise" class="list-none text-white">
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/promotions">Promotions</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/promotions">Welcome Bonus</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/about-us">About Us</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/contact-us">Contact Us</a></li>
-                    </ul>
+              <ul id="menu-footer-the-paradise" class="list-none text-white">
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/promotions">Promotions</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/promotions">Welcome Bonus</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/about-us">About Us</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsparadise.com/contact-us">Contact Us</a
+                  >
+                </li>
+              </ul>
             </div>
-        </div>
+          </div>
 
-        <div class="footer_col_4">
+          <div class="footer_col_4">
             <div class="footer_menu_title">
-                <h4 class="text-[#a64485] md:text-2xl lg:text-3xl font-giloryExtrabold mb-4">The Beach</h4>
+              <h4
+                class="text-[#a64485] md:text-2xl lg:text-3xl font-giloryExtrabold mb-4"
+              >
+                The Beach
+              </h4>
             </div>
             <div class="footer-col-menu">
-                <ul id="menu-footer-the-beach" class="list-none text-white">
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/the-beach/guides/">Casino Guides</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/the-beach/news/">Casino News</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/the-beach/casino-school/">Casino School</a></li>
-                    <li><a class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block" href="https://slotsstg.wpengine.com/the-beach/games/">Game Reviews</a></li>
-                    </ul>
+              <ul id="menu-footer-the-beach" class="list-none text-white">
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsstg.wpengine.com/the-beach/guides/"
+                    >Casino Guides</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsstg.wpengine.com/the-beach/news/"
+                    >Casino News</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsstg.wpengine.com/the-beach/casino-school/"
+                    >Casino School</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="transition-all hover:opacity-[0.7] font-giloryRegular font-semibold pb-2 inline-block"
+                    href="https://slotsstg.wpengine.com/the-beach/games/"
+                    >Game Reviews</a
+                  >
+                </li>
+              </ul>
             </div>
+          </div>
         </div>
-    </div>
- 
-    
-</div>
-    
-    
+      </div>
 
-    <!--Slots Paradise Online Casino Block -->
-    
-    <div class="bg-[#2f0536] text-[#a64485] py-16 font-giloryRegular font-semibold leading-6 text-sm border-b-[10px] border-b-[#51135a] px-4">
+      <!--Slots Paradise Online Casino Block -->
+
+      <div
+        class="bg-[#2f0536] text-[#a64485] py-16 font-giloryRegular font-semibold leading-6 text-sm border-b-[10px] border-b-[#51135a] px-4"
+      >
         <div class="max-w-[1440px] mx-auto text-center">
-            <div>
-            <h3 class="md:text-xl lg:text-2xl font-giloryExtrabold mb-6">Slots Paradise Online Casino</h3>
-            <p class="mb-5"><strong>Online casino games:</strong> Slots Paradise casino is committed to offering you a vast selection of games including slots, table games, roulette, craps, dice games, scratch cards and unparalleled live dealer games, so you can follow every move and action of the dealers. Here, you’ll also find dozens of fun and fast-paced TV games like no others. We’ve added over 30 game providers to ensure you a groundbreaking game variety, so you’ll never run out of options. Stick around, because every month we keep adding new exciting titles you won’t want to miss.</p>
-            <p class="mb-5"><strong>Join, Play, Win:</strong> Casino is about relaxing. To make things easy, no download is required to access our games. It only takes a few simple steps to create an account and start playing lots of high-paying games wherever you are, whenever you want. Be a part of the thousands of players.</p>
-            <p class="mb-5"><strong>Casino bonuses:</strong> Slots Paradise gives you a head start with its juicy welcome bonuses. Plus, you can also benefit from top-up bonuses for every single deposit. Give your bankroll a boost and enjoy the games longer while taking a chance at taking home large winnings.</p>
-            <p class="mb-5"><strong>Player rewards:</strong> We value the time you dedicate to our games and believe that it must be rewarded accordingly. At Slots Paradise, players receive freebies and other surprises that put them one step ahead.<br><strong>24/7 customer care:</strong> We aim to give a hassle-free experience to all our players. But if something occurs, our support team is ready to help, day and night.</p>
-            <p class="mb-5"><strong>Tips:</strong> Looking to learn some online casino game strategies? Check out “The Beach” where you’ll find casino news, tips, strategies and details of the casino games you can play for real money.</p>
-            </div>
+          <div>
+            <h3 class="md:text-xl lg:text-2xl font-giloryExtrabold mb-6">
+              Slots Paradise Online Casino
+            </h3>
+            <p class="mb-5">
+              <strong>Online casino games:</strong>
+              Slots Paradise casino is committed to offering you a vast selection
+              of games including slots, table games, roulette, craps, dice games,
+              scratch cards and unparalleled live dealer games, so you can follow
+              every move and action of the dealers. Here, you’ll also find dozens
+              of fun and fast-paced TV games like no others. We’ve added over 30
+              game providers to ensure you a groundbreaking game variety, so you’ll
+              never run out of options. Stick around, because every month we keep
+              adding new exciting titles you won’t want to miss.
+            </p>
+            <p class="mb-5">
+              <strong>Join, Play, Win:</strong>
+              Casino is about relaxing. To make things easy, no download is required
+              to access our games. It only takes a few simple steps to create an
+              account and start playing lots of high-paying games wherever you are,
+              whenever you want. Be a part of the thousands of players.
+            </p>
+            <p class="mb-5">
+              <strong>Casino bonuses:</strong>
+              Slots Paradise gives you a head start with its juicy welcome bonuses.
+              Plus, you can also benefit from top-up bonuses for every single deposit.
+              Give your bankroll a boost and enjoy the games longer while taking
+              a chance at taking home large winnings.
+            </p>
+            <p class="mb-5">
+              <strong>Player rewards:</strong>
+              We value the time you dedicate to our games and believe that it must
+              be rewarded accordingly. At Slots Paradise, players receive freebies
+              and other surprises that put them one step ahead.<br /><strong
+                >24/7 customer care:</strong
+              >
+              We aim to give a hassle-free experience to all our players. But if
+              something occurs, our support team is ready to help, day and night.
+            </p>
+            <p class="mb-5">
+              <strong>Tips:</strong>
+              Looking to learn some online casino game strategies? Check out “The
+              Beach” where you’ll find casino news, tips, strategies and details
+              of the casino games you can play for real money.
+            </p>
+          </div>
         </div>
-    </div>
-        
+      </div>
 
-
-    
-    <!--Cards Block -->
-    <div class="sp-footer-logos bg-[#2f0536] text-center text-white py-16 px-4">
-        <div class="footer-logo mx-auto">
-            <div class="text-center mb-6">
-            <Image width={650} height={56} class="inline" alt="cards image" title="cars image"  src="https://slotsstg.wpengine.com/wp-content/uploads/2022/02/cards.png">
-            </div>
-            <p class="text-sm">With our trusted platform, you can rest easy that your account is safe and secure.</p>
+      <!--Cards Block -->
+      <div class="sp-footer-logos bg-[#2f0536] text-center text-white py-16">
+        <div class="footer-logo mx-auto px-4">
+          <div class="text-center mb-6">
+            <Image
+              width={650}
+              height={56}
+              class="inline"
+              alt="cards image"
+              title="cars image"
+              src="https://slotsstg.wpengine.com/wp-content/uploads/2022/02/cards.png"
+            />
+            <p class="text-sm">
+              With our trusted platform, you can rest easy that your account is
+              safe and secure.
+            </p>
+          </div>
         </div>
-    </div>
-    
 
-    <!--Copyright block -->
-    
-    <div class="bg-black text-[#a64485] font-giloryRegular text-center pt-8 pb-40 px-4">
-        <div class="footer-last-block">
+        <!--Copyright block -->
+
+        <div
+          class="bg-black text-[#a64485] font-giloryRegular text-center pt-8 pb-40 px-4"
+        >
+          <div class="footer-last-block">
             <div class="et_pb_text_inner">
-                <p>We invite you to review the Rules &amp; Terms – Privacy Policy – Copyright 2023 – All Rights Reserved.</p>
+              <p>
+                We invite you to review the Rules &amp; Terms – Privacy Policy –
+                Copyright 2023 – All Rights Reserved.
+              </p>
             </div>
+          </div>
         </div>
-    </div>
-    
-    
-    <div id="promo-ft-link" class="fixed bottom-[-100px] flex justify-center text-center z-10 w-full">
-        <a href="/promotions" aria-label="Promotions link" class="block">
-            <span class="et_pb_image_wrap ">
-                <img decoding="async" alt="promotions" title="Promotions" src="https://slotsstg.wpengine.com//wp-content/themes/slotsparadise/images/promotions-banner.svg" width="200" height="200">
-            </span>
-        </a>
-    </div>
-    </footer>
 
-    <script src="../scripts/local.js"></script>
+        <div
+          id="promo-ft-link"
+          class="fixed bottom-[-100px] flex justify-center text-center z-10 w-full"
+        >
+          <a href="/promotions" aria-label="Promotions link" class="block">
+            <span class="et_pb_image_wrap">
+              <img
+                decoding="async"
+                alt="promotions"
+                title="Promotions"
+                src="https://slotsstg.wpengine.com//wp-content/themes/slotsparadise/images/promotions-banner.svg"
+                width="200"
+                height="200"
+              />
+            </span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../scripts/local.js"></script>
+</footer>
+<style>
+  .bet2tech-icon {
+    width: 55px !important;
+  }
+  .scroll-top {
+    right: -70px;
+  }
+  .scroll-top.visible {
+    right: 0;
+  }
+  .arrow {
+    border: solid #fff;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    margin-top: 5px;
+    padding: 4px;
+  }
+  .arrow.up {
+    transform: rotate(-135deg);
+  }
+</style>

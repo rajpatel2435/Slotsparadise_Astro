@@ -3,78 +3,183 @@ import { Image } from "astro:assets";
 ---
 
 <section class="online_casino_guides py-24 my-12 bg-[#eee] px-5">
-    <div class="guides_block_container max-w-[1440px] mx-auto">
-        <div class="title mb-7">
-            <h2 class="text-[#51135a] pb-3 font-medium font-giloryExtrabold text-3xl">Online Casino Guides</h2>
+  <div class="guides_block_container max-w-[1440px] mx-auto">
+    <div class="title mb-7">
+      <h2 class="text-[#51135a] pb-3 font-medium font-giloryExtrabold text-3xl">
+        Online Casino Guides
+      </h2>
+    </div>
+    <div
+      class="guides_blocks grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 mb-6"
+    >
+      <div class="guides_box flex">
+        <div class="guide_box_img w-1/2">
+          <Image
+            width="132"
+            height="128"
+            title="Blackjack"
+            src="https://slotsparadise.com/wp-content/uploads/2022/03/Path-6725.png"
+            alt="Blackjack"
+          />
         </div>
-        <div class="guides_blocks grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-14 mb-6">
-                <div class="guides_box flex">
-                    <div class="guide_box_img">
-                        <Image width="132" height="128" title="Blackjack" src="https://slotsstg.wpengine.com/wp-content/uploads/2022/03/Path-6725.png" alt="Blackjack">
-                    </div>
-                    <div class="guide_box_content pl-4">
-                        <h4 class="guide_box_title text-[#2f0536] font-giloryExtrabold text-xl pb-2"><a href="">Blackjack</a></h4>
-                        <p class="guide_box_text font-semibold text-[#2f0536] leading-6 text-lg font-giloryRegular">Complete Blackjack Guide with all the variations, rules, and the best strategies</p>
-                    </div>
-                </div>
 
-                <div class="guides_box flex">
-                    <div class="guide_box_img">
-                        <Image width="130" height="128" title="Slot Games" src="https://slotsstg.wpengine.com/wp-content/uploads/2022/03/Group-4264.png" alt="Slot Games">
-                    </div>
-                    <div class="guide_box_content pl-4">
-                        <h4 class="guide_box_title text-[#2f0536] font-giloryExtrabold text-xl pb-2"><a href="">Slot Games</a></h4>
-                        <p class="guide_box_text font-semibold text-[#2f0536] leading-6 text-lg font-giloryRegular">Everything you need to know about Slot Games, how to play, features, strategies & more</p>
-                    </div>
-                </div>
-
-                <div class="guides_box flex">
-                    <div class="guide_box_img">
-                        <Image width="126" height="128" title="Live Dealer Casino" src="https://slotsstg.wpengine.com/wp-content/uploads/2022/03/Path-6729.png" alt="Live Dealer Casino">
-                    </div>
-                    <div class="guide_box_content pl-4">
-                        <h4 class="guide_box_title text-[#2f0536] font-giloryExtrabold text-xl pb-2"><a href="">Live Dealer Casino</a></h4>
-                        <p class="guide_box_text font-semibold text-[#2f0536] leading-6 text-lg font-giloryRegular">Your ultimate guide about Live Dealer Casino is full of information, games, rules, and bonuses</p>
-                    </div>
-                </div>
-
-
-                <div class="guides_box flex">
-                    <div class="guide_box_img">
-                        <Image width="128" height="128" title="Table Games" src="https://slotsstg.wpengine.com/wp-content/uploads/2022/03/Path-6726.png" alt="Table Games">
-                    </div>
-                    <div class="guide_box_content pl-4">
-                        <h4 class="guide_box_title text-[#2f0536] font-giloryExtrabold text-xl pb-2"><a href="">Table Games</a></h4>
-                        <p class="guide_box_text font-semibold text-[#2f0536] leading-6 text-lg font-giloryRegular">Are you a big fan of table games? Check this amazing Table Games Guide with all the basics, strategies, and types</p>
-                    </div>
-                </div>
-
-                <div class="guides_box flex">
-                    <div class="guide_box_img">
-                        <Image width="128" height="128" title="Roulette" src="https://slotsstg.wpengine.com/wp-content/uploads/2022/03/Path-6727.png" alt="Roulette">
-                    </div>
-                    <div class="guide_box_content pl-4">
-                        <h4 class="guide_box_title text-[#2f0536] font-giloryExtrabold text-xl pb-2"><a href="">Roulette</a></h4>
-                        <p class="guide_box_text font-semibold text-[#2f0536] leading-6 text-lg font-giloryRegular">Become an expert with the perfect Roulette Guide loaded with bonuses, tips, and bets information</p>
-                    </div>
-                </div>
-
-                <div class="guides_box flex">
-                    <div class="guide_box_img">
-                        <Image width="128" height="128" title="Video Poker" src="https://slotsstg.wpengine.com/wp-content/uploads/2022/03/Path-6728.png" alt="Video Poker">
-                    </div>
-                    <div class="guide_box_content pl-4">
-                        <h4 class="guide_box_title text-[#2f0536] font-giloryExtrabold text-xl pb-2"><a href="">Video Poker</a></h4>
-                        <p class="guide_box_text font-semibold text-[#2f0536] leading-6 text-lg font-giloryRegular">Get into the best Video Poker Guide and increase your wins with bonuses, tips, and tactics</p>
-                    </div>
-                </div>
+        <div class="guide_box_content pl-4">
+          <h4
+            class="guide_box_title text-[#2f0536] font-giloryExtrabold text-xl pb-2"
+          >
+            <a href="/guides/blackjack-guides/blackjack-guide/">Blackjack</a>
+          </h4>
+          <p
+            class="guide_box_text font-semibold text-[#2f0536] leading-6 text-lg font-giloryRegular"
+          >
+            Complete Blackjack Guide with all the variations, rules, and the
+            best strategies
+          </p>
         </div>
+      </div>
+
+      <div class="guides_box flex">
+        <div class="guide_box_img w-1/2">
+          <Image
+            width="130"
+            height="128"
+            title="Slot Games"
+            src="https://slotsparadise.com/wp-content/uploads/2022/03/Group-4264.png"
+            alt="Slot Games"
+          />
+        </div>
+        <div class="guide_box_content pl-4">
+          <h4
+            class="guide_box_title text-[#2f0536] font-giloryExtrabold text-xl pb-2"
+          >
+            <a href="/guides/online-slots-guides/online-slots-guide/"
+              >Slot Games</a
+            >
+          </h4>
+          <p
+            class="guide_box_text font-semibold text-[#2f0536] leading-6 text-lg font-giloryRegular"
+          >
+            Everything you need to know about Slot Games, how to play, features,
+            strategies & more
+          </p>
+        </div>
+      </div>
+
+      <div class="guides_box flex">
+        <div class="guide_box_img w-1/2">
+          <Image
+            width="126"
+            height="128"
+            title="Live Dealer Casino"
+            src="https://slotsparadise.com/wp-content/uploads/2022/03/Path-6729.png"
+            alt="Live Dealer Casino"
+          />
+        </div>
+        <div class="guide_box_content pl-4">
+          <h4
+            class="guide_box_title text-[#2f0536] font-giloryExtrabold text-xl pb-2"
+          >
+            <a
+              href="/guides/live-dealer-casino-guides/live-dealer-casino-guide/"
+              >Live Dealer Casino</a
+            >
+          </h4>
+          <p
+            class="guide_box_text font-semibold text-[#2f0536] leading-6 text-lg font-giloryRegular"
+          >
+            Your ultimate guide about Live Dealer Casino is full of information,
+            games, rules, and bonuses
+          </p>
+        </div>
+      </div>
+
+      <div class="guides_box flex">
+        <div class="guide_box_img w-1/2">
+          <Image
+            width="128"
+            height="128"
+            title="Table Games"
+            src="https://slotsparadise.com/wp-content/uploads/2022/03/Path-6726.png"
+            alt="Table Games"
+          />
+        </div>
+        <div class="guide_box_content pl-4">
+          <h4
+            class="guide_box_title text-[#2f0536] font-giloryExtrabold text-xl pb-2"
+          >
+            <a
+              href="/guides/table-games-guides/table-games-at-casinos-you-should-definitely-try/"
+              >Table Games</a
+            >
+          </h4>
+          <p
+            class="guide_box_text font-semibold text-[#2f0536] leading-6 text-lg font-giloryRegular"
+          >
+            Are you a big fan of table games? Check this amazing Table Games
+            Guide with all the basics, strategies, and types
+          </p>
+        </div>
+      </div>
+
+      <div class="guides_box flex">
+        <div class="guide_box_img w-1/2">
+          <Image
+            width="128"
+            height="128"
+            title="Roulette"
+            src="https://slotsparadise.com/wp-content/uploads/2022/03/Path-6727.png"
+            alt="Roulette"
+          />
+        </div>
+        <div class="guide_box_content pl-4">
+          <h4
+            class="guide_box_title text-[#2f0536] font-giloryExtrabold text-xl pb-2"
+          >
+            <a href="/guides/roulette-guides/roulette-guide/">Roulette</a>
+          </h4>
+          <p
+            class="guide_box_text font-semibold text-[#2f0536] leading-6 text-lg font-giloryRegular"
+          >
+            Become an expert with the perfect Roulette Guide loaded with
+            bonuses, tips, and bets information
+          </p>
+        </div>
+      </div>
+
+      <div class="guides_box flex">
+        <div class="guide_box_img w-1/2">
+          <Image
+            width="128"
+            height="128"
+            title="Video Poker"
+            src="https://slotsparadise.com/wp-content/uploads/2022/03/Path-6728.png"
+            alt="Video Poker"
+          />
+        </div>
+        <div class="guide_box_content pl-4">
+          <h4
+            class="guide_box_title text-[#2f0536] font-giloryExtrabold text-xl pb-2"
+          >
+            <a href="/guides/video-poker-guides/video-poker-strategy-guide/"
+              >Video Poker</a
+            >
+          </h4>
+          <p
+            class="guide_box_text font-semibold text-[#2f0536] leading-6 text-lg font-giloryRegular"
+          >
+            Get into the best Video Poker Guide and increase your wins with
+            bonuses, tips, and tactics
+          </p>
+        </div>
+      </div>
     </div>
 
     <div class="more-guide-btn text-center mt-10">
-        <a
-          class="bg-[#a64485] inline-block text-white text-lg px-12 py-2 rounded-[25px] font-giloryExtrabold font-semibold uppercase hover:bg-[#ff93aa] cursor-pointer transition-all"
-          >More Guides</a
-        >
-      </div>
+      <a
+        href="/guides"
+        class="bg-[#a64485] inline-block text-white text-lg px-12 py-2 rounded-[25px] font-giloryExtrabold font-semibold uppercase hover:bg-[#ff93aa] cursor-pointer transition-all"
+        >More Guides</a
+      >
+    </div>
+  </div>
 </section>

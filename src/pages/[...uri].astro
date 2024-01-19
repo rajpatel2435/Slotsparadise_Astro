@@ -17,12 +17,13 @@ const node = data.nodeByUri;
 
 //console.log(node.basepress.edges.map(item => item.node.title));
 // Access the slug value if it exists in the node
-const slug = node.slug || null; // Replace null with a default value if needed
+//const slug = node.slug || null; // Replace null with a default value if needed
 
 // Now you have both uri and slug available
-console.log("URI:", uri);
-console.log("Slug:", slug);
-console.log(node.__typename);
+//console.log("Slug:", slug);
+/* console.log("URI:", uri);
+
+console.log(node.__typename); */
 
 export async function getStaticPaths() {
   return await getAllUris();

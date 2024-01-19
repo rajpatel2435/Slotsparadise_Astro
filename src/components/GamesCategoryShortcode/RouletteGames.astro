@@ -1,0 +1,109 @@
+---
+import { wpquery } from '../../data/wordpress';
+import { Image } from "astro:assets";
+
+const gameData = await wpquery({
+  query: `
+  query newGamesPage {
+  category(id: "22", idType: DATABASE_ID) {
+    gamesCategoryIds {
+        roulette
+    }
+  }
+}
+  `,
+});
+
+
+const gameIds = gameData.category.gamesCategoryIds.roulette;
+// console.log(gameIds);
+
+const gameIdsArray = gameIds.split(',').map(id => parseInt(id, 10));
+
+
+const data = await wpquery({
+  query: `
+    query GamesPage($gameIds: [ID!]) {
+      posts(where: { in: $gameIds }) {
+        edges {
+          node {
+            title
+            slug
+            featuredImage {
+              node {
+                altText
+                title
+                sourceUrl
+              }
+            }
+            link
+          }
+        }
+      }
+    }
+  `,
+  variables: {
+    gameIds: gameIdsArray
+  }
+});
+
+//console.log(data);
+---
+
+<!-- Slider main container -->
+
+<div class="swiper swiper4 py-2 my-12 mx-2">
+
+  <div class=" flex items-center space-x-2 mb-4">
+    <img src= "https://slotsparadise.com/wp-content/themes/slotsparadise/images/roulette-ico-pink.svg" alt="Roulette icon" width="40">
+    <h3 class="text-[#ff688b] text-3xl font-bold font-giloryExtrabold">Roulette</h3>
+  </div>
+  <!-- Additional required wrapper -->
+  <div class="swiper-wrapper">
+    {
+      data.posts.edges.map((post: any) => (
+    <!-- Slides -->
+      <article class="home-slider-article swiper-slide rounded-[3px] bg-white shadow-homePosts overflow-hidden border border-[#EAEAEA]">
+        <a class="entry-featured-image-url mb-5" href={post.node.link}>
+          <Image
+            class="games-Image reco w-full h-[228px]"
+            width="328"
+            height="223"
+            alt={post.node.title}
+            title={post.node.title}
+            src={post.node.featuredImage.node.sourceUrl}
+          />
+        </a>
+
+        <div class="entry-title text-[#2f0536]  font-gilorybold py-5 mx-2">
+            <h4 class="flex justify-between items-center space-x-2 mb-0"> 
+                <a href="" class="font-extrabold text-[18px] whitespace-nowrap w-[90%] overflow-hidden">{post.node.title}</a>
+                <img class="wishlist-img" src="https://slotsparadise.com/wp-content/themes/slotsparadise/images/heart-ico.svg" alt="wishlist" title="wishlist" />
+            </h4>
+            <div class="rating_container flex items-center space-x-4">
+                <p class="">Rating</p>
+                <img class="" src="https://slotsparadise.com/wp-content/themes/slotsparadise/images/star-rating.png" alt="star rating" width="93" height="16" /> 
+            </div>
+        </div>
+        
+        
+
+      </article>
+      ))
+  }
+
+  </div>
+
+  <!-- If we need navigation buttons -->
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+
+</div>
+
+
+
+<script src="../../scripts/local.js"></script>
+
+
+
+

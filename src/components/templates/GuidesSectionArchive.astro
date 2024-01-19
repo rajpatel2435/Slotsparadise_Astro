@@ -1,23 +1,40 @@
 ---
-import CasinoGuideSidebar from "../CasinoGuideSidebar.astro"
+import CasinoGuideSidebar from "../CasinoGuideSidebar.astro";
 const { node } = Astro.props;
---- 
 
-    <div class="online_casino_guide mt-10 font-giloryRegular font-semibold max-w-[1200px] mx-auto">
-        <div class="inner_container flex flex-col md:flex-row justify-between">
-            <CasinoGuideSidebar />
-            <div class="section-container w-full md:w-3/4 pl-0 md:pl-10 ">
-                <div class="section_block">
-                    <h1><i class="fa italic text-xl">&#xf02d;</i> <a class="font-giloryExtrabold text-[#2f0536] text-2xl" href={node.uri}>{node.name}</a></h1>
-                    <div>
-                        {node.basepress.edges.map((item) => (
-                        <a href={item.node.uri} class="py-3 font-giloryRegular font-semibold border-b border-dashed leading-3 flex items-start hover:bg-[#ddd]">
-                        <i class="fa text-gray-400 pr-1 block">&#xf059;</i><h3 class="text-sm m-0">{item.node.title}</h3></a> 
-                        ))}
-                    </div>
-                </div>
-                                       
-            </div>
+//console.log(node);
+---
+
+<div
+  class="online_casino_guide font-giloryRegular font-semibold max-w-[1200px] mx-auto md:py-10 px-2"
+>
+  <div class="inner_container flex flex-col md:flex-row justify-between">
+    <CasinoGuideSidebar />
+    <div class="section-container w-full md:w-3/4 pl-0 md:pl-10 pt-4 md:pt-0">
+      <div class="section_block">
+        <h1>
+          <i class="fa italic text-xl">&#xf02d;</i>
+          <a
+            class="font-giloryExtrabold text-[#2f0536] text-2xl"
+            href={node.uri}>{node.name}</a
+          >
+        </h1>
+        <div>
+          {
+            node.basepress.edges.map((item) => (
+              <a
+                href={item.node.uri}
+                class="py-3 font-giloryRegular font-semibold border-b border-dashed leading-3 flex items-start hover:bg-[#ddd]"
+              >
+                <>
+                  <i class="fa text-gray-400 pr-1 block">&#xf059;</i>
+                  <h3 class="text-sm m-0">{item.node.title}</h3>
+                </>
+              </a>
+            ))
+          }
         </div>
-
-
+      </div>
+    </div>
+  </div>
+</div>

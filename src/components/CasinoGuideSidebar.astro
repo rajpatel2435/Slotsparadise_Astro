@@ -1,70 +1,63 @@
-<div class="menu_container bg-[#eee] h-max rounded-lg p-6 w-full md:w-1/4"> 
-    <h3 class="text-[#2f0536] text-[22px]">Choose a Lesson</h3>
-        <div id="shortcode-container"></div>
-</div>
+---
+/* export const prerender = true; */
+import { GuideSidebar } from "../lib/api";
 
+const data = await GuideSidebar();
+//console.log(data);
+const items = data.sectionsBasepress.edges;
+//console.log(items);
 
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const ajaxurl = 'https://slotsstg.wpengine.com/wp-admin/admin-ajax.php';
-    
-        // Make the AJAX request
-        fetch(ajaxurl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            },
-            body: 'action=schoolmenu_shortcode_html',
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Update the content of the container with the shortcode result
-                    document.getElementById('shortcode-container').innerHTML = data.data;
+//const subitems = items[0].node.basepress.edges[0].node.title;
+//console.log(subitems);
+---
 
-                    //adding arrow icon and functionality
+<aside
+  class="bpress-sidebar bpress-float-right menu_container bg-[#eee] h-max rounded-lg p-6 w-full md:w-1/4"
+>
+  {
+    items.map((item) => (
+      <div class="">
+        <details class="group">
+          <summary class="flex justify-between items-center font-medium cursor-pointer list-none hover:bg-white p-2 rounded">
+            <span class="bpress-nav-item flex space-x-2">
+              <i class="fa italic block text-sm">&#xf02d;</i>
+              <span class="bpress-nav-item-title block font-giloryRegular font-semibold">
+                {item.node.name}
+              </span>
+            </span>
+            <span class="transition group-open:rotate-180">
+              <svg
+                fill="none"
+                height="24"
+                shape-rendering="geometricPrecision"
+                stroke="currentColor"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                viewBox="0 0 24 24"
+              >
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </span>
+          </summary>
 
-                    const menuChild = document.querySelectorAll("li.page_item_has_children");
-
-                    menuChild.forEach((item, index) => {
-                        // Append the <span class="arrrow-icon"></span> to each item
-                        const spanElement = document.createElement('span');
-                        spanElement.className = 'arrrow-icon';
-                        item.appendChild(spanElement);
-
-                        // Hide the corresponding child element by default
-                        const childElement = item.querySelector('.children');
-                        if (childElement) {
-                            childElement.classList.add('hidden');
-                        }
-
-                        // Add click event listener to each span
-                        spanElement.addEventListener('click', function () {
-                            // Toggle the 'hidden' class on the corresponding child element
-                            if (childElement) {
-                                childElement.classList.toggle('hidden');
-                                // Add or remove the 'rotate-90' class on the span element
-                                spanElement.classList.toggle('rotate-90', !childElement.classList.contains('hidden'));
-                            }
-                        });
-                    });
-
-
-
-                } else {
-                    // Handle errors
-                    console.error('Error fetching shortcode:', data.data);
-                }
-            })
-            .catch(error => {
-                // Handle fetch errors
-                console.error('Fetch error:', error);
-            });
-
-            
-        
-    });
-    
-
-    
-</script>
+          {item.node.basepress.edges.length > 0 && (
+            <p class="text-neutral-600 my-2 group-open:animate-fadeIn bg-white p-2 ml-2 ">
+              {item.node.basepress.edges.map((subitem) => (
+                <a
+                  href={subitem.node.uri}
+                  class="flex space-x-1 mb-1 hover:bg-[#eee] p-2"
+                >
+                  <i class="fa text-gray-400 pr-1 pt-1 block">&#xf059;</i>
+                  <span class="bpress-nav-item-title">
+                    {subitem.node.title}
+                  </span>
+                </a>
+              ))}
+            </p>
+          )}
+        </details>
+      </div>
+    ))
+  }
+</aside>

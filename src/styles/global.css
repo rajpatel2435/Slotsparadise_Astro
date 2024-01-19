@@ -54,9 +54,9 @@
     font-display: swap;
 }
 
-#top-menu li {
+/* #top-menu li {
     padding-right: 4.5vw;
-}
+} */
 
 h1, h2, h3, h4, h5, h6 {
     margin-bottom: 10px;
@@ -65,7 +65,7 @@ h1, h2, h3, h4, h5, h6 {
 
  
 /*** Hide Sidebar ***/
-.home .page-template-default #sidebar {display:none;}
+/* .home .page-template-default #sidebar {display:none;} */
  
 /*** Expand the content area to fullwidth ***/
 
@@ -929,7 +929,7 @@ div.wpcr3_review {
 	position: absolute;
 	top: 0;
 	left: 33%;
-	line-height: 34px !important;
+	line-height: 50px !important;
 	font-style: normal !important;
 	font-weight: 600;
 }
@@ -985,20 +985,6 @@ h6
 }
 }
 
-.guides-section h4.et_pb_module_header {
-	margin-bottom: 0;
-}
-
-#page-container div.et_pb_button_module_wrapper > a.et_pb_button, #page-container div.et_pb_button_wrapper > a.et_pb_button {
-	font-weight: normal !important;
-}
-#left-area{
-	position:relative;
-	    z-index: 1;
-}
-#main-content {
-    background-color: transparent;
-}
 
 
 /***************header*/
@@ -1152,176 +1138,6 @@ a#usd-btn {
     padding-right: 0.7em !important;
 }
 
-/******************Updated footer ***********************/
-/* footer .et_builder_inner_content.et_pb_gutters3 {
-    background: #3C0845;
-}
-.sp-ft-section-logos
-{
-	display: flex !important;
-    padding: 0 15px;
-	align-items: center;
-	align-items: center;
-    overflow-x: scroll;
-}
-
-
-.sp-ft-section-logos .et_pb_image 
-{
-	margin-bottom: 0 !important;
-    min-width: 120px;
-    max-width: 160px;
-    max-height: 65px;
-	padding-right: 20px;
-	text-align: center;
-}
-.sp-ft-section-logos::-webkit-scrollbar {
-    display: none;
-}
-.sp-ft-section-logos {
-    scrollbar-width: none;
-}
-
-div#promo-ft-link {
-    position: fixed;
-    bottom: -20px;
-    left: 50%;
-    transform: translate(-50%, 50%);
-    transition: bottom .5s;
-    z-index: 999;
-}
-.ft-row-div-menu{
-	z-index:0 !important;
-}
-.sp-footer-text p{
-	font-family: 'Gilroy-Regular',Helvetica,Arial,Lucida,sans-serif;
-    font-size: 14px;
-} */
-
-/* Logos scroller */
-
-/* .sp-ft-logos-row .slick-slide {
-    height: auto !important;
-}
-.sp-ft-logos-row .et_pb_module.et_pb_image {
-    margin-bottom: 0 !important;
-}	
-.sp-ft-logos-row {
-    padding-bottom: 0 !important;
-}
-.sp-ft-logos-row .slick-track {
-    display: flex;
-    align-items: center;
-     height: 95px; 
-}
-.sp-ft-logos-row .slick-slide {
-    margin: 0 25px;
-}
-.sp-ft-logos-row .slick-dots
-{
-	display:none !important;
-}
-.code-logos
-{
-	display:none;
-}
-.slick-disabled {
-    display: none !important;
-}
-.sp-ft-logos-row {
-    padding-top: 0 !important;
-}
-.slick-prev:before {
-       font-family: 'Line Awesome Free' !important;
-    font-weight: 900;
-    content: '\f104' !important;
-}
-.slick-next:before {
-    font-family: 'Line Awesome Free' !important;
-    font-weight: 900;
-    content: '\f105' !important;
-}
-
-button#slide-right {
-    background: none;
-    border: none;
-    color: #fff;
-}
-button#slide-left {
-    background: none;
-    border: none;
-    color: #fff;
-}
-#arrow-block{
-    position: sticky;
-    right: 0;
-}
-button#slide-left:after {
-    font-family: 'Line Awesome Free';
-    font-weight: 900;
-    content: '\f104';
-	
-}
-button#slide-right:after {
-    font-family: 'Line Awesome Free';
-    font-weight: 900;
-    content: '\f105';
-}
-#clients-logos-col{	
-    overflow-x: auto;
-    white-space: nowrap;
-    scroll-behavior: smooth;
-    scroll-snap-type: x mandatory;	
-}
-button#slide-right:hover {
-    cursor: pointer;
-}
-button#slide-left:hover {
-    cursor: pointer;
-}
-.sp-ft-logos-row {
-    width: 96% !important;
-    display: inline-block;
-}
-.sp-arrow-row {
-    display: inline-block;
-    width: 26px;
-} */
-/***************header *****************/
-
-/* Game Category Grid, July 11, 2022. @jenny*/
-
-/* body.archive.category.category-games .et_pb_blog_grid .et_pb_post {
-    border: 0px;
-}
-    
-body.archive.category.category-games .cat-item-9, body.archive.category.category-games .cat-item-7, body.archive.category.category-games .cat-item-1 {
-	display: none;
-}
-
-body.archive.category.category-games .current-cat {
-	font-weight: bolder;
-}
-
-.et-blog-css-grid > div {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 20px;
-}
-    
-.et-blog-css-grid .entry-title a {
-    font-size: 14px;
-}
-
-.et-blog-css-grid .et_pb_post a img  {
-    border-radius: 25px;
-}
-
-.et-blog-css-grid .et_pb_post .entry-featured-image-url {
-    margin-bottom: 10px;
-}
- */
-
 
 
 
@@ -1339,55 +1155,6 @@ div.wpcr3_review div.wpcr3_review_title {
 
 
 
-/****menu ***/
-/* .img-wrap{
-    background-position:center !important;
-    height: 100vh;
-}
-.et-menu-nav ul{
-    margin:0;
-    padding:10px 0;
-}
-
-.et-menu-nav li{
-    list-style:none;
-    position: static;
-}
-.et-menu-nav.open .dropdown.right {
-    right: 85px;
-	    display: none !important;
-}
-.et-menu-nav li a:hover{
-    color:#000000;
-}
-
-.dropdown {
-    color: #a64485;
-    cursor: pointer;
-    display: block !important;
-    padding: 2px 20px;
-    position: absolute;
-    top: 0;
-    z-index: 15;
-    transition: all 0.3s ease;
-}
-
-
-.dropdown.right{
-    right: 0;
-	font-size:22px;
-}
-
-.dropdown.left{
-    left: 0;
-    top: -44px;
-	font-size:22px;
-	
-} */
-
-/* .footer-lg {
-    margin-bottom: 0;
-} */
 body .et-menu-nav #menu-main-menu .sub-menu{
     box-shadow: none;
     bottom: 0;
@@ -1495,62 +1262,6 @@ div.wpcr3_review div.wpcr3_review_ratingValue {
     padding-left: 0;
 }
 
-/*******PDN Menu ******/
-/* 
-body .et-menu-nav #menu-main-menu .sub-menu {
-    position: relative;
-    left: 0;
-    padding-left: 0;
-    margin-top: 20px;
-	width: auto;
-}
-
-body .et-menu-nav.open #menu-main-menu {
-    left: 0;
-}
-#menu-main-menu li:first-child {
-    display: block;
-	text-align: left;
-}
-.et-menu-nav.open .dropdown.right {
-    right: 0;
-	display:block !important;
-	    transform: rotate(90deg);
-}
-.dropdown{
-	    top: -6px;
-}
-.slide-in-menu .et_pb_column.et_pb_column--with-menu {
-    height: 100vh;
-    top: 0;
-    position: absolute;
-    left: 0;
-}
-.slide-in-menu .et_pb_module.et_pb_menu {
-    top: 25%;
-    position: absolute;
-    width: 100%;
-}
-.nav li.et-touch-hover>ulul.sub-menu, .nav li:hover>ul.sub-menu {
-    opacity: 1;
-    visibility: visible;
-}
-.nav li ul.sub-menu{
-    opacity: 1;
-    visibility: visible;
-}
-.hide {
-    display: none;
-}
-@media (max-width: 600px){
-	.slide-in-menu-container.slide-in-menu {
-		overflow-y: auto;
-	}
-	.digit {
-    right: 15px;
-	margin-top: 7px;
-	}
-} */
 /**** Quicke review ***/
 .digit {
     position: absolute;
@@ -1575,132 +1286,6 @@ span.rvs_total {
 
 
 
-/** home page game review section carousel */
-
-/* .home-game-reviews h4 a{
-	font-size: 18px;
-    font-weight: 900;
-    color: #2F0536;
-    white-space: nowrap;
-}
-
-.home-game-reviews .home-slider-article h4 a {
-	padding-left: 20px;
-}
-
-.home-game-reviews {
-	display: flex;
-	justify-content: space-between;
-}
-
-.home-game-reviews .article_container {
-	width: 100%;
-	display: flex;
-	justify-content: left;
-	overflow: auto;
-	position:relative;
-	scroll-behavior:smooth;
-    scrollbar-width: none;
-} */
-
-/* Hide scrollbar for Chrome, Safari and Opera */
-/* .home-game-reviews .article_container::-webkit-scrollbar{
-	display: none;
-} */
-
-/* Hide scrollbar for IE, Edge and Firefox */
-/* .home-game-reviews .article_container {
-	-ms-overflow-style: none;  
-
-}
- */
-
-/* .home-game-reviews div .home-slider-article{
-	min-width: 328px;
-	height: 283px;
-	margin: 1px 10px 0 1px;
-	overflow: hidden;
-	border-radius: 3px;
-    background-color: white;
-	box-shadow: 0 4px 7px #0000001a;
-}
-.home-game-reviews div .home-slider-article .games-img{
-	height: 223px;
-    width: 100%;
-    max-width: 333px;
-}
-.game-review-title  {
-	margin-bottom:0 !important;
-}
-
-.game-review-title div {
-	display: flex;
-    justify-content: space-between;
-    align-items: center;
-	padding: 0 10px;
-}
-.game-review-title a{
-	color: #1C8FDF !important;
-}
-.game-review-sect{
-	max-width: 100%;
-}
-.game-review-sect .et_pb_row{
-	width: 100%;
-	max-width: 100%;
-}
-.game-review-sect .home-slider-article .entry-featured-image-url {
-    margin-bottom: 20px;
-}
-.game-review-sect .button-next {
-    display: none;
-    visibility: hidden;
-    position: absolute;
-    right: 0;
-    height: calc(100% - 100px);
-    width: 76px;
-    cursor: pointer;
-}  */
-
-
-/* 
-.game-review-sect .button-next:before {
-    content: '';
-    position: absolute;
-    width: 76px;
-    left: 0;
-    top: 0;
-    height: 100%;
-    background-size: 100% 100%;
-    background: url(/wp-content/uploads/2022/12/sp-hover-arrow-right.svg) no-repeat center center;
-}
- .game-review-sect .button-prev {
-    position: absolute;
-    z-index: 100;
-    left: -14px;
-    height: calc(100% - 100px);
-    width: 76px;
-    margin-top: 11px;
-    border-radius: 5px 0 0 5px;
-    cursor: pointer;
-}
-.button-prev-hidden {
-	display: none;
-}
-.home-game-reviews:hover .button-next{
-    display: block;
-    visibility: visible;
-}
-.game-review-sect .button-prev:before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 76px;
-    height: calc(100% - 26px);
-    background-size: 100% 100%;
-    background: url(/wp-content/uploads/2022/12/sp-hover-arrow-left.svg) no-repeat center center;
-} */
 /** new game hub page **/
 
 .game-review-carousel-row .game-hub-heading {
@@ -2021,8 +1606,79 @@ Css for astro site
 
 **/
 
+main {
+    margin-top: 208px;
+}
+
 .casino_school_main .page-nav li a {
     color: #2F0536 !important;
    
 }
+
+/** basepress search astro **/
+
+.bpress-search {
+    position: relative;
+    height: 50px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.bpress-search-form {
+    position: relative;
+    height: 100%;
+}
+
+input[type="text"].bpress-search-field {
+    display: block;
+    max-width: 600px;
+    margin: 20px auto;
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 30px;
+    background-color: #fafafa;
+    font-size: inherit;
+  }
+
+  .why-slots-tabs .tab-pgraph {
+    max-height: 233px;
+    padding-right: 10px;
+	scrollbar-width: thin;
+}
+
+
+.why-slots-tabs .tab-pgraph::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.why-slots-tabs .tab-pgraph::-webkit-scrollbar
+{
+	width: 3px;
+	background-color: #F5F5F5;
+}
+
+.why-slots-tabs .tab-pgraph::-webkit-scrollbar-thumb
+{
+	background-color: #fff;
+}
+
+
+ article p a {
+    color: #2ea3f2 !important;
+  }
+
+  article ul {
+    padding-left: 10px;
+}
+
+  article li {
+    list-style-type: disc;
+    margin-left: 10px;
+  }
+
+
+
 

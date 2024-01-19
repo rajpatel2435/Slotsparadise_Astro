@@ -70,6 +70,40 @@
   return data;
 } */
 
+
+
+export async function GuideSidebar(){
+  const response = await fetch("https://slotsstg.wpengine.com/graphql", {
+      method: 'post', 
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+          query: `query GuideSidebar {
+            sectionsBasepress(first: 100) {
+              edges {
+                node {
+                  name
+                  basepress(first: 100) {
+                    edges {
+                      node {
+                        title
+                        uri
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+          `
+      })
+  });
+  const{ data } = await response.json();
+  return data;
+}
+
+
+
+
 export async function CasinoGuidesArticles(){
   const response = await fetch("https://slotsstg.wpengine.com/graphql", {
       method: 'post', 
@@ -144,6 +178,34 @@ export async function getNodeByURI(uri){
                     }
                   }
                 }
+                seo {
+                  opengraphSiteName
+                  breadcrumbs {
+                    text
+                    url
+                  }
+                  opengraphUrl
+                  canonical
+                  metaDesc
+                  title
+                  opengraphDescription
+                  opengraphPublishedTime
+                  opengraphModifiedTime
+                  opengraphImage {
+                    sourceUrl
+                    mimeType
+                    author {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                  opengraphType
+                  readingTime
+                  schema {
+                    raw
+                  }
+                }
               }
               ... on Page {
                 id
@@ -152,6 +214,34 @@ export async function getNodeByURI(uri){
                 slug
                 date
                 content
+                seo {
+                  opengraphSiteName
+                  breadcrumbs {
+                    text
+                    url
+                  }
+                  opengraphUrl
+                  canonical
+                  metaDesc
+                  title
+                  opengraphDescription
+                  opengraphPublishedTime
+                  opengraphModifiedTime
+                  opengraphImage {
+                    sourceUrl
+                    mimeType
+                    author {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                  opengraphType
+                  readingTime
+                  schema {
+                    raw
+                  }
+                }
               }
               ... on Category {
                 id
@@ -176,7 +266,40 @@ export async function getNodeByURI(uri){
                           }
                         }
                       }
+                      seo {
+                        breadcrumbs {
+                          text
+                          url
+                        }
+                      }
                     }
+                  }
+                }
+                seo {
+                  opengraphSiteName
+                  breadcrumbs {
+                    text
+                    url
+                  }
+                  opengraphUrl
+                  canonical
+                  metaDesc
+                  title
+                  opengraphDescription
+                  opengraphPublishedTime
+                  opengraphModifiedTime
+                  opengraphImage {
+                    sourceUrl
+                    mimeType
+                    author {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                  opengraphType
+                  schema {
+                    raw
                   }
                 }
               }
@@ -185,7 +308,37 @@ export async function getNodeByURI(uri){
                 title
                 uri
                 slug
+                date
+                databaseId
                 content
+                seo {
+                  opengraphSiteName
+                  breadcrumbs {
+                    text
+                    url
+                  }
+                  opengraphUrl
+                  canonical
+                  metaDesc
+                  title
+                  opengraphDescription
+                  opengraphPublishedTime
+                  opengraphModifiedTime
+                  opengraphImage {
+                    sourceUrl
+                    mimeType
+                    author {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                  opengraphType
+                  readingTime
+                  schema {
+                    raw
+                  }
+                }
               }
               ... on SectionBasepress {
                 id
@@ -197,6 +350,33 @@ export async function getNodeByURI(uri){
                       title
                       uri
                     }
+                  }
+                }
+                seo {
+                  opengraphSiteName
+                  breadcrumbs {
+                    text
+                    url
+                  }
+                  opengraphUrl
+                  canonical
+                  metaDesc
+                  title
+                  opengraphDescription
+                  opengraphPublishedTime
+                  opengraphModifiedTime
+                  opengraphImage {
+                    sourceUrl
+                    mimeType
+                    author {
+                      node {
+                        name
+                      }
+                    }
+                  }
+                  opengraphType
+                  schema {
+                    raw
                   }
                 }
               }
@@ -277,11 +457,21 @@ export async function getAllUris() {
 
     // Extract post URIs and add them to the uris array
     const postNodes = data.posts.nodes || [];
-    uris = uris.concat(postNodes.map((node) => ({ params: { uri: trimURI(node.uri) } })));
+    uris = uris.concat(
+      postNodes
+        .map((node) => trimURI(node.uri)) // Extract URIs
+        .filter((uri) => uri && uri !== '/') // Filter out empty or invalid URIs
+        .map((uri) => ({ params: { uri } }))
+    );
 
     // Extract category URIs and add them to the uris array
     const categoryNodes = data.categories.nodes || [];
-    uris = uris.concat(categoryNodes.map((node) => ({ params: { uri: trimURI(node.uri) } })));
+    uris = uris.concat(
+      categoryNodes
+        .map((node) => trimURI(node.uri)) // Extract URIs
+        .filter((uri) => uri && uri !== '/') // Filter out empty or invalid URIs
+        .map((uri) => ({ params: { uri } }))
+    );
 
     // Extract pages URIs and add them to the uris array
     /* const pageNodes = data.pages.nodes || [];
