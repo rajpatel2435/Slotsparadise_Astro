@@ -19,5 +19,5 @@ pipelines:
             variables:
               USER: $DO_USER
               SERVER: $DO_SERVER
-              REMOTE_PATH: '/home/1173250.cloudwaysapps.com/wwkuakxmsp/public_html/'
+              REMOTE_PATH: 'applications/wwkuakxmsp/public_html/'
               LOCAL_PATH: 'dist/*'
