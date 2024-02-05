@@ -14,6 +14,9 @@
 
 /* Default edits */
 
+
+
+
 @font-face {
     font-family: 'Gilroy-Light';
     src: url('/wp-content/themes/slotsparadise/fonts/gilroy-bold-cufonfonts-webfont/Gilroy-Light.woff');
@@ -71,15 +74,16 @@ h1, h2, h3, h4, h5, h6 {
 
 /**************** Cutom css *****************************/
 
-h1, h2, h3, h4, h5, h6
+/* h1, h2, h3, h4, h5, h6
 {
 	font-family: 'Gilroy-ExtraBold',Helvetica,Arial,Lucida,sans-serif !important;
 	font-weight: normal !important;
-} 
+}  */
 
 
 /*** Widget *******/
 .progress {
+    position: relative;
     margin: 20px 0 auto;
     padding: 0;
     width: 100%;
@@ -119,7 +123,7 @@ h1, h2, h3, h4, h5, h6
     /*margin-top: -85px !important;*/
 	margin-top: 0 !important;
 }
-.col-first {
+/* .col-first {
     width: 31%;
     display: inline-block;
     margin-right: 1%;
@@ -144,7 +148,7 @@ h1, h2, h3, h4, h5, h6
     border-radius: 0 22px 22px 0;
     padding: 8px;
     text-align: center;
-}
+} */
 .wid-btn {
     background: #A64485;
     padding: 12px 30px;
@@ -296,11 +300,11 @@ ul#menu-footer-information li a {
     margin: 10px 0 auto;
     height: 34px;
 }
-.page-title {
+/* .page-title {
     padding-top: 60px;
     text-align: center !important;
 	    margin-bottom: 10px !important;
-}
+} */
   .game-table caption {
     font-size: 1.3em;
   }
@@ -419,6 +423,11 @@ ul#menu-footer-information li a {
     margin-top: 12px;
     margin-right: 15px;
 }
+
+.digit .perc_vals{
+    font-family: 'Gilroy-Light',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: 600;
+}
 /*********** CSS */
 
 
@@ -489,11 +498,11 @@ background-color: #fff;
     border-radius: 0;
     color: #fff;
 }
-.page-title h1 {
+/* .page-title h1 {
     color: #fff;
     font-weight: 700;
     font-size: 32px;
-}
+} */
 /********** Casino guides *********/
 
 
@@ -608,9 +617,9 @@ footer #menu-games a{
 .casino-school-text {
     display: none;
 }
-.page-title h1 {
+/* .page-title h1 {
     font-size: 18px;
-}
+} */
 }
 
 @media screen and (max-width: 768px) {
@@ -942,9 +951,6 @@ header .header-background {
     z-index: 0;
 	margin-bottom: 75px;
 }
-.char-table {
-    margin-top: 28%;
-}
 .schema-faq-section {
     margin-bottom: 20px;
 }
@@ -1139,12 +1145,10 @@ a#usd-btn {
 }
 
 
-
-
 .wpcr3_reviews_holder .wpcr3_review .wpcr3_review_author {
     display: block !important;
-    position: absolute;
-    top: 60px;
+    /* position: absolute;
+    top: 60px; */
 }
 
 div.wpcr3_review div.wpcr3_review_title {
@@ -1278,6 +1282,57 @@ span.rvs_total {
 }
 
 
+.a2a_button_facebook {
+    background-image: url('https://slotsstg.wpengine.com/wp-content/themes/slotsparadise/images/facebook.svg');
+    width: 26px;
+    display: block;
+    height: 22px;
+    background-repeat: no-repeat;
+}
+
+.a2a_button_twitter {
+    background-image: url('https://slotsstg.wpengine.com/wp-content/themes/slotsparadise/images/twitter.svg');
+    width: 26px;
+    display: block;
+    height: 22px;
+    background-repeat: no-repeat;
+}
+
+.a2a_dd {
+    background-image: url('https://slotsstg.wpengine.com/wp-content/themes/slotsparadise/images/plus-2.png');
+    background-position: center;
+    display: block;
+    width: 22px;
+    height: 22px;
+    background-repeat: no-repeat;
+    background-color: rgb(1, 102, 255);
+    border-radius: 4px;
+}
+
+
+li.relted-games {
+    list-style: none;
+    display: inline-block;
+    margin-right: 1%;
+    width: 18%;
+}
+img.games-img {
+    display: block;
+}
+a.post-link {
+    color: #2F0536;
+    font-weight: bold;
+}
+.dtwd_related-posts h4 {
+    color: #FF93AA;
+    font-size: 36px;
+	position: relative;
+}
+
+li.relted-games img {
+    border-radius: 8px;
+    box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
+}
 /* knowledge base hiding the tp image */
 
 .single-knowledgebase figure.wp-block-image.size-large {
@@ -1396,6 +1451,12 @@ span.rvs_total {
 	padding: 20px 22px;
 	font-size: 11px;
 }
+
+li.relted-games {
+    margin-right: 0;
+    width: 100%;
+	margin-bottom: 20px;
+}
 }
 
 
@@ -1412,13 +1473,27 @@ span.rvs_total {
 
 .rating-col p, .rating-col, .percent {
     color: #46104e;
+    font-family: 'Gilroy-Light',Helvetica,Arial,Lucida,sans-serif;
+    font-weight: 600;
 }
 
+.rating-col {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .free-online-block {
 	display: flex;
 	justify-content: space-between;
 	align-items: flex-start;
+}
+
+.a2a_kit.a2a_kit_size_18.addtoany_list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
 }
 
 

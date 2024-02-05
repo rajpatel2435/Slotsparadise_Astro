@@ -37,6 +37,7 @@ const data = await wpquery({
               }
             }
             link
+            uri
           }
         }
       }
@@ -64,20 +65,20 @@ const data = await wpquery({
       data.posts.edges.map((post: any) => (
     <!-- Slides -->
       <article class="home-slider-article swiper-slide rounded-[3px] bg-white shadow-homePosts overflow-hidden border border-[#EAEAEA]">
-        <a class="entry-featured-image-url mb-5" href={post.node.link}>
+        <a class="entry-featured-image-url mb-5" href={post.node.uri}>
           <Image
             class="games-Image reco w-full h-[228px]"
             width="328"
             height="223"
             alt={post.node.title}
             title={post.node.title}
-            src={post.node.featuredImage.node.sourceUrl}
+            src={post.node.featuredImage?.node?.sourceUrl}
           />
         </a>
 
         <div class="entry-title text-[#2f0536]  font-gilorybold py-5 mx-2">
             <h4 class="flex justify-between items-center space-x-2 mb-0"> 
-                <a href="" class="font-extrabold text-[18px] whitespace-nowrap w-[90%] overflow-hidden">{post.node.title}</a>
+                <a href={post.node.uri}class="font-extrabold text-[18px] whitespace-nowrap w-[90%] overflow-hidden">{post.node.title}</a>
                 <img class="wishlist-img" src="https://slotsparadise.com/wp-content/themes/slotsparadise/images/heart-ico.svg" alt="wishlist" title="wishlist" />
             </h4>
             <div class="rating_container flex items-center space-x-4">

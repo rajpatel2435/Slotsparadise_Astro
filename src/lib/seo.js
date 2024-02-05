@@ -1,3 +1,4 @@
+export const prerender = true;
 export async function seoNodeByURI(uri){
     const response = await fetch("https://slotsstg.wpengine.com/graphql", {
         method: 'post', 

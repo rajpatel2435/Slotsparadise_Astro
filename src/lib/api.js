@@ -1,3 +1,5 @@
+export const prerender = true;
+
 /* export async function navQuery(){
   const siteNavQueryRes = await fetch("https://slotsstg.wpengine.com/graphql", {
       method: 'post', 

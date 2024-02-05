@@ -1,54 +1,23 @@
-image: node:10.15.3
+image: node:18.14.1
 
 pipelines:
   default:
     - step:
-        name: Set Node.js Version and Build
+        name: Build and test
         caches:
           - node
         script:
-          - nvm use $(cat .nvmrc) # Set Node.js version based on .nvmrc
-          - node --version # Verify the Node.js version
           - npm install
           - npm run build
+        artifacts:
+          - build/**
     - step:
-        name: Deploy Everything using SCP to PROD
+        name: Deploy artifacts using SCP to PROD
         deployment: production
         script:
-          - echo "$SSH_PASSWORD" > ssh-password.txt # Create a temporary file with the password
           - pipe: atlassian/scp-deploy:0.3.3
             variables:
-              USER: $USER
-              SERVER: $SERVER
-              REMOTE_PATH: "/home/master/applications/wwkuakxmsp/public_html"
-              LOCAL_PATH: "."
-              SSH_PASSWORD_FILE: ssh-password.txt # Use the temporary file as the SSH password
-          - rm ssh-password.txt # Remove the temporary file after deployment
-  branches:
-    #  dev:
-    #    - step:
-    #        name: Push to Dev
-    #        script:
-    #          - echo "This action runs when changes are pushed to the dev branch."
-    #        # Add other steps for the dev branch if needed
-
-    #  stg:
-    #    - step:
-    #        name: Merge to Staging
-    #        script:
-    #          - echo "This action runs when changes are merged into the staging branch."
-    #        # Add other steps for the staging branch if needed
-
-    master:
-      - step:
-          name: Merge to Master
-          script:
-            - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
-            - COMMIT_DATE=$(git log -n 1 --pretty=format:'%ci' $BITBUCKET_COMMIT)
-            - COMMIT_AUTHOR=$(git log -n 1 --pretty=format:'%an' $BITBUCKET_COMMIT)
-            - >
-              curl -d '{
-                  "channel": "wp-team-activity",
-                  "username": "Bitbucket Pipelines",
-                  "text": "New commit deployed to #SlotsParadise **Master** branch on ```Astro Theme``` with the following message: \n ```\n'"$COMMIT_MESSAGE"'\nEnv: CloudWays\nDate: '"$COMMIT_DATE"'\nAuthor: '"$COMMIT_AUTHOR"'\n ```"
-                }' -H "Content-Type: application/json" -X POST https://matter.dblexchange.com/hooks/t34yjuo6a3refeeafr3itdauge
+              USER: $DO_USER
+              SERVER: $DO_SERVER
+              REMOTE_PATH: '/home/1173250.cloudwaysapps.com/wwkuakxmsp/public_html/'
+              LOCAL_PATH: 'build/*'

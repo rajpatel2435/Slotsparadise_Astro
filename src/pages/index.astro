@@ -1,5 +1,5 @@
 ---
-//export const prerender = true;
+export const prerender = true;
 import Layout from "../layouts/Layout.astro";
 import HomePosts from "../components/Home/HomePosts.astro";
 import CasinoNews from "../components/Home/CasinoNews.astro";
@@ -30,21 +30,27 @@ import WhySlots from "../components/Home/WhySlots.astro";
               <div
                 class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom"
               >
-                <a href="https://slotsparadise.com/blackjack">
+                <a
+                  href="https://slotsparadise.com/blackjack"
+                  aria-label="blackjack"
+                >
                   <figure class="">
                     <img
                       class="w-full"
                       width="686"
                       height="386"
                       src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-blackjack.webp"
-                      alt=""
+                      alt="blackjack image"
                     />
                   </figure></a
                 >
 
-                <h3 class="image-block-text font-semibold py-3 text-2xl">
-                  <a href="https://slotsparadise.com/blackjack">BlackJack</a>
-                </h3>
+                <h2 class="image-block-text font-semibold py-3 text-2xl">
+                  <a
+                    href="https://slotsparadise.com/blackjack"
+                    aria-label="blackjack">BlackJack</a
+                  >
+                </h2>
               </div>
             </div>
 
@@ -52,42 +58,50 @@ import WhySlots from "../components/Home/WhySlots.astro";
               <div
                 class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom"
               >
-                <a href="https://slotsparadise.com/slots">
+                <a href="https://slotsparadise.com/slots" aria-label="slots">
                   <figure class="">
                     <img
                       class="w-full"
                       width="686"
                       height="386"
                       src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-slots-1.webp"
-                      alt=""
+                      alt="slots image"
                     />
                   </figure>
                 </a>
 
-                <h3 class="image-block-text font-semibold py-3 text-2xl">
-                  <a href="https://slotsparadise.com/slots">Slots</a>
-                </h3>
+                <h2 class="image-block-text font-semibold py-3 text-2xl">
+                  <a href="https://slotsparadise.com/slots" aria-label="slots"
+                    >Slots</a
+                  >
+                </h2>
               </div>
             </div>
             <div class="w-full sm:w-1/2 md:w-1/4 p-4">
               <div
                 class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom"
               >
-                <a href="https://slotsparadise.com/roulette">
+                <a
+                  href="https://slotsparadise.com/roulette"
+                  aria-label="roulette"
+                >
                   <figure class="">
                     <img
                       class="w-full"
                       width="686"
                       height="386"
                       src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-roulette.webp"
-                      alt=""
+                      alt="roulette image"
                     />
                   </figure>
                 </a>
 
-                <h3 class="image-block-text font-semibold py-3 text-2xl">
-                  <a href="https://slotsparadise.com/roulette">Roulette</a>
-                </h3>
+                <h2 class="image-block-text font-semibold py-3 text-2xl">
+                  <a
+                    href="https://slotsparadise.com/roulette"
+                    aria-label="roulette">Roulette</a
+                  >
+                </h2>
               </div>
             </div>
 
@@ -95,23 +109,27 @@ import WhySlots from "../components/Home/WhySlots.astro";
               <div
                 class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom"
               >
-                <a href="https://slotsparadise.com/table-games/">
+                <a
+                  href="https://slotsparadise.com/table-games/"
+                  aria-label="table games"
+                >
                   <figure class="">
                     <img
                       class="w-full"
                       width="686"
                       height="386"
                       src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-baccarat.webp"
-                      alt=""
+                      alt="table games image"
                     />
                   </figure></a
                 >
 
-                <h3 class="image-block-text font-semibold py-3 text-2xl">
-                  <a href="https://slotsparadise.com/table-games/"
-                    >Table Games</a
+                <h2 class="image-block-text font-semibold py-3 text-2xl">
+                  <a
+                    href="https://slotsparadise.com/table-games/"
+                    aria-label="table games">Table Games</a
                   >
-                </h3>
+                </h2>
               </div>
             </div>
           </div>
@@ -120,6 +138,7 @@ import WhySlots from "../components/Home/WhySlots.astro";
             <div class="more-casino-games-btn text-center">
               <a
                 href="https://slotsparadise.com/all-games"
+                aria-label="all games"
                 class="mt-5 bg-[#a64485] inline-block text-white font-giloryExtrabold text-lg px-10 py-2 rounded-[25px] font-semibold uppercase hover:bg-[#ff93aa] cursor-pointer transition-all"
                 >More Casino Games</a
               >

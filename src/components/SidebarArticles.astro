@@ -12,6 +12,7 @@ const data = await wpquery({
         title
         excerpt
         date
+        uri
         featuredImage {
           node {
             sourceUrl
@@ -31,7 +32,7 @@ const data = await wpquery({
       <article class=" flex items-center justify-between border-b pb-4">
         <a
           class="block w-[40%] h-40 rounded-lg overflow-hidden"
-          href={post.node.link}
+          href={post.node.uri}
         >
           <Image
             class="w-full h-40 object-cover shadow-casinoNews"
@@ -43,13 +44,13 @@ const data = await wpquery({
           />
         </a>
         <div class="w-[55%]">
-          <h4 class="text-[#6A6C6E] font-giloryBold text-xl leading-[1.1]">
-            <a href="{post.node.link}">{post.node.title}</a>
-          </h4>
+          <h3 class="text-[#6A6C6E] font-giloryBold text-xl leading-[1.1]">
+            <a href={post.node.uri}>{post.node.title}</a>
+          </h3>
           <div class="line-clamp-3 mt-2">
             <a
               class="text-[#2F0536] font-giloryRegular text-base font-semibold"
-              href={post.node.link}
+              href={post.node.uri}
               set:html={post.node.excerpt}
             />
           </div>

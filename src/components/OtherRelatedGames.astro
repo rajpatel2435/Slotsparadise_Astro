@@ -1,0 +1,100 @@
+---
+import { Image } from "astro:assets";
+import { wpquery } from "../data/wordpress";
+
+const fullUrl = Astro.request.url;
+const segments = fullUrl.split("/");
+const slug = segments[segments.length - 3];
+//console.log(slug);
+
+const currentPost = segments[segments.length - 2];
+
+const data = await wpquery({
+  query: `
+    query otherRelatedGames($categoryName: String!) {
+      posts(
+        where: { categoryName: $categoryName, orderby: { order: DESC, field: DATE } }
+        first: 6
+      ) {
+        edges {
+          node {
+            featuredImage {
+              node {
+                altText
+                title
+                sourceUrl
+              }
+            }
+            title
+            slug
+            uri
+          }
+        }
+      }
+    }
+  `,
+  variables: {
+    categoryName: slug,
+  },
+});
+
+//console.log(data.posts.edges.slice(0, 4));
+
+const postsByCat = data.posts.edges.slice(0, 6);
+
+const relatedPosts = postsByCat.filter(
+  (relPost) => relPost.node.slug !== currentPost
+);
+
+//console.log(relatedPosts);
+//console.log(relatedPosts[0].node.featuredImage);
+---
+
+<!-- <div id="other_related_container"></div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const ajaxurl = "https://slotsstg.wpengine.com/wp-admin/admin-ajax.php";
+
+    // Make the AJAX request with individual attribute values
+    fetch(ajaxurl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      },
+      body: "action=other_realted_games",
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        // Set the response as the content of the #review-container
+        document.getElementById("other_related_container").innerHTML = data;
+      });
+  });
+</script>
+ -->
+<h4 class="text-[#FF93AA] font-giloryExtrabold text-xl">Other Related Games</h4>
+<div class="other_related_container flex gap-3 flex-col sm:flex-row">
+  {
+    relatedPosts.map((post: any) => (
+      <div class="">
+        <div class="">
+          <a class="block rounded-lg overflow-hidden" href={post.node.uri}>
+            <Image
+              class="w-full object-cover shadow-casinoNews"
+              width="155"
+              height="86"
+              alt={post.node.title}
+              title={post.node.title}
+              src={post.node.featuredImage?.node?.sourceUrl}
+            />
+          </a>
+          <div class="">
+            <p class="text-[#2F0536] font-giloryRegular font-semibold">
+              <a href={post.node.uri}>{post.node.title}</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    ))
+  }
+</div>

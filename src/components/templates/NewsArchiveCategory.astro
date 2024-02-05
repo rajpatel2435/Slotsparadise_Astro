@@ -1,7 +1,7 @@
 ---
 import NewsPostCategory from "../../components/NewsPostCategory.astro";
 import { wpquery } from "../../data/wordpress";
-import { getNodeByURI, getAllUris } from "../../lib/api";
+import { getNodeByURI } from "../../lib/api";
 const uri = `/${Astro.params.uri}/`;
 const data = await getNodeByURI(uri);
 const node = data.nodeByUri;
@@ -13,9 +13,8 @@ const slug = node.slug;
 //console.log("URI:", uri);
 //console.log("Slug:", slug);
 
-
-  const postsData = await wpquery({
-    query: `
+const postsData = await wpquery({
+  query: `
       query GetNewsPosts {
         posts(where: { categoryName: "${slug}" }, first: 1000) {
           edges {
@@ -25,7 +24,7 @@ const slug = node.slug;
               date
               uri
               slug
-              excerpt
+              excerpt(format: RENDERED)
               featuredImage {
                 node {
                   sourceUrl
@@ -37,35 +36,58 @@ const slug = node.slug;
         }
       }
     `,
-  });
+});
 
-  const allPosts = postsData?.posts?.edges;
+const allPosts = postsData?.posts?.edges;
 
 //console.log(allPosts);
-
 ---
 
-  <div class="news_page_container max-w-[1440px] mx-auto w-[80%] font-giloryRegular font-semibold text-base text-[#666]">
-    <div> 
-        <div><h1 class="text-3xl sm:text-4xl text-[#ff688b] pb-3 font-medium font-giloryExtrabold">Casino News</h1> 
-          <p><span>Our Casino News section is your source for the latest happenings in the world of gambling and casinos. Stay informed on new casino openings, industry developments, and changes in laws and regulations. Discover the latest trends and innovations in the casino industry and get insights into winning strategies and tactics. From major tournament events to tips for success, Casino News has everything you need to stay ahead in the world of online gambling. </span></p> 
-          <p><span>Whether you are a seasoned gambler or just starting out, this section is your go-to resource for all things related to the casino world. Stay informed, and stay ahead of the game, with Casino News.</span></p>
-        </div> 
+<div
+  class="news_page_container max-w-[1440px] mx-auto w-[80%] font-giloryRegular font-semibold text-base text-[#666]"
+>
+  <div>
+    <div>
+      <h1
+        class="text-3xl sm:text-4xl text-[#ff688b] pb-3 font-medium font-giloryExtrabold"
+      >
+        Casino News
+      </h1>
+      <p>
+        <span
+          >Our Casino News section is your source for the latest happenings in
+          the world of gambling and casinos. Stay informed on new casino
+          openings, industry developments, and changes in laws and regulations.
+          Discover the latest trends and innovations in the casino industry and
+          get insights into winning strategies and tactics. From major
+          tournament events to tips for success, Casino News has everything you
+          need to stay ahead in the world of online gambling.
+        </span>
+      </p>
+      <p>
+        <span
+          >Whether you are a seasoned gambler or just starting out, this section
+          is your go-to resource for all things related to the casino world.
+          Stay informed, and stay ahead of the game, with Casino News.</span
+        >
+      </p>
     </div>
+  </div>
 
-    <section class="news_page max-w-[1440px] mx-auto px-4 my-16">
-        {allPosts.map((post) => (
-          <NewsPostCategory
-            href={post.node.uri}
-            title={post.node.title}
-            body={post.node.excerpt}
-            src={post.node.featuredImage?.node?.sourceUrl}
-            alt={post.node.featuredImage?.node?.altText}
-            excerpt={post.node.excerpt}
-            slug={post.node.slug}
-            uri={post.node.uri}
-          />
-        ))}
-      </section>
-
-
+  <section class="news_page max-w-[1440px] mx-auto px-4 my-16">
+    {
+      allPosts.map((post) => (
+        <NewsPostCategory
+          href={post.node.uri}
+          title={post.node.title}
+          body={post.node.excerpt}
+          src={post.node.featuredImage?.node?.sourceUrl}
+          alt={post.node.featuredImage?.node?.altText}
+          excerpt={post.node.excerpt}
+          slug={post.node.slug}
+          uri={post.node.uri}
+        />
+      ))
+    }
+  </section>
+</div>

@@ -18,6 +18,7 @@ const data = await wpquery({
           }
         }
         link
+        uri
       }
     }
   }
@@ -38,8 +39,8 @@ const data = await wpquery({
     {
       data.posts.edges.map((post: any) => (
     <!-- Slides -->
-      <article class="home-slider-article swiper-slide rounded-[3px] bg-white shadow-homePosts overflow-hidden h-[283px]">
-        <a class="entry-featured-image-url mb-5" href={post.node.link}>
+      <article class="home-slider-article swiper-slide rounded-[3px] bg-white shadow-homePosts overflow-hidden h-[283px]" role="article">
+        <a href={post.node.uri} class="entry-featured-image-url mb-5">
           <Image
             class="games-Image reco w-full h-[228px]"
             width="328"
@@ -51,7 +52,7 @@ const data = await wpquery({
         </a>
 
         <h4 class="entry-title pl-5 h-[55px] leading-[55px] text-[#2f0536] font-extrabold text-[18px] whitespace-nowrap font-gilorybold">
-          <a href="">{post.node.title}</a>
+          <a href={post.node.uri}>{post.node.title}</a>
         </h4>
       </article>
       ))

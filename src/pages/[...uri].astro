@@ -1,7 +1,6 @@
 ---
 /* export const prerender = true; */
 import Layout from "../layouts/Layout.astro";
-
 import Archive from "../components/templates/Archive.astro";
 import Single from "../components/templates/Single.astro";
 import SingleNewsArticle from "../components/templates/SingleNewsArticle.astro";
@@ -22,8 +21,8 @@ const node = data.nodeByUri;
 // Now you have both uri and slug available
 //console.log("Slug:", slug);
 /* console.log("URI:", uri);
-
-console.log(node.__typename); */
+ */
+//console.log(node.__typename);
 
 export async function getStaticPaths() {
   return await getAllUris();

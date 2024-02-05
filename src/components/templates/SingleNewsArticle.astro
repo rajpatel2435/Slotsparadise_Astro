@@ -1,81 +1,105 @@
 ---
 const { node } = Astro.props;
-import { Image } from "astro:assets";
 import SidebarArticles from "../SidebarArticles.astro";
---- 
 
-<div class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/08/casino-guides-header-v23.jpg')] bg-cover bg-center h-52 flex items-center text-white font-giloryRegular">
-    <div class="header-content-row w-[80%] mx-auto">
-        <div class="page-title">
-            <h1 class="entry-title text-2xl md:text-3xl font-giloryExtrabold mb-2">{node.title}</h1>
-    
-            <!-- <div class="post-bread font-semibold">
-                <div class=""><p><span><span><a href="https://slotsparadise.com/the-beach/">Home</a></span> &gt; 
-                    <span><a href="https://slotsparadise.com/the-beach/news/">News</a></span> &gt; 
-                    <span>{ node.categories ?
-                    node.categories.nodes.map(category => (<a class='term-link' href={category.uri}>{category.name}</a>)) :     
-                    null 
-                    }</span> &gt; 
-                    <span class="breadcrumb_last" aria-current="page"><strong>{node.title}</strong></span></span></p>
-                </div>
-            </div> -->
+//console.log(node.seo.breadcrumbs);
+---
+
+<div
+  class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/08/casino-guides-header-v23.jpg')] bg-cover bg-center h-52 flex items-center text-white font-giloryRegular"
+>
+  <div class="header-content-row w-[80%] mx-auto">
+    <div class="page-title">
+      <h1 class="entry-title text-2xl md:text-3xl font-giloryExtrabold mb-2">
+        {node.title}
+      </h1>
+
+      <div class="post-bread font-semibold">
+        <div class="">
+          <p>
+            <span
+              ><span
+                ><a href={node.seo.breadcrumbs[0].url}
+                  >{node.seo.breadcrumbs[0].text}</a
+                ></span
+              > &gt; <span
+                ><a href={node.seo.breadcrumbs[1].url}
+                  >{node.seo.breadcrumbs[1].text}</a
+                ></span
+              > &gt; <span class="" aria-current="page"
+                ><a href={node.seo.breadcrumbs[2].url}
+                  >{node.seo.breadcrumbs[2].text}</a
+                ></span
+              ></span
+            > &gt; <span class="" aria-current="page"
+              ><a href="">{node.seo.breadcrumbs[3].text}</a></span
+            >
+          </p>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- Main Page -->
 
-    <div class="post-content-row max-w-[1440px] mx-auto mt-16">
-        <div class="casino_news_blocks grid grid-cols-6 gap-12">
-            <div class="post-content-module col-span-6 md:col-span-4">
-                <div class="pb-10"><img class='featured-image rounded-lg overflow-hidden' width="1200" height="667" src={node.featuredImage?.node?.sourceUrl} alt={node.title}
-                    title={node.title}> </div>
-                <article class=" font-giloryRegular font-semibold " set:html={node.content}>
-                </article>
-            </div>
-            <div class="sidebar col-span-6 md:col-span-2 flex flex-col gap-4">
-                <h2 class="text-[#ff688b] pb-3 font-medium font-giloryExtrabold text-3xl">Articles</h2>
-                <SidebarArticles />
-                </div>
-        </div>
+<div class="post-content-row max-w-[1440px] mx-auto mt-16">
+  <div class="casino_news_blocks grid grid-cols-6 gap-12">
+    <div class="post-content-module col-span-6 md:col-span-4">
+      <div class="pb-10">
+        <img
+          class="featured-image rounded-lg overflow-hidden"
+          width="1200"
+          height="667"
+          src={node.featuredImage?.node?.sourceUrl}
+          alt={node.title}
+          title={node.title}
+        />
+      </div>
+      <article
+        class="font-giloryRegular font-semibold"
+        set:html={node.content}
+      />
     </div>
+    <div class="sidebar col-span-6 md:col-span-2 flex flex-col gap-4">
+      <h2 class="text-[#ff688b] pb-3 font-medium font-giloryExtrabold text-3xl">
+        Articles
+      </h2>
+      <SidebarArticles />
+    </div>
+  </div>
+</div>
 
- 
- 
+<style is:global>
+  .wp-block-image img {
+    width: 100%;
+    height: auto;
+  }
 
- <style is:global>
-    .wp-block-image img {
-            width: 100%;
-            height: auto;  
-    }
+  h2.wp-block-heading,
+  h3.wp-block-heading {
+    font-size: 26px;
+    color: #ff688b;
+    font-weight: 900;
+    font-family: "Gilroy-ExtraBold";
+    padding-bottom: 10px;
+  }
 
-    h2.wp-block-heading, h3.wp-block-heading{
-        font-size: 26px;
-        color: #ff688b;
-        font-weight: 900;
-        font-family: 'Gilroy-ExtraBold';
-        padding-bottom: 10px;
-    }
+  h3.wp-block-heading {
+    font-size: 22px;
+  }
 
-    h3.wp-block-heading{
-        font-size: 22px;
-    }
+  .post-content-module p {
+    padding-bottom: 16px;
+  }
 
-    .post-content-module a {
-    color: #2ea3f2;
-    }
-
-    .post-content-module p {
-        padding-bottom: 16px;
-    }
-
-    .post-content-module .related_topics ul {
+  .post-content-module .related_topics ul {
     padding: 5px;
     padding-left: 10px;
-}
+  }
 
-.post-content-module .related_topics li{
+  .post-content-module .related_topics li {
     list-style-type: disc;
     margin-left: 20px;
-    }
+  }
 </style>

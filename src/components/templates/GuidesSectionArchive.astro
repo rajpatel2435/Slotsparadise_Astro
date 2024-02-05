@@ -1,13 +1,50 @@
 ---
 import CasinoGuideSidebar from "../CasinoGuideSidebar.astro";
+import SearchWidget from "../SearchWidget.astro";
 const { node } = Astro.props;
 
 //console.log(node);
 ---
 
 <div
+  class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/07/thebeach-guides.jpg')] bg-cover bg-center py-16 flex items-center text-white font-giloryRegular"
+>
+  <div class="header-content-row w-[80%] mx-auto">
+    <div class="page-title text-center">
+      <h1
+        class="entry-title text-2xl md:text-3xl font-giloryExtrabold mb-2 text-center"
+      >
+        Online Casino Guides
+      </h1>
+
+      <SearchWidget />
+    </div>
+  </div>
+</div>
+
+<div
   class="online_casino_guide font-giloryRegular font-semibold max-w-[1200px] mx-auto md:py-10 px-2"
 >
+  <div class="post-bread font-semibold text-[#555] mb-10">
+    <p>
+      <span
+        ><span
+          ><a href={node.seo.breadcrumbs[0].url}
+            >{node.seo.breadcrumbs[0].text}</a
+          ></span
+        > &gt; <span
+          ><a href={node.seo.breadcrumbs[1].url}
+            >{node.seo.breadcrumbs[1].text}</a
+          ></span
+        > &gt; <span class="" aria-current="page"
+          ><a href={node.seo.breadcrumbs[2].url}
+            >{node.seo.breadcrumbs[2].text}</a
+          ></span
+        >
+      </span>
+    </p>
+  </div>
+
   <div class="inner_container flex flex-col md:flex-row justify-between">
     <CasinoGuideSidebar />
     <div class="section-container w-full md:w-3/4 pl-0 md:pl-10 pt-4 md:pt-0">

@@ -1,9 +1,9 @@
 ---
 import { Image } from "astro:assets";
 import SidebarArticles from "../SidebarArticles.astro";
-//import { wpquery } from "../../data/wordpress";
+import { wpquery } from "../../data/wordpress";
 
-const postData = await fetch("https://slotsstg.wpengine.com/graphql", {
+/* const postData = await fetch("https://slotsstg.wpengine.com/graphql", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",
@@ -14,6 +14,7 @@ const postData = await fetch("https://slotsstg.wpengine.com/graphql", {
     edges {
       node {
         link
+        uri
         title
         excerpt
         date
@@ -30,15 +31,16 @@ const postData = await fetch("https://slotsstg.wpengine.com/graphql", {
 }).then((data) => data.json());
 
 const posts = postData.data.posts.edges;
-//console.log(posts);
+console.log(posts); */
 
-/* const data = await wpquery({
+const data = await wpquery({
   query: `
   query CasinoNewsHome {
   posts(where: {categoryId: 9}, first: 4) {
     edges {
       node {
         link
+        uri
         title
         excerpt
         date
@@ -52,7 +54,9 @@ const posts = postData.data.posts.edges;
   }
 }
   `,
-}); */
+});
+
+//console.log(data.posts.edges);
 ---
 
 <section
@@ -67,10 +71,10 @@ const posts = postData.data.posts.edges;
   <div class="casino_news_blocks grid grid-cols-5 gap-12">
     <div class="casino_news_left_block col-span-5 md:col-span-3">
       {
-        posts.slice(0, 1).map((post: any) => (
+        data.posts.edges.slice(0, 1).map((post: any) => (
           <div class="left_block">
             <article class="">
-              <a class="mb-5" href={post.node.link}>
+              <a class="mb-5" href={post.node.uri}>
                 {post.node.featuredImage?.node ? (
                   <Image
                     class="shadow-casinoBlock rounded-lg"
@@ -78,21 +82,21 @@ const posts = postData.data.posts.edges;
                     height="460"
                     alt={post.node.title}
                     title={post.node.title}
-                    src={post.node.featuredImage.node.sourceUrl}
+                    src={post.node.featuredImage?.node?.sourceUrl}
                   />
                 ) : null}
               </a>
 
-              <h4 class="text-3xl py-3 font-giloryBold text-[#ff688b]">
+              <h3 class="text-3xl py-3 font-giloryBold text-[#ff688b]">
                 <a href={post.node.link}>{post.node.title}</a>
-              </h4>
+              </h3>
               <p class="text-[#491957] py-2 before:content-[url('https://slotsparadise.com/wp-content/uploads/2022/03/Group-4377.png')] flex gap-2 before:inline-block before:h-full before:w-4 items-center">
                 {post.node.date.split("T")[0]}
               </p>
               <div class="text-[#2f0536] font-giloryRegular font-semibold">
                 <a
                   class="font-giloryRegular"
-                  href={post.node.link}
+                  href={post.node.uri}
                   set:html={post.node.excerpt}
                 />
               </div>

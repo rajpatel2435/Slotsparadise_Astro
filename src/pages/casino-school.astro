@@ -1,12 +1,14 @@
 ---
-/* export const prerender = true; */
+export const prerender = true;
 import Layout from "../layouts/Layout.astro";
 import CasinoSchoolSidebar from "../components/CasinoSchoolSidebar.astro";
 ---
 
 <Layout title="casino school">
   <div class="main-content casino_page mt-52">
-    <div class="first_row bg-[#51135a] text-white font-giloryRegular">
+    <div
+      class="first_row bg-[#51135a] text-white font-giloryRegular font-semibold"
+    >
       <div
         class="inner_content flex flex-col md:flex-row items-center max-w-[1440px] mx-auto py-12 justify-between px-2"
       >
@@ -15,7 +17,7 @@ import CasinoSchoolSidebar from "../components/CasinoSchoolSidebar.astro";
             class="w-full"
             width="640"
             height="520"
-            src="https://cdn-ijecn.nitrocdn.com/xQDKkszZvfubgABZYAOVkLEBHdJfEQZp/assets/images/optimized/rev-0836318/slotsparadise.com/the-beach/images/2022/08/casino-side2-1.jpg"
+            src="https://slotsparadise.com/wp-content/uploads/2022/08/casino-side2-1.jpg"
             alt="casino school"
             title="casino school"
           />
@@ -44,7 +46,7 @@ import CasinoSchoolSidebar from "../components/CasinoSchoolSidebar.astro";
     <div class="page_content max-w-[1440px] mx-auto px-2 font-giloryRegular">
       <div class="breadcrumbs font-giloryRegular py-5">
         <div class="et_pb_text_inner">
-          <span><a href="https://slotsparadise.com/the-beach/">Home</a></span>
+          <span><a href="/">Home</a></span>
           &gt; <span class="breadcrumb_last" aria-current="page"
             ><strong>Casino School</strong></span
           >
@@ -88,7 +90,8 @@ import CasinoSchoolSidebar from "../components/CasinoSchoolSidebar.astro";
                   </p>
                   <p>
                     We have taken it upon ourselves at Slots Paradise <a
-                      href="https://slotsparadise.com/">online casino</a
+                      href="https://slotsparadise.com/"
+                      class="underline text-blue-600">online casino</a
                     > to ensure everyone is included. You will find our casino school
                     helpful if you are new to online gambling. Even as a veteran,
                     you can always refresh your gaming knowledge at our casino school.
@@ -146,9 +149,10 @@ import CasinoSchoolSidebar from "../components/CasinoSchoolSidebar.astro";
                     session. <span
                       >Stay tuned to our casino news and guides on our&nbsp;</span
                     ><a
-                      href="https://twitter.com/SlotsParadiseOC"
+                      href="https://twitter.com/SlotsParadise"
                       target="_blank"
-                      rel="noreferrer noopener">social media</a
+                      rel="noreferrer noopener"
+                      class="underline text-blue-600">social media</a
                     ><span>&nbsp;for more updates.</span>
                   </p>
                   <p>
