@@ -1,32 +1,19 @@
 ---
 import { seoNodeByURI } from '../lib/seo';
 
-// Check if Astro.params.uri is defined and not empty
-const isDefinedUri = Astro.params.uri !== undefined && Astro.params.uri !== '';
+// Set the URI based on whether it's the main page or a specific URI
+const uri = Astro.params.uri ? `/${Astro.params.uri}/` : '/';
 
-// Check if the current page is the main page
-const isMainPage = Astro.request.url === '/' || Astro.request.url === 'https://preeminent-mochi-ac18b5.netlify.app/';
-
-// Set the URI based on whether it's defined or not
-const uri = isDefinedUri
-  ? `/${Astro.params.uri}/`
-  : isMainPage
-    ? '/'
-    : `/${Astro.request.url.split('/').filter(Boolean).pop() || ''}/`;
-
-//console.log(uri);
-//console.log(Astro.request.url);
+console.log(uri);
 
 const data = await seoNodeByURI(uri);
-//console.log(data);  
 
 const node = data.nodeByUri && data.nodeByUri.seo ? data.nodeByUri : null;
-
-//console.log(node);
 
 const seo = node ? node.seo : null;
 
 //console.log(seo);
+
 ---
 
 <meta name="description" content={seo?.metaDesc} />
