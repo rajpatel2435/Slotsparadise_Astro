@@ -10,7 +10,7 @@ pipelines:
           - npm install
           - npm run build
         artifacts:
-          - build/**
+          - dist/**
     - step:
         name: Deploy artifacts using SCP to PROD
         deployment: production
@@ -20,4 +20,4 @@ pipelines:
               USER: $DO_USER
               SERVER: $DO_SERVER
               REMOTE_PATH: '/home/1173250.cloudwaysapps.com/wwkuakxmsp/public_html/'
-              LOCAL_PATH: 'build/*'
+              LOCAL_PATH: 'dist/*'
