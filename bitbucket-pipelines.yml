@@ -11,7 +11,6 @@ pipelines:
           - npm run build
         artifacts:
           - dist/**
-          - run-server.mjs  # Include the run-server.mjs file
     - step:
         name: Deploy artifacts using SCP to PROD
         deployment: production
@@ -22,7 +21,5 @@ pipelines:
               SERVER: $DO_SERVER
               REMOTE_PATH: 'applications/wwkuakxmsp/public_html/'
               LOCAL_PATH: 'dist/*'
-          # Copy run-server.mjs to the remote server
-          - scp -r run-server.mjs $DO_USER@$DO_SERVER:applications/wwkuakxmsp/public_html/
-          # Execute the run-server.mjs file on the server
-          - ssh $DO_USER@$DO_SERVER 'cd applications/wwkuakxmsp/public_html/ && node run-server.mjs'
+          # Execute the entry.mjs file on the server
+          - ssh $DO_USER@$DO_SERVER 'cd applications/wwkuakxmsp/public_html/ && node ./dist/server/entry.mjs'
