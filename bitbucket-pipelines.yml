@@ -22,7 +22,7 @@ pipelines:
               SERVER: $DO_SERVER
               REMOTE_PATH: 'applications/wwkuakxmsp/public_html/'
               LOCAL_PATH: 'dist/*'
-          # Add run-server.mjs to the LOCAL_PATH
-          - 'run-server.mjs'
+          # Copy run-server.mjs to the remote server
+          - scp -r run-server.mjs $DO_USER@$DO_SERVER:applications/wwkuakxmsp/public_html/
           # Execute the run-server.mjs file on the server
           - ssh $DO_USER@$DO_SERVER 'cd applications/wwkuakxmsp/public_html/ && node run-server.mjs'
