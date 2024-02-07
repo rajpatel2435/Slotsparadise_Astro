@@ -3,7 +3,7 @@ image: node:18.14.1
 pipelines:
   default:
     - step:
-        name: Deploy project to server and start
+        name: Stop server and clone repository
         deployment: production
         script:
           # Check if the server is running before stopping it
@@ -12,7 +12,11 @@ pipelines:
               ssh $DO_USER@$DO_SERVER 'pkill -f "node ./dist/server/entry.mjs"'
             fi
           # Clone the repository onto the server
-          - git clone git@bitbucket.org:pacific-wp/astro-theme.git applications/wwkuakxmsp/public_html/
+          - git clone git@bitbucket.org:pacific-wp/astro-theme.git
+    - step:
+        name: Deploy to server
+        deployment: production
+        script:
           - ls -la applications/wwkuakxmsp/public_html/
           # SSH into the server, install dependencies, build, and start the server
           - ssh $DO_USER@$DO_SERVER 'cd $DEPLOY_PATH && npm install && npm run build && node ./dist/server/entry.mjs &'
