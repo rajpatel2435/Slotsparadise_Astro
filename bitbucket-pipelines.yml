@@ -6,10 +6,13 @@ pipelines:
         name: Deploy project to server and start
         deployment: production
         script:
-          # Stop the existing server if it's running
-          - ssh $DO_USER@$DO_SERVER 'pkill -f "node ./dist/server/entry.mjs"'
+          # Check if the server is running before stopping it
+          - |
+            if ssh $DO_USER@$DO_SERVER 'pgrep -f "node ./dist/server/entry.mjs"'; then
+              ssh $DO_USER@$DO_SERVER 'pkill -f "node ./dist/server/entry.mjs"'
+            fi
           # Deploy the entire repository to the server --exclude-from=deployment-exclude-list.txt
-          - rsync -zrSlh --stats $BITBUCKET_CLONE_DIR/ $DO_USER@$DO_SERVER:$DEPLOY_PATH
+          - rsync -zrSlh --stats  $BITBUCKET_CLONE_DIR/ $DO_USER@$DO_SERVER:$DEPLOY_PATH
           # SSH into the server to install dependencies, build, and start the server
           - ssh $DO_USER@$DO_SERVER 'cd $DEPLOY_PATH && npm install && npm run build && node ./dist/server/entry.mjs &'
           # Create .htaccess file to reverse proxy traffic
