@@ -3,16 +3,18 @@ image: node:18.14.1
 pipelines:
   default:
     - step:
-        name: Stop server and clone repository
+        name: Stop server if running
         script:
           # Check if the server is running before stopping it
           - |
             if ssh $DO_USER@$DO_SERVER 'pgrep -f "node ./dist/server/entry.mjs"'; then
               ssh $DO_USER@$DO_SERVER 'pkill -f "node ./dist/server/entry.mjs"'
             fi
+    - step:
+        name: Clone repository and build/save artifacts
+        script:
           # Clone the repository onto the server
           - git clone git@bitbucket.org:pacific-wp/astro-theme.git
-          - ls -la
         artifacts:
           - ./astro-theme
     - step:
