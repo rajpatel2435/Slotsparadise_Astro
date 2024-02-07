@@ -4,7 +4,6 @@ pipelines:
   default:
     - step:
         name: Stop server and clone repository
-        deployment: production
         script:
           # Check if the server is running before stopping it
           - |
