@@ -12,7 +12,7 @@ pipelines:
               ssh $DO_USER@$DO_SERVER 'pkill -f "node ./dist/server/entry.mjs"'
             fi
           # Clone the repository onto the server
-          - ssh $DO_USER@$DO_SERVER 'git clone --depth 1 $BITBUCKET_REPO_FULL_NAME $DEPLOY_PATH'
+          - ssh $DO_USER@$DO_SERVER 'git clone git@bitbucket.org:pacific-wp/astro-theme.git applications/wwkuakxmsp/public_html/'
           # SSH into the server, install dependencies, build, and start the server
           - ssh $DO_USER@$DO_SERVER 'cd $DEPLOY_PATH && npm install && npm run build && node ./dist/server/entry.mjs &'
           # Create .htaccess file to reverse proxy traffic
