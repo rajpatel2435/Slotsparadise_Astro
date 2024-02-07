@@ -11,15 +11,9 @@ pipelines:
             if ssh $DO_USER@$DO_SERVER 'pgrep -f "node ./dist/server/entry.mjs"'; then
               ssh $DO_USER@$DO_SERVER 'pkill -f "node ./dist/server/entry.mjs"'
             fi
-          # Create a temporary directory
-          - ssh $DO_USER@$DO_SERVER 'mkdir -p $DEPLOY_PATH/tmp'
-          # Copy the contents of the current directory to the temporary directory
-          - tar cf - . | ssh $DO_USER@$DO_SERVER "tar xf - -C $DEPLOY_PATH/tmp"
-          # Compress the temporary directory
-          - ssh $DO_USER@$DO_SERVER "tar czf $DEPLOY_PATH/project.tar.gz -C $DEPLOY_PATH/tmp ."
-          # Delete the temporary directory
-          - ssh $DO_USER@$DO_SERVER 'rm -rf $DEPLOY_PATH/tmp'
-          # SSH into the server, extract the repository, install dependencies, build, and start the server
-          - ssh $DO_USER@$DO_SERVER 'cd $DEPLOY_PATH && tar xzf project.tar.gz && rm project.tar.gz && npm install && npm run build && node ./dist/server/entry.mjs &'
+          # Clone the repository onto the server
+          - ssh $DO_USER@$DO_SERVER 'git clone --depth 1 $BITBUCKET_REPO_FULL_NAME $DEPLOY_PATH'
+          # SSH into the server, install dependencies, build, and start the server
+          - ssh $DO_USER@$DO_SERVER 'cd $DEPLOY_PATH && npm install && npm run build && node ./dist/server/entry.mjs &'
           # Create .htaccess file to reverse proxy traffic
           - ssh $DO_USER@$DO_SERVER 'echo "RewriteEngine On\nRewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]" > $DEPLOY_PATH/.htaccess'
