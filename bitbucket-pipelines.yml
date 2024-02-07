@@ -26,6 +26,6 @@ pipelines:
               REMOTE_PATH: 'applications/wwkuakxmsp/public_html/'
               LOCAL_PATH: './*'
           # SSH into the server, install dependencies, build, and start the server
-          - ssh $DO_USER@$DO_SERVER 'cd $REMOTE_PATH && npm install && npm run build && node ./dist/server/entry.mjs &'
+          - ssh $DO_USER@$DO_SERVER 'cd applications/wwkuakxmsp/public_html/ && npm install && npm run build && node ./dist/server/entry.mjs &'
           # Create .htaccess file to reverse proxy traffic
-          - ssh $DO_USER@$DO_SERVER 'echo "RewriteEngine On\nRewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]" > $REMOTE_PATH/.htaccess'
+          - ssh $DO_USER@$DO_SERVER 'echo "RewriteEngine On\nRewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]" > applications/wwkuakxmsp/public_html/.htaccess'
