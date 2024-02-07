@@ -3,26 +3,25 @@ image: node:18.14.1
 pipelines:
   default:
     - step:
-        name: Build, install dependencies, and test
+        name: Build and test
         caches:
           - node
         script:
           - npm install
           - npm run build
-          # Zip the entire project folder
-          - zip -r project.zip ./*
         artifacts:
-          - project.zip
+          - ./**
     - step:
-        name: Deploy and start server
+        name: Deploy artifacts using SCP to PROD
         deployment: production
         script:
-          # Copy the zip file to the server
           - pipe: atlassian/scp-deploy:0.3.3
             variables:
               USER: $DO_USER
               SERVER: $DO_SERVER
               REMOTE_PATH: 'applications/wwkuakxmsp/public_html/'
-              LOCAL_PATH: 'project.zip'
-          # SSH into the server to unzip the file and proceed with deployment
-          - ssh $DO_USER@$DO_SERVER 'cd applications/wwkuakxmsp/public_html/ && unzip -o project.zip && npm install && npm run build && node ./dist/server/entry.mjs'
+              LOCAL_PATH: './*'
+          # Execute the entry.mjs file on the server
+          - ssh $DO_USER@$DO_SERVER 'cd applications/wwkuakxmsp/public_html/ && node ./dist/server/entry.mjs'
+          # Create .htaccess file to reverse proxy traffic
+          - ssh $DO_USER@$DO_SERVER 'echo "RewriteEngine On\nRewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]" > applications/wwkuakxmsp/public_html/.htaccess'
