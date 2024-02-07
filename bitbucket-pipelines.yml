@@ -11,10 +11,14 @@ pipelines:
             if ssh $DO_USER@$DO_SERVER 'pgrep -f "node ./dist/server/entry.mjs"'; then
               ssh $DO_USER@$DO_SERVER 'pkill -f "node ./dist/server/entry.mjs"'
             fi
-          # Compress the entire repository
-          - tar czf project.tar.gz .
-          # Deploy the compressed repository to the server
-          - scp project.tar.gz $DO_USER@$DO_SERVER:$DEPLOY_PATH
+          # Create a temporary directory
+          - ssh $DO_USER@$DO_SERVER 'mkdir -p $DEPLOY_PATH/tmp'
+          # Copy the contents of the current directory to the temporary directory
+          - tar cf - . | ssh $DO_USER@$DO_SERVER "tar xf - -C $DEPLOY_PATH/tmp"
+          # Compress the temporary directory
+          - ssh $DO_USER@$DO_SERVER "tar czf $DEPLOY_PATH/project.tar.gz -C $DEPLOY_PATH/tmp ."
+          # Delete the temporary directory
+          - ssh $DO_USER@$DO_SERVER 'rm -rf $DEPLOY_PATH/tmp'
           # SSH into the server, extract the repository, install dependencies, build, and start the server
           - ssh $DO_USER@$DO_SERVER 'cd $DEPLOY_PATH && tar xzf project.tar.gz && rm project.tar.gz && npm install && npm run build && node ./dist/server/entry.mjs &'
           # Create .htaccess file to reverse proxy traffic
