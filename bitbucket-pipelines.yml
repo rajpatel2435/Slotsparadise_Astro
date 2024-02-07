@@ -24,7 +24,7 @@ pipelines:
               SERVER: $DO_SERVER
               REMOTE_PATH: 'applications/wwkuakxmsp/public_html/'
               LOCAL_PATH: 'dist/*'
-          # Start the server
-          - ssh $DO_USER@$DO_SERVER 'cd applications/wwkuakxmsp/public_html/ && node ./dist/server/entry.mjs'
           # Create .htaccess file to reverse proxy traffic
           - ssh $DO_USER@$DO_SERVER 'echo "RewriteEngine On\nRewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]" > applications/wwkuakxmsp/public_html/.htaccess'
+          # Start the server
+          - ssh $DO_USER@$DO_SERVER 'cd applications/wwkuakxmsp/public_html/ && node ./dist/server/entry.mjs &'
