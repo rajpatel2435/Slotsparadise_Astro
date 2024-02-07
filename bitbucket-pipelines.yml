@@ -11,9 +11,11 @@ pipelines:
             if ssh $DO_USER@$DO_SERVER 'pgrep -f "node ./dist/server/entry.mjs"'; then
               ssh $DO_USER@$DO_SERVER 'pkill -f "node ./dist/server/entry.mjs"'
             fi
-          # Deploy the entire repository to the server --exclude-from=deployment-exclude-list.txt
-          - rsync -zrSlh --stats  $BITBUCKET_CLONE_DIR/ $DO_USER@$DO_SERVER:$DEPLOY_PATH
-          # SSH into the server to install dependencies, build, and start the server
-          - ssh $DO_USER@$DO_SERVER 'cd $DEPLOY_PATH && npm install && npm run build && node ./dist/server/entry.mjs &'
+          # Compress the entire repository
+          - tar czf project.tar.gz .
+          # Deploy the compressed repository to the server
+          - scp project.tar.gz $DO_USER@$DO_SERVER:$DEPLOY_PATH
+          # SSH into the server, extract the repository, install dependencies, build, and start the server
+          - ssh $DO_USER@$DO_SERVER 'cd $DEPLOY_PATH && tar xzf project.tar.gz && rm project.tar.gz && npm install && npm run build && node ./dist/server/entry.mjs &'
           # Create .htaccess file to reverse proxy traffic
           - ssh $DO_USER@$DO_SERVER 'echo "RewriteEngine On\nRewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]" > $DEPLOY_PATH/.htaccess'
