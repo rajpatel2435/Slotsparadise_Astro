@@ -3,28 +3,14 @@ image: node:18.14.1
 pipelines:
   default:
     - step:
-        name: Build and test
-        caches:
-          - node
-        script:
-          - npm install
-          - npm run build
-        artifacts:
-          - dist/**
-    - step:
-        name: Deploy artifacts using SCP to PROD
+        name: Deploy project to server and start
         deployment: production
         script:
           # Stop the existing server if it's running
           - ssh $DO_USER@$DO_SERVER 'pkill -f "node ./dist/server/entry.mjs"'
-          # Deploy artifacts
-          - pipe: atlassian/scp-deploy:0.3.3
-            variables:
-              USER: $DO_USER
-              SERVER: $DO_SERVER
-              REMOTE_PATH: 'applications/wwkuakxmsp/public_html/'
-              LOCAL_PATH: 'dist/*'
+          # Deploy the entire repository to the server --exclude-from=deployment-exclude-list.txt
+          - rsync -zrSlh --stats $BITBUCKET_CLONE_DIR/ $DO_USER@$DO_SERVER:$DEPLOY_PATH
+          # SSH into the server to install dependencies, build, and start the server
+          - ssh $DO_USER@$DO_SERVER 'cd $DEPLOY_PATH && npm install && npm run build && node ./dist/server/entry.mjs &'
           # Create .htaccess file to reverse proxy traffic
-          - ssh $DO_USER@$DO_SERVER 'echo "RewriteEngine On\nRewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]" > applications/wwkuakxmsp/public_html/.htaccess'
-          # Start the server
-          - ssh $DO_USER@$DO_SERVER 'cd applications/wwkuakxmsp/public_html/ && node ./dist/server/entry.mjs &'
+          - ssh $DO_USER@$DO_SERVER 'echo "RewriteEngine On\nRewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]" > $DEPLOY_PATH/.htaccess'
