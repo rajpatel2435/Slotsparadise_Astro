@@ -3,22 +3,19 @@ image: node:18.14.1
 pipelines:
   default:
     - step:
-        name: Stop server if running
+        name: Stop Node server if running and clone repository as artifact
         script:
           # Check if the server is running before stopping it
           - |
             if ssh $DO_USER@$DO_SERVER 'pgrep -f "node ./dist/server/entry.mjs"'; then
               ssh $DO_USER@$DO_SERVER 'pkill -f "node ./dist/server/entry.mjs"'
             fi
-    - step:
-        name: Clone repository and build/save artifacts
-        script:
           # Clone the repository onto the server
           - git clone git@bitbucket.org:pacific-wp/astro-theme.git
         artifacts:
           - ./astro-theme
     - step:
-        name: Deploy artifacts using SCP to PROD
+        name: Deploy artifacts using SCP to PROD, build them and start node server
         deployment: production
         script:
           - pipe: atlassian/scp-deploy:0.3.3
@@ -27,7 +24,9 @@ pipelines:
               SERVER: $DO_SERVER
               REMOTE_PATH: 'applications/wwkuakxmsp/public_html/'
               LOCAL_PATH: './*'
-          # SSH into the server, install dependencies, build, and start the server
-          - ssh $DO_USER@$DO_SERVER 'cd applications/wwkuakxmsp/public_html/ && npm install && npm run build && node ./dist/server/entry.mjs &'
           # Create .htaccess file to reverse proxy traffic
           - ssh $DO_USER@$DO_SERVER 'echo "RewriteEngine On\nRewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]" > applications/wwkuakxmsp/public_html/.htaccess'
+          # SSH into the server, install dependencies, build, and start the server
+          - ssh $DO_USER@$DO_SERVER 'cd applications/wwkuakxmsp/public_html/ && npm install && npm run build && node ./dist/server/entry.mjs > /dev/null 2>&1 &'
+          # Sleep for a few seconds to allow the server to start (adjust as needed)
+          - sleep 5
