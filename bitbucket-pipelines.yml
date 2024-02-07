@@ -12,12 +12,20 @@ pipelines:
             fi
           # Clone the repository onto the server
           - git clone git@bitbucket.org:pacific-wp/astro-theme.git
+          - ls -la
+        artifacts:
+          - ./astro-theme
     - step:
-        name: Deploy to server
+        name: Deploy artifacts using SCP to PROD
         deployment: production
         script:
-          - ls -la applications/wwkuakxmsp/public_html/
+          - pipe: atlassian/scp-deploy:0.3.3
+            variables:
+              USER: $DO_USER
+              SERVER: $DO_SERVER
+              REMOTE_PATH: 'applications/wwkuakxmsp/public_html/'
+              LOCAL_PATH: './*'
           # SSH into the server, install dependencies, build, and start the server
-          - ssh $DO_USER@$DO_SERVER 'cd $DEPLOY_PATH && npm install && npm run build && node ./dist/server/entry.mjs &'
+          - ssh $DO_USER@$DO_SERVER 'cd $REMOTE_PATH && npm install && npm run build && node ./dist/server/entry.mjs &'
           # Create .htaccess file to reverse proxy traffic
-          - ssh $DO_USER@$DO_SERVER 'echo "RewriteEngine On\nRewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]" > $DEPLOY_PATH/.htaccess'
+          - ssh $DO_USER@$DO_SERVER 'echo "RewriteEngine On\nRewriteRule ^(.*)$ http://127.0.0.1:4321/$1 [P,L]" > $REMOTE_PATH/.htaccess'
