@@ -1,0 +1,4 @@
+DirectoryIndex
+RewriteEngine On
+RewriteBase /
+RewriteRule ^(.*)?$ http://127.0.0.1:4321/$1 [P,L]
