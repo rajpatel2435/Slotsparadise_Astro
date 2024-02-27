@@ -27,7 +27,7 @@ pipelines:
                 ssh $DO_USER@$DO_SERVER 'pkill -f "node ./dist/server/entry.mjs"'
               fi
             # Build the project on the server
-            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "applications/szkhyquxps/public_html/the-beach && npm install && npm run build && node ./dist/server/entry.mjs > /dev/null 2>&1 &"
+            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "cd applications/szkhyquxps/public_html/the-beach && npm install && npm run build && node ./dist/server/entry.mjs > /dev/null 2>&1 &"
             # Send message to MatterMost
             - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
             - COMMIT_DATE=$(git log -n 1 --pretty=format:'%ci' $BITBUCKET_COMMIT)
