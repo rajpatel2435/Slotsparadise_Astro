@@ -10,6 +10,8 @@ import netlify from "@astrojs/netlify/functions";
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind()],
+  base: '/the-beach',
+  trailingSlash: "always",
   output: 'server',
   adapter: node({
     mode: 'standalone',
