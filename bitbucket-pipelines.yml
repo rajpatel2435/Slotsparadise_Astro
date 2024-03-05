@@ -25,7 +25,7 @@ pipelines:
                 LOCAL_PATH: './*'
 
             # Copy .htaccess file to the server
-            - scp .htaccess $MKTCASINOS_USER@$MKTCASINOS_SERVER:/applications/szkhyquxps/public_html/the-beach/
+            - scp .htaccess $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach/
 
             # Make the ./restart_server.sh executable
             - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "chmod +x applications/szkhyquxps/public_html/the-beach/restart_server.sh"
