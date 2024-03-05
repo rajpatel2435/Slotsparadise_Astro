@@ -28,7 +28,7 @@ const data = await wpquery({
 ---
 
 <!-- Slider main container -->
-<div class="swiper swiper1 py-20 my-12 bg-[#eee]">
+<div class="swiper swiper1 py-20 mb-12 bg-[#eee]">
 
   <div class=" flex justify-between px-2 mb-4">
     <h3 class="text-[#ff688b] text-3xl font-bold font-giloryExtrabold">Game Reviews</h3>
@@ -51,9 +51,9 @@ const data = await wpquery({
           />
         </a>
 
-        <h4 class="entry-title pl-5 h-[55px] leading-[55px] text-[#2f0536] font-extrabold text-[18px] whitespace-nowrap font-gilorybold">
-          <a href={post.node.uri}>{post.node.title}</a>
-        </h4>
+        <div class="entry-title pl-5 h-[55px] leading-[55px]">
+          <a class="text-[#2f0536] font-extrabold text-[18px] whitespace-nowrap font-gilorybold" href={post.node.uri}>{post.node.title}</a>
+        </div>
       </article>
       ))
   }
@@ -61,14 +61,27 @@ const data = await wpquery({
   </div>
 
   <!-- If we need navigation buttons -->
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"><img src="https://slotsparadise.com/wp-content/uploads/2022/12/sp-hover-arrow-left.svg" /></div>
+  <div class="swiper-button-next"><img src="https://slotsparadise.com/wp-content/uploads/2022/12/sp-hover-arrow-right.svg" /></div>
 
 </div>
 
-
+<style>
+  .swiper-button-next::after, .swiper-button-prev::after {
+    content: "";
+}
+.swiper-button-prev{
+    left: 0px;
+    width: unset;
+}
+.swiper-button-next{
+    right: 0px;
+    width: unset;
+}
+</style>
 
 <script src="../../scripts/local.js"></script>
+
 
 
 

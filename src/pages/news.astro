@@ -70,16 +70,22 @@ import Layout from "../layouts/Layout.astro";
       posts.forEach((post) => {
         postsHTML += `
               <article class="news_post_article flex flex-col md:flex-row gap-8 mb-16">
-                <a href=${post.node.uri} class="block w-full md:w-1/4 rounded-lg overflow-hidden shadow-casinoBlock">
-                  <img src="${post.node.featuredImage.node.sourceUrl}" alt="${post.node.featuredImage.node.altText}" width="400" height="200">
+                <a href=${post.node.uri} class="block w-full md:w-[300px] rounded-lg overflow-hidden shadow-casinoBlock">
+                  <img src="${post.node.featuredImage.node.sourceUrl}" alt="${post.node.featuredImage.node.altText}" width="400" height="166" >
                 </a>
 
                 <div class="post-content w-full md:w-3/4">
             <div class="post-content-inner">
-              <h2 class="text-[#ff688b] pb-3 font-medium font-giloryExtrabold text-xl sm:text-2xl">
+              <div class="text-[#ff688b] pb-3 font-medium font-giloryExtrabold text-xl sm:text-2xl">
                 <a href=${post.node.uri}>${post.node.title}</a>
-              </h2>
-              <p class="text-[15px]"> ${post.node.excerpt}</p>
+              </div>
+              <div class="line-clamp-2 mt-2">
+            <a
+              class=""
+              href=${post.node.uri}
+              set:html=${post.node.excerpt}
+            />
+          </div>
               <a
                 href=${post.node.uri}
                 class="bg-[#a64485] inline-block text-white text-lg px-8 py-2 rounded-[25px] font-giloryExtrabold font-semibold uppercase hover:bg-[#ff93aa] cursor-pointer transition-all mt-5"
@@ -210,7 +216,7 @@ import Layout from "../layouts/Layout.astro";
       });
 
       const newData = await response.json();
-      console.log(newData);
+      //console.log(newData);
 
       renderPosts(newData.data.posts.edges);
 

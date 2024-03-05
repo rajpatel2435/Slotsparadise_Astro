@@ -171,29 +171,34 @@ const { demo, play } = extractDemoAndPlay(originalContentValue);
 </script>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    let aggRating = document.querySelector(
-      ".wpcr3_aggregateRating_ratingValue"
-    );
-    let reviewStarsElement = document.getElementById("review_stars");
+  // Wait for the entire page to load
+  window.onload = function () {
+    
+    document.addEventListener("DOMContentLoaded", function () {
+      let aggRating = document.querySelector(
+        ".wpcr3_aggregateRating_ratingValue"
+      );
+      let reviewStarsElement = document.getElementById("review_stars");
 
-    // Get the element with the class "wpcr3_aggregateRating_reviewCount"
-    let reviewCountElement = document.querySelector(
-      ".wpcr3_aggregateRating_reviewCount"
-    );
+      // Get the element with the class "wpcr3_aggregateRating_reviewCount"
+      let reviewCountElement = document.querySelector(
+        ".wpcr3_aggregateRating_reviewCount"
+      );
 
-    // Extract the numeric part using a regular expression
-    let numericReviewCount = reviewCountElement
-      ? reviewCountElement.innerHTML.match(/\d+/)
-      : null;
+      // Extract the numeric part using a regular expression
+      let numericReviewCount = reviewCountElement
+        ? reviewCountElement.innerHTML.match(/\d+/)
+        : null;
 
-    // Update the element with the ID "rev_count" with the extracted numeric value
-    document.getElementById("rev_count").innerHTML = numericReviewCount
-      ? numericReviewCount[0]
-      : "0";
+      // Update the element with the ID "rev_count" with the extracted numeric value
+      document.getElementById("rev_count").innerHTML = numericReviewCount
+        ? numericReviewCount[0]
+        : "0";
 
-    if (aggRating) {
-      reviewStarsElement.innerHTML = aggRating.innerHTML;
-    }
-  });
+      if (aggRating) {
+        reviewStarsElement.innerHTML = aggRating.innerHTML;
+      }
+    });
+  };
 </script>
+

@@ -8,12 +8,14 @@ pipelines:
             - git clone git@bitbucket.org:pacific-wp/astro-theme.git
             - git checkout master
           artifacts:
+            # Save repositories code
             - ./astro-theme
       - step:
           name: Deploy to Production
           script:
             # SSH into the server and remove the existing folder
             - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "rm -rf applications/szkhyquxps/public_html/the-beach && mkdir applications/szkhyquxps/public_html/the-beach"
+
             # Update the remote
             - pipe: atlassian/scp-deploy:0.3.3
               variables:
@@ -21,13 +23,22 @@ pipelines:
                 SERVER: $MKTCASINOS_SERVER
                 REMOTE_PATH: 'applications/szkhyquxps/public_html/the-beach'
                 LOCAL_PATH: './*'
+
+            # Copy .htaccess file to the server
+            - scp .htaccess $MKTCASINOS_USER@$MKTCASINOS_SERVER:/applications/szkhyquxps/public_html/the-beach/
+
+            # Make the ./restart_server.sh executable
+            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "chmod +x applications/szkhyquxps/public_html/the-beach/restart_server.sh"
+
             # Check if the server is running before stopping it
             - |
-              if ssh $DO_USER@$DO_SERVER 'pgrep -f "node ./dist/server/entry.mjs"'; then
-                ssh $DO_USER@$DO_SERVER 'pkill -f "node ./dist/server/entry.mjs"'
+              if ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER 'lsof -i :4321'; then
+                ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER 'kill -9 $(lsof -t -i:4321)'
               fi
+
             # Build the project on the server
-            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "cd applications/szkhyquxps/public_html/the-beach && npm install && npm run build && node ./dist/server/entry.mjs > /dev/null 2>&1 &"
+            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "cd applications/szkhyquxps/public_html/the-beach && npm install && npm run build && PORT=4321 node ./dist/server/entry.mjs > /dev/null 2>&1 &"
+
             # Send message to MatterMost
             - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
             - COMMIT_DATE=$(git log -n 1 --pretty=format:'%ci' $BITBUCKET_COMMIT)
@@ -38,6 +49,7 @@ pipelines:
                   "username": "Bitbucket Pipelines",
                   "text": "New commit deployed to #SlotsParadise **master** branch on ```Astro slotsparadise``` with the following message: \n ```\n'"$COMMIT_MESSAGE"' \nEnv: AstroSlotsParadise\nDate: '"$COMMIT_DATE"'\nAuthor: '"$COMMIT_AUTHOR"'\n ```"
                 }' -H "Content-Type: application/json" -X POST https://matter.dblexchange.com/hooks/t34yjuo6a3refeeafr3itdauge
+
 #    stg:
 #      - step:
 #          name: Get repository latest changes

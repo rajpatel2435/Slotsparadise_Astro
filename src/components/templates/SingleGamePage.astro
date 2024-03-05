@@ -8,18 +8,7 @@ import OtherRelatedgames from "../OtherRelatedGames.astro";
 //console.log(node.seo.breadcrumbs);
 ---
 
-<!-- <div
-  class="header-background w-full bg-[url('/images/casino-guide-header.webp')] bg-cover bg-center h-52 flex items-center text-white font-giloryRegular"
->
-  <div class="header-content-row w-[80%] mx-auto">
-    <div class="page-title">
-      <h1 class="entry-title text-2xl md:text-3xl font-giloryExtrabold mb-2">
-        {node.title}
-      </h1>
-    </div>
-  </div>
-</div> -->
-<figure class="relative flex items-center">
+<!-- <figure class="relative flex items-center">
   <img
     src="https://slotsparadise.com/wp-content/uploads/2022/08/casino-guides-header-v23.jpg"
     alt="header banner"
@@ -30,7 +19,19 @@ import OtherRelatedgames from "../OtherRelatedGames.astro";
   >
     {node.title}
   </figcaption>
-</figure>
+</figure> -->
+<div
+  class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/08/header-mob-v1.jpg')]
+      md:bg-[url('https://slotsparadise.com/wp-content/uploads/2022/08/casino-guides-header-v23.jpg')] bg-cover bg-center text-white py-20"
+>
+  <div class="header-content-row max-w-[1440px] mx-auto px-4">
+    <div class="page-title">
+      <h1 class="entry-title text-2xl md:text-3xl font-giloryExtrabold">
+        {node.title}
+      </h1>
+    </div>
+  </div>
+</div>
 
 <!-- Main Page -->
 
@@ -67,7 +68,7 @@ import OtherRelatedgames from "../OtherRelatedGames.astro";
         </div>
       </div>
       <article
-        class="font-giloryRegular font-semibold pl-4 md:pl-0"
+        class="font-giloryRegular font-semibold pl-4 md:pl-0 single-game-content-article single_article"
         set:html={node.content}
       />
 

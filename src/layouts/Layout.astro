@@ -13,6 +13,7 @@ const { title } = Astro.props;
 <!doctype html>
 <html lang="en">
   <head>
+    <script src="../scripts/login.js"></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
@@ -20,17 +21,24 @@ const { title } = Astro.props;
     <title>{title}</title>
     <SeoTags />
 
-    <link
+    <!-- <link
       rel="preload"
       fetchpriority="high"
       as="image"
       href="https://slotsparadise.com/wp-content/uploads/2022/08/casino-guides-header-v23.jpg"
       type="image/jpg"
-    />
+    /> -->
     <!-- <link
       rel="stylesheet"
       href="https://slotsparadise.com/wp-content/plugins/wp-customer-reviews/css/wp-customer-reviews.css?ver=3.6.8"
     /> -->
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/line-awesome/1.3.0/line-awesome/css/line-awesome.min.css"
+      media="print"
+      onload="this.media='all'"
+    />
 
     <link
       rel="stylesheet"

@@ -55,7 +55,7 @@ const { node } = Astro.props;
         <CasinoSchoolSidebar />
         <div class="content-container w-full md:w-3/5 mt-5 md:mt-0">
           <h1 class="text-[#ff688b] font-giloryExtrabold">{node.title}</h1>
-          <article set:html={node.content} />
+          <article class="single-school-content-article single_article" set:html={node.content} />
         </div>
       </div>
     </div>

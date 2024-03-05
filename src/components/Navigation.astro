@@ -180,17 +180,112 @@ import { Icon } from "astro-icon";
       class="login-btn border-2 hover:border-[#FD106A] px-4 sm:px-10 py-2 sm:py-4 inline-block rounded-full hover:text-[#FD106A] text-[#1C8FDF] border-[#1C8FDF] text-sm sm:text-[22px]"
       href="https://slotsparadise.com/#login">Login</a
     >
+
+    <a
+      class="dep-btn border-2 hover:border-[#FD106A] px-4 sm:px-10 py-2 sm:py-4 rounded-full text-white bg-[#1C8FDF] border-[#1C8FDF] hover:bg-[#FD106A] text-sm sm:text-[22px]"
+      href="https://slotsparadise.com/#login">Deposit</a
+    >
   </div>
 
-  <div>
+  <div class="join-usd-container">
     <a
       class="join-btn border-2 hover:border-[#FD106A] px-4 sm:px-10 py-2 sm:py-4 inline-block rounded-full hover:bg-[#FD106A] text-[#ffffff] border-[#1C8FDF] bg-[#1C8FDF] text-sm sm:text-[22px]"
       href="https://slotsparadise.com/#register">Join</a
     >
+
+    <a
+      class="usd-btn border-2 hover:border-[#FD106A] px-4 sm:px-10 py-2 sm:py-4 rounded-full text-[#1C8FDF] border-[#1C8FDF] hover:text-[#FD106A] bg-white text-sm sm:text-[22px]"
+      href="https://slotsparadise.com/#register">USD</a
+    >
+
+    <!-- Trigger/Open The Modal -->
+    <!-- The Modal -->
+    <div id="myModal" class="modal block absolute">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close"></span>
+        </div>
+        <div class="Menu--users">
+          <ul>
+            <li class="pl-name_lastname" id="userLastm"></li>
+            <li class="pl-username" id="userFirstm"></li>
+            <li class="pl-id" id="userIdm"></li>
+            <li>
+              <div class="wagerd_balance">
+                Wagered
+                <span class="Played--Balane" id="userWageredm"> </span>
+              </div>
+              <div class="not_wagered_balance">
+                Not Wagered
+                <span class="Not--Played--Balance" id="notWageredm"> </span>
+              </div>
+              <div class="play_balance">
+                Play Balance
+                <span class="Play--Balance" id="playBalancem"></span>
+              </div>
+              <div class="withdrawable_balance">
+                Withdrawable
+                <span class="Withdrawable" id="withBalancem"> </span>
+              </div>
+            </li>
+            <li class="pl-profile">
+              <a href="https://slotsstg.wpengine.com/?h=profile&r=profile"
+                ><i class="las la-user"></i>Profile</a
+              >
+            </li>
+            <li class="pl-wallet">
+              <a href="https://slotsstg.wpengine.com/?h=profile&r=wallet"
+                ><i class="las la-wallet"></i>Wallet</a
+              >
+            </li>
+            <li class="pl-deposit">
+              <a href="https://slotsstg.wpengine.com/?h=profile&r=deposit"
+                ><i class="las la-angle-down"></i>Deposit</a
+              >
+            </li>
+            <li class="pl-withdraw">
+              <a href="https://slotsstg.wpengine.com/?h=profile&r=withdrawal"
+                ><i class="las la-angle-up"></i>Withdraw</a
+              >
+            </li>
+            <li class="pl-messages">
+              <a href="https://slotsstg.wpengine.com/?h=profile&r=messages"
+                ><i class="las la-envelope"></i>Messages</a
+              >
+            </li>
+            <li class="pl-history">
+              <a href="https://slotsstg.wpengine.com/?h=profile&r=history"
+                ><i class="las la-history"></i>History</a
+              >
+            </li>
+            <li class="pl-promotions">
+              <a href="https://slotsstg.wpengine.com/?h=profile&r=promotions"
+                ><i class="las la-rocket"></i>Promotions</a
+              >
+            </li>
+            <li class="change_pass">
+              <a href="https://slotsstg.wpengine.com/?h=change-password"
+                ><i class="las la-key"></i>Change Password</a
+              >
+            </li>
+            <li class="sign_out">
+              <a href="/account/logout"
+                ><i class="las la-sign-out-alt"></i>Sign Out</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
 <style>
+  .usd-btn,
+  .dep-btn {
+    display: none;
+  }
   .new-nav-header {
     position: fixed;
     top: 0;

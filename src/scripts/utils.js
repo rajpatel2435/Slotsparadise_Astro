@@ -9,7 +9,10 @@ export function slugify(text) {
       .replace(/-+$/, '');
   }
   
-
+  
+  export function replaceHtmlEntities(text) {
+        return text.replace(/&#8217;/, "'");
+    }
 
 
   export function formatDate(inputDateString) {
@@ -19,7 +22,7 @@ export function slugify(text) {
     // Define the options for formatting
     const options = {
       year: 'numeric',
-      month: 'long',
+      month: 'short',
       day: 'numeric'
     };
   

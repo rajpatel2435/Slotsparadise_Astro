@@ -2,12 +2,14 @@
 import { wpquery } from '../../data/wordpress';
 import { Image } from "astro:assets";
 
+const { tag_id } = Astro.props;
+
 const gameData = await wpquery({
   query: `
   query newGamesPage {
-  category(id: "22", idType: DATABASE_ID) {
+  category(id: "${tag_id}", idType: DATABASE_ID) {
     gamesCategoryIds {
-      slots
+      featuredGames
     }
   }
 }
@@ -15,7 +17,7 @@ const gameData = await wpquery({
 });
 
 
-const gameIds = gameData.category.gamesCategoryIds.slots;
+const gameIds = gameData.category.gamesCategoryIds.featuredGames;
 // console.log(gameIds);
 
 const gameIdsArray = gameIds.split(',').map(id => parseInt(id, 10));
@@ -48,16 +50,15 @@ const data = await wpquery({
   }
 });
 
-//console.log(data.posts.edges);
+//console.log(data);
 ---
 
 <!-- Slider main container -->
 
-<div class="swiper swiper4 py-2 my-12">
+<div class="swiper swiper4 py-2 my-12 mx-2">
 
-  <div class=" flex items-center space-x-2 mb-4 mx-2">
-    <img src= "https://slotsparadise.com/wp-content/themes/slotsparadise/images/slots-ico-pink.svg" alt="slots icon" width="40">
-    <h3 class="text-[#ff688b] text-3xl font-bold font-giloryExtrabold">Slots</h3>
+  <div class="mb-4">
+    <h3 class="text-[#ff688b] text-3xl font-bold font-giloryExtrabold">Featured Games</h3>
   </div>
   <!-- Additional required wrapper -->
   <div class="swiper-wrapper">
@@ -77,14 +78,11 @@ const data = await wpquery({
         </a>
 
         <div class="entry-title text-[#2f0536]  font-gilorybold py-5 mx-2">
-            <h4 class="flex justify-between items-center space-x-2 mb-0"> 
-                <a href={post.node.uri} class="font-extrabold text-[18px] whitespace-nowrap w-[90%] overflow-hidden">{post.node.title}</a>
-                <img class="wishlist-img" src="https://slotsparadise.com/wp-content/themes/slotsparadise/images/heart-ico.svg" alt="wishlist" title="wishlist" />
-            </h4>
-            <div class="rating_container flex items-center space-x-4">
-                <p class="">Rating</p>
-                <img class="" src="https://slotsparadise.com/wp-content/themes/slotsparadise/images/star-rating.png" alt="star rating" width="93" height="16" /> 
+            <div class=" mb-0"> 
+                <a href={post.node.uri}class="font-extrabold text-[18px] whitespace-nowrap w-[90%] overflow-hidden">{post.node.title}</a>
+              
             </div>
+            
         </div>
         
         
@@ -96,25 +94,10 @@ const data = await wpquery({
   </div>
 
   <!-- If we need navigation buttons -->
-  <div class="swiper-button-prev"><img src="https://slotsparadise.com/wp-content/uploads/2022/12/sp-hover-arrow-left.svg" /></div>
-  <div class="swiper-button-next"><img src="https://slotsparadise.com/wp-content/uploads/2022/12/sp-hover-arrow-right.svg" /></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
 
 </div>
-
-<style>
-  .swiper-button-next::after, .swiper-button-prev::after {
-    content: "";
-}
-.swiper-button-prev{
-    left: 0px;
-    width: unset;
-}
-.swiper-button-next{
-    right: 0px;
-    width: unset;
-}
-</style>
-
 
 
 

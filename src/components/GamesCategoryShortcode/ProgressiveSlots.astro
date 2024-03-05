@@ -53,9 +53,9 @@ const data = await wpquery({
 
 <!-- Slider main container -->
 
-<div class="swiper swiper4 py-2 my-12 mx-2">
+<div class="swiper swiper4 py-2 my-12">
 
-  <div class=" flex items-center space-x-2 mb-4">
+  <div class=" flex items-center space-x-2 mb-4 mx-2">
     <img src= "https://slotsparadise.com/wp-content/themes/slotsparadise/images/progressive-slots-ico-pink.svg" alt="progressive icon" width="40">
     <h3 class="text-[#ff688b] text-3xl font-bold font-giloryExtrabold">Progressive Slots</h3>
   </div>
@@ -96,10 +96,25 @@ const data = await wpquery({
   </div>
 
   <!-- If we need navigation buttons -->
-  <div class="swiper-button-prev"></div>
-  <div class="swiper-button-next"></div>
+  <div class="swiper-button-prev"><img src="https://slotsparadise.com/wp-content/uploads/2022/12/sp-hover-arrow-left.svg" /></div>
+  <div class="swiper-button-next"><img src="https://slotsparadise.com/wp-content/uploads/2022/12/sp-hover-arrow-right.svg" /></div>
 
 </div>
+
+<style>
+  .swiper-button-next::after, .swiper-button-prev::after {
+    content: "";
+}
+.swiper-button-prev{
+    left: 0px;
+    width: unset;
+}
+.swiper-button-next{
+    right: 0px;
+    width: unset;
+}
+</style>
+
 
 
 

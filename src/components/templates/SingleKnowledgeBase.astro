@@ -2,11 +2,11 @@
 import CasinoGuideSidebar from "../CasinoGuideSidebar.astro";
 import SearchWidget from "../SearchWidget.astro";
 import { formatDate } from "../../scripts/utils";
-import Layout from "../../layouts/Layout.astro";
+import { replaceHtmlEntities } from "../../scripts/utils";
 const { node } = Astro.props;
 
-//console.log(node);
-//console.log(node.databaseId);
+//console.log("test" + node.content);
+//console.log(node.seo);
 
 var postId = node.databaseId;
 
@@ -17,81 +17,83 @@ var postId = node.databaseId;
 //console.log(guidesCat);
 ---
 
-<Layout title="casino guide">
-  <div class="main_container">
-    <div
-      class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/07/thebeach-guides.jpg')] bg-cover bg-center py-16 flex items-center text-white font-giloryRegular"
-    >
-      <div class="header-content-row w-[80%] mx-auto">
-        <div class="page-title text-center">
-          <h1
-            class="entry-title text-2xl md:text-3xl font-giloryExtrabold mb-2 text-center"
-          >
-            Online Casino Guides
-          </h1>
+<div class="main_container">
+  <div
+    class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/07/thebeach-guides.jpg')] bg-cover bg-center py-16 flex items-center text-white font-giloryRegular"
+  >
+    <div class="header-content-row w-[80%] mx-auto">
+      <div class="page-title text-center">
+        <h1
+          class="entry-title text-2xl md:text-3xl font-giloryExtrabold mb-2 text-center"
+        >
+          Online Casino Guides
+        </h1>
 
-          <SearchWidget />
-        </div>
+        <SearchWidget />
       </div>
     </div>
+  </div>
 
-    <div
-      class="casino_school_main max-w-[1200px] w-4/5 mx-auto px-2 mt-10 font-giloryRegular"
-    >
-      <div>
-        <div class="post-bread font-semibold text-[#555]">
-          <div class="">
-            <p>
-              <span
-                ><span
-                  ><a href={node.seo.breadcrumbs[0].url}
-                    >{node.seo.breadcrumbs[0].text}</a
-                  ></span
-                > &gt; <span
-                  ><a href={node.seo.breadcrumbs[1].url}
-                    >{node.seo.breadcrumbs[1].text}</a
-                  ></span
-                > &gt; <span class="" aria-current="page"
-                  ><a href={node.seo.breadcrumbs[2].url}
-                    >{node.seo.breadcrumbs[2].text}</a
-                  ></span
+  <div
+    class="casino_school_main max-w-[1200px] w-4/5 mx-auto px-2 mt-10 font-giloryRegular"
+  >
+    <div>
+      <div class="post-bread font-semibold text-[#555]">
+        <div class="">
+          <p>
+            <span
+              ><span
+                ><a href={node.seo.breadcrumbs[0].url}
+                  >{node.seo.breadcrumbs[0].text}</a
                 ></span
-              > &gt; <span class="" aria-current="page"
-                ><a href="">{node.seo.breadcrumbs[3].text}</a></span
-              >
-            </p>
-          </div>
+              > &gt; <span
+                ><a href={node.seo.breadcrumbs[1].url}
+                  >{node.seo.breadcrumbs[1].text}</a
+                ></span
+              > &gt; <span aria-current="page"
+                ><a href={node.seo.breadcrumbs[2].url}
+                  >{node.seo.breadcrumbs[2].text}</a
+                ></span
+              ></span
+            > &gt; <span aria-current="page"
+              ><a href="">{replaceHtmlEntities(node.seo.breadcrumbs[3].text)}</a></span
+            >
+          </p>
         </div>
+      </div>
 
-        <div
-          class="casino_single_container mt-10 font-giloryRegular font-semibold"
-        >
-          <div
-            class="inner_container flex flex-col md:flex-row justify-between"
-          >
-            <CasinoGuideSidebar />
-            <div class="content-container w-full md:w-[70%] mt-5 md:mt-0">
-              <h1 class="text-[#ff688b] font-giloryExtrabold">{node.title}</h1>
-              <div class="bpress-post-meta text-[#777] text-sm mb-4 opacity-70">
-                <span class="bpress-post-views inline-block mr-4"
-                  ><span class="bp-eye inline-block mr-1"
-                    ><i class="fa-solid fa-eye"></i></span
-                  ><span id="view-container"></span></span
-                >
-                <span class="bpress-post-date inline-block mr-4"
-                  ><span class="bp-clock inline-block mr-1"
-                    ><i class="fa-solid fa-clock"></i></span
-                  >{formatDate(node.date)}</span
-                >
-              </div>
-              <article set:html={node.content} />
+      <div
+        class="casino_single_container mt-10 font-giloryRegular font-semibold"
+      >
+        <div class="inner_container flex flex-col md:flex-row justify-between">
+          <CasinoGuideSidebar />
+          <div class="content-container w-full md:w-[70%] mt-5 md:mt-0">
+            <h1 class="text-[#ff688b] font-giloryExtrabold">{node.title}</h1>
+            <div class="bpress-post-meta text-[#777] text-sm mb-4 opacity-70">
+              <span class="bpress-post-views inline-block mr-4"
+                ><span class="bp-eye inline-block mr-1"
+                  ><i class="fa-solid fa-eye"></i></span
+                ><span id="view-container"></span></span
+              >
+              <span class="bpress-post-date inline-block mr-4"
+                ><span class="bp-clock inline-block mr-1"
+                  ><i class="fa-solid fa-clock"></i></span
+                >{formatDate(node.date)}</span
+              >
             </div>
+            <article class="single-kbase-content-article single_article" set:html={node.content} />
           </div>
         </div>
       </div>
     </div>
   </div>
-</Layout>
+</div>
+
+<style>
+  img.attachment-post-thumbnail.size-post-thumbnail.wp-post-image {
+    margin-bottom: 20px;
+  }
+</style>
 
 <script define:vars={{ postId }}>
   document.addEventListener("DOMContentLoaded", function () {
