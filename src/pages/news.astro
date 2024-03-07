@@ -216,7 +216,6 @@ import Layout from "../layouts/Layout.astro";
       });
 
       const newData = await response.json();
-      //console.log(newData);
 
       renderPosts(newData.data.posts.edges);
 
