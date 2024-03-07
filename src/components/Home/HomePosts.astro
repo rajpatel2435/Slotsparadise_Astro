@@ -40,7 +40,7 @@ const data = await wpquery({
       data.posts.edges.map((post: any) => (
     <!-- Slides -->
       <article class="home-slider-article swiper-slide rounded-[3px] bg-white shadow-homePosts overflow-hidden h-[283px]" role="article">
-        <a href={post.node.uri} class="entry-featured-image-url mb-5">
+        <a href={`/the-beach${post.node.uri}`} class="entry-featured-image-url mb-5">
           <Image
             class="games-Image reco w-full h-[228px]"
             width="328"
@@ -52,7 +52,7 @@ const data = await wpquery({
         </a>
 
         <div class="entry-title pl-5 h-[55px] leading-[55px]">
-          <a class="text-[#2f0536] font-extrabold text-[18px] whitespace-nowrap font-gilorybold" href={post.node.uri}>{post.node.title}</a>
+          <a class="text-[#2f0536] font-extrabold text-[18px] whitespace-nowrap font-gilorybold" href={`/the-beach${post.node.uri}`}>{post.node.title}</a>
         </div>
       </article>
       ))

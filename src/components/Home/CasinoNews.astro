@@ -2,37 +2,7 @@
 import { Image } from "astro:assets";
 import SidebarArticles from "../SidebarArticles.astro";
 import { wpquery } from "../../data/wordpress";
-import { formatDate } from "../../scripts/utils.js"
-
-/* const postData = await fetch("https://slotsstg.wpengine.com/graphql", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    query: `query CasinoNewsHome {
-  posts(where: {categoryId: 9}, first: 4) {
-    edges {
-      node {
-        link
-        uri
-        title
-        excerpt
-        date
-        featuredImage {
-          node {
-            sourceUrl
-          }
-        }
-      }
-    }
-  }
-}`,
-  }),
-}).then((data) => data.json());
-
-const posts = postData.data.posts.edges;
-console.log(posts); */
+import { formatDate } from "../../scripts/utils.js";
 
 const data = await wpquery({
   query: `
@@ -89,7 +59,7 @@ const data = await wpquery({
               </a>
 
               <h3 class="text-3xl py-3 font-giloryBold text-[#ff688b]">
-                <a href={post.node.link}>{post.node.title}</a>
+                <a href={`/the-beach${post.node.uri}`}>{post.node.title}</a>
               </h3>
               <p class="text-[#491957] py-2 before:content-[url('https://slotsparadise.com/wp-content/uploads/2022/03/Group-4377.png')] flex gap-2 before:inline-block before:h-full before:w-4 items-center font-medium">
                 {formatDate(post.node.date)}
@@ -97,7 +67,7 @@ const data = await wpquery({
               <div class="text-[#2f0536] font-giloryRegular font-semibold">
                 <a
                   class="font-giloryRegular line-clamp-2"
-                  href={post.node.uri}
+                  href={`/the-beach${post.node.uri}`}
                   set:html={post.node.excerpt}
                 />
               </div>
@@ -116,7 +86,7 @@ const data = await wpquery({
 
   <div class="more-casino-news-btn text-center mt-10">
     <a
-      href="/news"
+      href="/the-beach/news"
       class="bg-[#a64485] inline-block text-white text-lg px-12 py-2 rounded-[25px] font-giloryExtrabold font-semibold uppercase hover:bg-[#ff93aa] cursor-pointer transition-all"
     >
       More News
