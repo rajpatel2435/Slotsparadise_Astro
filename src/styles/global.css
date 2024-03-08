@@ -1679,8 +1679,9 @@ input[type="text"].bpress-search-field {
     margin-left: 10px;
   }
 
-  .single_article p{
+  .single_article p, .schema-faq-question strong{
     font-size: 20px;
   }
   
+
 
