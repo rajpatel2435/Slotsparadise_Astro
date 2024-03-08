@@ -1,71 +1,130 @@
-<div class="menu_container bg-[#eee] h-max rounded-lg p-6 w-full md:w-4/12"> 
-    <h3 class="text-[#2f0536] text-[22px]">Choose a Lesson</h3>
-        <div id="shortcode-container"></div>
+---
+import { wpquery } from "../data/wordpress";
+
+const postsData = await wpquery({
+  query: `
+  query casinoSchool {
+    pages(where: {parent: 375}, first: 100) {
+      nodes {
+        title
+        uri
+        children(first: 10) {
+          edges {
+            node {
+              ... on Page {
+                title
+                uri
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  `,
+});
+
+const parentPages = postsData.pages.nodes;
+---
+
+<div class="menu_container bg-[#eee] h-max rounded-lg p-6 w-full md:w-4/12">
+  <h3 class="text-[#2f0536] text-[22px] mb-5">Choose a Lesson</h3>
+  <div id="shortcode-container"></div>
 </div>
 
+<script define:vars={{ parentPages }}>
+  parentPages.forEach((parentPage) => {
+    //console.log("Parent Page:", parentPage.title);
 
-<script>
-    
-    document.addEventListener('DOMContentLoaded', function () {
-        const ajaxurl = 'https://slotsstg.wpengine.com/wp-admin/admin-ajax.php';
-    
-        // Make the AJAX request
-        fetch(ajaxurl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-            },
-            body: 'action=schoolmenu_shortcode_html',
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    // Update the content of the container with the shortcode result
-                    document.getElementById('shortcode-container').innerHTML = data.data;
+    const parentContainer = document.createElement("div");
+    parentContainer.classList.add("parent_container");
 
-                    //adding arrow icon and functionality
+    const parentLink = document.createElement("a");
+    parentLink.textContent = parentPage.title;
+    parentLink.href = "/the-beach" + parentPage.uri;
+    parentLink.classList.add("parent_link");
+    parentContainer.appendChild(parentLink);
 
-                    const menuChild = document.querySelectorAll("li.page_item_has_children");
+    const childContainer = document.createElement("div");
+    childContainer.classList.add("child_container", "hidden");
 
-                    menuChild.forEach((item, index) => {
-                        // Append the <span class="arrrow-icon"></span> to each item
-                        const spanElement = document.createElement('span');
-                        spanElement.className = 'arrrow-icon';
-                        item.appendChild(spanElement);
+    if (parentPage.children.edges.length > 0) {
+      console.log("Child Pages:");
+      parentPage.children.edges.forEach((edge) => {
+        const childPage = edge.node;
+        // console.log(" -", childPage.title);
 
-                        // Hide the corresponding child element by default
-                        const childElement = item.querySelector('.children');
-                        if (childElement) {
-                            childElement.classList.add('hidden');
-                        }
+        const childLink = document.createElement("a");
+        childLink.textContent = childPage.title;
+        childLink.href = "/the-beach" + childPage.uri;
+        childLink.classList.add("child_link");
+        childContainer.appendChild(childLink);
+      });
 
-                        // Add click event listener to each span
-                        spanElement.addEventListener('click', function () {
-                            // Toggle the 'hidden' class on the corresponding child element
-                            if (childElement) {
-                                childElement.classList.toggle('hidden');
-                                // Add or remove the 'rotate-90' class on the span element
-                                spanElement.classList.toggle('rotate-90', !childElement.classList.contains('hidden'));
-                            }
-                        });
-                    });
+      // Create container for arrow icon
+      const arrowContainer = document.createElement("span");
+      arrowContainer.classList.add("arrow-container");
+      parentContainer.appendChild(arrowContainer); // Append arrow container to parent link
 
+      // Add arrow icon to arrow container
+      const arrowIcon = document.createElement("span");
+      arrowIcon.className = "arrrow-icon"; // Ensure correct class name
+      arrowContainer.appendChild(arrowIcon); // Append arrow icon to arrow container
 
+      // Add event listener to arrow container
+      arrowContainer.addEventListener("click", (event) => {
+        event.stopPropagation(); // Prevent event from bubbling up to parent link
+        childContainer.classList.toggle("hidden");
+        arrowIcon.classList.toggle("rotate-90");
+      });
+    }
 
-                } else {
-                    // Handle errors
-                    console.error('Error fetching shortcode:', data.data);
-                }
-            })
-            .catch(error => {
-                // Handle fetch errors
-                console.error('Fetch error:', error);
-            });
-
-            
-        
-    });
-    
-
-    
+    parentContainer.appendChild(childContainer);
+    document.getElementById("shortcode-container").appendChild(parentContainer);
+  });
 </script>
+
+<style is:global>
+  .parent_container {
+    position: relative;
+    margin-bottom: 15px;
+    padding-left: 20px;
+  }
+
+  .parent_link,
+  .child_link {
+    color: #2f0536 !important;
+  }
+
+  .arrrow-icon {
+    font-size: 24px;
+    color: #2f0536;
+    position: absolute;
+    right: 0;
+    top: 7px;
+    background: url(https://slotsparadise.com/wp-content/uploads/2022/03/Path-6482.png);
+    background-repeat: no-repeat;
+    height: 15px;
+    width: 10px;
+    cursor: pointer;
+  }
+
+  .child_container {
+    background: #fff;
+    padding: 10px;
+  }
+
+  .parent_container:before {
+    content: "";
+    background: url(https://slotsparadise.com/wp-content/uploads/2022/03/Path-6732.png);
+    height: 22px;
+    width: 22px;
+    position: absolute;
+    left: -15px;
+  }
+
+  .child_container a {
+    padding: 8px 0 8px 18px;
+    display: block;
+  }
+</style>

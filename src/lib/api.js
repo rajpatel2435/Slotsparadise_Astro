@@ -1,81 +1,9 @@
 export const prerender = true;
 
-/* export async function navQuery(){
-  const siteNavQueryRes = await fetch("https://slotsstg.wpengine.com/graphql", {
-      method: 'post', 
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-          query: `{
-              menus(where: {location: PRIMARY}) {
-                nodes {
-                  name
-                  menuItems {
-                      nodes {
-                          uri
-                          url
-                          order
-                          label
-                      }
-                  }
-                }
-              }
-              generalSettings {
-                  title
-                  url
-                  description
-              }
-          }
-          `
-      })
-  });
-  const{ data } = await siteNavQueryRes.json();
-  return data;
-} */
-
-/* export async function homePagePostsQuery(){
-  const response = await fetch("https://slotsstg.wpengine.com/graphql", {
-      method: 'post', 
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-          query: `{
-            posts(first: 100) {
-                nodes {
-                  date
-                  uri
-                  title
-                  commentCount
-                  excerpt
-                  categories {
-                    nodes {
-                      name
-                      uri
-                    }
-                  }
-                  featuredImage {
-                    node {
-                      srcSet
-                      sourceUrl
-                      altText
-                      mediaDetails {
-                        height
-                        width
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          `
-      })
-  });
-  const{ data } = await response.json();
-  return data;
-} */
-
-
+const GRAPHQL_ENDPOINT = "https://slotsstg.wpengine.com/graphql";
 
 export async function GuideSidebar(){
-  const response = await fetch("https://slotsstg.wpengine.com/graphql", {
+  const response = await fetch(GRAPHQL_ENDPOINT, {
       method: 'post', 
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
@@ -107,7 +35,7 @@ export async function GuideSidebar(){
 
 
 export async function CasinoGuidesArticles(){
-  const response = await fetch("https://slotsstg.wpengine.com/graphql", {
+  const response = await fetch(GRAPHQL_ENDPOINT, {
       method: 'post', 
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
@@ -146,7 +74,7 @@ export async function CasinoGuidesArticles(){
 
 
 export async function getNodeByURI(uri){
-  const response = await fetch("https://slotsstg.wpengine.com/graphql", {
+  const response = await fetch(GRAPHQL_ENDPOINT, {
       method: 'post', 
       headers: {'Content-Type':'application/json'},
       body: JSON.stringify({
@@ -401,7 +329,7 @@ export async function getAllUris() {
   let postCursor = null;
 
   do {
-    const response = await fetch("https://slotsstg.wpengine.com/graphql", {
+    const response = await fetch(GRAPHQL_ENDPOINT, {
       method: 'post',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

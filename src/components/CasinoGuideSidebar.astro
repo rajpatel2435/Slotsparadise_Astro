@@ -45,7 +45,7 @@ const items = data.sectionsBasepress.edges;
             <p class="text-neutral-600 my-2 group-open:animate-fadeIn bg-white p-2 ml-2 ">
               {item.node.basepress.edges.map((subitem) => (
                 <a
-                  href={subitem.node.uri}
+                  href={`/the-beach${subitem.node.uri}`}
                   class="flex space-x-1 mb-1 hover:bg-[#eee] p-2"
                 >
                   <i class="fa text-gray-400 pr-1 pt-1 block">&#xf059;</i>

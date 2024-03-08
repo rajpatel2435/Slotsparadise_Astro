@@ -1,6 +1,7 @@
 ---
 import CasinoSchoolSidebar from "../CasinoSchoolSidebar.astro";
 const { node } = Astro.props;
+//console.log(node.seo);
 ---
 
 <div class="main_container">
@@ -27,25 +28,37 @@ const { node } = Astro.props;
         </div> -->
 
     <div class="post-bread font-semibold">
-      <div class="">
+      <div>
         <p>
-          <span
-            ><span
-              ><a href={node.seo.breadcrumbs[0].url}
-                >{node.seo.breadcrumbs[0].text}</a
+          <span>
+            <span
+              ><a href={node.seo?.breadcrumbs[0]?.url}
+                >{node.seo?.breadcrumbs[0]?.text}</a
               ></span
-            > &gt; <span
-              ><a href={node.seo.breadcrumbs[1].url}
-                >{node.seo.breadcrumbs[1].text}</a
+            >
+            &gt;
+            <span
+              ><a href={node.seo?.breadcrumbs[1]?.url}
+                >{node.seo?.breadcrumbs[1]?.text}</a
               ></span
-            > &gt; <span class="" aria-current="page"
-              ><a href={node.seo.breadcrumbs[2].url}
-                >{node.seo.breadcrumbs[2].text}</a
+            >
+            &gt;
+            <span class="" aria-current="page"
+              ><a href={node.seo?.breadcrumbs[2]?.url}
+                >{node.seo?.breadcrumbs[2]?.text}</a
               ></span
-            ></span
-          > &gt; <span class="" aria-current="page"
-            ><a href="">{node.seo.breadcrumbs[3].text}</a></span
-          >
+            >
+            {
+              node.seo?.breadcrumbs[3] ? (
+                <span>
+                  &gt;{" "}
+                  <span class="" aria-current="page">
+                    <a href="">{node.seo?.breadcrumbs[3]?.text}</a>
+                  </span>
+                </span>
+              ) : null
+            }
+          </span>
         </p>
       </div>
     </div>
@@ -55,7 +68,10 @@ const { node } = Astro.props;
         <CasinoSchoolSidebar />
         <div class="content-container w-full md:w-3/5 mt-5 md:mt-0">
           <h1 class="text-[#ff688b] font-giloryExtrabold">{node.title}</h1>
-          <article class="single-school-content-article single_article" set:html={node.content} />
+          <article
+            class="single-school-content-article single_article"
+            set:html={node.content}
+          />
         </div>
       </div>
     </div>
