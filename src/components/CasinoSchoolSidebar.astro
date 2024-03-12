@@ -27,7 +27,9 @@ const postsData = await wpquery({
 const parentPages = postsData.pages.nodes;
 ---
 
-<div class="menu_container bg-[#eee] h-max rounded-lg p-6 w-full md:w-4/12">
+<div
+  class="menu_container bg-[#eee] h-max rounded-lg p-6 w-full sm:w-3/5 md:w-4/12"
+>
   <h3 class="text-[#2f0536] text-[22px] mb-5">Choose a Lesson</h3>
   <div id="shortcode-container"></div>
 </div>
@@ -68,7 +70,7 @@ const parentPages = postsData.pages.nodes;
 
       // Add arrow icon to arrow container
       const arrowIcon = document.createElement("span");
-      arrowIcon.className = "arrrow-icon"; // Ensure correct class name
+      arrowIcon.className = "arrrow-icon";
       arrowContainer.appendChild(arrowIcon); // Append arrow icon to arrow container
 
       // Add event listener to arrow container

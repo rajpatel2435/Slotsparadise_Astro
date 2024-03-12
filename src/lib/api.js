@@ -1,6 +1,6 @@
 export const prerender = true;
 
-const GRAPHQL_ENDPOINT = "https://slotsstg.wpengine.com/graphql";
+import { GRAPHQL_ENDPOINT } from "../data/endpoints";
 
 export async function GuideSidebar(){
   const response = await fetch(GRAPHQL_ENDPOINT, {

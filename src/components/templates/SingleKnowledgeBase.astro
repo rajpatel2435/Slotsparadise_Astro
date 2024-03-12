@@ -35,7 +35,7 @@ var postId = node.databaseId;
   </div>
 
   <div
-    class="casino_school_main max-w-[1200px] w-4/5 mx-auto px-2 mt-10 font-giloryRegular"
+    class="casino_guide_main max-w-[1200px] w-full lg:w-4/5 mx-auto px-2 mt-10 font-giloryRegular mb-10"
   >
     <div>
       <div class="post-bread font-semibold text-[#555]">
@@ -56,7 +56,8 @@ var postId = node.databaseId;
                 ></span
               ></span
             > &gt; <span aria-current="page"
-              ><a href="">{replaceHtmlEntities(node.seo.breadcrumbs[3].text)}</a></span
+              ><a href="">{replaceHtmlEntities(node.seo.breadcrumbs[3].text)}</a
+              ></span
             >
           </p>
         </div>
@@ -81,7 +82,10 @@ var postId = node.databaseId;
                 >{formatDate(node.date)}</span
               >
             </div>
-            <article class="single-kbase-content-article single_article" set:html={node.content} />
+            <article
+              class="single-kbase-content-article single_article"
+              set:html={node.content}
+            />
           </div>
         </div>
       </div>

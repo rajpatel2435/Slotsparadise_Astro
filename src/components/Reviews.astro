@@ -1,3 +1,8 @@
+---
+import { ADMIN_AJAX_ENDPOINT } from "../data/endpoints";
+//console.log(ADMIN_AJAX_ENDPOINT);
+---
+
 <div class="reviews_box">
   <h2 class="text-[#ff688b] pb-3 font-medium font-giloryExtrabold text-3xl">
     Reviews
@@ -5,10 +10,10 @@
   <div id="get-reviews"></div>
 </div>
 
-<script>
-  function loadShortcodeHTML(postID: number) {
+<script define:vars={{ ADMIN_AJAX_ENDPOINT }}>
+  function loadShortcodeHTML(postID) {
     // Define the AJAX URL with the action name and nonce
-    const ajaxURL = "https://slotsstg.wpengine.com/wp-admin/admin-ajax.php";
+    const ajaxURL = ADMIN_AJAX_ENDPOINT;
     const action = "get_shortcode_html";
 
     // Create the data to be sent with the request
@@ -56,7 +61,7 @@
     });
 
     const my_ajax_object = {
-      ajax_url: "https://slotsstg.wpengine.com/wp-admin/admin-ajax.php", // Replace with your actual AJAX URL
+      ajax_url: ADMIN_AJAX_ENDPOINT, // Replace with your actual AJAX URL
     };
     function sendAjaxRequest(page) {
       const targetElement = document.getElementById("get-reviews");

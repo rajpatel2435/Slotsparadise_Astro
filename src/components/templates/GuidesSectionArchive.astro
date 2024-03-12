@@ -53,14 +53,16 @@ const { node } = Astro.props;
           <i class="fa italic text-xl">&#xf02d;</i>
           <a
             class="font-giloryExtrabold text-[#2f0536] text-2xl"
-            href={node.uri}>{node.name}</a
+            href={`the-beach${node.uri}`}
           >
+            {node.name}
+          </a>
         </h1>
         <div>
           {
             node.basepress.edges.map((item) => (
               <a
-                href={item.node.uri}
+                href={`the-beach${item.node.uri}`}
                 class="py-3 font-giloryRegular font-semibold border-b border-dashed leading-3 flex items-start hover:bg-[#ddd]"
               >
                 <>

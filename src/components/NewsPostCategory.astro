@@ -17,7 +17,7 @@ const { href, title, src, alt, excerpt, slug, uri } = Astro.props;
 
 <article class="news_post_article flex flex-col md:flex-row gap-8 mb-16">
   <a
-    href={uri}
+    href={`/the-beach${uri}`}
     class="block w-full md:w-1/4 rounded-lg overflow-hidden shadow-casinoBlock"
   >
     <Image
@@ -35,11 +35,11 @@ const { href, title, src, alt, excerpt, slug, uri } = Astro.props;
       <h2
         class="text-[#ff688b] pb-3 font-medium font-giloryExtrabold text-xl sm:text-2xl"
       >
-        <a href={uri}> {title}</a>
+        <a href={`/the-beach${uri}`}> {title}</a>
       </h2>
       <p set:html={excerpt} class="text-[15px]" />
       <a
-        href={uri}
+        href={`/the-beach${uri}`}
         class="bg-[#a64485] inline-block text-white text-lg px-8 py-2 rounded-[25px] font-giloryExtrabold font-semibold uppercase hover:bg-[#ff93aa] cursor-pointer transition-all mt-5"
         >Read More</a
       >

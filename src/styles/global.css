@@ -1679,9 +1679,16 @@ input[type="text"].bpress-search-field {
     margin-left: 10px;
   }
 
-  .single_article p, .schema-faq-section strong{
+  .single_article p{
     font-size: 20px;
   }
   
+.schema-faq-section strong{
+    font-size: 22px;
+    font-family: "Gilroy-ExtraBold" !important;
+  }
+  
 
-
+  h4.wp-block-heading {
+    font-family: 'Gilroy-ExtraBold';
+}

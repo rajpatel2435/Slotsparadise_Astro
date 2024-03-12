@@ -4,7 +4,7 @@ const { node } = Astro.props;
 //console.log(node.seo);
 ---
 
-<div class="main_container">
+<div class="main_container mb-10">
   <div
     class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/08/casino-guides-header-v23.jpg')] bg-cover bg-center h-52 flex items-center text-white font-giloryRegular"
   >
@@ -77,3 +77,24 @@ const { node } = Astro.props;
     </div>
   </div>
 </div>
+
+<style is:global>
+  img.wp-post-image {
+    margin-bottom: 20px;
+  }
+  .single_article li strong {
+    font-family: "Gilroy-ExtraBold" !important;
+    font-size: 22px !important;
+  }
+  h2.wp-block-heading,
+  h3.wp-block-heading {
+  }
+
+  h3.wp-block-heading {
+    font-size: 24px;
+  }
+
+  h4.wp-block-heading {
+    font-size: 22px;
+  }
+</style>

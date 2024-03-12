@@ -1,4 +1,5 @@
 export const prerender = true;
+import { GRAPHQL_ENDPOINT } from "./endpoints";
 interface WPGraphQLParams{
     query: string;
     variables? : object;
@@ -6,7 +7,7 @@ interface WPGraphQLParams{
 
 export async function wpquery({query, variables = {}}:WPGraphQLParams) {
 
-    const res = await fetch('https://slotsstg.wpengine.com/graphql', {
+    const res = await fetch(GRAPHQL_ENDPOINT, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

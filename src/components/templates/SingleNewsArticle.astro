@@ -43,9 +43,9 @@ import SidebarArticles from "../SidebarArticles.astro";
 
 <!-- Main Page -->
 
-<div class="post-content-row max-w-[1440px] mx-auto mt-16">
+<div class="post-content-row max-w-[1440px] mx-auto mt-16 mb-10">
   <div class="casino_news_blocks grid grid-cols-6 gap-12">
-    <div class="post-content-module col-span-6 md:col-span-4">
+    <div class="post-content-module col-span-6 lg:col-span-4 mx-auto lg:mx-0">
       <div class="pb-10">
         <img
           class="featured-image rounded-lg overflow-hidden"
@@ -57,11 +57,11 @@ import SidebarArticles from "../SidebarArticles.astro";
         />
       </div>
       <article
-        class="font-giloryRegular font-semibold single-news-content-article single_article"
+        class="font-giloryRegular font-semibold single-news-content-article single_article px-2"
         set:html={node.content}
       />
     </div>
-    <div class="sidebar col-span-6 md:col-span-2 flex flex-col gap-4">
+    <div class="sidebar col-span-6 lg:col-span-2 flex flex-col gap-4 px-2">
       <h2 class="text-[#ff688b] pb-3 font-medium font-giloryExtrabold text-3xl">
         Articles
       </h2>
@@ -74,6 +74,7 @@ import SidebarArticles from "../SidebarArticles.astro";
   .wp-block-image img {
     width: 100%;
     height: auto;
+    margin-bottom: 20px;
   }
 
   h2.wp-block-heading,
@@ -83,19 +84,27 @@ import SidebarArticles from "../SidebarArticles.astro";
     font-weight: 900;
     font-family: "Gilroy-ExtraBold";
     padding-bottom: 10px;
+    margin-top: 15px;
   }
 
   h3.wp-block-heading {
+    font-size: 24px;
+    margin-top: 15px;
+  }
+
+  h4.wp-block-heading {
     font-size: 22px;
+    margin-top: 15px;
   }
 
   .post-content-module p {
     padding-bottom: 16px;
   }
 
-  .post-content-module .related_topics ul {
-    padding: 5px;
-    padding-left: 10px;
+  .related_topics ul {
+    padding: 5px !important;
+    padding-left: 25px !important;
+    font-size: 18px !important;
   }
 
   .post-content-module .related_topics li {

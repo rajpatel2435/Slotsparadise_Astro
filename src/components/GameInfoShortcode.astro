@@ -1,10 +1,9 @@
 ---
-
-//console.log(Astro);
+import { GRAPHQL_ENDPOINT } from "../data/endpoints";
 const slugs = Astro.params.uri;
 //console.log(slugs);
 
-const parts = slugs.split('/');
+const parts = slugs.split("/");
 const lastPart = parts[parts.length - 1];
 
 //console.log(lastPart);
@@ -27,61 +26,57 @@ const query = `query GetPostsBySlug($slug: String) {
 
 const variables = { slug: lastPart };
 
-const response = await fetch(
-  `https://slotsstg.wpengine.com/graphql`,
-  {
-    method: "POST",
-    headers: {
-      "content-type": "application/json",
-    },
-    body: JSON.stringify({ query, variables }),
+const response = await fetch(GRAPHQL_ENDPOINT, {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
   },
-).then((response) => response.json());
+  body: JSON.stringify({ query, variables }),
+}).then((response) => response.json());
 
 //console.log(response);
 const posts = response.data.posts.edges;
+---
 
+<div>
+  {
+    posts.map((post) => (
+      <article>
+        {post.node.blocks.map((block, index) => {
+          if (
+            index === post.node.blocks.length - 1 &&
+            block.attributesJSON === "[]"
+          ) {
+            // Check if it's the last block and has attributesJSON as "[]"
+            const processedContent = block.dynamicContent
+              .replace(/\[gameinfo\]/g, "") // Remove opening shortcode
+              .replace(/\[\/gameinfo\]/g, "") // Remove closing shortcode
+              .replace(/<br \/>/g, "") // Remove <br /> tags
+              .replace(/<\/?p>/g, ""); // Remove <p> and </p> tags
 
+            // Split processed content into lines and filter out empty lines
+            const lines = processedContent
+              .split("\n")
+              .filter((line) => line.trim() !== "");
 
-  ---
-
- 
-  <div>
-  {posts.map((post) => (
-    <article>
-      {post.node.blocks.map((block, index) => {
-        if (index === post.node.blocks.length - 1 && block.attributesJSON === "[]") {
-          // Check if it's the last block and has attributesJSON as "[]"
-          const processedContent = block.dynamicContent
-            .replace(/\[gameinfo\]/g, '') // Remove opening shortcode
-            .replace(/\[\/gameinfo\]/g, '') // Remove closing shortcode
-            .replace(/<br \/>/g, '') // Remove <br /> tags
-            .replace(/<\/?p>/g, '') // Remove <p> and </p> tags
-
-          // Split processed content into lines and filter out empty lines
-          const lines = processedContent.split('\n').filter(line => line.trim() !== '');
-
-          return (
-            <div class="char-table">
-              <table class="game-table">
-                <caption>Characteristics</caption>
-                <tbody>
-                  {lines.map((line) => (
-                    <tr>
-                      <td>{line}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          );
-        }
-        return null; // Return null for other blocks
-      })}
-    </article>
-  ))}
+            return (
+              <div class="char-table">
+                <table class="game-table">
+                  <caption>Characteristics</caption>
+                  <tbody>
+                    {lines.map((line) => (
+                      <tr>
+                        <td>{line}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            );
+          }
+          return null; // Return null for other blocks
+        })}
+      </article>
+    ))
+  }
 </div>
-
-
-
-

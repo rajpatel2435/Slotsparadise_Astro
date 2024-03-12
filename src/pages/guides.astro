@@ -1,15 +1,13 @@
 ---
-export const prerender = true;
+//export const prerender = true;
 import Layout from "../layouts/Layout.astro";
 import CasinoGuideSidebar from "../components/CasinoGuideSidebar.astro";
 import { CasinoGuidesArticles } from "../lib/api";
 import SearchWidget from "../components/SearchWidget.astro";
 
 const data = await CasinoGuidesArticles();
-
 //console.log(data);
 const sections = data.sectionsBasepress.edges;
-
 //console.log(sections);
 ---
 

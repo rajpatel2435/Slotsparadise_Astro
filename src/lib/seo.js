@@ -1,6 +1,7 @@
 export const prerender = true;
+import { GRAPHQL_ENDPOINT } from "../data/endpoints";
 export async function seoNodeByURI(uri){
-    const response = await fetch("https://slotsstg.wpengine.com/graphql", {
+    const response = await fetch(GRAPHQL_ENDPOINT, {
         method: 'post', 
         headers: {'Content-Type':'application/json'},
         body: JSON.stringify({
