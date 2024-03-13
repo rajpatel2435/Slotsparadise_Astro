@@ -1,6 +1,8 @@
 ---
 import CasinoGuideSidebar from "../CasinoGuideSidebar.astro";
 import SearchWidget from "../SearchWidget.astro";
+import { Breadcrumbs } from "astro-breadcrumbs";
+import "astro-breadcrumbs/breadcrumbs.css";
 const { node } = Astro.props;
 
 //console.log(node);
@@ -26,7 +28,7 @@ const { node } = Astro.props;
   class="online_casino_guide font-giloryRegular font-semibold max-w-[1200px] mx-auto md:py-10 px-2"
 >
   <div class="post-bread font-semibold text-[#555] mb-10">
-    <p>
+    <!-- <p>
       <span
         ><span
           ><a href={node.seo.breadcrumbs[0].url}
@@ -42,7 +44,22 @@ const { node } = Astro.props;
           ></span
         >
       </span>
-    </p>
+    </p> -->
+    <Breadcrumbs linkTextFormat="capitalized" customBaseUrl="the-beach">
+      <svg
+        slot="separator"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><polyline points="9 18 15 12 9 6"></polyline>
+      </svg>
+    </Breadcrumbs>
   </div>
 
   <div class="inner_container flex flex-col md:flex-row justify-between">

@@ -1,8 +1,11 @@
 ---
 import CasinoGuideSidebar from "../CasinoGuideSidebar.astro";
 import SearchWidget from "../SearchWidget.astro";
+import { ADMIN_AJAX_ENDPOINT } from "../../data/endpoints";
 import { formatDate } from "../../scripts/utils";
 import { replaceHtmlEntities } from "../../scripts/utils";
+import { Breadcrumbs } from "astro-breadcrumbs";
+import "astro-breadcrumbs/breadcrumbs.css";
 const { node } = Astro.props;
 
 //console.log("test" + node.content);
@@ -39,7 +42,7 @@ var postId = node.databaseId;
   >
     <div>
       <div class="post-bread font-semibold text-[#555]">
-        <div class="">
+        <!-- <div class="">
           <p>
             <span
               ><span
@@ -60,7 +63,22 @@ var postId = node.databaseId;
               ></span
             >
           </p>
-        </div>
+        </div> -->
+        <Breadcrumbs linkTextFormat="capitalized" customBaseUrl="the-beach">
+          <svg
+            slot="separator"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </Breadcrumbs>
       </div>
 
       <div
@@ -99,9 +117,9 @@ var postId = node.databaseId;
   }
 </style>
 
-<script define:vars={{ postId }}>
+<script define:vars={{ postId, ADMIN_AJAX_ENDPOINT }}>
   document.addEventListener("DOMContentLoaded", function () {
-    const ajaxurl = "https://slotsstg.wpengine.com/wp-admin/admin-ajax.php";
+    const ajaxurl = ADMIN_AJAX_ENDPOINT;
     // Make the AJAX request
     fetch(ajaxurl, {
       method: "POST",

@@ -1,6 +1,8 @@
 ---
 const { node } = Astro.props;
 import SidebarArticles from "../SidebarArticles.astro";
+import { Breadcrumbs } from "astro-breadcrumbs";
+import "astro-breadcrumbs/breadcrumbs.css";
 //console.log("text 2" + node.content);
 //console.log(node.seo.breadcrumbs);
 ---
@@ -15,12 +17,12 @@ import SidebarArticles from "../SidebarArticles.astro";
       </h1>
 
       <div class="post-bread font-semibold">
-        <div class="">
+        <!-- <div class="">
           <p>
             <span
               ><span
-                ><a href={node.seo.breadcrumbs[0].url}
-                  >{node.seo.breadcrumbs[0].text}</a
+                ><a href="/the-beach"
+                  >Home</a
                 ></span
               > &gt; <span
                 ><a href={node.seo.breadcrumbs[1].url}
@@ -35,7 +37,22 @@ import SidebarArticles from "../SidebarArticles.astro";
               ><a href="">{node.seo.breadcrumbs[3].text}</a></span
             >
           </p>
-        </div>
+        </div> -->
+        <Breadcrumbs linkTextFormat="capitalized" customBaseUrl="the-beach">
+          <svg
+            slot="separator"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </Breadcrumbs>
       </div>
     </div>
   </div>

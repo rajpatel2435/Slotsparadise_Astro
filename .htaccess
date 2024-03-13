@@ -2,4 +2,4 @@ DirectoryIndex
 RewriteEngine On
 RewriteBase /
 RewriteCond %{REQUEST_URI} !^/the-beach/restart_server\.php$
-RewriteRule ^(.*)?$ http://127.0.0.1:4321/$1 [P,L]
+RewriteRule ^(.*)?$ http://localhost:4321/$1 [P,L]
