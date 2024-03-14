@@ -9,7 +9,7 @@ $output = shell_exec( $command );
 if ( empty( $output ) ) {
     echo "Node.js server is not running. Restarting...\n";
     // Restart the Node.js server
-    shell_exec( "PORT=4321 node $serverPath > /dev/null 2>&1 &" );
+    shell_exec( "HOST=127.0.0.1 PORT=4321 node $serverPath > /dev/null 2>&1 &" );
 }
 else {
     echo "Node.js server is running.\n";

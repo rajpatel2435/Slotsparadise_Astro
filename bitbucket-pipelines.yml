@@ -14,15 +14,10 @@ pipelines:
           name: Deploy to Production
           script:
             # SSH into the server and remove the existing folder
-            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "rm -rf applications/szkhyquxps/public_html/the-beach && mkdir applications/szkhyquxps/public_html/the-beach"
+            # - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "rm -rf applications/szkhyquxps/public_html/the-beach && mkdir applications/szkhyquxps/public_html/the-beach"
 
-            # Update the remote
-            - pipe: atlassian/scp-deploy:0.3.3
-              variables:
-                USER: $MKTCASINOS_USER
-                SERVER: $MKTCASINOS_SERVER
-                REMOTE_PATH: 'applications/szkhyquxps/public_html/the-beach'
-                LOCAL_PATH: './*'
+            # Update the remote with rsync
+            - rsync -zrSlh --stats ./* $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach
 
             # Copy .htaccess file to the server
             - scp .htaccess $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach/
@@ -36,8 +31,8 @@ pipelines:
                 ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER 'kill -9 $(lsof -t -i:4321)'
               fi
 
-            # Build the project on the server
-            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "cd applications/szkhyquxps/public_html/the-beach && npm install && npm run build && PORT=4321 node ./dist/server/entry.mjs > /dev/null 2>&1 &"
+            # Build the project on the server > /dev/null 2>&1 &
+            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "cd applications/szkhyquxps/public_html/the-beach && npm install && npm run build && HOST=127.0.0.1 PORT=4321 node ./dist/server/entry.mjs"
 
             # Send message to MatterMost
             - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
@@ -49,66 +44,3 @@ pipelines:
                   "username": "Bitbucket Pipelines",
                   "text": "New commit deployed to #SlotsParadise **master** branch on ```Astro slotsparadise``` with the following message: \n ```\n'"$COMMIT_MESSAGE"' \nEnv: AstroSlotsParadise\nDate: '"$COMMIT_DATE"'\nAuthor: '"$COMMIT_AUTHOR"'\n ```"
                 }' -H "Content-Type: application/json" -X POST https://matter.dblexchange.com/hooks/t34yjuo6a3refeeafr3itdauge
-
-#    stg:
-#      - step:
-#          name: Get repository latest changes
-#          script:
-#            # Clone the repository onto the server
-#            - git clone git@bitbucket.org:pacific-wp/slotswptheme.git
-#            - git checkout stg
-#          artifacts:
-#            - ./pointspreads
-#      - step:
-#          name: Deploy to Staging
-#          deployment: staging
-#          script:
-#            # SSH into the server and remove the existing folder
-#            - ssh $POINTSPREADS_USER@$POINTSPREADS_SERVER "rm -rf applications/phtqpuzrux/public_html/wp-content/themes/jannah-child && mkdir applications/phtqpuzrux/public_html/wp-content/themes/jannah-child"
-#            # Update the remote
-#            - pipe: atlassian/scp-deploy:0.3.3
-#              variables:
-#                USER: $POINTSPREADS_USER
-#                SERVER: $POINTSPREADS_SERVER
-#                REMOTE_PATH: 'applications/phtqpuzrux/public_html/wp-content/themes/jannah-child'
-#                LOCAL_PATH: './*'
-#            - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
-#            - COMMIT_DATE=$(git log -n 1 --pretty=format:'%ci' $BITBUCKET_COMMIT)
-#            - COMMIT_AUTHOR=$(git log -n 1 --pretty=format:'%an' $BITBUCKET_COMMIT)
-#            - >
-#              curl -d '{
-#                  "channel": "wp-team-activity",
-#                  "username": "Bitbucket Pipelines",
-#                  "text": "New commit deployed to #PointSpreads **stg** branch on ```Theme Jhanna Child``` with the following message: \n ```\n'"$COMMIT_MESSAGE"' \nEnv: '"$WPE_STG_ENV"'\nDate: '"$COMMIT_DATE"'\nAuthor: '"$COMMIT_AUTHOR"'\n ```"
-#                }' -H "Content-Type: application/json" -X POST https://matter.dblexchange.com/hooks/t34yjuo6a3refeeafr3itdauge
-#    dev:
-#      - step:
-#          name: Get repository latest changes
-#          script:
-#            # Clone the repository onto the server
-#            - git clone git@bitbucket.org:pacific-wp/slotswptheme.git
-#            - git checkout dev
-#          artifacts:
-#            - ./pointspreads
-#      - step:
-#          name: Deploy to Dev
-#          deployment: staging
-#          script:
-#            # SSH into the server and remove the existing folder
-#            - ssh $POINTSPREADS_USER@$POINTSPREADS_SERVER "rm -rf applications/kaunpsmbrb/public_html/wp-content/themes/jannah-child && mkdir applications/kaunpsmbrb/public_html/wp-content/themes/jannah-child"
-#            # Update the remote
-#            - pipe: atlassian/scp-deploy:0.3.3
-#              variables:
-#                USER: $POINTSPREADS_USER
-#                SERVER: $POINTSPREADS_SERVER
-#                REMOTE_PATH: 'applications/kaunpsmbrb/public_html/wp-content/themes/jannah-child'
-#                LOCAL_PATH: './*'
-#            - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
-#            - COMMIT_DATE=$(git log -n 1 --pretty=format:'%ci' $BITBUCKET_COMMIT)
-#            - COMMIT_AUTHOR=$(git log -n 1 --pretty=format:'%an' $BITBUCKET_COMMIT)
-#            - >
-#              curl -d '{
-#                  "channel": "wp-team-activity",
-#                  "username": "Bitbucket Pipelines",
-#                  "text": "New commit deployed to #PointSpreads **dev** branch on ```Theme Jhanna Child``` with the following message: \n ```\n'"$COMMIT_MESSAGE"' \nEnv: '"$WPE_DEV_ENV"'\nDate: '"$COMMIT_DATE"'\nAuthor: '"$COMMIT_AUTHOR"'\n ```"
-#                }' -H "Content-Type: application/json" -X POST https://matter.dblexchange.com/hooks/t34yjuo6a3refeeafr3itdauge

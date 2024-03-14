@@ -7,7 +7,7 @@ SERVER_PATH="./dist/server/entry.mjs"
 if ! lsof -i :4321; then
 	    echo "Node.js server is not running. Restarting..."
 	        # Restart the Node.js server
-		  PORT=4321 node ./dist/server/entry.mjs &
+		  HOST=127.0.0.1 PORT=4321 node ./dist/server/entry.mjs &
 else
       echo "Node.js server is running."
 fi
