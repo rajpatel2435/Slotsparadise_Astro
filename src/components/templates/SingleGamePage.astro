@@ -4,6 +4,8 @@ import SidebarArticles from "../SidebarArticles.astro";
 import SingleGameReviewSidebar from "../SingleGameReviewSidebar.astro";
 import GameInfoShortcode from "../GameInfoShortcode.astro";
 import OtherRelatedgames from "../OtherRelatedGames.astro";
+import { Breadcrumbs } from "astro-breadcrumbs";
+import "astro-breadcrumbs/breadcrumbs.css";
 
 //console.log(node.seo.breadcrumbs);
 ---
@@ -35,8 +37,8 @@ import OtherRelatedgames from "../OtherRelatedGames.astro";
 
 <!-- Main Page -->
 
-<div class="post-content-row max-w-[1440px] mx-auto mt-16">
-  <div class="casino_news_blocks flex flex-col lg:flex-row gap-14 px-2">
+<div class="post-content-row max-w-[1440px] mx-auto mt-16 px-10 xl:px-2">
+  <div class="casino_news_blocks flex flex-col lg:flex-row gap-14">
     <div class="post-content-module lg:w-[65%] px-2 lg:px-0">
       <div class="pb-10">
         <img
@@ -48,8 +50,8 @@ import OtherRelatedgames from "../OtherRelatedGames.astro";
           title={node.title}
         />
       </div>
-      <div class="post-bread font-semibold">
-        <div class="">
+      <div class="post-bread font-semibold mb-5">
+        <!-- <div class="">
           <p>
             <span
               ><span
@@ -65,7 +67,22 @@ import OtherRelatedgames from "../OtherRelatedGames.astro";
               ></span
             >
           </p>
-        </div>
+        </div> -->
+        <Breadcrumbs linkTextFormat="capitalized" customBaseUrl="the-beach">
+          <svg
+            slot="separator"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            ><polyline points="9 18 15 12 9 6"></polyline>
+          </svg>
+        </Breadcrumbs>
       </div>
       <article
         class="font-giloryRegular font-semibold pl-4 md:pl-0 single-game-content-article single_article"
@@ -121,5 +138,20 @@ import OtherRelatedgames from "../OtherRelatedGames.astro";
   .post-content-module .related_topics li {
     list-style-type: disc;
     margin-left: 20px;
+  }
+
+  .wp-block-table table {
+    border-collapse: collapse;
+    width: 100%;
+    border-spacing: 0;
+  }
+
+  .wp-block-table table td {
+    border: 1px solid black;
+    padding: 5px;
+  }
+
+  .wp-block-table table strong {
+    font-family: "Gilroy-Medium";
   }
 </style>
