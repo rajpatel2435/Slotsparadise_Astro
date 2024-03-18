@@ -32,7 +32,7 @@ pipelines:
               fi
 
             # Build the project on the server > /dev/null 2>&1 &
-            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "cd applications/szkhyquxps/public_html/the-beach && npm install && npm run build && HOST=127.0.0.1 PORT=4321 node ./dist/server/entry.mjs"
+            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "cd applications/szkhyquxps/public_html/the-beach && npm install && npm run build && php restart_server.php"
 
             # Send message to MatterMost
             - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
