@@ -1,5 +1,7 @@
 DirectoryIndex
 RewriteEngine On
 RewriteBase /
+#Yoast sitemap redirect
+RewriteRule ^(.+)\.(xml|xsl)$ https://%{HTTP_HOST}/$1.$2 [R=301,NC,L]
 RewriteCond %{REQUEST_URI} !^/the-beach/restart_server\.php$
 RewriteRule ^(.*)?$ http://127.0.0.1:4321/$1 [P,L]
