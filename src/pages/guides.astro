@@ -5,9 +5,6 @@ import CasinoGuideSidebar from "../components/CasinoGuideSidebar.astro";
 import { CasinoGuidesArticles } from "../lib/api";
 import SearchWidget from "../components/SearchWidget.astro";
 
-import { Breadcrumbs } from "astro-breadcrumbs";
-import "astro-breadcrumbs/breadcrumbs.css";
-
 const data = await CasinoGuidesArticles();
 //console.log(data);
 const sections = data.sectionsBasepress.edges;
@@ -43,29 +40,14 @@ const sections = data.sectionsBasepress.edges;
     class="online_casino_guide guides_main mt-10 font-giloryRegular font-semibold max-w-[1200px] mx-auto"
   >
     <div class="post-bread font-semibold my-10">
-      <!-- <div>
+      <div>
         <p>
           <span
             ><span><a href="/the-beach">Home</a></span> &gt;
             <span><a href="/guides/">Casino Guides</a></span>
           </span>
         </p>
-      </div> -->
-      <Breadcrumbs linkTextFormat="capitalized" customBaseUrl="the-beach">
-        <svg
-          slot="separator"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          ><polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </Breadcrumbs>
+      </div>
     </div>
 
     <div

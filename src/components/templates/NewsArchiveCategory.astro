@@ -5,12 +5,9 @@ import { getNodeByURI } from "../../lib/api";
 const uri = `/${Astro.params.uri}/`;
 const data = await getNodeByURI(uri);
 const node = data.nodeByUri;
-
+import { generateBreadcrumbs } from "../../scripts/utils";
 // Access the slug value if it exists in the node
 const slug = node.slug;
-
-import { Breadcrumbs } from "astro-breadcrumbs";
-import "astro-breadcrumbs/breadcrumbs.css";
 // Now you have both uri and slug available
 //console.log("URI:", uri);
 //console.log("Slug:", slug);
@@ -43,27 +40,14 @@ const postsData = await wpquery({
 const allPosts = postsData?.posts?.edges;
 
 //console.log(allPosts);
+const breadcrumb = generateBreadcrumbs(uri);
 ---
 
 <div
   class="news_page_container max-w-[1440px] mx-auto w-[80%] font-giloryRegular font-semibold text-base text-[#666]"
 >
   <div class="mb-10 font-semibold">
-    <Breadcrumbs linkTextFormat="capitalized" customBaseUrl="the-beach">
-      <svg
-        slot="separator"
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        ><polyline points="9 18 15 12 9 6"></polyline>
-      </svg>
-    </Breadcrumbs>
+    <div class="capitalize" set:html={breadcrumb} />
   </div>
   <div>
     <div>

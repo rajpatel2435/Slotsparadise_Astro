@@ -1,7 +1,9 @@
 ---
 import CasinoSchoolSidebar from "../CasinoSchoolSidebar.astro";
 const { node } = Astro.props;
+import { generateBreadcrumbs } from "../../scripts/utils";
 //console.log(node.seo);
+const breadcrumb = generateBreadcrumbs(node.uri);
 ---
 
 <div class="main_container mb-10">
@@ -20,47 +22,8 @@ const { node } = Astro.props;
   <div
     class="casino_school_main max-w-[1440px] w-4/5 mx-auto px-2 mt-10 font-giloryRegular"
   >
-    <!-- <div class="post-bread font-semibold">
-            <div class=""><p><span><span><a href="https://slotsparadise.com/the-beach/">Home</a></span> &gt; 
-                <span><a href="https://slotsparadise.com/the-beach/news/">Casino School</a></span> &gt;  
-                <span class="breadcrumb_last font-giloryExtrabold" aria-current="page"><strong>{node.title}</strong></span></span></p>
-            </div>
-        </div> -->
-
     <div class="post-bread font-semibold">
-      <div>
-        <p>
-          <span>
-            <span
-              ><a href={node.seo?.breadcrumbs[0]?.url}
-                >{node.seo?.breadcrumbs[0]?.text}</a
-              ></span
-            >
-            &gt;
-            <span
-              ><a href={node.seo?.breadcrumbs[1]?.url}
-                >{node.seo?.breadcrumbs[1]?.text}</a
-              ></span
-            >
-            &gt;
-            <span class="" aria-current="page"
-              ><a href={node.seo?.breadcrumbs[2]?.url}
-                >{node.seo?.breadcrumbs[2]?.text}</a
-              ></span
-            >
-            {
-              node.seo?.breadcrumbs[3] ? (
-                <span>
-                  &gt;{" "}
-                  <span class="" aria-current="page">
-                    <a href="">{node.seo?.breadcrumbs[3]?.text}</a>
-                  </span>
-                </span>
-              ) : null
-            }
-          </span>
-        </p>
-      </div>
+      <div class="capitalize" set:html={breadcrumb} />
     </div>
 
     <div class="casino_single_container mt-10 font-giloryRegular font-semibold">

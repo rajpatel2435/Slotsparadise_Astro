@@ -274,6 +274,7 @@ export async function getNodeByURI(uri){
                 id
                 name
                 slug
+                uri
                 basepress {
                   edges {
                     node {

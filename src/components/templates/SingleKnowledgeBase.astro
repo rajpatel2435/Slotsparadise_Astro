@@ -3,9 +3,7 @@ import CasinoGuideSidebar from "../CasinoGuideSidebar.astro";
 import SearchWidget from "../SearchWidget.astro";
 import { ADMIN_AJAX_ENDPOINT } from "../../data/endpoints";
 import { formatDate } from "../../scripts/utils";
-import { replaceHtmlEntities } from "../../scripts/utils";
-import { Breadcrumbs } from "astro-breadcrumbs";
-import "astro-breadcrumbs/breadcrumbs.css";
+import { generateBreadcrumbs } from "../../scripts/utils";
 const { node } = Astro.props;
 
 //console.log("test" + node.content);
@@ -18,6 +16,8 @@ var postId = node.databaseId;
 //const guidesCat = uriParts[uriParts.length - 3];
 //const guidesCategory = guidesCat.replace(/-/g, " ");
 //console.log(guidesCat);
+
+const breadcrumb = generateBreadcrumbs(node.uri);
 ---
 
 <div class="main_container">
@@ -42,43 +42,7 @@ var postId = node.databaseId;
   >
     <div>
       <div class="post-bread font-semibold text-[#555]">
-        <!-- <div class="">
-          <p>
-            <span
-              ><span
-                ><a href={node.seo.breadcrumbs[0].url}
-                  >{node.seo.breadcrumbs[0].text}</a
-                ></span
-              > &gt; <span
-                ><a href={node.seo.breadcrumbs[1].url}
-                  >{node.seo.breadcrumbs[1].text}</a
-                ></span
-              > &gt; <span aria-current="page"
-                ><a href={node.seo.breadcrumbs[2].url}
-                  >{node.seo.breadcrumbs[2].text}</a
-                ></span
-              ></span
-            > &gt; <span aria-current="page"
-              ><a href="">{replaceHtmlEntities(node.seo.breadcrumbs[3].text)}</a
-              ></span
-            >
-          </p>
-        </div> -->
-        <Breadcrumbs linkTextFormat="capitalized" customBaseUrl="the-beach">
-          <svg
-            slot="separator"
-            xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            ><polyline points="9 18 15 12 9 6"></polyline>
-          </svg>
-        </Breadcrumbs>
+        <div class="capitalize" set:html={breadcrumb} />
       </div>
 
       <div

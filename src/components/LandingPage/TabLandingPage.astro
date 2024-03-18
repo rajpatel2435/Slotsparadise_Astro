@@ -1,26 +1,65 @@
 ---
-import TermsAndConditions from './TermsAndConditions.astro'
-const { h1, h2, logo_image, bg_image, bg_btn, footer_image_1, footer_image_2 } = Astro.props;
+import TermsAndConditions from "./TermsAndConditions.astro";
+const { h1, h2, logo_image, bg_image, bg_btn, footer_image_1, footer_image_2 } =
+  Astro.props;
 ---
 
-<div class="content-container relative bg-cover bg-center" style={{ backgroundImage: `url(${bg_image})`, height: 'calc(100vh - 70px)' }}>
-    <div class="header-content mx-auto pt-[2%] text-center flex flex-col items-center">
-        <img width="420" height="143" title="logo" alt="logo" src={logo_image}>
-        <div class="et_pb_header_content_wrapper">
-            <div class="content w-full">
-                <h1 class="text-[125px] leading-[209px] text-center font-giloryExtrabold text-white tracking-[-5.13px] inline">{h1}</h1>
-                <p class="span-up w-[55px] inline-block text-2xl relative top-[-20px] font-giloryBold text-white leading-7"><span>UP</span><span> TO</span></p>
-                <h2 class="text-[125px] tracking-[-2.04px] leading-[83px] text-center font-giloryExtrabold text-white inline">{h2}</h2>
-                <a class={`join-now block text-white mx-auto w-[330px] text-center text-4xl tracking-[0px] uppercase font-giloryBold py-5 px-16 rounded-[50px] ${bg_btn}`}>Join Now</a>
-                <div class="footer-img absolute bottom-2 left-1/2 -translate-x-1/2 w-full max-w-[840px] px-2">
-                    <img class= "rounded-[40px] w-full max-w-[840px] mx-auto mb-2" width="840" height="78" src={footer_image_1} title="support" alt="support">
-                    <img class= "rounded-[40px] w-full max-w-[840px] mx-auto" width="840" height="78" src={footer_image_2} title="currency" alt="currency">
-                    <a class="terms button block text-white text-center mt-12 text-2xl tracking-normal cursor-pointer font-giloryRegular  underline" id="desk-popup" href="#">Terms &amp; Conditions</a>
-                </div>
-                <TermsAndConditions />
-            </div>
+<div
+  class="content-container relative bg-cover bg-center"
+  style={{ backgroundImage: `url(${bg_image})`, height: "calc(100vh - 70px)" }}
+>
+  <div
+    class="header-content mx-auto pt-[2%] text-center flex flex-col items-center"
+  >
+    <img width="420" height="143" title="logo" alt="logo" src={logo_image} />
+    <div class="et_pb_header_content_wrapper">
+      <div class="content w-full">
+        <h1
+          class="text-[125px] leading-[209px] text-center font-giloryExtrabold text-white tracking-[-5.13px] inline"
+        >
+          {h1}
+        </h1>
+        <p
+          class="span-up w-[55px] inline-block text-2xl relative top-[-20px] font-giloryBold text-white leading-7"
+        >
+          <span>UP</span><span> TO</span>
+        </p>
+        <h2
+          class="text-[125px] tracking-[-2.04px] leading-[83px] text-center font-giloryExtrabold text-white inline"
+        >
+          {h2}
+        </h2>
+        <a
+          class={`join-now block text-white mx-auto w-[330px] text-center text-4xl tracking-[0px] uppercase font-giloryBold py-5 px-16 rounded-[50px] ${bg_btn}`}
+          href="https://slotsparadise.com/#register">Join Now</a
+        >
+        <div
+          class="footer-img absolute bottom-2 left-1/2 -translate-x-1/2 w-full max-w-[840px] px-2"
+        >
+          <img
+            class="rounded-[40px] w-full max-w-[840px] mx-auto mb-2"
+            width="840"
+            height="78"
+            src={footer_image_1}
+            title="support"
+            alt="support"
+          />
+          <img
+            class="rounded-[40px] w-full max-w-[840px] mx-auto"
+            width="840"
+            height="78"
+            src={footer_image_2}
+            title="currency"
+            alt="currency"
+          />
+          <a
+            class="terms button block text-white text-center mt-12 text-2xl tracking-normal cursor-pointer font-giloryRegular underline"
+            id="desk-popup"
+            href="#">Terms &amp; Conditions</a
+          >
         </div>
+        <TermsAndConditions />
+      </div>
     </div>
+  </div>
 </div>
-
-

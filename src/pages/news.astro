@@ -1,8 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import { GRAPHQL_ENDPOINT } from "../data/endpoints";
-import { Breadcrumbs } from "astro-breadcrumbs";
-import "astro-breadcrumbs/breadcrumbs.css";
 ---
 
 <Layout title="News">
@@ -10,33 +8,14 @@ import "astro-breadcrumbs/breadcrumbs.css";
     class="news_page_container max-w-[1440px] mx-auto w-[80%] font-giloryRegular font-semibold text-base text-[#666] mt-56"
   >
     <div class="post-bread font-semibold my-10">
-      <!-- <div>
+      <div>
         <p>
           <span
             ><span><a href="/the-beach/">Home</a></span> &gt;
             <span><a href="/news/">News</a></span>
           </span>
         </p>
-      </div> -->
-      <Breadcrumbs
-        linkTextFormat="capitalized"
-        customBaseUrl="the-beach"
-        ellipsisAriaLabel="a structured list of pages"
-      >
-        <svg
-          slot="separator"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          ><polyline points="9 18 15 12 9 6"></polyline>
-        </svg>
-      </Breadcrumbs>
+      </div>
     </div>
 
     <div>
