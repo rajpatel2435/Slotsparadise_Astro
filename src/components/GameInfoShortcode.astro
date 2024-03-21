@@ -1,44 +1,41 @@
 ---
-import { GRAPHQL_ENDPOINT } from "../data/endpoints";
-const slugs = Astro.params.uri;
-//console.log(slugs);
+import { wpquery } from "../data/wordpress";
+import SocialShare from "../components/SocialShare.astro";
+const slug = Astro.params.uri; // Get the slug from the URL
+//console.log("Original Slug:", slug); // Log the original slug
+const slugParts = slug.split("/").filter(Boolean);
+//console.log("Slug Parts:", slugParts); // Log the parts after splitting
+const lastPart = slugParts.pop(); // Extract the last part of the slug
+//console.log("Last Part:", lastPart);
 
-const parts = slugs.split("/");
-const lastPart = parts[parts.length - 1];
-
-//console.log(lastPart);
-
-const query = `query GetPostsBySlug($slug: String) {
-  posts(where: {name: $slug}) {
+const data = await wpquery({
+  query: `query GetPostsBySlug($name: String!) {
+  posts(where: {name: $name}) {
     edges {
       node {
-        slug
-        blocks {
-          ... on CoreShortcodeBlock {
-            attributesJSON
-            dynamicContent
-          }
+        id
+        quickOverview {
+          charLists
+          charTitle
         }
       }
     }
   }
-}`;
+}`,
+  variables: { name: lastPart }, // Pass the last part of the slug as the title
+});
 
-const variables = { slug: lastPart };
+//console.log(data.posts.edges[0].node.quickOverview);
 
-const response = await fetch(GRAPHQL_ENDPOINT, {
-  method: "POST",
-  headers: {
-    "content-type": "application/json",
-  },
-  body: JSON.stringify({ query, variables }),
-}).then((response) => response.json());
+const val = data.posts.edges[0].node.quickOverview;
 
-//console.log(response);
-const posts = response.data.posts.edges;
+const charlist = val.charLists;
+const chartitle = val.charTitle;
+
+
 ---
 
-<div>
+<!-- <div>
   {
     posts.map((post) => (
       <article>
@@ -79,4 +76,25 @@ const posts = response.data.posts.edges;
       </article>
     ))
   }
+</div> -->
+
+
+
+<div class="char-table">
+  <table class="game-table">
+    {chartitle && (
+      <caption>{chartitle}</caption>
+    )}
+    <tbody>
+      {charlist
+        ?.split("\n")
+        .filter(Boolean)
+        .map((char: string, index: number) => (
+          <tr>
+            <td>{char.trim()}</td>
+          </tr>
+        ))}
+    </tbody>
+  </table>
 </div>
+

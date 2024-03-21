@@ -1,101 +1,76 @@
 ---
-import { ADMIN_AJAX_ENDPOINT, GRAPHQL_ENDPOINT } from "../data/endpoints";
-
+import { wpquery } from "../data/wordpress";
 import SocialShare from "../components/SocialShare.astro";
-const fullUrl = Astro.request.url;
-const segments = fullUrl.split("/");
-const slug = segments[segments.length - 2];
+const slug = Astro.params.uri; // Get the slug from the URL
+//console.log("Original Slug:", slug); // Log the original slug
+const slugParts = slug.split("/").filter(Boolean);
+//console.log("Slug Parts:", slugParts); // Log the parts after splitting
+const lastPart = slugParts.pop(); // Extract the last part of the slug
+//console.log("Last Part:", lastPart);
 
-//console.log(slug);
-
-const query = `query GetPostsBySlug($slug: String!) {
-  posts(where: { name: $slug }) {
+const data = await wpquery({
+  query: `query GetPostsBySlug($name: String!) {
+  posts(where: {name: $name}) {
     edges {
       node {
-        slug
-        blocks {
-          ... on CoreShortcodeBlock {
-            attributesJSON
-            originalContent
-          }
+        id
+        quickOverview {
+          gameplay
+          graphics
+          playButton
+          thumbnailUrl
+          value
+          demoButton
+          features
         }
       }
     }
   }
-}`;
+}`,
+  variables: { name: lastPart }, // Pass the last part of the slug as the title
+});
 
-const variables = {
-  slug: slug,
-};
+//console.log(data.posts.edges[0].node.quickOverview);
 
-const response = await fetch(GRAPHQL_ENDPOINT, {
-  method: "POST",
-  headers: {
-    "content-type": "application/json",
-  },
-  body: JSON.stringify({ query, variables }),
-}).then((response) => response.json());
+const val = data.posts.edges[0].node.quickOverview;
 
-let originalContentValue;
-
-// Check if the response has the expected structure
-if (
-  response.data &&
-  response.data.posts &&
-  response.data.posts.edges &&
-  response.data.posts.edges.length > 0 &&
-  response.data.posts.edges[0].node.blocks
-) {
-  const firstBlock = response.data.posts.edges[0].node.blocks.find(
-    (block) => block.originalContent
-  );
-
-  if (firstBlock) {
-    originalContentValue = firstBlock.originalContent;
-    //console.log(originalContentValue);
-  } else {
-    console.error("No block with originalContent found");
-  }
-}
-
-/** create a function to extratct the value of demo and play from the shortcode
- * [gameplay demo="https://slotsstg.wpengine.com/demo/frame/16338/Sante" play="https://slotsstg.wpengine.com/real/frame/16338/Sante" graphics="86" features="90" gameplay="88" value="87"]
- */
-function extractDemoAndPlay(originalContentValue) {
-  try {
-    // Extracting demo and play values using regular expressions
-    const demoMatch = originalContentValue.match(/demo="([^"]+)"/);
-    const playMatch = originalContentValue.match(/play="([^"]+)"/);
-
-    // Check if matches were found
-    if (demoMatch && playMatch) {
-      const demoUrl = demoMatch[1];
-      const playUrl = playMatch[1];
-
-      return { demo: demoUrl, play: playUrl };
-    } else {
-      console.error(
-        "Could not find demo and play values in originalContentValue"
-      );
-      return null;
-    }
-  } catch (error) {
-    console.error("Error extracting demo and play values:", error);
-    return null;
-  }
-}
-
-const { demo, play } = extractDemoAndPlay(originalContentValue);
-
-/* if (demo && play) {
-  console.log("Demo URL:", demo);
-  console.log("Play URL:", play);
-} else {
-  console.error("Failed to extract demo and play values");
-} */
+const graphics = val.graphics;
+const gameplay = val.gameplay;
+const features = val.features;
+const value = val.value;
+const demobtn = val.demoButton;
+const playbtn = val.playButton;
 ---
 
-<div id="review-container"></div>
+
+<div class="gameinfo">
+<h3 class="quick-title">Quick Overview</h3>
+<div class="quick-chart">
+<div class="progress">
+<div class="bar" style=`width:${graphics}%`>
+<p class="percent">Graphics</p>
+</div>
+<div class="digit"> <p class="perc_vals">{graphics}%</p> </div>
+</div>
+<div class="progress">
+<div class="bar" style=`width:${features}%`>
+<p class="percent">Features</p>
+</div>
+<div class="digit"> <p class="perc_vals">{features}%</p> </div>
+</div>
+<div class="progress">
+<div class="bar" style=`width:${gameplay}%`>
+<p class="percent">Gameplay</p>
+</div>
+<div class="digit"> <p class="perc_vals">{gameplay}%</p> </div>
+</div>
+<div class="progress">
+<div class="bar" style=`width:${value}%`>
+<p class="percent">Value</p>
+</div>
+<div class="digit"> <p class="perc_vals">{value}%</p> </div>
+</div>
+
 
 <div class="rating-col flex gap-2">
   <div
@@ -104,7 +79,7 @@ const { demo, play } = extractDemoAndPlay(originalContentValue);
     <p>Rating</p>
     <div class="text-center" id="review_stars">
       <img
-        src="https://slotsparadise.com/wp-content/themes/slotsparadise/images/stars-sprite-0.webp"
+        src="https://slotsstg.wpengine.com/wp-content/themes/slotsparadise/images/stars-sprite-0.webp"
         alt="star rating"
         class="stars_rating mx-auto"
       />
@@ -122,66 +97,21 @@ const { demo, play } = extractDemoAndPlay(originalContentValue);
   </div>
 </div>
 <p>
-  <a class="wid-btn btn-margin" href={demo}>DEMO</a>
-  <a class="wid-btn" href={play}>PLAY NOW</a>
+  <a class="wid-btn btn-margin" href={demobtn}>DEMO</a>
+  <a class="wid-btn" href={playbtn}>PLAY NOW</a>
 </p>
 
-<!--script to get the Quick overview section: Graphics, Features, Gameplay, Value -->
 
-<script define:vars={{ originalContentValue, ADMIN_AJAX_ENDPOINT }}>
-  document.addEventListener("DOMContentLoaded", function () {
-    const ajaxurl = ADMIN_AJAX_ENDPOINT;
-
-    // Custom parser function to extract attributes
-    function parseOriginalContentValue(originalContent) {
-      const matches = originalContent.match(/(\w+)="([^"]+)"/g);
-      const attributes = {};
-
-      if (matches) {
-        matches.forEach((match) => {
-          const [key, value] = match.split("=");
-          attributes[key] = value.replace(/"/g, "");
-        });
-      }
-
-      return attributes;
-    }
-
-    try {
-      // Extract attribute values using the custom parser
-      const { graphics, features, gameplay, value } =
-        parseOriginalContentValue(originalContentValue);
-
-      // Make the AJAX request with individual attribute values
-      fetch(ajaxurl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        },
-        body: `action=display_reviews_sidebar&graphics=${graphics}&features=${features}&gameplay=${gameplay}&value=${value}`,
-      })
-        .then((response) => response.text())
-        .then((data) => {
-          // Set the response as the content of the #review-container
-          document.getElementById("review-container").innerHTML = data;
-        });
-    } catch (error) {
-      // Log the error to the console
-      console.error("Error parsing originalContentValue:", error);
-    }
-  });
-</script>
-
-<script>
+<script is:inline>
   document.addEventListener("DOMContentLoaded", function () {
     let aggRating = document.querySelector(
-      ".wpcr3_aggregateRating_ratingValue"
+      ".wpcr3_aggregateRating_ratingValue",
     );
     let reviewStarsElement = document.getElementById("review_stars");
 
     // Get the element with the class "wpcr3_aggregateRating_reviewCount"
     let reviewCountElement = document.querySelector(
-      ".wpcr3_aggregateRating_reviewCount"
+      ".wpcr3_aggregateRating_reviewCount",
     );
 
     // Extract the numeric part using a regular expression
@@ -199,3 +129,4 @@ const { demo, play } = extractDemoAndPlay(originalContentValue);
     }
   });
 </script>
+
