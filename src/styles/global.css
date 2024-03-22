@@ -228,8 +228,6 @@ h6 {
   }
   .Menu--users {
     height: auto !important;
-    min-width: 98% !important;
-    right: 5px;
   }
   /* .slick-next {
     right: -16px !important;
