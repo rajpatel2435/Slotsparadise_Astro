@@ -5,7 +5,6 @@ import { ADMIN_AJAX_ENDPOINT } from "../data/endpoints";
 <div id="search-container" class="text-black"></div>
 
 <script define:vars={{ ADMIN_AJAX_ENDPOINT }}>
-  window.onload = function () {
     document.addEventListener("DOMContentLoaded", function () {
       const ajaxurl = ADMIN_AJAX_ENDPOINT;
 
@@ -27,5 +26,5 @@ import { ADMIN_AJAX_ENDPOINT } from "../data/endpoints";
           console.error("Fetch error:", error);
         });
     });
-  };
+
 </script>
