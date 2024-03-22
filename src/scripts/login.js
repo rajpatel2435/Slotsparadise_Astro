@@ -88,40 +88,43 @@ function checkCookiesAndUpdateCSS() {
           const [key, value] = entry;
           userDetail[key] = value;
         });
+
+        document.getElementById("userLast").innerHTML =
+          userDetail.FirstName + " " + userDetail.LastName;
+        document.getElementById("userFirst").innerHTML = userDetail.UserName;
+        document.getElementById("userId").innerHTML = idGame;
+
+        document.getElementById("userWagered").innerHTML =
+          userDetail.PlayedBalance;
+
+        document.getElementById("notWagered").innerHTML =
+          userDetail.NotPlayedBalance;
+
+        document.getElementById("playBalance").innerHTML = userDetail.Balance;
+
+        document.getElementById("withBalance").innerHTML =
+          userDetail.Withdrawable;
+        document.getElementById("usd-btn").innerHTML = userDetail.Balance;
+
+        /***Mobile****/
+
+        document.getElementById("userLastm").innerHTML =
+          userDetail.FirstName + " " + userDetail.LastName;
+        document.getElementById("userFirstm").innerHTML = userDetail.UserName;
+
+        document.getElementById("userIdm").innerHTML = idGame;
+
+        document.getElementById("userWageredm").innerHTML =
+          userDetail.PlayedBalance;
+
+        document.getElementById("notWageredm").innerHTML =
+          userDetail.NotPlayedBalance;
+
+        document.getElementById("playBalancem").innerHTML = userDetail.Balance;
+
+        document.getElementById("withBalancem").innerHTML =
+          userDetail.Withdrawable;
       });
-
-    document.getElementById("userLast").innerHTML =
-      userDetail.FirstName + " " + userDetail.LastName;
-    document.getElementById("userFirst").innerHTML = userDetail.UserName;
-    document.getElementById("userId").innerHTML = idGame;
-
-    document.getElementById("userWagered").innerHTML = userDetail.PlayedBalance;
-
-    document.getElementById("notWagered").innerHTML =
-      userDetail.NotPlayedBalance;
-
-    document.getElementById("playBalance").innerHTML = userDetail.Balance;
-
-    document.getElementById("withBalance").innerHTML = userDetail.Withdrawable;
-    document.getElementById("usd-btn").innerHTML = userDetail.Balance;
-
-    /***Mobile****/
-
-    document.getElementById("userLastm").innerHTML =
-      userDetail.FirstName + " " + userDetail.LastName;
-    document.getElementById("userFirstm").innerHTML = userDetail.UserName;
-
-    document.getElementById("userIdm").innerHTML = idGame;
-
-    document.getElementById("userWageredm").innerHTML =
-      userDetail.PlayedBalance;
-
-    document.getElementById("notWageredm").innerHTML =
-      userDetail.NotPlayedBalance;
-
-    document.getElementById("playBalancem").innerHTML = userDetail.Balance;
-
-    document.getElementById("withBalancem").innerHTML = userDetail.Withdrawable;
   }
 }
 
