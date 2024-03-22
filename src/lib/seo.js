@@ -1,11 +1,11 @@
 export const prerender = true;
 import { GRAPHQL_ENDPOINT } from "../data/endpoints";
-export async function seoNodeByURI(uri){
-    const response = await fetch(GRAPHQL_ENDPOINT, {
-        method: 'post', 
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({
-            query: `query seoUri($uri: String!) {
+export async function seoNodeByURI(uri) {
+  const response = await fetch(GRAPHQL_ENDPOINT, {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `query seoUri($uri: String!) {
               nodeByUri(uri: $uri) {
                 __typename
                 ... on Page {
@@ -22,6 +22,8 @@ export async function seoNodeByURI(uri){
                     opengraphUrl
                     canonical
                     metaDesc
+                    metaRobotsNofollow
+                    metaRobotsNoindex
                     title
                     opengraphDescription
                     opengraphPublishedTime
@@ -55,6 +57,8 @@ export async function seoNodeByURI(uri){
                     opengraphUrl
                     canonical
                     metaDesc
+                    metaRobotsNofollow
+                    metaRobotsNoindex
                     title
                     opengraphDescription
                     opengraphPublishedTime
@@ -89,6 +93,8 @@ export async function seoNodeByURI(uri){
                     opengraphUrl
                     canonical
                     metaDesc
+                    metaRobotsNofollow
+                    metaRobotsNoindex
                     title
                     opengraphDescription
                     opengraphPublishedTime
@@ -121,6 +127,8 @@ export async function seoNodeByURI(uri){
                     opengraphUrl
                     canonical
                     metaDesc
+                    metaRobotsNofollow
+                    metaRobotsNoindex
                     title
                     opengraphDescription
                     opengraphPublishedTime
@@ -154,6 +162,8 @@ export async function seoNodeByURI(uri){
                     opengraphUrl
                     canonical
                     metaDesc
+                    metaRobotsNofollow
+                    metaRobotsNoindex
                     title
                     opengraphDescription
                     opengraphPublishedTime
@@ -187,6 +197,8 @@ export async function seoNodeByURI(uri){
                     opengraphUrl
                     canonical
                     metaDesc
+                    metaRobotsNofollow
+                    metaRobotsNoindex
                     title
                     opengraphDescription
                     opengraphPublishedTime
@@ -210,11 +222,11 @@ export async function seoNodeByURI(uri){
             }
           
             `,
-            variables: {
-                uri: uri
-            }
-        })
-    });
-    const{ data } = await response.json();
-    return data;
-  }
+      variables: {
+        uri: uri,
+      },
+    }),
+  });
+  const { data } = await response.json();
+  return data;
+}
