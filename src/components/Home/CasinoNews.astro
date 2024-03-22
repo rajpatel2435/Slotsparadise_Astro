@@ -45,7 +45,7 @@ const data = await wpquery({
         data.posts.edges.slice(0, 1).map((post: any) => (
           <div class="left_block">
             <article class="">
-              <a class="mb-5" href={post.node.uri}>
+              <a class="mb-5" href={`/the-beach${post.node.uri}`}>
                 {post.node.featuredImage?.node ? (
                   <Image
                     class="shadow-casinoBlock rounded-lg"
