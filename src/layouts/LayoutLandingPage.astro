@@ -59,6 +59,47 @@ const { title } = Astro.props;
 
 
 </style>
+
+ <!-- Google Tag Manager -->
+    <script>
+      (function (w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != "dataLayer" ? "&l=" + l : "";
+        j.async = true;
+        j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, "script", "dataLayer", "GTM-TSTVXS8");
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <script type="text/javascript">
+      function setAffiliateCookie() {
+        // Drop affiliate tracking cookie
+        const urlParams = new URLSearchParams(window.location.search);
+
+        if (
+          urlParams.has("si") &&
+          urlParams.has("bt") &&
+          urlParams.has("dtag")
+        ) {
+          const cookieValue = encodeURIComponent(
+            `{"bt":"${urlParams.get("bt")}","dtag":"${urlParams.get(
+              "dtag"
+            )}","si":"${urlParams.get("si")}"}`
+          );
+
+          const affCookieValue = `r_i=${cookieValue};max-age=2592000;path=/`;
+          document.cookie = affCookieValue;
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function () {
+        setAffiliateCookie();
+      });
+    </script>
    
   </head>
   <body>
