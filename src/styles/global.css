@@ -228,6 +228,8 @@ h6 {
   }
   .Menu--users {
     height: auto !important;
+    min-width: 98% !important;
+    right: 5px;
   }
   /* .slick-next {
     right: -16px !important;
@@ -638,7 +640,8 @@ a.bpress-viewall {
 } */
 
   .Menu--users {
-    min-width: 100% !important;
+    min-width: 80% !important;
+    top: 0 !important;
   }
 }
 
