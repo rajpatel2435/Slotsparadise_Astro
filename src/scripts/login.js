@@ -1,25 +1,3 @@
-/* // Function to set a cookie
-function setCookie(cookieName, cookieValue, expirationDays) {
-    var d = new Date();
-    d.setTime(d.getTime() + (expirationDays * 24 * 60 * 60 * 1000));
-    var expires = "expires=" + d.toUTCString();
-    document.cookie = cookieName + "=" + cookieValue + ";" + expires + ";path=/";
-}
-
-// Usage: set an example cookie named "l_i" with value "gameId=1&id=104010" that expires in 1 day
-setCookie("l_i", "gameId=1&id=104010", 1);
-
-
-
- // Function to delete a cookie
-function deleteCookie(cookieName) {
-    document.cookie = cookieName + "=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;";
-}
-
-// Usage: delete the "l_i" cookie
-deleteCookie("l_i");
- */
-
 // Function to check cookies and update CSS
 function checkCookiesAndUpdateCSS() {
   //console.log("hello");
@@ -78,6 +56,72 @@ function checkCookiesAndUpdateCSS() {
         menu.style.display = "none";
       });
     });
+
+    let idGame;
+    function getCookie() {
+      var cookiesArray = document.cookie.split(";");
+
+      for (var i = 0; i < cookiesArray.length; i++) {
+        if (cookiesArray[i].includes("l_i=gameId=")) {
+          var startIndex = cookiesArray[i].indexOf("id=") + 3;
+          var endIndex = cookiesArray[i].length;
+          idGame = cookiesArray[i].substring(startIndex, endIndex);
+          break;
+        } else if (cookiesArray[i].trim().startsWith("l_i")) {
+          var valAr = cookiesArray[i].split("=");
+          var cutval = decodeURIComponent(valAr[1]);
+          const cArr = cutval.split("=");
+          idGame = cArr[cArr.length - 1];
+        }
+      }
+    }
+
+    window.onload = getCookie();
+
+    const userDetail = {};
+    fetch("https://slotsparadise.com/common/getinfo?id=1&gameId=" + idGame, {
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then((json) => {
+        Object.entries(json).forEach((entry) => {
+          const [key, value] = entry;
+          userDetail[key] = value;
+        });
+      });
+
+    document.getElementById("userLast").innerHTML =
+      userDetail.FirstName + " " + userDetail.LastName;
+    document.getElementById("userFirst").innerHTML = userDetail.UserName;
+    document.getElementById("userId").innerHTML = idGame;
+
+    document.getElementById("userWagered").innerHTML = userDetail.PlayedBalance;
+
+    document.getElementById("notWagered").innerHTML =
+      userDetail.NotPlayedBalance;
+
+    document.getElementById("playBalance").innerHTML = userDetail.Balance;
+
+    document.getElementById("withBalance").innerHTML = userDetail.Withdrawable;
+    document.getElementById("usd-btn").innerHTML = userDetail.Balance;
+
+    /***Mobile****/
+
+    document.getElementById("userLastm").innerHTML =
+      userDetail.FirstName + " " + userDetail.LastName;
+    document.getElementById("userFirstm").innerHTML = userDetail.UserName;
+
+    document.getElementById("userIdm").innerHTML = idGame;
+
+    document.getElementById("userWageredm").innerHTML =
+      userDetail.PlayedBalance;
+
+    document.getElementById("notWageredm").innerHTML =
+      userDetail.NotPlayedBalance;
+
+    document.getElementById("playBalancem").innerHTML = userDetail.Balance;
+
+    document.getElementById("withBalancem").innerHTML = userDetail.Withdrawable;
   }
 }
 
