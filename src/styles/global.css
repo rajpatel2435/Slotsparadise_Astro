@@ -636,11 +636,6 @@ a.bpress-viewall {
 .Menu--users {
    min-width: 100% !important;
 } */
-
-  .Menu--users {
-    min-width: 80% !important;
-    top: 0 !important;
-  }
 }
 
 @media screen and (max-width: 980px) {
