@@ -1,7 +1,29 @@
 DirectoryIndex
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^img/(.*)$ /game-img/$1 [L]
+    RewriteRule ^(.+)\.(xml|xsl)$ /$1.$2 [L]
+    #RewriteRule ^the-beach/images/(.*)$ /wp-content/uploads/$1 [L]
+</IfModule>
+
 RewriteEngine On
 RewriteBase /
-#Yoast sitemap redirect
+
+# Yoast sitemap redirect
+
 RewriteRule ^(.+)\.(xml|xsl)$ https://%{HTTP_HOST}/$1.$2 [R=301,NC,L]
+
+# Specific redirect rules
+
+RewriteRule ^wp-json/(._) https://%{HTTP_HOST}/wp-json/$1 [R=301,NC,L]
+RewriteRule ^wp-json/wp/(._) https://%{HTTP_HOST}/wp-json/wp/$1 [R=301,NC,L]
+RewriteRule ^wp-json/wp/(.\*) https://%{HTTP_HOST}/wp-json/wp/v2/$1 [R=301,NC,L]
+
+# Restart service
+
 RewriteCond %{REQUEST_URI} !^/the-beach/restart_server\.php$
-RewriteRule ^(.*)?$ http://127.0.0.1:4321/$1 [P,L]
+
+# Reverse Proxy
+
+RewriteRule ^(.\*)?$ http://127.0.0.1:4321/$1 [P,L]
