@@ -200,7 +200,7 @@ import { Icon } from "astro-icon";
 
     <!-- Trigger/Open The Modal -->
     <!-- The Modal -->
-    <div id="myModal" class="modal block absolute">
+    <div id="myModal" class="modal block absolute sm:hidden">
       <!-- Modal content -->
       <div class="modal-content">
         <div class="modal-header">
@@ -278,6 +278,56 @@ import { Icon } from "astro-icon";
         </div>
       </div>
     </div>
+
+    
+    <div id="myModal" class="modal absolute hidden sm:block">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <div class="modal-header">
+          <span class="close"></span>
+        </div>
+        <div class="Menu--users menu-mobile-hide">
+<ul>
+<li class="pl-name_lastname" id="userLast"></li>
+<li class="pl-username" id="userFirst"></li>
+<li class="pl-id" id="userId"></li>
+<li>
+<div class="wagerd_balance">
+Wagered
+<span class="Played--Balane" id="userWagered"> </span>
+</div>
+<div class="not_wagered_balance">
+Not Wagered
+<span class="Not--Played--Balance" id="notWagered"> </span>
+</div>
+<div class="play_balance">
+Play Balance
+<span class="Play--Balance" id="playBalance">
+
+</span>
+</div>
+<div class="withdrawable_balance">
+Withdrawable
+<span class="Withdrawable" id="withBalance"> </span>
+</div>
+</li>
+<li class="pl-profile"><a href="https://slotsstg.wpengine.com/?h=profile&r=profile"><i class="las la-user"></i>Profile</a></li>
+<li class="pl-wallet"><a href="https://slotsstg.wpengine.com/?h=profile&r=wallet"><i class="las la-wallet"></i>Wallet</a></li>
+<li class="pl-deposit"><a href="https://slotsstg.wpengine.com/?h=profile&r=deposit"><i class="las la-angle-down"></i>Deposit</a></li>
+<li class="pl-withdraw"><a href="https://slotsstg.wpengine.com/?h=profile&r=withdrawal"><i class="las la-angle-up"></i>Withdraw</a></li>
+<li class="pl-messages"><a href="https://slotsstg.wpengine.com/?h=profile&r=messages"><i class="las la-envelope"></i>Messages</a></li>
+  
+<li class="pl-history"><a href="https://slotsstg.wpengine.com/?h=profile&r=history"><i class="las la-history"></i>History</a></li>
+  
+<li class="pl-promotions"><a href="https://slotsstg.wpengine.com/?h=profile&r=promotions"><i class="las la-rocket"></i>Promotions</a></li>
+<li class="change_pass"><a href="https://slotsstg.wpengine.com/?h=change-password"><i class="las la-key"></i>Change Password</a></li>
+<li class="sign_out"><a href="/account/logout"><i class="las la-sign-out-alt"></i>Sign Out</a></li>
+</ul>
+</div>
+      </div>
+    </div>
+
+
   </div>
 </div>
 
