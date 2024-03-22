@@ -89,7 +89,7 @@ function checkCookiesAndUpdateCSS() {
           userDetail[key] = value;
         });
 
-        document.getElementById("userLast").innerHTML =
+        /* document.getElementById("userLast").innerHTML =
           userDetail.FirstName + " " + userDetail.LastName;
         document.getElementById("userFirst").innerHTML = userDetail.UserName;
         document.getElementById("userId").innerHTML = idGame;
@@ -104,7 +104,7 @@ function checkCookiesAndUpdateCSS() {
 
         document.getElementById("withBalance").innerHTML =
           userDetail.Withdrawable;
-        document.getElementById("usd-btn").innerHTML = userDetail.Balance;
+        document.getElementById("usd-btn").innerHTML = userDetail.Balance; */
 
         /***Mobile****/
 
