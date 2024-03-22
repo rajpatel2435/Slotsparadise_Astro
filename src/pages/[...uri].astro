@@ -78,7 +78,7 @@ function resolveContentTemplate(node) {
 const Template = resolveContentTemplate(node);
 ---
 
-<Layout title={node.title || node.name}>
+<Layout title={node.seo.title || node.title || node.name}>
   <main>
     <Template node={node} />
   </main>
