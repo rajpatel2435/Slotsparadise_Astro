@@ -581,6 +581,11 @@ a.bpress-viewall {
 }
 
 @media screen and (max-width: 768px) {
+  .Menu--users {
+    min-width: 90% !important;
+    top: 10px;
+  }
+
   .Menu--users ul {
     padding-left: 0;
   }
@@ -654,10 +659,12 @@ a.bpress-viewall {
     margin-left: 20px;
     margin-right: 20px;
   }
+  /*
   .logo-img {
     margin-left: 30px !important;
-  }
-  .header-row .et_pb_column {
+  } */
+
+  /*.header-row .et_pb_column {
     width: 48% !important;
     margin-bottom: 0;
   }
@@ -670,7 +677,7 @@ a.bpress-viewall {
   .inner-page-img {
     position: relative !important;
     top: 0 !important;
-  }
+  } */
 }
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
@@ -1233,149 +1240,10 @@ span.rvs_total {
   order: 8;
 }
 
-/* .a2a_button_facebook {
-    background-image: url('https://slotsstg.wpengine.com/wp-content/themes/slotsparadise/images/facebook.svg');
-    width: 26px;
-    display: block;
-    height: 22px;
-    background-repeat: no-repeat;
-}
-
-.a2a_button_twitter {
-    background-image: url('https://slotsstg.wpengine.com/wp-content/themes/slotsparadise/images/twitter.svg');
-    width: 26px;
-    display: block;
-    height: 22px;
-    background-repeat: no-repeat;
-}
-
-.a2a_dd {
-    background-image: url('https://slotsstg.wpengine.com/wp-content/themes/slotsparadise/images/plus-2.png');
-    background-position: center;
-    display: block;
-    width: 22px;
-    height: 22px;
-    background-repeat: no-repeat;
-    background-color: rgb(1, 102, 255);
-    border-radius: 4px;
-} */
-
-/* li.relted-games {
-    list-style: none;
-    display: inline-block;
-    margin-right: 1%;
-    width: 18%;
-}
-img.games-img {
-    display: block;
-}
-a.post-link {
-    color: #2F0536;
-    font-weight: bold;
-}
-.dtwd_related-posts h4 {
-    color: #FF93AA;
-    font-size: 36px;
-	position: relative;
-} */
-
-/* li.relted-games img {
-    border-radius: 8px;
-    box-shadow: rgb(149 157 165 / 20%) 0px 8px 24px;
-} */
-/* knowledge base hiding the tp image */
-
 .single-knowledgebase figure.wp-block-image.size-large {
   display: none;
 }
 
-/** new game hub page **/
-
-/* .game-review-carousel-row .game-hub-heading {
-	margin-bottom:0 !important;
-	padding-left: 10px;
-    padding-right: 10px;
-}
-.game-review-carousel-row .game-hub-heading div{
-	display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-.game-review-carousel-row .home-game-reviews .article_container {
-	padding: 0 10px;
-}
-.game-review-carousel-row .game-hub-heading a{
-	color: #1C8FDF !important;
-}
-.game-review-carousel-row .game-hub-heading .img-heading img {
-	width: 40px;
-	padding-right: 5px;
-}
-.home-game-reviews div .new-game-article {
-	min-width: 361px;
-	margin: 1px 10px 0 1px;
-	overflow: hidden;
-	background: #FFFFFF 0% 0% no-repeat padding-box;
-	box-shadow: 0px 4px 7px #0000001A;
-	border: 1px solid #EAEAEA;
-	border-radius: 0px 0px 5px 5px;
-	opacity: 1;
-}
-.new-game-article .art-content-game .art-heading {
-	display: flex;
-    justify-content: space-between;
-    width: 95%;
-    margin: auto;
-    align-items: flex-start;
-}
-.art-heading .entry-title a {
-	text-align: left;	
-	font-size: 16px;
-	font-weight: bold;
-	letter-spacing: 0px;
-	color: #2F0536;
-}
-.new-game-article .gamehub-img {
-	height: 228px;
-}
-.new-game-article .art-content-game .art-heading .entry-title{
-	width: 85%;
-	overflow: hidden;
-}
-.new-game-article .art-content-game .art-heading h4.entry-title{
-	margin-bottom: 0;
-	padding-bottom: 0;
-}
-.art-rating, .provider-block {
-	width: 95%;
-	margin: auto;
-}
-.art-rating p, .provider-block p{
-	display: inline-block;
-	color: #2F0536;
-	font-size: 14px;
-	padding-bottom: 0;
-}
-.art-rating .rate-title, .provider-block .provider-title {
-	width: 70px;
-}
-.art-content-game {
-	padding-top: 15px;
-	padding-bottom: 15px;
-} */
-/* .gamehub-last-section .last-section-row {
-	max-width: 550px;
-}
-.gamehub-last-section .last-section-row .last-section-text {
-	background: #FFFFFF 0% 0% no-repeat padding-box;
-	box-shadow: 0px 10px 20px #00000064;
-	border: 12px solid #EFEFEF;
-	border-radius: 16px;
-	padding: 40px 55px;
-} */
-/* .page-id-6377 footer.et-l.et-l--footer {
-	padding-top: 0px;
-} */
 @media (min-width: 1800px) {
   .gamehub-last-section {
     padding: 150px 0 !important;
