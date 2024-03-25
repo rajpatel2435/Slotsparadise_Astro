@@ -509,6 +509,124 @@ a.bpress-viewall {
 
 /********** Casino guides *********/
 
+/* Medium devices (landscape tablets, 768px and up) */
+/* @media only screen and (min-width: 768px) {
+  #myModal {
+    display: none;
+  }
+} */
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .footer-div h4 {
+    font-size: 28px !important;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  #slide-in-open {
+    margin-left: 12px !important;
+    width: 26px !important;
+  }
+  .games-content,
+  .dtwd_related-posts,
+  .inner-page-img,
+  .gameinfo {
+    padding: 0 20px;
+  }
+  .char-table {
+    margin-top: 14% !important;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  /*
+  .logo-img {
+    margin-left: 30px !important;
+  } */
+
+  /*.header-row .et_pb_column {
+    width: 48% !important;
+    margin-bottom: 0;
+  }
+  .footer-col-menu .et_mobile_nav_menu {
+    display: none;
+  }
+  .footer-col-menu .et_pb_menu__wrap {
+    display: inline;
+  }
+  .inner-page-img {
+    position: relative !important;
+    top: 0 !important;
+  } */
+}
+
+@media screen and (max-width: 768px) {
+  .Menu--users {
+    min-width: 90% !important;
+    top: 10px;
+  }
+
+  .Menu--users ul {
+    padding-left: 0;
+  }
+  .Menu--users ul .pl-name_lastname {
+    max-width: 100% !important;
+    margin: 0 0 0px !important;
+    text-align: left !important;
+    padding-left: 20px;
+    border: 2px solid #ffa3b6 !important;
+    padding-top: 20px;
+  }
+  .Menu--users ul .pl-username {
+    grid-area: nl !important;
+    margin-top: 45px !important;
+    padding-left: 20px;
+  }
+  .Menu--users ul .pl-id {
+    grid-area: nl !important;
+    margin-top: 70px !important;
+    padding-left: 20px;
+  }
+  .Menu--users ul li:nth-child(4) {
+    grid-area: us !important;
+    padding-left: 20px !important;
+  }
+  .Menu--users ul li:nth-child(4)::before,
+  .Menu--users ul li:nth-child(4)::after {
+    display: none !important;
+  }
+
+  .menu-mobile-hide {
+    display: none !important;
+  }
+
+  #myModal {
+    display: none;
+  }
+
+  /* .dep-btn{display: none !important;}	
+.usd-btn {
+    font-size: 18px;
+    padding-right: 1em !important;
+	border:none !important;
+}
+.usd-btn:active, .usd-btn:hover, .usd-btn:focus, .usd-btn:visited{
+	border:none !important;
+} */
+  /* .usd-btn:after {
+    content: '';
+    background-image: url(/content/img/design/icons/female.svg);
+    background-size: 100%;
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+    background-repeat: no-repeat;
+}
+.Menu--users {
+   min-width: 100% !important;
+} */
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media screen and (max-width: 600px) {
   /* .dep-btn
@@ -577,131 +695,6 @@ a.bpress-viewall {
 
   .page-title h1 {
     font-size: 18px;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .Menu--users {
-    min-width: 90% !important;
-    top: 10px;
-  }
-
-  .Menu--users ul {
-    padding-left: 0;
-  }
-  .Menu--users ul .pl-name_lastname {
-    max-width: 100% !important;
-    margin: 0 0 0px !important;
-    text-align: left !important;
-    padding-left: 20px;
-    border: 2px solid #ffa3b6 !important;
-    padding-top: 20px;
-  }
-  .Menu--users ul .pl-username {
-    grid-area: nl !important;
-    margin-top: 45px !important;
-    padding-left: 20px;
-  }
-  .Menu--users ul .pl-id {
-    grid-area: nl !important;
-    margin-top: 70px !important;
-    padding-left: 20px;
-  }
-  .Menu--users ul li:nth-child(4) {
-    grid-area: us !important;
-    padding-left: 20px !important;
-  }
-  .Menu--users ul li:nth-child(4)::before,
-  .Menu--users ul li:nth-child(4)::after {
-    display: none !important;
-  }
-
-  .menu-mobile-hide {
-    display: none !important;
-  }
-
-  /* .dep-btn{display: none !important;}	
-.usd-btn {
-    font-size: 18px;
-    padding-right: 1em !important;
-	border:none !important;
-}
-.usd-btn:active, .usd-btn:hover, .usd-btn:focus, .usd-btn:visited{
-	border:none !important;
-} */
-  /* .usd-btn:after {
-    content: '';
-    background-image: url(/content/img/design/icons/female.svg);
-    background-size: 100%;
-    width: 35px;
-    height: 35px;
-    display: inline-block;
-    background-repeat: no-repeat;
-}
-.Menu--users {
-   min-width: 100% !important;
-} */
-}
-
-@media screen and (max-width: 980px) {
-  #slide-in-open {
-    margin-left: 12px !important;
-    width: 26px !important;
-  }
-  .games-content,
-  .dtwd_related-posts,
-  .inner-page-img,
-  .gameinfo {
-    padding: 0 20px;
-  }
-  .char-table {
-    margin-top: 14% !important;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-  /*
-  .logo-img {
-    margin-left: 30px !important;
-  } */
-
-  /*.header-row .et_pb_column {
-    width: 48% !important;
-    margin-bottom: 0;
-  }
-  .footer-col-menu .et_mobile_nav_menu {
-    display: none;
-  }
-  .footer-col-menu .et_pb_menu__wrap {
-    display: inline;
-  }
-  .inner-page-img {
-    position: relative !important;
-    top: 0 !important;
-  } */
-}
-/* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {
-}
-
-/* Medium devices (landscape tablets, 768px and up) */
-@media only screen and (min-width: 768px) {
-  #myModal {
-    display: none;
-  }
-}
-
-/* Large devices (laptops/desktops, 992px and up) */
-@media only screen and (min-width: 992px) {
-  .footer-div h4 {
-    font-size: 22px !important;
-    white-space: nowrap;
-  }
-}
-
-/* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {
-  .footer-div h4 {
-    font-size: 28px !important;
   }
 }
 
