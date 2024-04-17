@@ -2,19 +2,21 @@ pipelines:
   branches:
     master:
       - step:
-          name: Get repository latest changes
+          name: Build assets
+          image: node:20.11.1
           script:
-            # Clone the repository onto the server
-            - git clone git@bitbucket.org:pacific-wp/astro-theme.git
-            - git checkout master
+            # Install dependencies and build assets
+            - npm install
+            - npm run build
+            # Save build assets as an artifact
           artifacts:
-            # Save repositories code
-            - ./astro-theme
+            - dist/**
+            - node_modules/**
       - step:
-          name: Deploy to Production
+          name: Rsync to production server and notify Mattermost
           script:
-            # SSH into the server and remove the existing folder
-            # - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "rm -rf applications/szkhyquxps/public_html/the-beach && mkdir applications/szkhyquxps/public_html/the-beach"
+            # Stop the lobby process to commit changes
+            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "pm2 stop beach"
 
             # Update the remote with rsync
             - rsync -zrSlh --stats ./* $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach
@@ -22,17 +24,8 @@ pipelines:
             # Copy .htaccess file to the server
             - scp .htaccess $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach/
 
-            # Make the ./restart_server.sh executable
-            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "chmod +x applications/szkhyquxps/public_html/the-beach/restart_server.sh"
-
-            # Check if the server is running before stopping it
-            - |
-              if ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER 'lsof -i :4321'; then
-                ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER 'kill -9 $(lsof -t -i:4321)'
-              fi
-
-            # Build the project on the server > /dev/null 2>&1 &
-            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "cd applications/szkhyquxps/public_html/the-beach && npm install && npm run build && php restart_server.php"
+            # Stop the lobby process to commit changes
+            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "pm2 start beach"
 
             # Send message to MatterMost
             - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
