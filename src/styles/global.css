@@ -1582,34 +1582,34 @@ h4.wp-block-heading {
   overflow: hidden;
 }
 
-.casino_news_blocks .thumb_img {
+.casino_news_blocks .right_block .thumb_img {
   width: 40%;
 }
 
-.casino_news_right_block .thumb_container {
+.casino_news_blocks .right_block .thumb_container {
   width: 55%;
 }
 
-.casino_news_right_block img {
+.casino_news_blocks .right_block img {
   border-radius: 8px;
   height: 160px;
   object-fit: cover;
 }
 
-.casino_news_right_block h3 {
+.casino_news_blocks .right_block h3 {
   color: #6a6c6e;
   line-height: 1.1;
   font-family: "Gilroy-Bold";
 }
 
-.casino_news_right_block p {
+.casino_news_blocks .right_block p {
   color: #2f0536;
   font-family: "Gilroy-Regular";
   font-weight: 600;
   margin-top: 8px;
 }
 
-.casino_news_right_block .right_block {
+.casino_news_blocks .right_block .right_block {
   display: flex;
   flex-direction: column;
   gap: 16px;
