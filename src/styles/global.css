@@ -1565,3 +1565,52 @@ input[type="text"].bpress-search-field {
 h4.wp-block-heading {
   font-family: "Gilroy-ExtraBold";
 }
+
+.custom-date:before {
+  content: url("https://slotsparadise.com/wp-content/uploads/2022/03/Group-4377.png");
+}
+
+.casino_news_image img {
+  border-radius: 8px;
+  box-shadow: 0px 2px 18px 0px rgb(0 0 0 / 30%);
+}
+
+.casino_news_blocks .post-excerpt {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.casino_news_blocks .thumb_img {
+  width: 40%;
+}
+
+.casino_news_right_block .thumb_container {
+  width: 55%;
+}
+
+.casino_news_right_block img {
+  border-radius: 8px;
+  height: 160px;
+  object-fit: cover;
+}
+
+.casino_news_right_block h3 {
+  color: #6a6c6e;
+  line-height: 1.1;
+  font-family: "Gilroy-Bold";
+}
+
+.casino_news_right_block p {
+  color: #2f0536;
+  font-family: "Gilroy-Regular";
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.casino_news_right_block .right_block {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

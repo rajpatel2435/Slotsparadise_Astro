@@ -1,33 +1,7 @@
 ---
-import { Image } from "astro:assets";
 import SidebarArticles from "../SidebarArticles.astro";
-import { wpquery } from "../../data/wordpress";
-import { formatDate } from "../../scripts/utils.js";
+import { ADMIN_AJAX_ENDPOINT } from "../../data/endpoints";
 
-const data = await wpquery({
-  query: `
-  query CasinoNewsHome {
-  posts(where: {categoryId: 9}, first: 4) {
-    edges {
-      node {
-        link
-        uri
-        title
-        excerpt
-        date
-        featuredImage {
-          node {
-            sourceUrl
-          }
-        }
-      }
-    }
-  }
-}
-  `,
-});
-
-//console.log(data.posts.edges);
 ---
 
 <section
@@ -39,42 +13,35 @@ const data = await wpquery({
     </h2>
   </div>
 
-  <div class="casino_news_blocks grid grid-cols-5 gap-12">
-    <div class="casino_news_left_block col-span-5 md:col-span-3">
-      {
-        data.posts.edges.slice(0, 1).map((post: any) => (
-          <div class="left_block">
-            <article class="">
-              <a class="mb-5" href={`/the-beach${post.node.uri}`}>
-                {post.node.featuredImage?.node ? (
-                  <Image
-                    class="shadow-casinoBlock rounded-lg"
-                    width="825"
-                    height="460"
-                    alt={post.node.title}
-                    title={post.node.title}
-                    src={post.node.featuredImage?.node?.sourceUrl}
-                  />
-                ) : null}
-              </a>
+<div class="casino_news_blocks grid grid-cols-5 gap-12">
+    <div id="casino_news_container" class="casino_news_left_block col-span-5 md:col-span-3">
 
-              <h3 class="text-3xl py-3 font-giloryBold text-[#ff688b]">
-                <a href={`/the-beach${post.node.uri}`}>{post.node.title}</a>
-              </h3>
-              <p class="text-[#491957] py-2 before:content-[url('https://slotsparadise.com/wp-content/uploads/2022/03/Group-4377.png')] flex gap-2 before:inline-block before:h-full before:w-4 items-center font-medium">
-                {formatDate(post.node.date)}
-              </p>
-              <div class="text-[#2f0536] font-giloryRegular font-semibold">
-                <a
-                  class="font-giloryRegular line-clamp-2"
-                  href={`/the-beach${post.node.uri}`}
-                  set:html={post.node.excerpt}
-                />
-              </div>
-            </article>
-          </div>
-        ))
-      }
+<script define:vars={{ ADMIN_AJAX_ENDPOINT }}>
+    document.addEventListener("DOMContentLoaded", function () {
+      const ajaxurl = ADMIN_AJAX_ENDPOINT;
+
+      // Make the AJAX request
+      fetch(ajaxurl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        },
+        body: "action=get_latest_post_from_category",
+      })
+        .then((response) => response.text())
+        .then((data) => {
+          // Update the content of the container with the sanitized result
+          document.getElementById("casino_news_container").innerHTML = data;
+        })
+        .catch((error) => {
+          // Handle fetch errors
+          console.error("Fetch error:", error);
+        });
+    });
+
+</script>
+
+     
     </div>
 
     <div

@@ -1,61 +1,31 @@
 ---
-import { Image } from "astro:assets";
-import { wpquery } from "../data/wordpress";
-
-const data = await wpquery({
-  query: `
-  query CasinoNewsHome {
-  posts(where: {categoryId: 9}, first: 4) {
-    edges {
-      node {
-        link
-        title
-        excerpt
-        date
-        uri
-        featuredImage {
-          node {
-            sourceUrl
-          }
-        }
-      }
-    }
-  }
-}
-  `,
-});
+import { ADMIN_AJAX_ENDPOINT } from "../data/endpoints";
 ---
 
-{
-  data.posts.edges.slice(1, 4).map((post: any) => (
-    <div class="right_block">
-      <article class=" flex items-center justify-between border-b pb-4">
-        <a
-          class="block w-[40%] h-40 rounded-lg overflow-hidden"
-          href={`/the-beach${post.node.uri}`}
-        >
-          <Image
-            class="w-full h-40 object-cover shadow-casinoNews"
-            width="214"
-            height="160"
-            alt={post.node.title}
-            title={post.node.title}
-            src={post.node.featuredImage?.node?.sourceUrl}
-          />
-        </a>
-        <div class="w-[55%]">
-          <h3 class="text-[#6A6C6E] font-giloryBold text-xl leading-[1.1]">
-            <a href={`/the-beach${post.node.uri}`}>{post.node.title}</a>
-          </h3>
-          <div class="line-clamp-3 mt-2">
-            <a
-              class="text-[#2F0536] font-giloryRegular text-base font-semibold"
-              href={`/the-beach${post.node.uri}`}
-              set:html={post.node.excerpt}
-            />
-          </div>
-        </div>
-      </article>
-    </div>
-  ))
-}
+<div id="sidebar_content_blocks">
+
+</div>
+<script define:vars={{ ADMIN_AJAX_ENDPOINT }}>
+    document.addEventListener("DOMContentLoaded", function () {
+      const ajaxurl = ADMIN_AJAX_ENDPOINT;
+
+      // Make the AJAX request
+      fetch(ajaxurl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+        },
+        body: "action=get_latest_three_posts_from_category",
+      })
+        .then((response) => response.text())
+        .then((data) => {
+          // Update the content of the container with the sanitized result
+          document.getElementById("sidebar_content_blocks").innerHTML = data;
+        })
+        .catch((error) => {
+          // Handle fetch errors
+          console.error("Fetch error:", error);
+        });
+    });
+
+</script>
