@@ -1609,7 +1609,7 @@ h4.wp-block-heading {
   margin-top: 8px;
 }
 
-.casino_news_blocks .right_block .right_block {
+.casino_news_blocks .right_block {
   display: flex;
   flex-direction: column;
   gap: 16px;
