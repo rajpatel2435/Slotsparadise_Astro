@@ -1614,3 +1614,9 @@ h4.wp-block-heading {
   flex-direction: column;
   gap: 16px;
 }
+
+@media only screen and (orientation: horizontal) {
+  .mob_screen_horizontal {
+    height: 750px;
+  }
+}
