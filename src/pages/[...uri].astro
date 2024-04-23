@@ -30,6 +30,12 @@ export async function getStaticPaths() {
 
 function resolveContentTemplate(node) {
   let template;
+  if (!node) {
+    // Return 404 status code if node is null
+    Astro.response.status = 404;
+    Astro.response.statusText = "Not found";
+    template = Archive;
+  } else {
   switch (node.__typename) {
     case "Post":
       // Check if the uri includes the word "news"
@@ -70,15 +76,17 @@ function resolveContentTemplate(node) {
     default:
       template = Single;
   }
-
+}
   return template;
 }
 
 const Template = resolveContentTemplate(node);
 ---
 
-<Layout title={node.seo.title || node.title || node.name}>
+
+<Layout title={node ? node.title || node.name : "Page Not Found"}>
   <main>
     <Template node={node} />
   </main>
 </Layout>
+
