@@ -20,6 +20,12 @@ const breadcrumb = generateBreadcrumbs(node.uri);
 
       <div class="post-bread font-semibold">
         <div class="capitalize" set:html={breadcrumb} />
+         <div
+      class="font-semibold text-[#ff688b] text-[18px] mt-4"
+      id="edit-post-link"
+      data-astro-node-id={node.id}
+    >
+    </div>
       </div>
     </div>
   </div>
@@ -96,3 +102,27 @@ const breadcrumb = generateBreadcrumbs(node.uri);
     margin-left: 20px;
   }
 </style>
+
+
+<script is:inline>
+  function getLoggedInCookie(postID) {
+    postID = postID.replace(/^post:/, "");
+    const cookie = document.cookie.indexOf("wp-settings-time") !== -1;
+    let anchor = "";
+    if (cookie) {
+      anchor = `<a href="https://slotsparadise.com/wp-admin/post.php?post=${postID}&action=edit">Edit post</a>`;
+    }
+    return anchor;
+  }
+  document.addEventListener("DOMContentLoaded", function (event) {
+    const editPostLink = getLoggedInCookie(
+      atob(
+        document
+          .getElementById("edit-post-link")
+          .getAttribute("data-astro-node-id"),
+      ),
+    );
+    document.getElementById("edit-post-link").innerHTML = editPostLink;
+    console.log("EDIT POST LINK", editPostLink);
+  });
+</script>
