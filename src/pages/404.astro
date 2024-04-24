@@ -1,11 +1,16 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import notFoundDesk from "../assets/images/page_not_found.webp"
+import notFoundMob from "../assets/images/page_not_found_md.webp";
+//console.log(notFoundDesk);
 ---
 
 <Layout title="404 error">
-  <div class=" mt-[70px]">
-    <a href="/" class="block h-screen bg-[url('https://slotsparadise.com/content//img/banners/page_not_found_md.webp')] md:bg-[url('https://slotsparadise.com/content//img/banners/page_not_found.webp')] bg-cover bg-no-repeat"></a>
-    <!-- <h1 class="text-[#ff688b] text-4xl font-bold font-giloryExtrabold">No Result Found</h1>
-  <p class="text-base font-giloryRegular font-semibold">The page you requested could not be found. Try refining your search, or use the navigation above to locate the post.</p> -->
-  </div> 
+  <div class=" mt-52 md:mt-48">
+<!--     <a href="/" class="block h-screen" style={`background-image: url(${notFoundDesk.src}); background-position: center; background-size: cover; background-repeat: no-repeat;`}></a>
+ -->  
+<a href="/" class="hidden lg:block"><img src={notFoundDesk.src} width={notFoundDesk.width} height={notFoundDesk.height} alt="404 page" class="w-screen h-screen object-cover"/> </a>
+<a href="/" class="block lg:hidden"><img src={notFoundMob.src} width={notFoundMob.width} height={notFoundMob.height} alt="404 page" class="w-screen h-screen object-cover"/> </a>
+
+</div> 
 </Layout>
