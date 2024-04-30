@@ -1605,3 +1605,7 @@ h4.wp-block-heading {
   flex-direction: column;
   gap: 16px;
 }
+
+.casino_single_container .single_article p {
+  margin-bottom: 16px;
+}
