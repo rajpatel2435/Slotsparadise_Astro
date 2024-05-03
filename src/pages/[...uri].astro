@@ -19,11 +19,59 @@ const node = data.nodeByUri;
 //const slug = node.slug || null; // Replace null with a default value if needed
 // Now you have both uri and slug available
 //console.log("Slug:", slug);
- //console.log("URI:", uri);
- 
+//console.log("URI:", uri);
 
 //console.log(node.__typename);
+//Redirects
+import { cache } from "../cacheUtils.js";
 
+const requestedPath = "/the-beach" + new URL(Astro.request.url).pathname;
+console.log("RequestedPath = ", requestedPath);
+
+const credentials =
+  "bmthaXJvQHBhY2lmaWNkZXYuY29tOlFBNzMgMG5nbCBjSVM0IHV5U20gQnRlOCBvUjJR";
+let cachedRedirects = cache.get("redirectCache");
+console.log(cache.getStats());
+try {
+  if (!cachedRedirects) {
+    console.log("Fetching redirects");
+    const response = await fetch(
+      "https://slotsparadise.com/wp-json/redirection/v1/export/all/json",
+      {
+        headers: {
+          Authorization: `Basic ${credentials}`, // Set Authorization header
+        },
+      },
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to fetch redirects data");
+    }
+
+    const responseData = await response.json();
+    cachedRedirects = JSON.parse(responseData.data);
+    cache.set("redirectCache", cachedRedirects, 3600);
+  }
+
+  const redirect = cachedRedirects.redirects.find(
+    (item) => item.url === requestedPath,
+  );
+
+  if (redirect && redirect.enabled) {
+    return Astro.redirect(redirect.action_data.url, 301);
+  } else {
+    console.log(
+      redirect
+        ? "Redirect rule is not enabled for the requested path:"
+        : "No redirection found for the requested path:",
+      requestedPath,
+    );
+  }
+} catch (error) {
+  console.error("Error fetching redirects data:", error);
+}
+
+//END Redirects
 export async function getStaticPaths() {
   return await getAllUris();
 }
@@ -31,53 +79,53 @@ export async function getStaticPaths() {
 function resolveContentTemplate(node) {
   let template;
 
-   if (!node) {
+  if (!node) {
     // Return 404 status code if node is null
     Astro.response.status = 404;
     Astro.response.statusText = "Not found";
     template = Archive;
   } else {
-  switch (node.__typename) {
-    case "Post":
-      // Check if the uri includes the word "news"
-      if (uri.includes("news")) {
-        template = SingleNewsArticle;
-      } else {
-        template = SingleGamePage;
-      }
-      break;
+    switch (node.__typename) {
+      case "Post":
+        // Check if the uri includes the word "news"
+        if (uri.includes("news")) {
+          template = SingleNewsArticle;
+        } else {
+          template = SingleGamePage;
+        }
+        break;
 
-    case "Category":
-      if (uri.includes("news")) {
-        template = NewsArchiveCategory;
-      } else {
+      case "Category":
+        if (uri.includes("news")) {
+          template = NewsArchiveCategory;
+        } else {
+          template = Archive;
+        }
+        break;
+
+      case "Page":
+        if (uri.includes("casino-school")) {
+          template = SingleCasinoSchool;
+        } else {
+          template = Single;
+        }
+        break;
+
+      case "Basepress":
+        template = SingleKnowledgeBase;
+        break;
+
+      case "SectionBasepress":
+        template = GuidesSectionArchive;
+        break;
+
+      case "Tag":
         template = Archive;
-      }
-      break;
-
-    case "Page":
-      if (uri.includes("casino-school")) {
-        template = SingleCasinoSchool;
-      } else {
+        break;
+      default:
         template = Single;
-      }
-      break;
-
-    case "Basepress":
-      template = SingleKnowledgeBase;
-      break;
-
-    case "SectionBasepress":
-      template = GuidesSectionArchive;
-      break;
-
-    case "Tag":
-      template = Archive;
-      break;
-    default:
-      template = Single;
+    }
   }
-}
 
   return template;
 }
