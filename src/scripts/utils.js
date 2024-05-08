@@ -52,7 +52,7 @@ export function generateBreadcrumbs(uri) {
     const text = part.replace(/-/g, " ");
 
     // Append the separator and the current part as a hyperlink to the breadcrumb trail
-    breadcrumb += ` &gt; <a href="${currentPath}">${text}</a>`;
+    breadcrumb += ` &gt; <a href="${currentPath}/">${text}</a>`;
   });
 
   return breadcrumb;
