@@ -1613,3 +1613,7 @@ h4.wp-block-heading {
 strong {
   font-family: "Gilroy-ExtraBold";
 }
+
+.bpress-sidebar div:nth-child(8) {
+  display: none;
+}
