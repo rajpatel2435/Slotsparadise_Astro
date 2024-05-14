@@ -1,0 +1,178 @@
+---
+/* export const prerender = true; */
+import Layout from "../../layouts/Layout.astro";
+import SidebarArticles from "../SidebarArticles.astro";
+// const { node } = Astro.props;
+const { postId } = Astro.props;
+---
+
+<main><div id="draft-post-content"></div></main>
+
+<script is:inline define:vars={{ postId }}>
+    const cookie = document.cookie.indexOf("wp-settings-time") !== -1;
+    const isLoggedIn = cookie;
+    if (postId && isLoggedIn) {
+        document.addEventListener("DOMContentLoaded", function () {
+            const graphqlEndpoint = "https://slotsparadise.com/wp-graphql/";
+            const username = "nkairo@pacificdev.com";
+            const password = "QA73 0ngl cIS4 uySm Bte8 oR2Q";
+
+            const authToken = btoa(`${username}:${password}`); // Encode credentials
+            const query = `query KnowledgeBaseDraftPost($id: ID!) {
+                basepress(id: $id, idType: DATABASE_ID) {
+                    title
+                    status
+                    content
+                    uri         
+                    featuredImage {
+                        node {
+                            sourceUrl
+                        }
+                    }
+                }
+            }`;
+
+            // Variables for the GraphQL query
+            const variables = {
+                id: postId,
+            };
+
+            // Make GraphQL request to fetch draft post content
+            fetch(graphqlEndpoint, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Basic ${authToken}`, // Include encoded credentials
+                },
+                body: JSON.stringify({ query, variables }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    const draftPost = data.data.basepress;
+                    if (draftPost) {
+                        // Construct edit post URL
+                        const editPostUrl = `https://slotsparadise.com/wp-admin/post.php?post=${postId}&action=edit`;
+
+                        // Displaying draft post content
+                        const draftPostContent = `
+                        <div
+                            class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/08/casino-guides-header-v23.jpg')] bg-cover bg-center h-52 flex items-center text-white font-giloryRegular"
+                            >
+                            <div class="header-content-row w-[80%] mx-auto">
+                                <div class="page-title">
+                                <h1 class="entry-title text-2xl md:text-3xl font-giloryExtrabold mb-2">
+                                    ${draftPost.title}
+                                </h1>
+                                </div>
+                                <div
+                            class="font-semibold text-[#ff688b] text-[18px] mt-4"
+                                id="edit-post-link"
+                                data-astro-node-id=${draftPost.postId}
+                                >
+                                    <a href="${editPostUrl}" target="_blank">Edit Post</a>
+                                </div>
+                            </div>
+                           
+                            
+                            </div>
+                            
+                                <div class="post-content-row max-w-[1440px] mx-auto mt-16 mb-10 px-10 xl:px-2">
+                                <div class="casino_news_blocks grid grid-cols-6 gap-12">
+                                    <div class="post-content-module col-span-6 lg:col-span-4 mx-auto lg:mx-0">
+                                    <div class="pb-10">
+                                    ${
+                                        draftPost?.featuredImage?.node
+                                            ?.sourceUrl
+                                            ? `
+                                            <img
+                                                class="featured-image rounded-lg overflow-hidden"
+                                                width="1200"
+                                                height="667"
+                                                src=${draftPost.featuredImage.node.sourceUrl}
+                                                alt=${draftPost.title}
+                                                title=${draftPost.title}
+                                            />
+                                        `
+                                            : ""
+                                    }
+                                </div>
+                                <article
+                                class="font-giloryRegular font-semibold single-news-content-article single_article"
+                                    set:html=${draftPost.content}
+                                ></article>
+
+                                </div>
+                                
+                            </div>
+                            </div>
+                        `;
+                        document.getElementById(
+                            "draft-post-content",
+                        ).innerHTML = draftPostContent;
+                    } else {
+                        console.error(
+                            "No draft post found with postId:",
+                            postId,
+                        );
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error fetching draft post content:", error);
+                });
+        });
+    } else if (!isLoggedIn) {
+        const pageNotFoundContent = `
+            <div>
+                <h1 class="text-white text-[20px]">Page not found</h1>
+                <p>The page you are looking for could not be found.</p>
+            </div>
+        `;
+        document.getElementById("draft-post-content").innerHTML =
+            pageNotFoundContent;
+    } else {
+        console.log("No Post Id");
+    }
+</script>
+
+<style is:inline>
+    .wp-block-image img {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    h2.wp-block-heading,
+    h3.wp-block-heading {
+        font-size: 26px;
+        color: #ff688b;
+        font-weight: 900;
+        font-family: "Gilroy-ExtraBold";
+        padding-bottom: 10px;
+        margin-top: 15px;
+    }
+
+    h3.wp-block-heading {
+        font-size: 24px;
+        margin-top: 15px;
+    }
+
+    h4.wp-block-heading {
+        font-size: 22px;
+        margin-top: 15px;
+    }
+
+    .post-content-module p {
+        padding-bottom: 16px;
+    }
+
+    .related_topics ul {
+        padding: 5px !important;
+        padding-left: 25px !important;
+        font-size: 18px !important;
+    }
+
+    .post-content-module .related_topics li {
+        list-style-type: disc;
+        margin-left: 20px;
+    }
+</style>

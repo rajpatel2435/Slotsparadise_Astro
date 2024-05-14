@@ -1,5 +1,5 @@
 ---
-export const prerender = true;
+// export const prerender = false;
 import Layout from "../layouts/Layout.astro";
 import HomePosts from "../components/Home/HomePosts.astro";
 import CasinoNews from "../components/Home/CasinoNews.astro";
@@ -8,159 +8,193 @@ import Promos from "../components/Home/Promos.astro";
 import Recommend from "../components/Home/Recommend.astro";
 import Reviews from "../components/Reviews.astro";
 import WhySlots from "../components/Home/WhySlots.astro";
+import Preview from "./preview.astro";
+import Knowledgebase from "./knowledgebase.astro";
+let template;
+//draft posts
+const url = Astro.request.url;
+
+// Function to extract parameter from URL
+function extractParameter(url, paramName) {
+  const searchParams = new URLSearchParams(new URL(url).search);
+
+  return searchParams.get(paramName);
+}
+
+// Detect URL structure and extract the correct parameter
+let postId;
+const previewParam = extractParameter(url, "preview");
+const pageIdParam = extractParameter(url, "page_id");
+const pParam = extractParameter(url, "p");
+
+const postTypeParam = extractParameter(url, "post_type");
+
+if (previewParam === "true" || pageIdParam) {
+  postId = extractParameter(url, "p") || extractParameter(url, "page_id");
+} else if (postTypeParam === "knowledgebase") {
+  postId = extractParameter(url, "p") || extractParameter(url, "page_id");
+}
 ---
 
-<Layout
-  title="Welcome to the Beach | Enjoy the Sun and Light of Slots Paradise"
->
-  <main>
-    <section
-      class="top_casino_section bg-[url('https://slotsparadise.com/the-beach/images/2023/03/jp-background.webp')] bg-cover py-16"
-    >
-      <div class="home-first-column max-w-[1440px] mx-auto mt-5">
-        <div class="the-beach-new-page">
-          <h1
-            class="wp-block-heading text-center text-3xl sm:text-[32px] font-bold capitalize font-giloryBlack text-[#2f0536]"
-          >
-            Top casino games to play online
-          </h1>
+{
+  (previewParam === "true" && !(postTypeParam === "knowledgebase") && pParam) ||
+  pageIdParam ? (
+    (template = <Preview postId={postId} />)
+  ) : postTypeParam === "knowledgebase" ? (
+    <Knowledgebase postId={postId} />
+  ) : (
+    <Layout title="Welcome to the Beach | Enjoy the Sun and Light of Slots Paradise">
+      <main>
+        <section class="top_casino_section bg-[url('https://slotsparadise.com/the-beach/images/2023/03/jp-background.webp')] bg-cover py-16">
+          <div class="home-first-column max-w-[1440px] mx-auto mt-5">
+            <div class="the-beach-new-page">
+              <h1 class="wp-block-heading text-center text-3xl sm:text-[32px] font-bold capitalize font-giloryBlack text-[#2f0536]">
+                Top casino games to play online
+              </h1>
 
-          <div
-            class="beach-games flex justify-center items-center sm:justify-between mt-10 flex-wrap font-giloryBold"
-          >
-            <div class="w-full sm:w-1/2 md:w-1/4 p-4">
-              <div
-                class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom bg-white"
-              >
-                <a
-                  href="https://slotsparadise.com/blackjack"
-                  aria-label="blackjack"
-                >
-                  <figure class="">
-                    <img
-                      class="w-full"
-                      width="686"
-                      height="386"
-                      src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-blackjack.webp"
-                      alt="blackjack image"
-                    />
-                  </figure></a
-                >
+              <div class="beach-games flex justify-center items-center sm:justify-between mt-10 flex-wrap font-giloryBold">
+                <div class="w-full sm:w-1/2 md:w-1/4 p-4">
+                  <div class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom bg-white">
+                    <a
+                      href="https://slotsparadise.com/blackjack"
+                      aria-label="blackjack"
+                    >
+                      <figure class="">
+                        <img
+                          class="w-full"
+                          width="686"
+                          height="386"
+                          src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-blackjack.webp"
+                          alt="blackjack image"
+                        />
+                      </figure>
+                    </a>
 
-                <h2 class="image-block-text font-semibold py-3 text-2xl">
-                  <a
-                    href="https://slotsparadise.com/blackjack"
-                    aria-label="blackjack">BlackJack</a
-                  >
-                </h2>
+                    <h2 class="image-block-text font-semibold py-3 text-2xl">
+                      <a
+                        href="https://slotsparadise.com/blackjack"
+                        aria-label="blackjack"
+                      >
+                        BlackJack
+                      </a>
+                    </h2>
+                  </div>
+                </div>
+
+                <div class="w-full sm:w-1/2 md:w-1/4 p-4">
+                  <div class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom bg-white">
+                    <a
+                      href="https://slotsparadise.com/slots"
+                      aria-label="slots"
+                    >
+                      <figure class="">
+                        <img
+                          class="w-full"
+                          width="686"
+                          height="386"
+                          src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-slots-1.webp"
+                          alt="slots image"
+                        />
+                      </figure>
+                    </a>
+
+                    <h2 class="image-block-text font-semibold py-3 text-2xl">
+                      <a
+                        href="https://slotsparadise.com/slots"
+                        aria-label="slots"
+                      >
+                        Slots
+                      </a>
+                    </h2>
+                  </div>
+                </div>
+                <div class="w-full sm:w-1/2 md:w-1/4 p-4">
+                  <div class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom bg-white">
+                    <a
+                      href="https://slotsparadise.com/roulette"
+                      aria-label="roulette"
+                    >
+                      <figure class="">
+                        <img
+                          class="w-full"
+                          width="686"
+                          height="386"
+                          src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-roulette.webp"
+                          alt="roulette image"
+                        />
+                      </figure>
+                    </a>
+
+                    <h2 class="image-block-text font-semibold py-3 text-2xl">
+                      <a
+                        href="https://slotsparadise.com/roulette"
+                        aria-label="roulette"
+                      >
+                        Roulette
+                      </a>
+                    </h2>
+                  </div>
+                </div>
+
+                <div class="w-full sm:w-1/2 md:w-1/4 p-4">
+                  <div class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom bg-white">
+                    <a
+                      href="https://slotsparadise.com/table-games/"
+                      aria-label="table games"
+                    >
+                      <figure class="">
+                        <img
+                          class="w-full"
+                          width="686"
+                          height="386"
+                          src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-baccarat.webp"
+                          alt="table games image"
+                        />
+                      </figure>
+                    </a>
+
+                    <h2 class="image-block-text font-semibold py-3 text-2xl">
+                      <a
+                        href="https://slotsparadise.com/table-games/"
+                        aria-label="table games"
+                      >
+                        Table Games
+                      </a>
+                    </h2>
+                  </div>
+                </div>
               </div>
-            </div>
 
-            <div class="w-full sm:w-1/2 md:w-1/4 p-4">
-              <div
-                class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom bg-white"
-              >
-                <a href="https://slotsparadise.com/slots" aria-label="slots">
-                  <figure class="">
-                    <img
-                      class="w-full"
-                      width="686"
-                      height="386"
-                      src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-slots-1.webp"
-                      alt="slots image"
-                    />
-                  </figure>
-                </a>
-
-                <h2 class="image-block-text font-semibold py-3 text-2xl">
-                  <a href="https://slotsparadise.com/slots" aria-label="slots"
-                    >Slots</a
-                  >
-                </h2>
-              </div>
-            </div>
-            <div class="w-full sm:w-1/2 md:w-1/4 p-4">
-              <div
-                class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom bg-white"
-              >
-                <a
-                  href="https://slotsparadise.com/roulette"
-                  aria-label="roulette"
-                >
-                  <figure class="">
-                    <img
-                      class="w-full"
-                      width="686"
-                      height="386"
-                      src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-roulette.webp"
-                      alt="roulette image"
-                    />
-                  </figure>
-                </a>
-
-                <h2 class="image-block-text font-semibold py-3 text-2xl">
+              <div class="">
+                <div class="more-casino-games-btn text-center">
                   <a
-                    href="https://slotsparadise.com/roulette"
-                    aria-label="roulette">Roulette</a
+                    href="https://slotsparadise.com/all-games"
+                    aria-label="all games"
+                    class="mt-5 bg-[#a64485] inline-block text-white font-giloryExtrabold text-lg px-10 py-2 rounded-[25px] font-semibold uppercase hover:bg-[#ff93aa] cursor-pointer transition-all"
                   >
-                </h2>
-              </div>
-            </div>
-
-            <div class="w-full sm:w-1/2 md:w-1/4 p-4">
-              <div
-                class="beach-home-game rounded-[20px] overflow-hidden text-center shadow-custom bg-white"
-              >
-                <a
-                  href="https://slotsparadise.com/table-games/"
-                  aria-label="table games"
-                >
-                  <figure class="">
-                    <img
-                      class="w-full"
-                      width="686"
-                      height="386"
-                      src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-baccarat.webp"
-                      alt="table games image"
-                    />
-                  </figure></a
-                >
-
-                <h2 class="image-block-text font-semibold py-3 text-2xl">
-                  <a
-                    href="https://slotsparadise.com/table-games/"
-                    aria-label="table games">Table Games</a
-                  >
-                </h2>
+                    More Casino Games
+                  </a>
+                </div>
               </div>
             </div>
           </div>
+        </section>
 
-          <div class="">
-            <div class="more-casino-games-btn text-center">
-              <a
-                href="https://slotsparadise.com/all-games"
-                aria-label="all games"
-                class="mt-5 bg-[#a64485] inline-block text-white font-giloryExtrabold text-lg px-10 py-2 rounded-[25px] font-semibold uppercase hover:bg-[#ff93aa] cursor-pointer transition-all"
-                >More Casino Games</a
-              >
-            </div>
+        <HomePosts />
+        <CasinoNews />
+        <OnlineCasinoGuides />
+        <div class="review_container flex flex-col lg:flex-row max-w-[1440px] mx-auto px-4">
+          <div class="w-full lg:w-[64%] mr-[5%]">
+            <WhySlots />
+          </div>
+          <div class="w-full lg:w-[31%]">
+            <Reviews />
           </div>
         </div>
-      </div>
-    </section>
 
-    <HomePosts />
-    <CasinoNews />
-    <OnlineCasinoGuides />
-    <div
-      class="review_container flex flex-col lg:flex-row max-w-[1440px] mx-auto px-4"
-    >
-      <div class="w-full lg:w-[64%] mr-[5%]"><WhySlots /></div>
-      <div class="w-full lg:w-[31%]"><Reviews /></div>
-    </div>
-
-    <Promos />
-    <Recommend />
-  </main>
-</Layout>
+        <Promos />
+        <Recommend />
+      </main>
+    </Layout>
+  )
+}
