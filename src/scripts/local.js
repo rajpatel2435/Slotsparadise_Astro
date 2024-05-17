@@ -55,7 +55,7 @@ function smoothScrollToTop() {
 
 
   window.addEventListener("load", (event) => {
-  console.log("page is fully loaded");
+  
   const swiper1 = new Swiper('.swiper1', {
   // Optional parameters
   direction: 'horizontal',

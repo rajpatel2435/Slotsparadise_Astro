@@ -25,11 +25,11 @@ const breadcrumb = generateBreadcrumbs(node.uri);
     <div class="post-bread font-semibold">
       <div class="capitalize" set:html={breadcrumb} />
       <div
-      class="font-semibold text-[#ff688b] text-[18px] mt-4"
-      id="edit-post-link"
-      data-astro-node-id={node.id}
-    >
-    </div>
+        class="font-semibold text-[#ff688b] text-[18px] mt-4"
+        id="edit-post-link"
+        data-astro-node-id={node.id}
+      >
+      </div>
     </div>
 
     <div class="casino_single_container mt-10 font-giloryRegular font-semibold">
@@ -87,6 +87,5 @@ const breadcrumb = generateBreadcrumbs(node.uri);
       ),
     );
     document.getElementById("edit-post-link").innerHTML = editPostLink;
-    console.log("EDIT POST LINK", editPostLink);
   });
 </script>

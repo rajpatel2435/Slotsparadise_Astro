@@ -30,7 +30,7 @@ const breadcrumb = generateBreadcrumbs(node.uri);
           class="entry-title text-2xl md:text-3xl font-giloryExtrabold mb-2 text-center"
         >
           Online Casino Guides
-      </p>
+        </p>
 
         <SearchWidget />
       </div>
@@ -43,12 +43,12 @@ const breadcrumb = generateBreadcrumbs(node.uri);
     <div>
       <div class="post-bread font-semibold text-[#555]">
         <div class="capitalize" set:html={breadcrumb} />
-         <div
-      class="font-semibold text-[#ff688b] text-[18px] mt-4"
-      id="edit-post-link"
-      data-astro-node-id={node.id}
-    >
-    </div>
+        <div
+          class="font-semibold text-[#ff688b] text-[18px] mt-4"
+          id="edit-post-link"
+          data-astro-node-id={node.id}
+        >
+        </div>
       </div>
 
       <div
@@ -106,7 +106,6 @@ const breadcrumb = generateBreadcrumbs(node.uri);
   });
 </script>
 
-
 <script is:inline>
   function getLoggedInCookie(postID) {
     postID = postID.replace(/^post:/, "");
@@ -126,6 +125,5 @@ const breadcrumb = generateBreadcrumbs(node.uri);
       ),
     );
     document.getElementById("edit-post-link").innerHTML = editPostLink;
-    console.log("EDIT POST LINK", editPostLink);
   });
 </script>
