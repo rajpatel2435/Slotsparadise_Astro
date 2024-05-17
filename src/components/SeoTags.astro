@@ -2,20 +2,9 @@
 import { seoNodeByURI } from '../lib/seo';
 
 // Set the URI based on whether it's the main page or a specific URI
-// Get the full URL from Astro.request.url
-const fullUrl = Astro.request.url;
+const uri = Astro.params.uri ? `/${Astro.params.uri}/` : '/';
 
-// Extract the path from the URL
-const path = new URL(fullUrl).pathname;
-
-//  URI based on the path
-let uri;
-if (path === '/') {
-  uri = '/';
-} else {
-  uri = path.endsWith('/') ? path : `${path}/`;
-}
-
+console.log(uri);
 
 const data = await seoNodeByURI(uri);
 
