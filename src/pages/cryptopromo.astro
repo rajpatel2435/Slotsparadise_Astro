@@ -2,9 +2,11 @@
 //export const prerender = true;
 import LayoutLandingPage from "../layouts/LayoutLandingPage.astro";
 import HeaderLandingPage from "../components/LandingPage/HeaderLandingPage.astro";
+import { getSeoData } from "../lib/seoUtils";
+const seo = await getSeoData(Astro);
 ---
 
-<LayoutLandingPage title="Welcome" />
+<LayoutLandingPage title={seo?.title} />
 
 <div class="main flex flex-col lg:flex-row welcome-page">
   <div class="main-header">

@@ -3,9 +3,11 @@ import FeaturedGamesSlider from "../components/CategoryArchivesComponents/Featur
 import AllGamesCategory from "../components/CategoryArchivesComponents/AllGamesCategory.astro";
 import Layout from "../layouts/Layout.astro";
 import ContentSlider from "../components/CategoryArchivesComponents/ContentSlider.astro";
+import { getSeoData } from "../lib/seoUtils";
+const seo = await getSeoData(Astro);
 ---
 
-<Layout title="Online Poker">
+<Layout title={seo?.title}>
   <div class="slots_online_page_container mt-52">
     <div
       class="header-background bg-[url('https://slotsparadise.com/the-beach/images/2023/04/online-poker-banner-mobile.webp')]

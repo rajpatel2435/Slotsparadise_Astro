@@ -10,6 +10,11 @@ import Reviews from "../components/Reviews.astro";
 import WhySlots from "../components/Home/WhySlots.astro";
 import Preview from "./preview.astro";
 import Knowledgebase from "./knowledgebase.astro";
+import { casinoImages } from "../scripts/imagesData.js";
+
+import { getSeoData } from "../lib/seoUtils";
+const seo = await getSeoData(Astro);
+
 let template;
 //draft posts
 const url = Astro.request.url;
@@ -43,7 +48,7 @@ if (previewParam === "true" || pageIdParam) {
   ) : postTypeParam === "knowledgebase" ? (
     <Knowledgebase postId={postId} />
   ) : (
-    <Layout title="Welcome to the Beach | Enjoy the Sun and Light of Slots Paradise">
+    <Layout title={seo?.title}>
       <main>
         <section class="top_casino_section bg-[url('https://slotsparadise.com/the-beach/images/2023/03/jp-background.webp')] bg-cover py-16">
           <div class="home-first-column max-w-[1440px] mx-auto mt-5">
@@ -64,7 +69,7 @@ if (previewParam === "true" || pageIdParam) {
                           class="w-full"
                           width="686"
                           height="386"
-                          src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-blackjack.webp"
+                          src={casinoImages[0].path.src}
                           alt="blackjack image"
                         />
                       </figure>
@@ -92,7 +97,7 @@ if (previewParam === "true" || pageIdParam) {
                           class="w-full"
                           width="686"
                           height="386"
-                          src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-slots-1.webp"
+                          src={casinoImages[1].path.src}
                           alt="slots image"
                         />
                       </figure>
@@ -119,7 +124,7 @@ if (previewParam === "true" || pageIdParam) {
                           class="w-full"
                           width="686"
                           height="386"
-                          src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-roulette.webp"
+                          src={casinoImages[2].path.src}
                           alt="roulette image"
                         />
                       </figure>
@@ -147,7 +152,7 @@ if (previewParam === "true" || pageIdParam) {
                           class="w-full"
                           width="686"
                           height="386"
-                          src="https://slotspressdev.wpengine.com/the-beach/images/2023/10/slots-paradise-thebeach-baccarat.webp"
+                          src={casinoImages[3].path.src}
                           alt="table games image"
                         />
                       </figure>

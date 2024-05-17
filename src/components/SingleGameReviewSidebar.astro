@@ -42,91 +42,89 @@ const demobtn = val.demoButton;
 const playbtn = val.playButton;
 ---
 
-
 <div class="gameinfo">
-<h3 class="quick-title">Quick Overview</h3>
-<div class="quick-chart">
-<div class="progress">
-<div class="bar" style=`width:${graphics}%`>
-<p class="percent">Graphics</p>
-</div>
-<div class="digit"> <p class="perc_vals">{graphics}%</p> </div>
-</div>
-<div class="progress">
-<div class="bar" style=`width:${features}%`>
-<p class="percent">Features</p>
-</div>
-<div class="digit"> <p class="perc_vals">{features}%</p> </div>
-</div>
-<div class="progress">
-<div class="bar" style=`width:${gameplay}%`>
-<p class="percent">Gameplay</p>
-</div>
-<div class="digit"> <p class="perc_vals">{gameplay}%</p> </div>
-</div>
-<div class="progress">
-<div class="bar" style=`width:${value}%`>
-<p class="percent">Value</p>
-</div>
-<div class="digit"> <p class="perc_vals">{value}%</p> </div>
-</div>
-
-
-<div class="rating-col flex gap-2">
-  <div
-    class="r-col-first bg-[#EFEFEF] w-[33%] block p-2 text-center relative rounded-l-[22px] h-16"
-  >
-    <p>Rating</p>
-    <div class="text-center" id="review_stars">
-      <img
-        src="https://slotsstg.wpengine.com/wp-content/themes/slotsparadise/images/stars-sprite-0.webp"
-        alt="star rating"
-        class="stars_rating mx-auto"
-      />
+  <h3 class="quick-title">Quick Overview</h3>
+  <div class="quick-chart">
+    <div class="progress">
+      <div class="bar" style=`width:${graphics}%`>
+        <p class="percent">Graphics</p>
+      </div>
+      <div class="digit"><p class="perc_vals">{graphics}%</p></div>
     </div>
-  </div>
-  <div class="r-col-sec bg-[#EFEFEF] w-[33%] block p-2 text-center h-15">
-    <p>Reviews</p>
-    <span class="rvs_total"><strong id="rev_count">0</strong></span>
-  </div>
-  <div
-    class="r-col-third bg-[#EFEFEF] w-[33%] block p-2 text-center rounded-r-[22px] h-16"
-  >
-    <p>Share</p>
-    <div class="flex items-center justify-center h-5"><SocialShare /></div>
+    <div class="progress">
+      <div class="bar" style=`width:${features}%`>
+        <p class="percent">Features</p>
+      </div>
+      <div class="digit"><p class="perc_vals">{features}%</p></div>
+    </div>
+    <div class="progress">
+      <div class="bar" style=`width:${gameplay}%`>
+        <p class="percent">Gameplay</p>
+      </div>
+      <div class="digit"><p class="perc_vals">{gameplay}%</p></div>
+    </div>
+    <div class="progress">
+      <div class="bar" style=`width:${value}%`>
+        <p class="percent">Value</p>
+      </div>
+      <div class="digit"><p class="perc_vals">{value}%</p></div>
+    </div>
+
+    <div class="rating-col flex gap-2">
+      <div
+        class="r-col-first bg-[#EFEFEF] w-[33%] block p-2 text-center relative rounded-l-[22px] h-16"
+      >
+        <p>Rating</p>
+        <div class="text-center" id="review_stars">
+          <img
+            src="https://slotsparadise.com/wp-content/themes/slotsparadise/images/stars-sprite-0.webp"
+            alt="star rating"
+            class="stars_rating mx-auto"
+          />
+        </div>
+      </div>
+      <div class="r-col-sec bg-[#EFEFEF] w-[33%] block p-2 text-center h-15">
+        <p>Reviews</p>
+        <span class="rvs_total"><strong id="rev_count">0</strong></span>
+      </div>
+      <div
+        class="r-col-third bg-[#EFEFEF] w-[33%] block p-2 text-center rounded-r-[22px] h-16"
+      >
+        <p>Share</p>
+        <div class="flex items-center justify-center h-5"><SocialShare /></div>
+      </div>
+    </div>
+    <p>
+      <a class="wid-btn btn-margin" href={demobtn}>DEMO</a>
+      <a class="wid-btn" href={playbtn}>PLAY NOW</a>
+    </p>
+
+    <script is:inline>
+      document.addEventListener("DOMContentLoaded", function () {
+        let aggRating = document.querySelector(
+          ".wpcr3_aggregateRating_ratingValue",
+        );
+        let reviewStarsElement = document.getElementById("review_stars");
+
+        // Get the element with the class "wpcr3_aggregateRating_reviewCount"
+        let reviewCountElement = document.querySelector(
+          ".wpcr3_aggregateRating_reviewCount",
+        );
+
+        // Extract the numeric part using a regular expression
+        let numericReviewCount = reviewCountElement
+          ? reviewCountElement.innerHTML.match(/\d+/)
+          : null;
+
+        // Update the element with the ID "rev_count" with the extracted numeric value
+        document.getElementById("rev_count").innerHTML = numericReviewCount
+          ? numericReviewCount[0]
+          : "0";
+
+        if (aggRating) {
+          reviewStarsElement.innerHTML = aggRating.innerHTML;
+        }
+      });
+    </script>
   </div>
 </div>
-<p>
-  <a class="wid-btn btn-margin" href={demobtn}>DEMO</a>
-  <a class="wid-btn" href={playbtn}>PLAY NOW</a>
-</p>
-
-
-<script is:inline>
-  document.addEventListener("DOMContentLoaded", function () {
-    let aggRating = document.querySelector(
-      ".wpcr3_aggregateRating_ratingValue",
-    );
-    let reviewStarsElement = document.getElementById("review_stars");
-
-    // Get the element with the class "wpcr3_aggregateRating_reviewCount"
-    let reviewCountElement = document.querySelector(
-      ".wpcr3_aggregateRating_reviewCount",
-    );
-
-    // Extract the numeric part using a regular expression
-    let numericReviewCount = reviewCountElement
-      ? reviewCountElement.innerHTML.match(/\d+/)
-      : null;
-
-    // Update the element with the ID "rev_count" with the extracted numeric value
-    document.getElementById("rev_count").innerHTML = numericReviewCount
-      ? numericReviewCount[0]
-      : "0";
-
-    if (aggRating) {
-      reviewStarsElement.innerHTML = aggRating.innerHTML;
-    }
-  });
-</script>
-

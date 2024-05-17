@@ -2,9 +2,11 @@
 export const prerender = true;
 import Layout from "../layouts/Layout.astro";
 import CasinoSchoolSidebar from "../components/CasinoSchoolSidebar.astro";
+import { getSeoData } from "../lib/seoUtils";
+const seo = await getSeoData(Astro);
 ---
 
-<Layout title="casino school">
+<Layout title={seo?.title}>
   <div class="main-content casino_page mt-52">
     <div
       class="first_row bg-[#51135a] text-white font-giloryRegular font-semibold"

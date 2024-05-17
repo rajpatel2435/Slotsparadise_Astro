@@ -12,9 +12,11 @@ import ProgressiveSlots from "../components/GamesCategoryShortcode/ProgressiveSl
 import RouletteGames from "../components/GamesCategoryShortcode/RouletteGames.astro";
 import VideoPoker from "../components/GamesCategoryShortcode/VideoPoker.astro";
 import OtherGames from "../components/GamesCategoryShortcode/OtherGames.astro";
+import { getSeoData } from "../lib/seoUtils";
+const seo = await getSeoData(Astro);
 ---
 
-<Layout title="Casino Games Reviews">
+<Layout title={seo?.title}>
   <div
     class="main_games_container font-giloryRegular font-semibold text-[#2f0536] mt-52"
   >

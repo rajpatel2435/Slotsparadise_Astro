@@ -3,9 +3,11 @@ import FeaturedGamesSlider from "../components/CategoryArchivesComponents/Featur
 import AllGamesCategory from "../components/CategoryArchivesComponents/AllGamesCategory.astro";
 import Layout from "../layouts/Layout.astro";
 import ContentSlider from "../components/CategoryArchivesComponents/ContentSlider.astro";
+import { getSeoData } from "../lib/seoUtils";
+const seo = await getSeoData(Astro);
 ---
 
-<Layout title="Casino Table Games">
+<Layout title={seo?.title}>
   <div class="slots_online_page_container mt-52">
     <div
       class="header-background bg-[url('https://slotsparadise.com/the-beach/images/2023/04/casino-table-games-banner-mobile.webp')] md:bg-[url('https://slotsparadise.com/the-beach/images/2023/04/casino-table-games.webp')] bg-cover bg-center text-white py-20"
@@ -24,7 +26,10 @@ import ContentSlider from "../components/CategoryArchivesComponents/ContentSlide
         <p>
           <span
             ><span><a href="/the-beach/">Home</a></span> &gt;
-            <span><a href="/the-beach/casino-table-games/">Casino Table Games</a></span>
+            <span
+              ><a href="/the-beach/casino-table-games/">Casino Table Games</a
+              ></span
+            >
           </span>
         </p>
       </div>
