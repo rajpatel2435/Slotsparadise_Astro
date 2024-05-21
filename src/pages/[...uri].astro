@@ -26,12 +26,11 @@ const node = data.nodeByUri;
 import { cache } from "../cacheUtils.js";
 
 const requestedPath = "/the-beach" + new URL(Astro.request.url).pathname;
-console.log("RequestedPath = ", requestedPath);
 
 const credentials =
   "bmthaXJvQHBhY2lmaWNkZXYuY29tOlFBNzMgMG5nbCBjSVM0IHV5U20gQnRlOCBvUjJR";
 let cachedRedirects = cache.get("redirectCache");
-console.log(cache.getStats());
+
 try {
   if (!cachedRedirects) {
     console.log("Fetching redirects");

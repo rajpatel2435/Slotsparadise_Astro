@@ -1,6 +1,8 @@
 ---
-const url = Astro.request.url;
-console.log(url);
+const url =
+  "https://slotsparadise.com/the-beach" + new URL(Astro.request.url).pathname;
+
+console.log("social share file;", url);
 
 import {
   FacebookShareButton,
@@ -12,7 +14,7 @@ import {
 ---
 
 <!--https://github.com/silent1mezzo/astro-social-share -->
-<FacebookShareButton>
+<FacebookShareButton url={url}>
   <svg
     class="w-[30px]"
     xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +44,7 @@ import {
   </svg>
 </FacebookShareButton>
 
-<TwitterShareButton>
+<TwitterShareButton url={url}>
   <svg
     class="w-[25px]"
     xmlns="http://www.w3.org/2000/svg"
@@ -108,7 +110,7 @@ import {
         event.target.parentNode.parentNode.parentNode.classList.add("active");
         setTimeout(() => {
           event.target.parentNode.parentNode.parentNode.classList.remove(
-            "active"
+            "active",
           );
         }, 1500);
       })
