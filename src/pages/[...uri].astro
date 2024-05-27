@@ -10,128 +10,106 @@ import SingleCasinoSchool from "../components/templates/SingleCasinoSchool.astro
 import { getNodeByURI, getAllUris } from "../lib/api";
 import SingleKnowledgeBase from "../components/templates/SingleKnowledgeBase.astro";
 import GuidesSectionArchive from "../components/templates/GuidesSectionArchive.astro";
-const uri = `/${Astro.params.uri}/`;
-const data = await getNodeByURI(uri);
-const node = data.nodeByUri;
-
-//console.log(node.basepress.edges.map(item => item.node.title));
-// Access the slug value if it exists in the node
-//const slug = node.slug || null; // Replace null with a default value if needed
-// Now you have both uri and slug available
-//console.log("Slug:", slug);
-//console.log("URI:", uri);
-
-//console.log(node.__typename);
-//Redirects
 import { cache } from "../cacheUtils.js";
 
-const requestedPath = "/the-beach" + new URL(Astro.request.url).pathname;
-
-const credentials =
-  "bmthaXJvQHBhY2lmaWNkZXYuY29tOlFBNzMgMG5nbCBjSVM0IHV5U20gQnRlOCBvUjJR";
-let cachedRedirects = cache.get("redirectCache");
+const uri = `/${Astro.params.uri}/`;
+let node = null;
+let Template = Archive;
 
 try {
-  if (!cachedRedirects) {
-    console.log("Fetching redirects");
-    const response = await fetch(
-      "https://slotsparadise.com/wp-json/redirection/v1/export/all/json",
-      {
-        headers: {
-          Authorization: `Basic ${credentials}`, // Set Authorization header
-        },
-      },
-    );
+  const data = await getNodeByURI(uri);
+  node = data.nodeByUri;
 
-    if (!response.ok) {
-      throw new Error("Failed to fetch redirects data");
+  if (!node) {
+    console.error("Node not found");
+    Astro.response.status = 404;
+    Astro.response.statusText = "Not found";
+  } else if (node.uri !== uri) {
+    console.error("URI mismatch");
+    Astro.response.status = 404;
+    Astro.response.statusText = "Not found";
+  } else {
+    console.log("URI matches");
+
+    // Redirects
+    const requestedPath = "/the-beach" + new URL(Astro.request.url).pathname;
+    const credentials = "bmthaXJvQHBhY2lmaWNkZXYuY29tOlFBNzMgMG5nbCBjSVM0IHV5U20gQnRlOCBvUjJR";
+    let cachedRedirects = cache.get("redirectCache");
+
+    try {
+      if (!cachedRedirects) {
+        console.log("Fetching redirects");
+        const response = await fetch(
+          "https://slotsparadise.com/wp-json/redirection/v1/export/all/json",
+          {
+            headers: {
+              Authorization: `Basic ${credentials}`, // Set Authorization header
+            },
+          },
+        );
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch redirects data");
+        }
+
+        const responseData = await response.json();
+        cachedRedirects = JSON.parse(responseData.data);
+        cache.set("redirectCache", cachedRedirects, 3600);
+      }
+
+      const redirect = cachedRedirects.redirects.find(
+        (item) => item.url === requestedPath,
+      );
+
+      if (redirect && redirect.enabled) {
+        return Astro.redirect(redirect.action_data.url, 301);
+      } else {
+        console.log(
+          redirect
+            ? "Redirect rule is not enabled for the requested path:"
+            : "No redirection found for the requested path:",
+          requestedPath,
+        );
+      }
+    } catch (error) {
+      console.error("Error fetching redirects data:", error);
     }
 
-    const responseData = await response.json();
-    cachedRedirects = JSON.parse(responseData.data);
-    cache.set("redirectCache", cachedRedirects, 3600);
-  }
-
-  const redirect = cachedRedirects.redirects.find(
-    (item) => item.url === requestedPath,
-  );
-
-  if (redirect && redirect.enabled) {
-    return Astro.redirect(redirect.action_data.url, 301);
-  } else {
-    console.log(
-      redirect
-        ? "Redirect rule is not enabled for the requested path:"
-        : "No redirection found for the requested path:",
-      requestedPath,
-    );
+    // Resolve the template
+    Template = resolveContentTemplate(node);
   }
 } catch (error) {
-  console.error("Error fetching redirects data:", error);
+  console.error("Error fetching data:", error);
+  Astro.response.status = 500;
+  Astro.response.statusText = "Internal Server Error";
 }
 
-//END Redirects
 export async function getStaticPaths() {
   return await getAllUris();
 }
 
 function resolveContentTemplate(node) {
-  let template;
-
   if (!node) {
-    // Return 404 status code if node is null
-    Astro.response.status = 404;
-    Astro.response.statusText = "Not found";
-    template = Archive;
-  } else {
-    switch (node.__typename) {
-      case "Post":
-        // Check if the uri includes the word "news"
-        if (uri.includes("news")) {
-          template = SingleNewsArticle;
-        } else {
-          template = SingleGamePage;
-        }
-        break;
-
-      case "Category":
-        if (uri.includes("news")) {
-          template = NewsArchiveCategory;
-        } else {
-          template = Archive;
-        }
-        break;
-
-      case "Page":
-        if (uri.includes("casino-school")) {
-          template = SingleCasinoSchool;
-        } else {
-          template = Single;
-        }
-        break;
-
-      case "Basepress":
-        template = SingleKnowledgeBase;
-        break;
-
-      case "SectionBasepress":
-        template = GuidesSectionArchive;
-        break;
-
-      case "Tag":
-        template = Archive;
-        break;
-      default:
-        template = Single;
-    }
+    return Archive;
   }
-
-  return template;
+  switch (node.__typename) {
+    case "Post":
+      return uri.includes("news") ? SingleNewsArticle : SingleGamePage;
+    case "Category":
+      return uri.includes("news") ? NewsArchiveCategory : Archive;
+    case "Page":
+      return uri.includes("casino-school") ? SingleCasinoSchool : Single;
+    case "Basepress":
+      return SingleKnowledgeBase;
+    case "SectionBasepress":
+      return GuidesSectionArchive;
+    case "Tag":
+      return Archive;
+    default:
+      return Single;
+  }
 }
-
-const Template = resolveContentTemplate(node);
 ---
-
 <Layout title={node ? node.title || node.name : "Page Not Found"}>
   <main>
     {node ? <Template node={node} /> : <p>Page Not Found</p>}
