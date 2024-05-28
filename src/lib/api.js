@@ -2,12 +2,12 @@ export const prerender = true;
 
 import { GRAPHQL_ENDPOINT } from "../data/endpoints";
 
-export async function GuideSidebar(){
+export async function GuideSidebar() {
   const response = await fetch(GRAPHQL_ENDPOINT, {
-      method: 'post', 
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-          query: `query GuideSidebar {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `query GuideSidebar {
             sectionsBasepress(first: 100) {
               edges {
                 node {
@@ -24,22 +24,19 @@ export async function GuideSidebar(){
               }
             }
           }
-          `
-      })
+          `,
+    }),
   });
-  const{ data } = await response.json();
+  const { data } = await response.json();
   return data;
 }
 
-
-
-
-export async function CasinoGuidesArticles(){
+export async function CasinoGuidesArticles() {
   const response = await fetch(GRAPHQL_ENDPOINT, {
-      method: 'post', 
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-          query: `query CasinoGuidePage {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `query CasinoGuidePage {
             sectionsBasepress(first: 100) {
               edges {
                 node {
@@ -63,22 +60,19 @@ export async function CasinoGuidesArticles(){
               }
             }
           }
-          `
-      })
+          `,
+    }),
   });
-  const{ data } = await response.json();
+  const { data } = await response.json();
   return data;
 }
 
-
-
-
-export async function getNodeByURI(uri){
+export async function getNodeByURI(uri) {
   const response = await fetch(GRAPHQL_ENDPOINT, {
-      method: 'post', 
-      headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({
-          query: `query GetNodeByURI($uri: String!) {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `query GetNodeByURI($uri: String!) {
             nodeByUri(uri: $uri) {
               __typename
               isContentNode
@@ -176,6 +170,7 @@ export async function getNodeByURI(uri){
               ... on Category {
                 id
                 name
+                uri
                 slug
                 children {
                   edges {
@@ -314,12 +309,12 @@ export async function getNodeByURI(uri){
             }
           }
           `,
-          variables: {
-              uri: uri
-          }
-      })
+      variables: {
+        uri: uri,
+      },
+    }),
   });
-  const{ data } = await response.json();
+  const { data } = await response.json();
   return data;
 }
 
@@ -331,8 +326,8 @@ export async function getAllUris() {
 
   do {
     const response = await fetch(GRAPHQL_ENDPOINT, {
-      method: 'post',
-      headers: { 'Content-Type': 'application/json' },
+      method: "post",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         query: `
         query GetAllUris($postCursor: String) {
@@ -391,7 +386,7 @@ export async function getAllUris() {
     uris = uris.concat(
       postNodes
         .map((node) => trimURI(node.uri)) // Extract URIs
-        .filter((uri) => uri && uri !== '/') // Filter out empty or invalid URIs
+        .filter((uri) => uri && uri !== "/") // Filter out empty or invalid URIs
         .map((uri) => ({ params: { uri } }))
     );
 
@@ -400,7 +395,7 @@ export async function getAllUris() {
     uris = uris.concat(
       categoryNodes
         .map((node) => trimURI(node.uri)) // Extract URIs
-        .filter((uri) => uri && uri !== '/') // Filter out empty or invalid URIs
+        .filter((uri) => uri && uri !== "/") // Filter out empty or invalid URIs
         .map((uri) => ({ params: { uri } }))
     );
 
@@ -409,28 +404,33 @@ export async function getAllUris() {
     uris = uris.concat(pageNodes.map((node) => ({ params: { uri: trimURI(node.uri) } })));  */
 
     // Extract pages URIs and add them to the uris array
-const pageNodes = data.pages.nodes || [];
-uris = uris.concat(
-  pageNodes
-    .map((node) => trimURI(node.uri)) // Extract URIs
-    .filter((uri) => uri && uri !== '/') // Filter out empty or invalid URIs
-    .map((uri) => ({ params: { uri } }))
-);
+    const pageNodes = data.pages.nodes || [];
+    uris = uris.concat(
+      pageNodes
+        .map((node) => trimURI(node.uri)) // Extract URIs
+        .filter((uri) => uri && uri !== "/") // Filter out empty or invalid URIs
+        .map((uri) => ({ params: { uri } }))
+    );
 
     // Extract Basepress URIs and add them to the uris array
-    const basepressNodes = data.allBasepress.nodes|| [];
-    uris = uris.concat(basepressNodes.map((node) => ({ params: { uri: trimURI(node.uri) } })));
+    const basepressNodes = data.allBasepress.nodes || [];
+    uris = uris.concat(
+      basepressNodes.map((node) => ({ params: { uri: trimURI(node.uri) } }))
+    );
 
     // Extract Basepress Sections URIs and add them to the uris array
     const basepressSectionNodes = basepressNodes.reduce((acc, node) => {
       const sections = node.sectionsBasepress?.edges || [];
       return acc.concat(
         sections.map((section) => ({
-          params: { uri: trimURI(section.node.uri), basepressSlug: trimURI(node.slug) },
+          params: {
+            uri: trimURI(section.node.uri),
+            basepressSlug: trimURI(node.slug),
+          },
         }))
       );
     }, []);
-    
+
     // Filter out empty or invalid URIs before adding them to the uris array
     basepressSectionNodes.forEach((node) => {
       if (node.params.uri && node.params.uri !== "/") {
@@ -439,15 +439,40 @@ uris = uris.concat(
     });
 
     // Update the cursor for the next page
-    postCursor = data.posts.pageInfo.hasNextPage ? data.posts.pageInfo.endCursor : null;
+    postCursor = data.posts.pageInfo.hasNextPage
+      ? data.posts.pageInfo.endCursor
+      : null;
   } while (postCursor);
 
   return uris;
 }
-
 
 // Function to trim URI
 function trimURI(uri) {
   return uri.substring(1, uri.length - 1);
 }
 
+//function to get All guides for search page
+
+export async function BasepressForSearch() {
+  const response = await fetch(GRAPHQL_ENDPOINT, {
+    method: "post",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      query: `query AllVasepressForSearch {
+                allBasepress(first: 1000) {
+                  edges {
+                    node {
+                      id
+                      title
+                      uri
+                      excerpt
+                    }
+                  }
+                }
+              }`,
+    }),
+  });
+  const { data } = await response.json();
+  return data;
+}
