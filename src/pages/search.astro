@@ -150,7 +150,7 @@ import CasinoGuideSidebar from "../components/CasinoGuideSidebar.astro";
     function displaySearchResults(results){
         searchResults.innerHTML = results.length ? results.map(result => `
             <div class="mb-3">
-                <a class="text-[#666]" href="${result.item.node.uri}">
+                <a class="text-[#666]" href="/the-beach${result.item.node.uri}">
                     <h3 class="text-[#ff688b] font-medium font-giloryExtrabold text-xl sm:text-2xl">${result.item.node.title}</h3>
                     <p>${result.item.node.excerpt}</p>
                 </a>
