@@ -53,9 +53,9 @@ import CasinoGuideSidebar from "../components/CasinoGuideSidebar.astro";
   </div>
     
 
-  <div class="page_section mt-10 font-giloryRegular font-semibold max-w-[1200px] mx-auto">
+  <div class="page_section mt-5 font-giloryRegular font-semibold max-w-[1200px] mx-auto md:mt-10">
 			<section aria-label="Search Results">
-                <div class="inner_container flex flex-col md:flex-row justify-between px-2 mb-10">
+                <div class="inner_container flex flex-col-reverse md:flex-row justify-between px-2 mb-10">
                     <CasinoGuideSidebar />
                     <div class="section-container w-full md:w-3/4 mt-5 md:mt-0 pl-0 md:pl-2 xl:pl-10">
                         <p id="searchReadout" class="mb-4"></p>
@@ -143,7 +143,7 @@ import CasinoGuideSidebar from "../components/CasinoGuideSidebar.astro";
         if (!FUSE_INSTANCE) return;
         
         const searchResult = FUSE_INSTANCE.search(search);
-        console.log("Search Results:", searchResult);
+        //console.log("Search Results:", searchResult);
         displaySearchResults(searchResult);
     }
 
