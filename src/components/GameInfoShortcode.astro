@@ -31,54 +31,7 @@ const val = data.posts.edges[0].node.quickOverview;
 
 const charlist = val.charLists;
 const chartitle = val.charTitle;
-
-
 ---
-
-<!-- <div>
-  {
-    posts.map((post) => (
-      <article>
-        {post.node.blocks.map((block, index) => {
-          if (
-            index === post.node.blocks.length - 1 &&
-            block.attributesJSON === "[]"
-          ) {
-            // Check if it's the last block and has attributesJSON as "[]"
-            const processedContent = block.dynamicContent
-              .replace(/\[gameinfo\]/g, "") // Remove opening shortcode
-              .replace(/\[\/gameinfo\]/g, "") // Remove closing shortcode
-              .replace(/<br \/>/g, "") // Remove <br /> tags
-              .replace(/<\/?p>/g, ""); // Remove <p> and </p> tags
-
-            // Split processed content into lines and filter out empty lines
-            const lines = processedContent
-              .split("\n")
-              .filter((line) => line.trim() !== "");
-
-            return (
-              <div class="char-table">
-                <table class="game-table">
-                  <caption>Characteristics</caption>
-                  <tbody>
-                    {lines.map((line) => (
-                      <tr>
-                        <td>{line}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            );
-          }
-          return null; // Return null for other blocks
-        })}
-      </article>
-    ))
-  }
-</div> -->
-
-
 
 <div class="char-table">
   <table class="game-table">

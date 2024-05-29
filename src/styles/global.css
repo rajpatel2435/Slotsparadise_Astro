@@ -518,17 +518,16 @@ a.bpress-viewall {
     margin-left: 12px !important;
     width: 26px !important;
   }
-  .games-content,
+  /*  .games-content,
   .dtwd_related-posts,
-  .inner-page-img,
-  .gameinfo {
+  .inner-page-img {
     padding: 0 20px;
   }
   .char-table {
     margin-top: 14% !important;
     margin-left: 20px;
     margin-right: 20px;
-  }
+  } */
   /*
   .logo-img {
     margin-left: 30px !important;
@@ -1291,6 +1290,7 @@ span.rvs_total {
   display: flex;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
 }
 
 .a2a_kit.a2a_kit_size_18.addtoany_list {

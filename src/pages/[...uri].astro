@@ -89,7 +89,7 @@ export async function getStaticPaths() {
 }
 
 function resolveContentTemplate(node) {
-  if (!node) {
+  if (!node || node.uri !== uri) {
     return Archive;
   }
   switch (node.__typename) {

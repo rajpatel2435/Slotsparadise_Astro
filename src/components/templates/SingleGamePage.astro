@@ -24,10 +24,9 @@ const breadcrumb = generateBreadcrumbs(node.uri);
 
 <!-- Main Page -->
 
-<div class="post-content-row max-w-[1440px] mx-auto mt-16 px-10 xl:px-2">
-  <div class="casino_news_blocks flex flex-col lg:flex-row gap-14">
-    <div class="post-content-module lg:w-[65%] px-2 lg:px-0">
-      <div class="pb-10">
+<div class="post-content-row max-w-[1440px] mx-auto mt-8 lg:mt-16 px-2">
+  <div class="casino_news_blocks grid grid-cols-1 gap-4 lg:grid-cols-3 lg:grid-flow-row xl:gap-x-14">
+    <div class="lg:col-start-1 lg:col-end-3">
         <img
           class="featured-image rounded-lg overflow-hidden w-full"
           width="1200"
@@ -36,8 +35,8 @@ const breadcrumb = generateBreadcrumbs(node.uri);
           alt={node.title}
           title={node.title}
         />
-      </div>
-      <div class="post-bread font-semibold mb-5">
+
+        <div class="post-bread font-semibold pt-2">
         <div class="capitalize" set:html={breadcrumb} />
         <div
           class="font-semibold text-[#ff688b] text-[18px] mt-4"
@@ -46,15 +45,9 @@ const breadcrumb = generateBreadcrumbs(node.uri);
         >
         </div>
       </div>
-      <article
-        class="font-giloryRegular font-semibold pl-4 md:pl-0 single-game-content-article single_article"
-        set:html={node.content}
-      />
-
-      <OtherRelatedgames />
-    </div>
-    <div
-      class="sidebar w-full px-2 lg:px-0 lg:w-[35%] flex flex-col mt-5 lg:mt-0"
+      </div>
+      <div
+      class="sidebar mt-5 px-2 lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-4 lg:px-0 lg:mt-0"
     >
       <SingleGameReviewSidebar />
       <div class="mt-14"><GameInfoShortcode /></div>
@@ -66,6 +59,15 @@ const breadcrumb = generateBreadcrumbs(node.uri);
       </h2>
       <SidebarArticles />
     </div>
+    <div class="post-content-module lg:col-start-1 lg:col-end-3">
+      <article
+        class="font-giloryRegular font-semibold pl-4 md:pl-0 single-game-content-article single_article"
+        set:html={node.content}
+      />
+
+      <OtherRelatedgames />
+    </div>
+    
   </div>
 </div>
 
