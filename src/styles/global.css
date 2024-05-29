@@ -150,9 +150,9 @@ h6 {
   table-layout: fixed;
   width: 100%;
 }
-.gameinfo {
+/* .gameinfo {
   margin-top: -45px;
-}
+} */
 .game-table caption {
   background: #46104e;
   padding: 20px;

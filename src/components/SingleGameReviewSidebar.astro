@@ -43,9 +43,10 @@ const playbtn = val.playButton;
 ---
 
 <div class="gameinfo">
-  <h3 class="quick-title">Quick Overview</h3>
-  <div class="quick-chart">
-    <div class="progress">
+  <div class="quick-chart flex flex-col">
+    <div>
+      <h3 class="quick-title">Quick Overview</h3>
+       <div class="progress">
       <div class="bar" style=`width:${graphics}%`>
         <p class="percent">Graphics</p>
       </div>
@@ -94,10 +95,12 @@ const playbtn = val.playButton;
         <div class="flex items-center justify-center h-5"><SocialShare /></div>
       </div>
     </div>
-    <p>
+    </div>
+   
+    <div>
       <a class="wid-btn btn-margin" href={demobtn}>DEMO</a>
       <a class="wid-btn" href={playbtn}>PLAY NOW</a>
-    </p>
+    </div>
 
     <script is:inline>
       document.addEventListener("DOMContentLoaded", function () {
