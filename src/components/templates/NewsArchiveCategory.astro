@@ -6,16 +6,18 @@ const uri = `/${Astro.params.uri}/`;
 const data = await getNodeByURI(uri);
 const node = data.nodeByUri;
 import { generateBreadcrumbs } from "../../scripts/utils";
+import Pagination from "../Pagination.astro";
+import type { CollectionEntry } from "astro:content";
 // Access the slug value if it exists in the node
+//console.log(node);
 const slug = node.slug;
 // Now you have both uri and slug available
 //console.log("URI:", uri);
 //console.log("Slug:", slug);
 
 const postsData = await wpquery({
-  query: `
-      query GetNewsPosts {
-        posts(where: { categoryName: "${slug}" }, first: 1000) {
+  query: `query GetNewsPosts($slug: String!) {
+        posts(where: { categoryName:$slug }, first: 1000) {
           edges {
             node {
               id
@@ -35,16 +37,31 @@ const postsData = await wpquery({
         }
       }
     `,
+    variables: { slug }, 
 });
 
 const allPosts = postsData?.posts?.edges;
-
 //console.log(allPosts);
+
+const ArticlesPerPage = 10;
+const AllArticles = allPosts.length;
+console.log(AllArticles);
+const totalPages: number = Math.ceil(AllArticles/ArticlesPerPage);
+
+//console.log("Total Pages", totalPages);
+
+const currentPage: number | null = +Astro.url.searchParams.get('page')! || 1;
+
+const articlesForPage: CollectionEntry<'artciles'>[] = allPosts.slice((currentPage - 1) * ArticlesPerPage, currentPage * ArticlesPerPage);
+
+//console.log(articlesForPage);
+
+
 const breadcrumb = generateBreadcrumbs(uri);
 ---
 
 <div
-  class="news_page_container max-w-[1440px] mx-auto w-[80%] font-giloryRegular font-semibold text-base text-[#666]"
+  class="news_page_container max-w-[1440px] mx-auto px-2 font-giloryRegular font-semibold text-base text-[#666] lg:px-0"
 >
   <div class="mb-10 font-semibold">
     <div class="capitalize" set:html={breadcrumb} />
@@ -77,9 +94,9 @@ const breadcrumb = generateBreadcrumbs(uri);
     </div>
   </div>
 
-  <section class="news_page max-w-[1440px] mx-auto px-4 my-16">
+  <section class="news_page max-w-[1440px] mx-auto my-16">
     {
-      allPosts.map((post) => (
+      articlesForPage.map((post) => (
         <NewsPostCategory
           href={post.node.uri}
           title={post.node.title}
@@ -93,4 +110,14 @@ const breadcrumb = generateBreadcrumbs(uri);
       ))
     }
   </section>
+
+  <div class="mb-10">
+    <Pagination 
+        currentPage={currentPage} 
+        totalPages={totalPages} 
+        disablePrevious={currentPage === 1} 
+        disableNext={currentPage === totalPages} 
+      />
+  </div>
+   
 </div>

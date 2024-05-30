@@ -453,7 +453,7 @@ function trimURI(uri) {
   return uri.substring(1, uri.length - 1);
 }
 
-//function to get All guides for search page
+//function to get All guides for search page , used for searchPage widget
 
 export async function BasepressForSearch() {
   const response = await fetch(GRAPHQL_ENDPOINT, {
