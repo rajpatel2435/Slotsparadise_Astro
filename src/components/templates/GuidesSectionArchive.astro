@@ -2,10 +2,23 @@
 import CasinoGuideSidebar from "../CasinoGuideSidebar.astro";
 import SearchWidget from "../SearchWidget.astro";
 import { generateBreadcrumbs } from "../../scripts/utils";
+import Pagination from "../Pagination.astro";
+import type { CollectionEntry } from "astro:content";
 const { node } = Astro.props;
-//console.log(node);
-
 const breadcrumb = generateBreadcrumbs(node.uri);
+//console.log(node.count);
+
+const ArticlesPerPage = 10;
+const AllArticles = node.count;
+const totalPages: number = Math.ceil(AllArticles/ArticlesPerPage);
+
+//console.log("Total Pages", totalPages);
+
+const currentPage: number | null = +Astro.url.searchParams.get('page')! || 1;
+
+const articlesForPage: CollectionEntry<'artciles'>[] = node.basepress.edges.slice((currentPage - 1) * ArticlesPerPage, currentPage * ArticlesPerPage);
+
+//console.log(articlesForPage);
 ---
 
 <div
@@ -46,7 +59,7 @@ const breadcrumb = generateBreadcrumbs(node.uri);
         </h1>
         <div>
           {
-            node.basepress.edges.map((item) => (
+            articlesForPage.map((item) => (
               <a
                 href={`/the-beach${item.node.uri}`}
                 class="py-3 font-giloryRegular font-semibold border-b border-dashed leading-3 flex items-start hover:bg-[#ddd]"
@@ -60,6 +73,15 @@ const breadcrumb = generateBreadcrumbs(node.uri);
           }
         </div>
       </div>
+      <Pagination 
+        currentPage={currentPage} 
+        totalPages={totalPages} 
+        disablePrevious={currentPage === 1} 
+        disableNext={currentPage === totalPages} 
+      />
     </div>
   </div>
 </div>
+
+
+  

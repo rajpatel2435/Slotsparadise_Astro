@@ -219,9 +219,7 @@ const seo = await getSeoData(Astro);
       });
 
       const newData = await response.json();
-
       renderPosts(newData.data.posts.edges);
-
       // Update the startCursor for the next request
       startCursor = newData.data.posts.pageInfo.startCursor;
       // Update the visibility of the "Previous" button

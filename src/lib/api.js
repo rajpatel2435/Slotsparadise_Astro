@@ -270,7 +270,7 @@ export async function getNodeByURI(uri) {
                 name
                 slug
                 uri
-                basepress {
+                basepress(first: 100) {
                   edges {
                     node {
                       title
@@ -305,6 +305,7 @@ export async function getNodeByURI(uri) {
                     raw
                   }
                 }
+                count
               }
             }
           }
