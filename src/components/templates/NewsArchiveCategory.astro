@@ -45,7 +45,7 @@ const allPosts = postsData?.posts?.edges;
 
 const ArticlesPerPage = 10;
 const AllArticles = allPosts.length;
-console.log(AllArticles);
+//console.log(AllArticles);
 const totalPages: number = Math.ceil(AllArticles/ArticlesPerPage);
 
 //console.log("Total Pages", totalPages);
@@ -61,7 +61,7 @@ const breadcrumb = generateBreadcrumbs(uri);
 ---
 
 <div
-  class="news_page_container max-w-[1440px] mx-auto px-2 font-giloryRegular font-semibold text-base text-[#666] lg:px-0"
+  class="news_page_container max-w-[1440px] mx-auto px-2 font-giloryRegular font-semibold text-base text-[#666] 2xl:px-0"
 >
   <div class="mb-10 font-semibold">
     <div class="capitalize" set:html={breadcrumb} />
