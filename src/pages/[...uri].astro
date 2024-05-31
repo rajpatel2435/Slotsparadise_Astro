@@ -20,7 +20,9 @@ try {
   const data = await getNodeByURI(uri);
   node = data.nodeByUri;
 
-  if (!node) {
+  //console.log("value is" , node);
+
+  if (!node || node === null) {
     console.error("Node not found");
     Astro.response.status = 404;
     Astro.response.statusText = "Not found";

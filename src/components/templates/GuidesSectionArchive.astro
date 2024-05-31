@@ -13,7 +13,6 @@ const AllArticles = node.count;
 const totalPages: number = Math.ceil(AllArticles/ArticlesPerPage);
 
 //console.log("Total Pages", totalPages);
-
 const currentPage: number | null = +Astro.url.searchParams.get('page')! || 1;
 
 const articlesForPage: CollectionEntry<'artciles'>[] = node.basepress.edges.slice((currentPage - 1) * ArticlesPerPage, currentPage * ArticlesPerPage);
