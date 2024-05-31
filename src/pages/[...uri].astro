@@ -13,7 +13,6 @@ import GuidesSectionArchive from "../components/templates/GuidesSectionArchive.a
 import { cache } from "../cacheUtils.js";
 
 const uri = `/${Astro.params.uri}/`;
-console.log(uri);
 let node = null;
 let Template = Archive;
 
@@ -23,16 +22,12 @@ try {
 
   console.log("value is" , node);
 
-  if (!node) {
+  if (!node || node === null) {
     console.error("Node not found");
     Astro.response.status = 404;
     Astro.response.statusText = "Not found";
   } else if (node.uri !== uri) {
     console.error("URI mismatch");
-    Astro.response.status = 404;
-    Astro.response.statusText = "Not found";
-  } else if (node == null) {
-    console.error("URI is null");
     Astro.response.status = 404;
     Astro.response.statusText = "Not found";
   } else {
