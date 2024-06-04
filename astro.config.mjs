@@ -14,10 +14,4 @@ export default defineConfig({
     port: 4321,
     host: "127.0.0.1",
   },
-  redirects: {
-    "/keno": {
-      status: 302,
-      destination: "/other-games",
-    },
-  },
 });
