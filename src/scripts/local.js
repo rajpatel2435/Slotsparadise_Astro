@@ -5,6 +5,7 @@
 if (document.location.href.indexOf("the-beach/the-beach") > -1) {
   // indexOf will return the position of the first occurence of this string in the url
   // or -1 it it's not there.
+  console.log("testing url");
   document.location.href = "https://slotsparadise.com/the-beach/404/";
 }
 
