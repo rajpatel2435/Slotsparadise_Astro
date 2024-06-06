@@ -87,8 +87,9 @@ function checkCookiesAndUpdateCSS() {
         Object.entries(json).forEach((entry) => {
           const [key, value] = entry;
           userDetail[key] = value;
-          console.log(userDetail);
         });
+
+        console.log(userDetail);
 
         document.getElementById("userLastm").innerHTML =
           userDetail.FirstName + " " + userDetail.LastName;
