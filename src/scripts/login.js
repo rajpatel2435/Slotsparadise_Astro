@@ -67,6 +67,8 @@ function checkCookiesAndUpdateCSS() {
           //console.log("User Details:", userDetail); // Log the user details
 
           // Update the DOM with user details
+          document.getElementById("currency_menu").innerHTML =
+            userDetail.Balance;
           document.getElementById(
             "userLastm"
           ).innerHTML = `${userDetail.FirstName} ${userDetail.LastName}`;
@@ -77,8 +79,6 @@ function checkCookiesAndUpdateCSS() {
           document.getElementById("notWageredm").innerHTML =
             userDetail.NotPlayedBalance;
           document.getElementById("playBalancem").innerHTML =
-            userDetail.Balance;
-          document.getElementById("currency_menu").innerHTML =
             userDetail.Balance;
           document.getElementById("withBalancem").innerHTML =
             userDetail.Withdrawable;
