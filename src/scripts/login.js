@@ -87,26 +87,8 @@ function checkCookiesAndUpdateCSS() {
         Object.entries(json).forEach((entry) => {
           const [key, value] = entry;
           userDetail[key] = value;
+          console.log(userDetail);
         });
-
-        /* document.getElementById("userLast").innerHTML =
-          userDetail.FirstName + " " + userDetail.LastName;
-        document.getElementById("userFirst").innerHTML = userDetail.UserName;
-        document.getElementById("userId").innerHTML = idGame;
-
-        document.getElementById("userWagered").innerHTML =
-          userDetail.PlayedBalance;
-
-        document.getElementById("notWagered").innerHTML =
-          userDetail.NotPlayedBalance;
-
-        document.getElementById("playBalance").innerHTML = userDetail.Balance;
-
-        document.getElementById("withBalance").innerHTML =
-          userDetail.Withdrawable;
-        document.getElementById("usd-btn").innerHTML = userDetail.Balance; */
-
-        /***Mobile****/
 
         document.getElementById("userLastm").innerHTML =
           userDetail.FirstName + " " + userDetail.LastName;
@@ -122,7 +104,7 @@ function checkCookiesAndUpdateCSS() {
 
         document.getElementById("playBalancem").innerHTML = userDetail.Balance;
 
-        document.getElementById("currency_menu").innerHTML = userDetail.Balance;
+        //document.getElementById("currency_menu").innerHTML = userDetail.Balance;
 
         document.getElementById("withBalancem").innerHTML =
           userDetail.Withdrawable;
