@@ -122,6 +122,8 @@ function checkCookiesAndUpdateCSS() {
 
         document.getElementById("playBalancem").innerHTML = userDetail.Balance;
 
+        document.getElementById("currency_menu").innerHTML = userDetail.Balance;
+
         document.getElementById("withBalancem").innerHTML =
           userDetail.Withdrawable;
       });
