@@ -47,7 +47,7 @@ function checkCookiesAndUpdateCSS() {
         }
       }
 
-      console.log("Game ID found:", idGame); // Debug log to check the ID
+      //console.log("Game ID found:", idGame); // Debug log to check the ID
       return idGame;
     }
 
@@ -64,7 +64,7 @@ function checkCookiesAndUpdateCSS() {
             userDetail[key] = value;
           });
 
-          console.log("User Details:", userDetail); // Log the user details
+          //console.log("User Details:", userDetail); // Log the user details
 
           // Update the DOM with user details
           document.getElementById(
