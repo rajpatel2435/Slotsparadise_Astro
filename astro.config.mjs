@@ -24,4 +24,5 @@ export default defineConfig({
     port: 4321,
     host: "127.0.0.1",
   },
+  GRAPHQL_ENDPOINT: GRAPHQL_ENDPOINT
 });
