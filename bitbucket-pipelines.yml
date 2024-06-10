@@ -45,7 +45,7 @@ pipelines:
           script:
             # Install dependencies and build assets
             - npm install
-            - npm run build
+            - npm run build-dev
             # Save build assets as an artifact
           artifacts:
             - dist/**
