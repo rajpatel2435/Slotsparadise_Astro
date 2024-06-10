@@ -19,7 +19,7 @@ pipelines:
             - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "pm2 stop beach"
 
             # Update the remote with rsync
-            - rsync -zrSlh --stats ./* $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach
+            - rsync -zrSlh --delete --stats ./* $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach
 
             # Copy .htaccess file to the server
             - scp .htaccess $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach/
@@ -36,4 +36,42 @@ pipelines:
                   "channel": "wp-team-activity",
                   "username": "Bitbucket Pipelines",
                   "text": "New commit deployed to #SlotsParadise **master** branch on ```Astro slotsparadise``` with the following message: \n ```\n'"$COMMIT_MESSAGE"' \nEnv: AstroSlotsParadise\nDate: '"$COMMIT_DATE"'\nAuthor: '"$COMMIT_AUTHOR"'\n ```"
+                }' -H "Content-Type: application/json" -X POST https://matter.dblexchange.com/hooks/t34yjuo6a3refeeafr3itdauge
+
+    dev:
+      - step:
+          name: Build assets
+          image: node:20.11.1
+          script:
+            # Install dependencies and build assets
+            - npm install
+            - npm run build
+            # Save build assets as an artifact
+          artifacts:
+            - dist/**
+            - node_modules/**
+      - step:
+          name: Rsync to Development server and notify Mattermost
+          script:
+            # Stop the lobby process to commit changes
+            - ssh $MKTCASINOS_USER_DEV@$MKTCASINOS_SERVER_DEV "pm2 stop beach"
+
+            # Update the remote with rsync
+            - rsync -zrSlh --delete --stats ./* $MKTCASINOS_USER_DEV@$MKTCASINOS_SERVER_DEV:applications/qvucfjykmh/public_html/the-beach
+
+            # Copy .htaccess file to the server
+            - scp .htaccess $MKTCASINOS_USER_DEV@$MKTCASINOS_SERVER_DEV:applications/qvucfjykmh/public_html/the-beach/
+
+            # Stop the lobby process to commit changes
+            - ssh $MKTCASINOS_USER_DEV@$MKTCASINOS_SERVER_DEV "pm2 start beach"
+
+            # Send message to MatterMost
+            - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
+            - COMMIT_DATE=$(git log -n 1 --pretty=format:'%ci' $BITBUCKET_COMMIT)
+            - COMMIT_AUTHOR=$(git log -n 1 --pretty=format:'%an' $BITBUCKET_COMMIT)
+            - >
+              curl -d '{
+                  "channel": "wp-team-activity",
+                  "username": "Bitbucket Pipelines",
+                  "text": "New commit deployed to #SlotsParadise **dev** branch on ```Astro slotsparadise``` with the following message: \n ```\n'"$COMMIT_MESSAGE"' \nEnv: AstroSlotsParadise\nDate: '"$COMMIT_DATE"'\nAuthor: '"$COMMIT_AUTHOR"'\n ```"
                 }' -H "Content-Type: application/json" -X POST https://matter.dblexchange.com/hooks/t34yjuo6a3refeeafr3itdauge
