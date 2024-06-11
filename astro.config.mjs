@@ -10,7 +10,7 @@ dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
 // Ensure GRAPHQL_ENDPOINT is set in process.env
 const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT;
-
+console.log("endpoint is", GRAPHQL_ENDPOINT);
 
 export default defineConfig({
   integrations: [tailwind()],

@@ -7,14 +7,20 @@ pipelines:
           script:
             # Install dependencies and build assets
             - npm install
+            - echo GRAPHQL_ENDPOINT=https://slotsparadise.com/wp-graphql >> .env.production
+            - echo ADMIN_AJAX_ENDPOINT=https://slotsparadise.com/wp-admin/admin-ajax.php >> .env.production
             - npm run build
             # Save build assets as an artifact
           artifacts:
             - dist/**
             - node_modules/**
+            - .env.production
       - step:
           name: Rsync to production server and notify Mattermost
           script:
+            # Copy .env file to the server
+            - scp .env.production $MKTCASINOS_USER_DEV@$MKTCASINOS_SERVER_DEV:applications/szkhyquxps/public_html/the-beach/
+
             # Stop the lobby process to commit changes
             - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "pm2 stop beach"
 
@@ -45,15 +51,21 @@ pipelines:
           script:
             # Install dependencies and build assets
             - npm install
+            - echo GRAPHQL_ENDPOINT=https://wordpress-1233981-4586437.cloudwaysapps.com/wp-graphql >> .env.development
+            - echo ADMIN_AJAX_ENDPOINT=https://wordpress-1233981-4586437.cloudwaysapps.com/wp-admin/admin-ajax.php >> .env.development
             - npm run build-dev
             # Save build assets as an artifact
           artifacts:
             - dist/**
             - node_modules/**
+            - .env.development
       - step:
           name: Rsync to Development server and notify Mattermost
           script:
-            # Stop the lobby process to commit changes
+           # Copy .env file to the server
+            - scp .env.development $MKTCASINOS_USER_DEV@$MKTCASINOS_SERVER_DEV:applications/qvucfjykmh/public_html/the-beach/
+
+            # Stop the beach process to commit changes
             - ssh $MKTCASINOS_USER_DEV@$MKTCASINOS_SERVER_DEV "pm2 stop beach"
 
             # Update the remote with rsync
@@ -62,7 +74,7 @@ pipelines:
             # Copy .htaccess file to the server
             - scp .htaccess $MKTCASINOS_USER_DEV@$MKTCASINOS_SERVER_DEV:applications/qvucfjykmh/public_html/the-beach/
 
-            # Stop the lobby process to commit changes
+            # Stop the beach process to commit changes
             - ssh $MKTCASINOS_USER_DEV@$MKTCASINOS_SERVER_DEV "pm2 start beach"
 
             # Send message to MatterMost
