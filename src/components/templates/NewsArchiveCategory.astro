@@ -37,7 +37,7 @@ const postsData = await wpquery({
         }
       }
     `,
-    variables: { slug }, 
+  variables: { slug },
 });
 
 const allPosts = postsData?.posts?.edges;
@@ -46,16 +46,18 @@ const allPosts = postsData?.posts?.edges;
 const ArticlesPerPage = 10;
 const AllArticles = allPosts.length;
 //console.log(AllArticles);
-const totalPages: number = Math.ceil(AllArticles/ArticlesPerPage);
+const totalPages: number = Math.ceil(AllArticles / ArticlesPerPage);
 
 //console.log("Total Pages", totalPages);
 
-const currentPage: number | null = +Astro.url.searchParams.get('page')! || 1;
+const currentPage: number | null = +Astro.url.searchParams.get("page")! || 1;
 
-const articlesForPage: CollectionEntry<'artciles'>[] = allPosts.slice((currentPage - 1) * ArticlesPerPage, currentPage * ArticlesPerPage);
+const articlesForPage: CollectionEntry<"artciles">[] = allPosts.slice(
+  (currentPage - 1) * ArticlesPerPage,
+  currentPage * ArticlesPerPage,
+);
 
 //console.log(articlesForPage);
-
 
 const breadcrumb = generateBreadcrumbs(uri);
 ---
@@ -112,12 +114,11 @@ const breadcrumb = generateBreadcrumbs(uri);
   </section>
 
   <div class="mb-10">
-    <Pagination 
-        currentPage={currentPage} 
-        totalPages={totalPages} 
-        disablePrevious={currentPage === 1} 
-        disableNext={currentPage === totalPages} 
-      />
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      disablePrevious={currentPage === 1}
+      disableNext={currentPage === totalPages}
+    />
   </div>
-   
 </div>

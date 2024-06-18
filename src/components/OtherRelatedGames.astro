@@ -43,7 +43,7 @@ const data = await wpquery({
 const postsByCat = data.posts.edges.slice(0, 6);
 
 const relatedPosts = postsByCat.filter(
-  (relPost) => relPost.node.slug !== currentPost
+  (relPost) => relPost.node.slug !== currentPost,
 );
 
 //console.log(relatedPosts);

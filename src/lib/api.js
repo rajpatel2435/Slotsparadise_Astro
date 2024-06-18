@@ -8,7 +8,7 @@ export async function GuideSidebar() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `query GuideSidebar {
-            sectionsBasepress(first: 100) {
+            sectionsBasepress(first: 100,where: {parent: 14}) {
               edges {
                 node {
                   name
@@ -37,7 +37,7 @@ export async function CasinoGuidesArticles() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `query CasinoGuidePage {
-            sectionsBasepress(first: 100) {
+            sectionsBasepress(first: 100, where: {parent: 14}) {
               edges {
                 node {
                   name
