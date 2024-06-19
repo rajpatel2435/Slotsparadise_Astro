@@ -23,7 +23,7 @@ export async function seoNodeByURI(uri) {
     }
   }
 
-  console.log("Transformed URI:", uri); // Debugging line to check the transformed URI
+  
 
   const response = await fetch(GRAPHQL_ENDPOINT, {
     method: "post",
@@ -252,6 +252,6 @@ export async function seoNodeByURI(uri) {
     }),
   });
   const { data } = await response.json();
-  console.log("seo data is:", data);
+  
   return data;
 }

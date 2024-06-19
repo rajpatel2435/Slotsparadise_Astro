@@ -56,10 +56,7 @@ const relatedPosts = postsByCat.filter(
     relatedPosts.map((post: any) => (
       <div class="">
         <div class="">
-          <a
-            class="block rounded-lg overflow-hidden"
-            href={`/the-beach${post.node.uri}`}
-          >
+          <a class="block rounded-lg overflow-hidden" href={`${post.node.uri}`}>
             <Image
               class="w-full object-cover shadow-casinoNews"
               width="155"
@@ -71,7 +68,7 @@ const relatedPosts = postsByCat.filter(
           </a>
           <div class="">
             <p class="text-[#2F0536] font-giloryRegular font-semibold">
-              <a href={`/the-beach${post.node.uri}`}>{post.node.title}</a>
+              <a href={`${post.node.uri}`}>{post.node.title}</a>
             </p>
           </div>
         </div>
