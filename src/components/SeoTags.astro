@@ -8,6 +8,17 @@ const fullUrl = Astro.request.url;
 // Extract the path from the URL
 const path = new URL(fullUrl).pathname;
 
+// Define a mapping of URI patterns to their transformed equivalents
+const uriTransformations = {
+  'casino/slots': 'casino/casino_slots',
+  'casino/jackpot-games': 'casino/casino_jackpot-games',
+  'casino/video-poker': 'casino/casino_video-poker',
+  'casino/table-games': 'casino/casino_table-games',
+  'casino/roulette' : 'casino/casino_roulette',
+  'casino/blackjack': 'casino/casino_blackjack',
+};
+
+
 //  URI based on the path
 let uri;
 if (path === '/') {
@@ -16,12 +27,27 @@ if (path === '/') {
   uri = path.endsWith('/') ? path : `${path}/`;
 }
 
+// Transform the URI based on the defined mapping
+for (const [key, value] of Object.entries(uriTransformations)) {
+  if (uri.includes(key)) {
+    uri = uri.replace(key, value);
+    break;  // Stop once a match is found and replaced
+  }
+}
+
 const data = await seoNodeByURI(uri);
 
 const node = data.nodeByUri && data.nodeByUri.seo ? data.nodeByUri : null;
 
 const seo = node ? node.seo : null;
 
+let canonicalUrl = seo?.canonical;
+for (const [key, value] of Object.entries(uriTransformations)) {
+  if (canonicalUrl?.includes(value)) {
+    canonicalUrl = canonicalUrl.replace(value, key);
+    break;  // Stop once a match is found and replaced
+  }
+}
 
 
 
@@ -29,7 +55,7 @@ const seo = node ? node.seo : null;
 ---
 
 <meta name="description" content={seo?.metaDesc} />
-<link rel="canonical" href={seo?.canonical} />
+<link rel="canonical" href={canonicalUrl} />
 <meta property="og:locale" content="en_US" />
 <meta name="robots" content=`${seo?.metaRobotsNofollow},${seo?.metaRobotsNoindex}` />
 <meta property="og:type" content={seo?.opengraphType} />
