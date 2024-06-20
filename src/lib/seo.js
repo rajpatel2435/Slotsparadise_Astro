@@ -8,6 +8,7 @@ const uriTransformations = {
   'casino/table-games': 'casino/casino_table-games',
   'casino/roulette': 'casino/casino_roulette',
   'casino/blackjack': 'casino/casino_blackjack',
+  'casino/live-dealer': 'casino/casino_live-dealer',
 };
 
 export async function seoNodeByURI(uri) {
