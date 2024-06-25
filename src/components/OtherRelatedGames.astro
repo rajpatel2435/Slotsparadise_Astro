@@ -3,9 +3,12 @@ import { Image } from "astro:assets";
 import { wpquery } from "../data/wordpress";
 
 const fullUrl = Astro.request.url;
+
 const segments = fullUrl.split("/");
-const slug = segments[segments.length - 3];
-//console.log(slug);
+const originalSlug = segments[segments.length - 3];
+
+// Append "casino_" before the original slug
+const slug = `casino_${originalSlug}`;
 
 const currentPost = segments[segments.length - 2];
 

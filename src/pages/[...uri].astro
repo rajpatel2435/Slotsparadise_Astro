@@ -101,7 +101,7 @@ function resolveContentTemplate(node) {
     case "Category":
       return uri.includes("news") ? NewsArchiveCategory : Archive;
     case "Page":
-      return uri.includes("casino-school") ? SingleCasinoSchool : Single;
+      return uri.includes("casino-school") ? SingleNewsArticle : Single;
     case "Basepress":
       return SingleKnowledgeBase;
     case "SectionBasepress":
