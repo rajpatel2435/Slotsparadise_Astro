@@ -38,10 +38,10 @@ export function formatDate(inputDateString) {
 
 export function generateBreadcrumbs(uri) {
   const parts = uri.split("/").filter((part) => part !== ""); // Split the URI and remove empty parts
-  let breadcrumb = '<a href="/the-beach/">Home</a>'; // Start with 'Home'
+  let breadcrumb = '<a href="/">Home</a>'; // Start with 'Home'
 
   // Initialize the current path
-  let currentPath = "/the-beach";
+  let currentPath = "";
 
   // Iterate over the parts to build the breadcrumb trail
   parts.forEach((part) => {

@@ -1,6 +1,31 @@
 export const prerender = true;
 import { GRAPHQL_ENDPOINT } from "../data/endpoints";
+// Define a mapping of URI patterns to their transformed equivalents
+const uriTransformations = {
+  'casino/slots': 'casino/casino_slots',
+  'casino/jackpot-games': 'casino/casino_jackpot-games',
+  'casino/video-poker': 'casino/casino_video-poker',
+  'casino/table-games': 'casino/casino_table-games',
+  'casino/roulette': 'casino/casino_roulette',
+  'casino/blackjack': 'casino/casino_blackjack',
+  'casino/live-dealer': 'casino/casino_live-dealer',
+};
+
 export async function seoNodeByURI(uri) {
+  // if (uri.includes("casino/slots", "casino_jackpot-games", "casino/video-poker", "casino/table-games")) {
+  //   uri = uri.replace("casino/slots", "casino/casino_slots");
+  // }
+
+   // Transform the URI based on the defined mapping
+   for (const [key, value] of Object.entries(uriTransformations)) {
+    if (uri.includes(key)) {
+      uri = uri.replace(key, value);
+      break;  
+    }
+  }
+
+  
+
   const response = await fetch(GRAPHQL_ENDPOINT, {
     method: "post",
     headers: { "Content-Type": "application/json" },
@@ -228,5 +253,6 @@ export async function seoNodeByURI(uri) {
     }),
   });
   const { data } = await response.json();
+  
   return data;
 }

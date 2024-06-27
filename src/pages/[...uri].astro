@@ -35,7 +35,8 @@ try {
 
     // Redirects
     const requestedPath = "/the-beach" + new URL(Astro.request.url).pathname;
-    const credentials = "bmthaXJvQHBhY2lmaWNkZXYuY29tOlFBNzMgMG5nbCBjSVM0IHV5U20gQnRlOCBvUjJR";
+    const credentials =
+      "bmthaXJvQHBhY2lmaWNkZXYuY29tOlFBNzMgMG5nbCBjSVM0IHV5U20gQnRlOCBvUjJR";
     let cachedRedirects = cache.get("redirectCache");
 
     try {
@@ -100,7 +101,7 @@ function resolveContentTemplate(node) {
     case "Category":
       return uri.includes("news") ? NewsArchiveCategory : Archive;
     case "Page":
-      return uri.includes("casino-school") ? SingleCasinoSchool : Single;
+      return uri.includes("casino-school") ? SingleNewsArticle : Single;
     case "Basepress":
       return SingleKnowledgeBase;
     case "SectionBasepress":
@@ -112,6 +113,7 @@ function resolveContentTemplate(node) {
   }
 }
 ---
+
 <Layout title={node ? node.title || node.name : "Page Not Found"}>
   <main>
     {node ? <Template node={node} /> : <p>Page Not Found</p>}
