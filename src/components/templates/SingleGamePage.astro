@@ -25,18 +25,20 @@ const breadcrumb = generateBreadcrumbs(node.uri);
 <!-- Main Page -->
 
 <div class="post-content-row max-w-[1440px] mx-auto mt-5 lg:mt-16 px-2">
-  <div class="casino_news_blocks grid grid-cols-1 gap-4 lg:grid-cols-3 lg:grid-flow-row xl:gap-x-14">
+  <div
+    class="casino_news_blocks grid grid-cols-1 gap-4 lg:grid-cols-3 lg:grid-flow-row xl:gap-x-14"
+  >
     <div class="lg:col-start-1 lg:col-end-3">
-        <img
-          class="featured-image rounded-lg overflow-hidden w-full"
-          width="1200"
-          height="667"
-          src={node.featuredImage?.node?.sourceUrl}
-          alt={node.title}
-          title={node.title}
-        />
+      <img
+        class="featured-image rounded-lg overflow-hidden w-full"
+        width="1200"
+        height="667"
+        src={node.featuredImage?.node?.sourceUrl}
+        alt={node.title}
+        title={node.title}
+      />
 
-        <div class="post-bread font-semibold pt-2">
+      <div class="post-bread font-semibold pt-2">
         <div class="capitalize" set:html={breadcrumb} />
         <div
           class="font-semibold text-[#ff688b] text-[18px] mt-4"
@@ -45,22 +47,21 @@ const breadcrumb = generateBreadcrumbs(node.uri);
         >
         </div>
       </div>
-      </div>
-      <div
+    </div>
+    <div
       class="sidebar mt-0 px-2 lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-4 lg:px-0"
     >
       <SingleGameReviewSidebar />
       <div class="mt-12 lg:mt-14"><GameInfoShortcode /></div>
 
       <h2
-        class="text-[#ff688b] pb-3 font-medium font-giloryExtrabold text-3xl mt-10"
+        class="text-[#ff688b] pb-3 font-medium font-giloryExtrabold text-3xl mt-10 mob-heading"
       >
         Articles
       </h2>
       <SidebarArticles />
     </div>
     <div class="post-content-module lg:col-start-1 lg:col-end-3">
-      
       <article
         class="font-giloryRegular font-semibold pl-4 md:pl-0 single-game-content-article single_article"
         set:html={node.content}
@@ -68,7 +69,6 @@ const breadcrumb = generateBreadcrumbs(node.uri);
 
       <OtherRelatedgames />
     </div>
-    
   </div>
 </div>
 
@@ -127,6 +127,11 @@ const breadcrumb = generateBreadcrumbs(node.uri);
   @media (max-width: 1280px) {
     .related_topics {
       background-position: left !important;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    h2.mob-heading {
+      display: none;
     }
   }
 </style>
