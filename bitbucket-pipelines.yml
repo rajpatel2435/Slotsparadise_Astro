@@ -19,7 +19,7 @@ pipelines:
           name: Rsync to production server and notify Mattermost
           script:
             # Copy .env file to the server
-            - scp .env.production $MKTCASINOS_SERVER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach/
+            - scp .env.production $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach/
 
             # Stop the lobby process to commit changes
             - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "pm2 stop beach"
