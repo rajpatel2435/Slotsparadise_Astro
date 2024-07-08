@@ -20,7 +20,7 @@ const gameData = await wpquery({
 const gameIds = gameData.category.gamesCategoryIds.featuredGames;
 // console.log(gameIds);
 
-const gameIdsArray = gameIds.split(',').map(id => parseInt(id, 10));
+const gameIdsArray = gameIds?.split(',').map(id => parseInt(id, 10));
 
 
 const data = await wpquery({
