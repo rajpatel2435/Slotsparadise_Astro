@@ -13,6 +13,7 @@ import GuidesSectionArchive from "../components/templates/GuidesSectionArchive.a
 import { cache } from "../cacheUtils.js";
 
 const uri = `/${Astro.params.uri}/`;
+console.log("uri  is", uri);
 let node = null;
 let Template = Archive;
 
@@ -34,7 +35,8 @@ try {
     console.log("URI matches");
 
     // Redirects
-    const requestedPath = "/the-beach" + new URL(Astro.request.url).pathname;
+    const requestedPath = new URL(Astro.request.url).pathname;
+
     const credentials =
       "bmthaXJvQHBhY2lmaWNkZXYuY29tOlFBNzMgMG5nbCBjSVM0IHV5U20gQnRlOCBvUjJR";
     let cachedRedirects = cache.get("redirectCache");
