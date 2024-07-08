@@ -22,7 +22,7 @@ pipelines:
             - scp .env.production $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach/
 
             # Stop the lobby process to commit changes
-            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "pm2 stop beach"
+            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "pm2 stop the-beach"
 
             # Update the remote with rsync
             - rsync -zrSlh --delete --stats ./* $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach
@@ -31,7 +31,7 @@ pipelines:
             - scp .htaccess $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach/
 
             # Stop the lobby process to commit changes
-            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "pm2 start beach"
+            - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "pm2 start the-beach"
 
             # Send message to MatterMost
             - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
