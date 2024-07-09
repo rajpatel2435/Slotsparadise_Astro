@@ -16,7 +16,7 @@ pipelines:
             - node_modules/**
             - .env.production
       - step:
-          name: Rsync to production server and notify Mattermost
+          name: Rsync to production server
           script:
             # Copy .env file to the server
             - scp .env.production $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach/
@@ -31,7 +31,18 @@ pipelines:
             - scp .htaccess $MKTCASINOS_USER@$MKTCASINOS_SERVER:applications/szkhyquxps/public_html/the-beach/
 
             # Stop the lobby process to commit changes
+
             - ssh $MKTCASINOS_USER@$MKTCASINOS_SERVER "pm2 start the-beach"
+
+      - step:
+          name: Purge Cache and notify MatterMost
+          script:
+            # Install JQ
+            - update && apt-get install -y jq
+
+            # Purge the cache
+            - chmod +x purge-cache.sh
+            - ./purge-cache.sh "$SERVER_ID_PROD" "$APP_ID_PROD" "$CD_API_EMAIL" "$CD_API_KEY"
 
             # Send message to MatterMost
             - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
@@ -60,9 +71,9 @@ pipelines:
             - node_modules/**
             - .env.development
       - step:
-          name: Rsync to Development server and notify Mattermost
+          name: Rsync to Development server
           script:
-           # Copy .env file to the server
+            # Copy .env file to the server
             - scp .env.development $MKTCASINOS_USER_DEV@$MKTCASINOS_SERVER_DEV:applications/qvucfjykmh/public_html/the-beach/
 
             # Stop the beach process to commit changes
@@ -76,6 +87,16 @@ pipelines:
 
             # Stop the beach process to commit changes
             - ssh $MKTCASINOS_USER_DEV@$MKTCASINOS_SERVER_DEV "pm2 start beach"
+
+      - step:
+          name: Purge cache and Notify MaterMost
+          script:
+            # Install JQ
+            - apt-get update && apt-get install -y jq
+
+            # Purge the cache
+            - chmod +x purge-cache.sh
+            - ./purge-cache.sh "$SERVER_ID_DEV" "$APP_ID_DEV" "$CD_API_EMAIL" "$CD_API_KEY"
 
             # Send message to MatterMost
             - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
