@@ -38,7 +38,7 @@ pipelines:
           name: Purge Cache and notify MatterMost
           script:
             # Install JQ
-            - update && apt-get install -y jq
+            - apt-get update && apt-get install -y jq
 
             # Purge the cache
             - chmod +x purge-cache.sh
