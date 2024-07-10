@@ -1,8 +1,15 @@
 ---
 import { wpquery } from '../../data/wordpress';
+import { getCachedData, setCachedData } from '../../lib/cache.js';
 import { Image } from "astro:assets";
 
-const data = await wpquery({
+const cacheKey = 'homePostsData'; //define cache key here
+const cachedData = getCachedData(cacheKey); //retrive cached data
+
+
+let data;
+if (cachedData === undefined) {
+data = await wpquery({
   query: `
   query HomePosts {
   posts(where: {in: [992, 1244, 1285, 1287, 1250, 1289, 1252, 2218]}) {
@@ -25,6 +32,12 @@ const data = await wpquery({
 }
   `,
 });
+setCachedData(cacheKey, data);
+}else{
+  data = cachedData;
+  
+}
+
 ---
 
 <!-- Slider main container -->

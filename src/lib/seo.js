@@ -1,4 +1,5 @@
 export const prerender = true;
+import { getCachedData, setCachedData } from '../lib/cache.js';
 import { GRAPHQL_ENDPOINT } from "../data/endpoints";
 // Define a mapping of URI patterns to their transformed equivalents
 const uriTransformations = {
@@ -12,19 +13,18 @@ const uriTransformations = {
 };
 
 export async function seoNodeByURI(uri) {
-  // if (uri.includes("casino/slots", "casino_jackpot-games", "casino/video-poker", "casino/table-games")) {
-  //   uri = uri.replace("casino/slots", "casino/casino_slots");
-  // }
+  const cacheKey = `seoNodeByUri:${uri}`;
+  const cachedData = getCachedData(cacheKey);
 
-   // Transform the URI based on the defined mapping
-   for (const [key, value] of Object.entries(uriTransformations)) {
-    if (uri.includes(key)) {
-      uri = uri.replace(key, value);
-      break;  
-    }
+  if (cachedData) {
+    return cachedData;
   }
-
-  
+  try {
+    Object.entries(uriTransformations).forEach(([key, value]) => {
+      if (uri.includes(key)) {
+        uri = uri.replace(key, value);
+      }
+    });
 
   const response = await fetch(GRAPHQL_ENDPOINT, {
     method: "post",
@@ -252,7 +252,16 @@ export async function seoNodeByURI(uri) {
       },
     }),
   });
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
   const { data } = await response.json();
-  
+
+  // Cache the fetched data
+  setCachedData(cacheKey, data);
   return data;
+} catch (error) {
+  console.error("Error fetching SEO data:", error);
+  return null; // Return null or handle the error in an appropriate way
+}
 }
