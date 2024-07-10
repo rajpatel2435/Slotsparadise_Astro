@@ -1,7 +1,7 @@
 // cache.js
 import NodeCache from "node-cache";
 
-const cache = new NodeCache({ stdTTL: 2  }); // 1 hour
+const cache = new NodeCache({ stdTTL: 3600  }); // 1 hour
 
 
 
