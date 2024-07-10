@@ -61,13 +61,16 @@ const breadcrumb = generateBreadcrumbs(node.uri);
       </h2>
       <SidebarArticles />
     </div>
-    <div class="post-content-module lg:col-start-1 lg:col-end-3">
-      <article
-        class="font-giloryRegular font-semibold pl-4 md:pl-0 single-game-content-article single_article"
-        set:html={node.content}
-      />
 
-      <OtherRelatedgames />
+    <div class="post-content-module lg:col-start-1 lg:col-end-3">
+      <div class="content-wrapper">
+        <article
+          class="font-giloryRegular font-semibold pl-4 md:pl-0 single-game-content-article single_article"
+          set:html={node.content}
+        />
+
+        <OtherRelatedgames />
+      </div>
     </div>
   </div>
 </div>
@@ -132,6 +135,10 @@ const breadcrumb = generateBreadcrumbs(node.uri);
   @media only screen and (max-width: 768px) {
     h2.mob-heading {
       display: none;
+    }
+    .content-wrapper {
+      display: flex;
+      flex-direction: column-reverse;
     }
   }
 </style>
