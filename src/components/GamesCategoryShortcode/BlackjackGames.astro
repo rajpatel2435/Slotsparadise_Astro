@@ -1,8 +1,13 @@
 ---
 import { wpquery } from '../../data/wordpress';
 import { Image } from "astro:assets";
+import { getCachedData, setCachedData } from '../../lib/cache.js';
 
-const gameData = await wpquery({
+const gameDataCacheKey = 'gameData'; 
+const cachedGameData = getCachedData(gameDataCacheKey); 
+let gameData;
+if (cachedGameData === undefined || cachedGameData === null) {
+ gameData = await wpquery({
   query: `
   query newGamesPage {
   category(id: "22", idType: DATABASE_ID) {
@@ -13,6 +18,12 @@ const gameData = await wpquery({
 }
   `,
 });
+setCachedData(gameDataCacheKey, gameData);
+    
+} else {
+    gameData = cachedGameData;
+    
+}
 
 
 const gameIds = gameData.category.gamesCategoryIds.blackjack;
@@ -20,8 +31,12 @@ const gameIds = gameData.category.gamesCategoryIds.blackjack;
 
 const gameIdsArray = gameIds.split(',').map(id => parseInt(id, 10));
 
+const gamesCacheKey = 'gamesData'; // Define cache key for games data here
+const cachedGamesData = getCachedData(gamesCacheKey); // Retrieve cached games data
 
-const data = await wpquery({
+let data;
+if (cachedGamesData === undefined || cachedGameData === null) {
+ data = await wpquery({
   query: `
     query GamesPage($gameIds: [ID!]) {
       posts(where: { in: $gameIds }) {
@@ -47,7 +62,13 @@ const data = await wpquery({
     gameIds: gameIdsArray
   }
 });
+setCachedData(gamesCacheKey, data);
+    
+  } else {
+      data = cachedGamesData;
 
+  }
+  
 //console.log(data);
 ---
 
@@ -64,7 +85,7 @@ const data = await wpquery({
   <!-- Additional required wrapper -->
   <div class="swiper-wrapper">
     {
-      data.posts.edges.map((post: any) => (
+      data.posts?.edges?.map((post: any) => (
     <!-- Slides -->
       <article class="home-slider-article swiper-slide rounded-[3px] bg-white shadow-homePosts overflow-hidden border border-[#EAEAEA]">
         <a class="entry-featured-image-url mb-5" href={`${post.node.uri}`}>

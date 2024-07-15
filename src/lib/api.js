@@ -1,6 +1,7 @@
 export const prerender = true;
 
 import { GRAPHQL_ENDPOINT } from "../data/endpoints";
+import { getCachedData, setCachedData } from '../lib/cache.js';
 
 export async function GuideSidebar() {
   const response = await fetch(GRAPHQL_ENDPOINT, {
@@ -68,6 +69,11 @@ export async function CasinoGuidesArticles() {
 }
 
 export async function getNodeByURI(uri) {
+  const cacheKey = `nodeByUri:${uri}`; //  cache key using the URI
+  const cachedData = getCachedData(cacheKey); // Retrieve cached data
+  if (cachedData) {
+    return cachedData;
+  } else {
   const response = await fetch(GRAPHQL_ENDPOINT, {
     method: "post",
     headers: { "Content-Type": "application/json" },
@@ -316,7 +322,11 @@ export async function getNodeByURI(uri) {
     }),
   });
   const { data } = await response.json();
-  return data;
+      
+      setCachedData(cacheKey, data); // Cache the fetched data
+      return data;
+   
+  }
 }
 
 export async function getAllUris() {
