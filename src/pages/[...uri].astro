@@ -18,6 +18,55 @@ let node = null;
 let Template = Archive;
 
 try {
+  // Redirects
+  const requestedPath = new URL(Astro.request.url).pathname;
+  const requestedPathWithBeach = `/the-beach${requestedPath}`;
+  const credentials =
+    "bmthaXJvQHBhY2lmaWNkZXYuY29tOlFBNzMgMG5nbCBjSVM0IHV5U20gQnRlOCBvUjJR";
+  let cachedRedirects = cache.get("redirectCache");
+
+  try {
+    if (!cachedRedirects) {
+      console.log("Fetching redirects");
+      const response = await fetch(
+        "https://slotsparadise.com/wp-json/redirection/v1/export/all/json",
+        {
+          headers: {
+            Authorization: `Basic ${credentials}`, // Set Authorization header
+          },
+        },
+      );
+
+      if (!response.ok) {
+        throw new Error("Failed to fetch redirects data");
+      }
+
+      const responseData = await response.json();
+      cachedRedirects = JSON.parse(responseData.data);
+      cache.set("redirectCache", cachedRedirects, 3600);
+    }
+
+    const redirect = cachedRedirects.redirects.find(
+      (item) =>
+        item.url === requestedPath ||
+        item.url === requestedPathWithBeach ||
+        requestedPath.includes("/the-beach"),
+    );
+
+    if (redirect && redirect.enabled) {
+      return Astro.redirect(redirect.action_data.url, 301);
+    } else {
+      console.log(
+        redirect
+          ? "Redirect rule is not enabled for the requested path:"
+          : "No redirection found for the requested path:",
+        requestedPath,
+      );
+    }
+  } catch (error) {
+    console.error("Error fetching redirects data:", error);
+  }
+
   const data = await getNodeByURI(uri);
   node = data.nodeByUri;
 
@@ -32,54 +81,6 @@ try {
     Astro.response.status = 404;
     Astro.response.statusText = "Not found";
   } else {
-    console.log("URI matches");
-
-    // Redirects
-    const requestedPath = new URL(Astro.request.url).pathname;
-
-    const credentials =
-      "bmthaXJvQHBhY2lmaWNkZXYuY29tOlFBNzMgMG5nbCBjSVM0IHV5U20gQnRlOCBvUjJR";
-    let cachedRedirects = cache.get("redirectCache");
-
-    try {
-      if (!cachedRedirects) {
-        console.log("Fetching redirects");
-        const response = await fetch(
-          "https://slotsparadise.com/wp-json/redirection/v1/export/all/json",
-          {
-            headers: {
-              Authorization: `Basic ${credentials}`, // Set Authorization header
-            },
-          },
-        );
-
-        if (!response.ok) {
-          throw new Error("Failed to fetch redirects data");
-        }
-
-        const responseData = await response.json();
-        cachedRedirects = JSON.parse(responseData.data);
-        cache.set("redirectCache", cachedRedirects, 3600);
-      }
-
-      const redirect = cachedRedirects.redirects.find(
-        (item) => item.url === requestedPath,
-      );
-
-      if (redirect && redirect.enabled) {
-        return Astro.redirect(redirect.action_data.url, 301);
-      } else {
-        console.log(
-          redirect
-            ? "Redirect rule is not enabled for the requested path:"
-            : "No redirection found for the requested path:",
-          requestedPath,
-        );
-      }
-    } catch (error) {
-      console.error("Error fetching redirects data:", error);
-    }
-
     // Resolve the template
     Template = resolveContentTemplate(node);
   }
