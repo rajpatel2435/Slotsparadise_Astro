@@ -43,7 +43,7 @@ try {
 
       const responseData = await response.json();
       cachedRedirects = JSON.parse(responseData.data);
-      cache.set("redirectCache", cachedRedirects, 3600);
+      cache.set("redirectCache", cachedRedirects, 900);
     }
 
     const redirect = cachedRedirects.redirects.find(
