@@ -350,59 +350,30 @@ const { title } = Astro.props;
         width="0"
         style="display:none;visibility:hidden"></iframe></noscript
     >
-    <!-- End Google Tag Manager (noscript) -->
-
-    <script>
-      window.__lc = window.__lc || {};
-      window.__lc.license = 14939949;
-      window.__lc.chat_between_groups = false;
-      (function (n, t, c) {
-        function i(n) {
-          return e._h ? e._h.apply(null, n) : e._q.push(n);
+    <!-- Begin Comm100 Live Chat Code-->
+    <div id="comm100-button-dynamic"></div>
+    <script type="text/javascript">
+      var Comm100API = Comm100API || {};
+      (function (t) {
+        function e(e) {
+          var a = document.createElement("script"),
+            c = document.getElementsByTagName("script")[0];
+          (a.type = "text/javascript"),
+            (a.async = !0),
+            (a.src = e + t.site_id),
+            c.parentNode.insertBefore(a, c);
         }
-        var e = {
-          _q: [],
-          _h: null,
-          _v: "2.0",
-          on: function () {
-            i(["on", c.call(arguments)]);
-          },
-          once: function () {
-            i(["once", c.call(arguments)]);
-          },
-          off: function () {
-            i(["off", c.call(arguments)]);
-          },
-          get: function () {
-            if (!e._h)
-              throw new Error(
-                "[LiveChatWidget] You can't use getters before load.",
-              );
-            return i(["get", c.call(arguments)]);
-          },
-          call: function () {
-            i(["call", c.call(arguments)]);
-          },
-          init: function () {
-            var n = t.createElement("script");
-            (n.async = !0),
-              (n.type = "text/javascript"),
-              (n.src = "https://cdn.livechatinc.com/tracking.js"),
-              t.head.appendChild(n);
-          },
-        };
-        !n.__lc.asyncInit && e.init(),
-          (n.LiveChatWidget = n.LiveChatWidget || e);
-      })(window, document, [].slice);
+        (t.chat_buttons = t.chat_buttons || []),
+          t.chat_buttons.push({ div_id: "comm100-button-dynamic" }),
+          (t.site_id = 80000228),
+          (t.dynamic = true),
+          e("https://vue.comm100.com/livechat.ashx?siteId="),
+          setTimeout(function () {
+            t.loaded ||
+              e("https://standby.comm100vue.com/livechat.ashx?siteId=");
+          }, 5e3);
+      })(Comm100API || {});
     </script>
-    <noscript
-      ><a href="https://www.livechat.com/chat-with/14939949/" rel="nofollow"
-        >Chat with us</a
-      >, powered by <a
-        href="https://www.livechat.com/?welcome"
-        rel="noopener nofollow"
-        target="_blank">LiveChat</a
-      ></noscript
-    >
+    <!--End Comm100 Live Chat Code-->
   </body>
 </html>
