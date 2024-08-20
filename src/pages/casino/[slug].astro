@@ -1,0 +1,383 @@
+---
+import FeaturedGamesSlider from "../../components/CategoryArchivesComponents/FeaturedGamesSlider.astro";
+import AllGamesCategory from "../../components/CategoryArchivesComponents/AllGamesCategory.astro";
+import Layout from "../../layouts/Layout.astro";
+import ContentSlider from "../../components/CategoryArchivesComponents/ContentSlider.astro";
+import { getSeoData } from "../../lib/seoUtils";
+import { wpquery } from "../../data/wordpress";
+const seo = await getSeoData(Astro);
+const { slug } = Astro.params; // Get the slug from the URL
+const prefixedSlug = `casino_${slug}`; // Add the "games_" prefix
+console.log("slug is", prefixedSlug);
+
+function decodeBase64(encodedString: string): number {
+    try {
+        // Ensure the string is base64 valid
+        encodedString = encodedString.replace(/[^A-Za-z0-9+/=]/g, ""); // Remove invalid characters
+        // Pad the string if necessary
+        while (encodedString.length % 4 !== 0) {
+            encodedString += "=";
+        }
+        // Decode base64 string
+        const decodedString = atob(encodedString);
+        console.log("decoded string:", decodedString);
+        // Strip out non-numeric characters and convert to number
+        const numericString = decodedString.replace(/\D/g, ""); // Remove all non-digits
+        const num = parseInt(numericString, 10);
+        if (isNaN(num)) {
+            throw new Error("Decoded string is not a valid number");
+        }
+        return num;
+    } catch (error) {
+        console.error("Failed to decode base64 string", error);
+        return NaN; // Return NaN if decoding fails
+    }
+}
+
+// import ContentSlider from "../components/CategoryArchivesComponents/ContentSlider.astro";
+const data = await wpquery({
+    query: `query getCategoryBySlug($prefixedSlug: [String]) {
+  categories(where: {slug: $prefixedSlug}) {
+    edges {
+      node {
+        casinoCategoryContent {
+          firstSectionImage {
+            node {
+              sourceUrl
+            }
+          }
+          firstSectionDescription
+          sliderBackgroundImage {
+            node {
+              sourceUrl(size: _2048X2048)
+            }
+          }
+          sliderContent {
+            sliderTexts
+          }
+          iconBlockSection {
+            iconImage {
+              node {
+                sourceUrl
+              }
+            }
+            iconTitle
+            iconDescription
+            iconAlt
+          }
+          lastSectionTitle
+          lastSectionDescription
+          mainTitle
+          mainDesktopImage{
+          node{
+            sourceUrl
+          }
+          }
+           mainMobileImage{
+          node{
+            sourceUrl
+          }
+          }
+        }
+        id
+      }
+    }
+  }
+}`,
+    variables: { prefixedSlug },
+});
+
+//Main Section
+
+//LAST SECTION
+const mainTitle =
+    data?.categories?.edges[0].node?.casinoCategoryContent.mainTitle ?? "";
+
+const mainDesktopImage =
+    data?.categories?.edges[0].node?.casinoCategoryContent.mainDesktopImage.node
+        .sourceUrl ?? "";
+console.log("DESKTOP IMAGE:", mainDesktopImage);
+const mainMobileImage =
+    data?.categories?.edges[0].node?.casinoCategoryContent.mainMobileImage.node
+        .sourceUrl ?? "";
+console.log("DESKTOP IMAGE:", mainMobileImage);
+
+const categoryFirstSectionImage =
+    data?.categories?.edges[0]?.node?.casinoCategoryContent?.firstSectionImage
+        ?.node?.sourceUrl ?? "";
+const category = data?.categories?.edges[0]?.node;
+const base64Id = category.id;
+const categoryId = decodeBase64(base64Id);
+const categoryFirstSectionDescription =
+    data?.categories?.edges[0].node.casinoCategoryContent
+        .firstSectionDescription ?? "";
+
+//SLIDER SECTION
+const sliderBgImg =
+    data?.categories?.edges[0].node?.casinoCategoryContent.sliderBackgroundImage
+        .node.sourceUrl;
+
+const sliderTexts =
+    data?.categories?.edges[0]?.node?.casinoCategoryContent?.sliderContent?.map(
+        (item) => item.sliderTexts,
+    ) || [];
+// Generate dynamic slider props
+const generateSliderProps = (texts) => {
+    const props = {};
+    texts.forEach((text, index) => {
+        props[`sl${index + 1}`] = text || "";
+    });
+    return props;
+};
+
+const sliderProps = generateSliderProps(sliderTexts);
+
+// Prepare sliderProps object with sl1, sl2, sl3... etc.
+// Manually set slider texts for the first five items
+// const sliderText1 = sliderTexts[0] || "";
+// console.log("SLIDER TEXT 1:", sliderText1);
+// const sliderText2 = sliderTexts[1] || "";
+// const sliderText3 = sliderTexts[2] || "";
+// const sliderText4 = sliderTexts[3] || "";
+// const sliderText5 = sliderTexts[4] || "";
+
+//ICON SECTION
+const iconBlocks =
+    data?.categories?.edges[0].node?.casinoCategoryContent.iconBlockSection ||
+    [];
+
+//LAST SECTION
+const lastSectionTitle =
+    data?.categories?.edges[0].node?.casinoCategoryContent.lastSectionTitle ??
+    "";
+
+const lastSectionDesc =
+    data?.categories?.edges[0].node?.casinoCategoryContent
+        .lastSectionDescription ?? "";
+---
+
+<Layout title={seo?.title}>
+    <div class="slots_online_page_container mt-52">
+        <div
+            style={`background-image: url('${mainDesktopImage}');`}
+            class="header-background bg-cover bg-center text-white py-20 md:block hidden"
+        >
+            <div
+                class="header-content-row max-w-[1440px] mx-auto px-4 text-white"
+            >
+                <div class="page-title">
+                    <h1
+                        class="entry-title text-2xl md:text-6xl font-giloryExtrabold"
+                    >
+                        {mainTitle}
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <div
+            style={`background-image: url('${mainMobileImage}');`}
+            class="header-background bg-cover bg-center text-white py-20 md:hidden"
+        >
+            <div
+                class="header-content-row max-w-[1440px] mx-auto px-4 text-white"
+            >
+                <div class="page-title">
+                    <h1
+                        class="entry-title text-2xl md:text-6xl font-giloryExtrabold"
+                    >
+                        {mainTitle}
+                    </h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-bread font-semibold my-10 max-w-[1440px] mx-auto px-4">
+        <div>
+            <p>
+                <span
+                    ><span><a href="/">Home</a></span> &gt;
+                    <span><a href="/casino/blackjack/">{mainTitle}</a></span>
+                </span>
+            </p>
+        </div>
+    </div>
+
+    <div class="first_row font-giloryRegular font-semibold">
+        <div
+            class="inner_content flex flex-col md:flex-row items-center max-w-[1440px] mx-auto py-12 justify-between px-4 gap-12"
+        >
+            <div class="casino_image w-full md:w-1/2">
+                <img
+                    class="w-full"
+                    width="680"
+                    height="680"
+                    src={categoryFirstSectionImage}
+                    alt="BlackJack Online"
+                    title="BlackJack Online"
+                />
+            </div>
+            <div class="first_row_text flex flex-col space-y-2 w-full md:w-1/2">
+                <h2
+                    class="mb-7 text-2xl md:text-6xl font-giloryRegular text-[#ff688b]"
+                >
+                    BlackJack Online
+                </h2>
+                <div
+                    class="flex flex-col space-y-3 text-[18px] leading-8 font-giloryRegular tracking-normal text-[#2F0536]"
+                    set:html={categoryFirstSectionDescription.replace(
+                        /<br\s*\/?>/gi,
+                        "",
+                    )}
+                />
+            </div>
+        </div>
+    </div>
+
+    <!--Featured Games slider -->
+
+    <FeaturedGamesSlider tag_id={categoryId} />
+
+    <!-- All Games block -->
+
+    <AllGamesCategory heading="All Blackjack Games" , categoryId={categoryId} />
+
+    <!--Last content slider page -->
+    <ContentSlider bg_desk={sliderBgImg} {...sliderProps} />
+
+    <!--Last content Block -->
+    <!--
+        
+        Free BlackJack Online block Starts
+    
+    -->
+    <div
+        class="single-game-page-freeslots-section bg-[#ff93aa14] py-20 font-giloryRegular font-semibold"
+    >
+        <div class="heading-text-free-slots mb-12">
+            <div>
+                <h2
+                    class="mb-7 text-2xl md:text-5xl font-giloryRegular text-[#ff688b] text-center"
+                >
+                    Blackjack Online <span class="font-giloryBold">Free</span>
+                </h2>
+            </div>
+        </div>
+
+        <div
+            class="flex flex-col lg:flex-row max-w-[1440px] px-4 mx-auto gap-20"
+        >
+            <!-- Left Column -->
+            <div class="flex flex-col space-y-10 w-full lg:w-1/2">
+                {
+                    iconBlocks.slice(0, 4).map((icon, index) => (
+                        <div>
+                            <div class="free-online-block">
+                                <div class="free-online-svg">
+                                    <img
+                                        alt={icon.iconAlt}
+                                        src={icon.iconImage.node.sourceUrl}
+                                        title={icon.iconAlt}
+                                    />
+                                </div>
+                                <div class="free-online-block-content">
+                                    <p class="free-online-block-content-title text-3xl leading-7 font-giloryMedium tracking-[-0.7px] text-[#2F0536] pb-2.5">
+                                        {icon.iconTitle}
+                                    </p>
+                                    <p class="free-online-block-content-text">
+                                        {icon.iconDescription}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Right Column -->
+            <div class="flex flex-col space-y-10 w-full lg:w-1/2">
+                {
+                    iconBlocks.slice(4).map((icon, index) => (
+                        <div>
+                            <div class="free-online-block">
+                                <div class="free-online-svg">
+                                    <img
+                                        alt={icon.iconAlt}
+                                        src={icon.iconImage.node.sourceUrl}
+                                        title={icon.iconAlt}
+                                    />
+                                </div>
+                                <div class="free-online-block-content">
+                                    <p class="free-online-block-content-title text-3xl leading-7 font-giloryMedium tracking-[-0.7px] text-[#2F0536] pb-2.5">
+                                        {icon.iconTitle}
+                                    </p>
+                                    <p class="free-online-block-content-text">
+                                        {icon.iconDescription}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    ))
+                }
+            </div>
+        </div>
+    </div>
+    <!--
+        
+        Free BlackJack Online block Ends
+    
+    -->
+
+    <div class="last_content_block max-w-[1440px] mx-auto my-12">
+        <h2
+            class="text-3xl md:text-[40px] font-giloryBold tracking-[-1px] text-[#ff688b] text-center mb-8"
+        >
+            {lastSectionTitle}
+        </h2>
+        <div
+            class="text_inner px-4 text-[18px] leading-8 font-giloryRegular text-[#2F0536] space-y-4 font-semibold"
+            set:html={lastSectionDesc.replace(/<br\s*\/?>/gi, "")}
+        />
+
+        <div class="button_module text-center mt-10">
+            <a
+                class="bg-[#a64485] text-white font-giloryExtrabold uppercase px-12 py-5 inline-block rounded-full text-xl"
+                href="https://slotsparadise.com/#register">JOIN NOW</a
+            >
+        </div>
+    </div>
+</Layout>
+
+<style is:global>
+    .free-online-block .free-online-svg {
+        width: 30%;
+    }
+
+    .free-online-block .free-online-block-content {
+        width: 100%;
+        padding-left: 10px;
+    }
+
+    .free-online-block .free-online-block-content-title {
+        text-align: left;
+        font-size: 28px;
+        line-height: 27px;
+        font-family: "Gilroy-Medium";
+        letter-spacing: -0.7px;
+        color: #2f0536;
+        padding-bottom: 10px;
+        font-weight: 800;
+    }
+    .free-online-block {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+
+    @media (min-width: 1320px) and (max-width: 1700px) {
+        .free-online-block .free-online-block-content {
+            width: 90%;
+        }
+    }
+</style>

@@ -1,6 +1,6 @@
 ---
-const { bg_desk, sl1, sl2, sl3, sl4, sl5 } = Astro.props;
-//console.log(bg_desk);
+const { bg_desk, ...sliderTexts } = Astro.props;
+const slides = Object.values(sliderTexts).filter((text) => text); // Filter out any empty texts
 ---
 
 <div class="relative my-16">
@@ -10,53 +10,18 @@ const { bg_desk, sl1, sl2, sl3, sl4, sl5 } = Astro.props;
     style={{ backgroundImage: `url(${bg_desk})` }}
   >
     <div class="swiper-wrapper">
-      <!-- Slides -->
-      <div class="swiper-slide">
-        <div class="slide-content">
-          <p
-            class="text-[#A64485] text-base md:text-2xl bg-white tracking-[-0.55px] py-10 px-8 leading-6 md:leading-8 font-giloryBold border-[#EFEFEF] border-[12px] rounded-2xl"
-          >
-            {sl1}
-          </p>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="slide-content">
-          <p
-            class="text-[#A64485] text-base md:text-2xl bg-white tracking-[-0.55px] py-10 px-8 leading-6 md:leading-8 font-giloryBold border-[#EFEFEF] border-[12px] rounded-2xl"
-          >
-            {sl2}
-          </p>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="slide-content">
-          <p
-            class="text-[#A64485] text-base md:text-2xl bg-white tracking-[-0.55px] py-10 px-8 leading-6 md:leading-8 font-giloryBold border-[#EFEFEF] border-[12px] rounded-2xl"
-          >
-            {sl3}
-          </p>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="slide-content">
-          <p
-            class="text-[#A64485] text-base md:text-2xl bg-white tracking-[-0.55px] py-10 px-8 leading-6 md:leading-8 font-giloryBold border-[#EFEFEF] border-[12px] rounded-2xl"
-          >
-            {sl4}
-          </p>
-        </div>
-      </div>
-      <div class="swiper-slide">
-        <div class="slide-content">
-          <p
-            class="text-[#A64485] text-base md:text-2xl bg-white tracking-[-0.55px] py-10 px-8 leading-6 md:leading-8 font-giloryBold border-[#EFEFEF] border-[12px] rounded-2xl"
-          >
-            {sl5}
-          </p>
-        </div>
-      </div>
-      <!-- Add more slides as needed -->
+      <!-- Generate slides dynamically -->
+      {
+        slides.map((slideText) => (
+          <div class="swiper-slide">
+            <div class="slide-content">
+              <p class="text-[#A64485] text-base md:text-2xl bg-white tracking-[-0.55px] py-10 px-8 leading-6 md:leading-8 font-giloryBold border-[#EFEFEF] border-[12px] rounded-2xl">
+                {slideText}
+              </p>
+            </div>
+          </div>
+        ))
+      }
     </div>
     <!-- If we need pagination -->
     <div class="swiper-pagination"></div>
