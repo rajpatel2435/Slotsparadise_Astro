@@ -237,7 +237,7 @@ const lastSectionDesc =
                     {categoryFirstSectionTitle}
                 </h2>
                 <div
-                    class="flex flex-col space-y-3 text-[18px] leading-8 font-giloryRegular tracking-normal text-[#2F0536]"
+                    class="content_block flex flex-col space-y-3 text-[18px] leading-8 font-giloryRegular tracking-normal text-[#2F0536]"
                     set:html={categoryFirstSectionDescription.replace(
                         /<br\s*\/?>/gi,
                         "",
@@ -366,6 +366,9 @@ const lastSectionDesc =
 </Layout>
 
 <style is:global>
+    .content_block p a{
+        color: #2F0536;
+    }
     .free-online-block .free-online-svg {
         width: 30%;
     }
