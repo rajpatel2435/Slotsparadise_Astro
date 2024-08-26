@@ -118,7 +118,8 @@ const mainMobileImage =
 
 //FIRST SECTION
 const categoryFirstSectionTitle =
-    data?.categories?.edges[0]?.node?.casinoCategoryContent?.firstSectionTitle;
+    data?.categories?.edges[0]?.node?.casinoCategoryContent
+        ?.firstSectionTitle ?? "Image Title";
 const categoryFirstSectionImage =
     data?.categories?.edges[0]?.node?.casinoCategoryContent?.firstSectionImage
         ?.node?.sourceUrl ?? "";
@@ -133,7 +134,7 @@ const categoryId = decodeBase64(base64Id);
 //SLIDER SECTION
 const sliderBgImg =
     data?.categories?.edges[0].node?.casinoCategoryContent.sliderBackgroundImage
-        .node.sourceUrl;
+        .node.sourceUrl ?? "";
 
 const sliderTexts =
     data?.categories?.edges[0]?.node?.casinoCategoryContent?.sliderContent?.map(
@@ -153,7 +154,8 @@ const sliderProps = generateSliderProps(sliderTexts);
 
 //ICON SECTION
 const iconMainTitle =
-    data?.categories?.edges[0].node?.casinoCategoryContent.iconMainTitle;
+    data?.categories?.edges[0].node?.casinoCategoryContent.iconMainTitle ??
+    "Image Title";
 const iconBlocks =
     data?.categories?.edges[0].node?.casinoCategoryContent.iconBlockSection ||
     [];
@@ -161,11 +163,11 @@ const iconBlocks =
 //LAST SECTION
 const lastSectionTitle =
     data?.categories?.edges[0].node?.casinoCategoryContent.lastSectionTitle ??
-    "";
+    "Image Title";
 
 const lastSectionDesc =
     data?.categories?.edges[0].node?.casinoCategoryContent
-        .lastSectionDescription ?? "";
+        .lastSectionDescription ?? "Description";
 ---
 
 <Layout title={seo?.title}>
