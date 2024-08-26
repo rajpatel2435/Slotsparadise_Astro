@@ -12,9 +12,9 @@ const { slug } = Astro.params;
 // Function to format the slug
 const formatSlug = (slug) => {
     const formattedSlug = slug
-        .split("-") // Split the slug at hyphens
-        .map((word) => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
-        .join(" "); // Join the words with spaces
+        .split("-")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ");
 
     // Check if the formattedSlug ends with 'Games', if so, just return it; otherwise, add 'Games'
     return formattedSlug.includes("Games")
@@ -119,7 +119,7 @@ const mainMobileImage =
 //FIRST SECTION
 const categoryFirstSectionTitle =
     data?.categories?.edges[0]?.node?.casinoCategoryContent
-        ?.firstSectionTitle ?? "Image Title";
+        ?.firstSectionTitle ?? "";
 const categoryFirstSectionImage =
     data?.categories?.edges[0]?.node?.casinoCategoryContent?.firstSectionImage
         ?.node?.sourceUrl ?? "";
@@ -154,8 +154,7 @@ const sliderProps = generateSliderProps(sliderTexts);
 
 //ICON SECTION
 const iconMainTitle =
-    data?.categories?.edges[0].node?.casinoCategoryContent.iconMainTitle ??
-    "Image Title";
+    data?.categories?.edges[0].node?.casinoCategoryContent.iconMainTitle ?? "";
 const iconBlocks =
     data?.categories?.edges[0].node?.casinoCategoryContent.iconBlockSection ||
     [];
@@ -163,11 +162,11 @@ const iconBlocks =
 //LAST SECTION
 const lastSectionTitle =
     data?.categories?.edges[0].node?.casinoCategoryContent.lastSectionTitle ??
-    "Image Title";
+    "";
 
 const lastSectionDesc =
     data?.categories?.edges[0].node?.casinoCategoryContent
-        .lastSectionDescription ?? "Description";
+        .lastSectionDescription ?? "";
 ---
 
 <Layout title={seo?.title}>
@@ -368,8 +367,8 @@ const lastSectionDesc =
 </Layout>
 
 <style is:global>
-    .content_block p a{
-        color: #2F0536;
+    .content_block p a {
+        color: #2f0536;
     }
     .free-online-block .free-online-svg {
         width: 30%;
