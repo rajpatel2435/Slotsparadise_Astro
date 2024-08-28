@@ -3,9 +3,7 @@
   <head>
     <title>Most Common Superstitions Across the U.S. | Slots Paradise</title>
     <meta charset="UTF-8">
-    <meta name="description" content="We’ve analyzed common superstitions across the U.S. to learn more
-    about which good and bad luck superstitions are most prevalent in each
-    state.">
+    <meta name="description" content="We’ve analyzed common superstitions across the U.S. to learn more about which good and bad luck superstitions are most prevalent in each state.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">      
     </head>
     <body>
@@ -38,7 +36,7 @@
             <a href="" class="block px-2"><img src="https://slotsparadise.com/the-beach/images/2024/08/facebook-icon-light.svg" alt="" class="w-3"></a>
             <a href="" class="block px-2"><img src="https://slotsparadise.com/the-beach/images/2024/08/linkedin-icon-light.svg" alt="" class="w-5"></a>
             <a href="" class="block px-2"><img src="https://slotsparadise.com/the-beach/images/2024/08/email-icon-light.svg" alt="" class="w-5"></a>
-            <a href="" class="block px-2"><img src="https://slotsparadise.com/the-beach/images/2024/08/copy-link-icon-light.svg" alt="" class="w-5"></a>
+            <a href="" class="block px-2 copy-link-btn"><img src="https://slotsparadise.com/the-beach/images/2024/08/copy-link-icon-light.svg" alt="" class="w-5"></a>
         </div>
         <!--Mobile nav dropdown -->
         <div class="mobile block md:hidden">
@@ -70,7 +68,7 @@
                     <img class="w-3 mx-auto" src="https://slotsparadise.com/the-beach/images/2024/08/email-icon-dark.svg" alt=""></div>
                 <span class="text-sm text-[#181924] font-medium">Email</span>
             </a>
-            <a href="" class="flex items-center gap-2 border-b py-2">
+            <a href="" class="flex items-center gap-2 border-b py-2 copy-link-btn">
                 <div class="border border-black rounded-full w-7 h-7 flex items-center justify-center ml-4">
                     <img class="w-3 mx-auto" src="https://slotsparadise.com/the-beach/images/2024/08/copy-link-icon-dark.svg" alt=""></div>
                 <span class="text-sm text-[#181924] font-medium">Copy link</span>
@@ -1207,7 +1205,7 @@
             <a href="" class="block px-2"><img src="https://slotsparadise.com/the-beach/images/2024/08/facebook-icon-light.svg" alt="" class="w-3"></a>
             <a href="" class="block px-2"><img src="https://slotsparadise.com/the-beach/images/2024/08/linkedin-icon-light.svg" alt="" class="w-5"></a>
             <a href="" class="block px-2"><img src="https://slotsparadise.com/the-beach/images/2024/08/email-icon-light.svg" alt="" class="w-5"></a>
-            <a href="" class="block px-2"><img src="https://slotsparadise.com/the-beach/images/2024/08/copy-link-icon-light.svg" alt="" class="w-5"></a>
+            <a href="" class="block px-2 copy-link-btn"><img src="https://slotsparadise.com/the-beach/images/2024/08/copy-link-icon-light.svg" alt="" class="w-5"></a>
         </div>
         <!--Mobile nav dropdown -->
         <div class="mobile block md:hidden">
@@ -1239,7 +1237,7 @@
                             <img class="w-3 mx-auto" src="https://slotsparadise.com/the-beach/images/2024/08/email-icon-dark.svg" alt=""></div>
                         <span class="text-sm text-[#181924] font-medium">Email</span>
                     </a>
-                    <a href="" class="flex items-center gap-2 border-b py-2">
+                    <a href="" class="flex items-center gap-2 border-b py-2 copy-link-btn">
                         <div class="border border-black rounded-full w-7 h-7 flex items-center justify-center ml-4">
                             <img class="w-3 mx-auto" src="https://slotsparadise.com/the-beach/images/2024/08/copy-link-icon-dark.svg" alt=""></div>
                         <span class="text-sm text-[#181924] font-medium">Copy link</span>
@@ -1502,6 +1500,63 @@
             document.querySelectorAll('.mob_share_btn').forEach(btn => {
                 btn.addEventListener('click', toggleDropdown);
             });
+
+            /**
+             * 
+             * Funtion to copy the url of the page
+             * 
+             */
+
+
+            
+            const copyLinkButtons = document.querySelectorAll('.copy-link-btn') as NodeListOf<HTMLAnchorElement>;
+
+            copyLinkButtons.forEach((button) => {
+                button.addEventListener('click', (event: MouseEvent) => {
+                    event.preventDefault(); // Prevent default link behavior
+
+                    const pageUrl: string = window.location.href;
+
+                    // Copy the page URL to the clipboard
+                    navigator.clipboard.writeText(pageUrl).then(() => {
+                        showTooltip(button, 'Link copied');
+                    }).catch(err => {
+                        console.error('Failed to copy: ', err);
+                    });
+                });
+            });
+
+
+            function showTooltip(element: HTMLElement, message: string) {
+                // Create the tooltip element
+                const tooltip = document.createElement('div');
+                tooltip.innerText = message;
+                tooltip.style.position = 'absolute';
+                tooltip.style.backgroundColor = 'black';
+                tooltip.style.color = 'white';
+                tooltip.style.padding = '5px 10px';
+                tooltip.style.borderRadius = '4px';
+                tooltip.style.fontSize = '12px';
+                tooltip.style.zIndex = '1000';
+                tooltip.style.whiteSpace = 'nowrap';
+
+                // Append the tooltip to the body to ensure proper positioning
+                document.body.appendChild(tooltip);
+
+                // Position the tooltip above the element
+                const rect = element.getBoundingClientRect();
+                tooltip.style.top = `${rect.top - 30}px`;
+                tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.clientWidth / 2}px`;
+
+                // Adjust the position after the element is added to the DOM
+                tooltip.style.left = `${rect.left + rect.width / 2 - tooltip.clientWidth / 2}px`;
+
+                // Remove the tooltip after 2 seconds
+                setTimeout(() => {
+                    tooltip.remove();
+                }, 2000);
+            }
+
             
             
             /** 
