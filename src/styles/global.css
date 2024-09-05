@@ -359,12 +359,12 @@ h6 {
 }
 .right-art p {
   color: #2f0536;
-  /*font-family: 'Gilroy-Light',Helvetica,Arial,Lucida,sans-serif,Helvetica,Arial,Lucida,sans-serif;*/
   font-size: 16px;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  display: -webkit-box;
-  overflow: hidden;
+  line-clamp: 3; /* Standard property (future support) */
+  -webkit-line-clamp: 3; /* WebKit-specific property */
+  -webkit-box-orient: vertical; /* Necessary for -webkit-line-clamp */
+  display: -webkit-box; /* Required for the text to be treated as a flexible box */
+  overflow: hidden; /* Hide the overflowing text */
 }
 
 .right-art a {
@@ -1566,10 +1566,11 @@ h4.wp-block-heading {
 }
 
 .casino_news_blocks .post-excerpt {
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  display: -webkit-box; /* WebKit-specific flexbox */
+  -webkit-line-clamp: 3; /* WebKit-specific line clamp */
+  -webkit-box-orient: vertical; /* Vertical orientation for WebKit */
+  line-clamp: 3; /* Standard line clamp (for future compatibility) */
+  overflow: hidden; /* Hide overflow text */
 }
 
 .casino_news_blocks .right_block .thumb_img {
