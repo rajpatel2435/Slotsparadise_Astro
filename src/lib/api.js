@@ -47,7 +47,7 @@ export async function GuideSidebar() {
   const { data: graphQLData } = await graphQLResponse.json();
 
   // Fetch basepress positions from custom REST API
-  const restResponse = await fetch('https://wordpress-1233981-4586437.cloudwaysapps.com/wp-json/custom/v1/positions');
+  const restResponse = await fetch('https://slotsparadise.com/wp-json/custom/v1/positions');
   const positionsData = await restResponse.json();
 
   // Convert positionsData to a map for easier access
