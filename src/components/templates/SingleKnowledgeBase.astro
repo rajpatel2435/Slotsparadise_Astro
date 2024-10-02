@@ -6,21 +6,24 @@ import { formatDate } from "../../scripts/utils";
 import { generateBreadcrumbs } from "../../scripts/utils";
 const { node } = Astro.props;
 
-//console.log("test" + node.content);
-//console.log(node.seo);
-
 var postId = node.databaseId;
 console.log("post id", postId);
-//const uriParts = node.uri.split("/");
-// Get the second-to-last value for guides categories
-//const guidesCat = uriParts[uriParts.length - 3];
-//const guidesCategory = guidesCat.replace(/-/g, " ");
-//console.log(guidesCat);
 
 const breadcrumb = generateBreadcrumbs(node.uri);
 ---
 
 <div class="main_container">
+  <div
+    class="post-bread font-semibold text-[#555] mx-auto px-2 font-giloryRegular max-w-[1200px] text-black"
+  >
+    <div class="capitalize" set:html={breadcrumb} />
+    <div
+      class="font-semibold text-[#ff688b] text-[18px] mt-4"
+      id="edit-post-link"
+      data-astro-node-id={node.id}
+    >
+    </div>
+  </div>
   <div
     class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/07/thebeach-guides.jpg')] bg-cover bg-center py-16 flex items-center text-white font-giloryRegular"
   >
@@ -41,23 +44,17 @@ const breadcrumb = generateBreadcrumbs(node.uri);
     class="casino_guide_main max-w-[1200px] w-full lg:w-4/5 mx-auto px-2 mt-10 font-giloryRegular mb-10"
   >
     <div>
-      <div class="post-bread font-semibold text-[#555]">
-        <div class="capitalize" set:html={breadcrumb} />
-        <div
-          class="font-semibold text-[#ff688b] text-[18px] mt-4"
-          id="edit-post-link"
-          data-astro-node-id={node.id}
-        >
-        </div>
-      </div>
-
       <div
         class="casino_single_container mt-10 font-giloryRegular font-semibold"
       >
         <div class="inner_container flex flex-col md:flex-row justify-between">
           <CasinoGuideSidebar />
           <div class="content-container w-full md:w-[70%] mt-5 md:mt-0">
-            <h1 class="text-[#ff688b] font-giloryExtrabold">{node.title}</h1>
+            <h1
+              class="text-[#ff688b] font-giloryExtrabold text-[30px] md:text-[32px]"
+            >
+              {node.title}
+            </h1>
             <div class="bpress-post-meta text-[#777] text-sm mb-4 opacity-70">
               <span class="bpress-post-views inline-block mr-4"
                 ><span class="bp-eye inline-block mr-1"
@@ -81,9 +78,14 @@ const breadcrumb = generateBreadcrumbs(node.uri);
   </div>
 </div>
 
-<style>
+<style is:inline>
   img.attachment-post-thumbnail.size-post-thumbnail.wp-post-image {
     margin-bottom: 20px;
+  }
+  @media (max-width: 768px) {
+    .bpress-sidebar {
+      order: 1;
+    }
   }
 </style>
 

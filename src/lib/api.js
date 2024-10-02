@@ -3,15 +3,30 @@ export const prerender = true;
 import { GRAPHQL_ENDPOINT } from "../data/endpoints";
 import { getCachedData, setCachedData } from '../lib/cache.js';
 
+// Helper function to decode base64 and extract term ID
+function decodeBase64(base64String) {
+  try {
+     // Decode base64
+    const decodedString = atob(base64String);
+    // Extract the term ID after "term:"
+    const termId = decodedString.split(':')[1]; 
+    return termId;
+  } catch (e) {
+    console.error('Error decoding base64 string:', base64String, e);
+    return null;
+  }
+}
+
 export async function GuideSidebar() {
-  const response = await fetch(GRAPHQL_ENDPOINT, {
+  const graphQLResponse = await fetch(GRAPHQL_ENDPOINT, {
     method: "post",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       query: `query GuideSidebar {
-            sectionsBasepress(first: 100,where: {parent: 14}) {
+            sectionsBasepress(first: 100, where: {parent: 14}) {
               edges {
                 node {
+                  id
                   name
                   basepress(first: 100) {
                     edges {
@@ -28,9 +43,46 @@ export async function GuideSidebar() {
           `,
     }),
   });
-  const { data } = await response.json();
-  return data;
+
+  const { data: graphQLData } = await graphQLResponse.json();
+
+  // Fetch basepress positions from custom REST API
+  const restResponse = await fetch('https://slotsparadise.com/wp-json/custom/v1/positions');
+  const positionsData = await restResponse.json();
+
+  // Convert positionsData to a map for easier access
+  const positionMap = positionsData.reduce((acc, pos) => {
+    acc[pos.term_id] = parseInt(pos.basepress_position, 10);
+    return acc;
+  }, {});
+
+ 
+
+  // Merge the GraphQL data with basepress_position from the custom API
+  const sections = graphQLData.sectionsBasepress.edges.map((section) => {
+    const termId = decodeBase64(section.node.id);
+    //if not found then default set to 9999
+    const basepress_position = positionMap[termId] !== undefined ? positionMap[termId] : 9999; 
+
+    return {
+      ...section.node,
+      basepress_position,
+    };
+  });
+
+
+  // Sort sections by basepress_position
+  sections.sort((a, b) => {
+    if (a.basepress_position === 9999) return 1; 
+    if (b.basepress_position === 9999) return -1; 
+    return a.basepress_position - b.basepress_position; 
+  });
+
+
+  return sections;
 }
+
+
 
 export async function CasinoGuidesArticles() {
   const response = await fetch(GRAPHQL_ENDPOINT, {
