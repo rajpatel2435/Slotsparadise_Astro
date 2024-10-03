@@ -344,7 +344,7 @@
   zoomIn.addEventListener("click", () => updateZoom(currentZoom + zoomStep));
   zoomOut.addEventListener("click", () => updateZoom(currentZoom - zoomStep));
 
-  d3.xml("https://slotsparadise.com/the-beach/images/2024/10/bad_luck_map.svg").then((data) => {
+  d3.xml("/images/2024/10/bad_luck_map.svg").then((data) => {
     const mapSvg = data.documentElement;
     const container = mapContainer.querySelector("#bad-luck-map-svg");
     container.innerHTML = ""; // Clear existing content
@@ -1560,8 +1560,8 @@
     ];
 
     const iconArray = {
-      "friday-13": "https://slotsparadise.com/the-beach/images/2024/10/friday-the-13th-map-icon.svg",
-      666: "https://slotsparadise.com/the-beach/images/2024/10/number-666-map-icon.svg",
+      "friday-13": "/images/2024/10/friday-the-13th-map-icon.svg",
+      666: "/images/2024/10/number-666-map-icon.svg",
     };
 
     function updateMap() {
