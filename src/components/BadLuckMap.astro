@@ -311,7 +311,10 @@
   let svgGroup;
 
   function enableDrag() {
-    const zoom = d3.zoom().scaleExtent([minZoom, maxZoom]).on("zoom", zoomed);
+    const zoom = d3.zoom().scaleExtent([minZoom, maxZoom]).on("zoom", zoomed).filter(function(event) {
+      // Disable zoom on wheel event
+      return event.type !== "wheel";
+    });
 
     svg.call(zoom);
   }
