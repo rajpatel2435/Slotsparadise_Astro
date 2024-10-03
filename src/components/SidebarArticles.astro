@@ -2,30 +2,32 @@
 import { ADMIN_AJAX_ENDPOINT } from "../data/endpoints";
 ---
 
-<div id="sidebar_content_blocks">
-
-</div>
+<h2
+  class="text-[#ff688b] pb-3 font-medium font-giloryExtrabold text-[26px] mt-10 wp-block-heading"
+>
+  Articles
+</h2>
+<div id="sidebar_content_blocks"></div>
 <script define:vars={{ ADMIN_AJAX_ENDPOINT }}>
-    document.addEventListener("DOMContentLoaded", function () {
-      const ajaxurl = ADMIN_AJAX_ENDPOINT;
+  document.addEventListener("DOMContentLoaded", function () {
+    const ajaxurl = ADMIN_AJAX_ENDPOINT;
 
-      // Make the AJAX request
-      fetch(ajaxurl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
-        },
-        body: "action=get_latest_three_posts_from_category",
+    // Make the AJAX request
+    fetch(ajaxurl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8",
+      },
+      body: "action=get_latest_three_posts_from_category",
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        // Update the content of the container with the sanitized result
+        document.getElementById("sidebar_content_blocks").innerHTML = data;
       })
-        .then((response) => response.text())
-        .then((data) => {
-          // Update the content of the container with the sanitized result
-          document.getElementById("sidebar_content_blocks").innerHTML = data;
-        })
-        .catch((error) => {
-          // Handle fetch errors
-          console.error("Fetch error:", error);
-        });
-    });
-
+      .catch((error) => {
+        // Handle fetch errors
+        console.error("Fetch error:", error);
+      });
+  });
 </script>

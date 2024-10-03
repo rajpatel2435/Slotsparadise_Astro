@@ -683,7 +683,8 @@ a.bpress-viewall {
   }
 
   .page-title h1 {
-    font-size: 18px;
+    font-size: 30px;
+    font-family: 'Gilroy-Bold';
   }
 }
 
