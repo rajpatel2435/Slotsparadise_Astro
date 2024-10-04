@@ -17,7 +17,6 @@
 </div>
  
 
-
 <script>
   import DOMPurify from 'dompurify';
 
@@ -33,7 +32,7 @@
   console.log(searchTerm);
   if(!searchTerm || searchTerm.length === 0) return;
 
-  const url = new URL("/search", window.location.origin);
+  const url = new URL("/the-beach/search", window.location.origin);
 
   url.searchParams.set("q", searchTerm);
 
