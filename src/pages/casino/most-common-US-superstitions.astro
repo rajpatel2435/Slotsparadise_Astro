@@ -1,3 +1,8 @@
+---
+import GoodLuckMap from "../../components/GoodLuckMap.astro";
+import BadLuckMap from "../../components/BadLuckMap.astro";
+---
+
 <!doctype html>
 <html lang="en">
   <head>
@@ -139,7 +144,9 @@
                 </p>
             </div>
 
-            <div class="max-w-[1040px] mx-auto pb-10"><img class="w-full"src="https://slotsparadise.com/the-beach/images/2024/09/good-luck-map.webp" alt="good luck map" /></div>
+            <div class="max-w-[1040px] mx-auto pb-10">
+                <GoodLuckMap />
+            </div>
 
             <div class="content text-[#181924] max-w-[930px] mx-auto text-center relative z-50 px-4 text-xl font-medium pb-20">
                 <p>From sea to shining sea, the most popular good luck superstition is breaking a wishbone,
@@ -195,10 +202,12 @@
                 </p>
             </div>
 
-            <div class="max-w-[1040px] mx-auto pb-10"><img class="w-full"src="https://slotsparadise.com/the-beach/images/2024/09/bad-luck-map.webp" alt="bad luck map" /></div>
+            <div class="max-w-[1040px] mx-auto pb-10">
+                <BadLuckMap />
+            </div>
 
 
-            <div class="content text-[#181924] max-w-[930px] mx-auto text-center relative z-50 px-4 text-xl font-medium pb-40 md:pb-20">
+            <div class="content text-[#181924] max-w-[930px] mx-auto text-center relative z-50 px-4 text-xl font-medium pb-40 md:pb-40">
                 <p>
                     <a class="text-[#EDA579] underline" href="https://www.history.com/topics/folklore/friday-the-13th" target="_blank">Friday the 13th</a> is considered a day of 
                     misfortune and bad luck for many Americans, with the superstition being the most popular bad luck superstition across 98% of states. 
@@ -238,7 +247,7 @@
                     <input
                         type="text"
                         class="search-input w-64 mx-auto text-center outline-none text-lg  text-white"
-                        placeholder="Search for your city…"
+                        placeholder="Search for your state…"
                     />
                     </div>
                 </div>
@@ -1614,6 +1623,7 @@
   
 
     </script>
+
     </body>
     </html>
 
