@@ -4,24 +4,13 @@
       //Redirect the-beach to casino
       const url = new URL(window.location.href);
 
-      // Check if the URL has the `q` query parameter
-      if (url.searchParams.has('q')) {
-          // Remove `/the-beach/` from the pathname if it exists
-          const newPath = url.pathname.replace('/the-beach/', '');
-          const newUrl = `${url.origin}${newPath}${url.search}`;
-      
-          // Redirect to the new URL without `/the-beach/`
-          window.location.replace(newUrl);
-          return;
-      }
-      
-      // Check if the path includes /the-beach/ and no preview query parameter
+      // Check if the path includes /lobby/ and no preview query parameter
       if (url.pathname.includes('/the-beach/') && !url.searchParams.has('preview')) {
-          // Redirect to 404
-          window.location.replace('https://slotsparadise.com/404/');
-          return;
-      }
-      
+         // Redirect to 404
+         window.location.replace('https://slotsparadise.com/404/');
+         return; 
+     }
+ 
     const currentPath = window.location.pathname.toLowerCase();
   
     // Function to check if the current response is a 404
