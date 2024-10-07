@@ -5,7 +5,6 @@ import CasinoGuideSidebar from "../components/CasinoGuideSidebar.astro";
 
 <Layout title="search">
 
-
 <div
 class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/07/thebeach-guides.jpg')] bg-cover bg-center py-16 flex items-center text-white font-giloryRegular mt-52"
 >
@@ -146,7 +145,7 @@ class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2
 
         if (!SEARCH_DATA) {
             try {
-                const res = await fetch("/search.json");
+                const res = await fetch("https://wordpress-1233981-4586437.cloudwaysapps.com/search.json");
                 if (!res.ok) {
                     throw new Error("Something went wrong…please try again");
                 }
@@ -162,7 +161,7 @@ class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2
         }
         if (!FUSE_INSTANCE) return;
         const searchResult = FUSE_INSTANCE.search(search);
-        console.log("🚀 ~ fetchSearchResults ~ searchResult:", searchResult);
+        //console.log("🚀 ~ fetchSearchResults ~ searchResult:", searchResult);
         // Limit the number of results to 20
         const limitedResults = searchResult.slice(0, 20);
     
