@@ -3,7 +3,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const currentPath = url.pathname.toLowerCase();
   const hasQParam = url.searchParams.has('q');
 
-
   // If '/the-beach/' is present without 'preview' or 'q' parameter, redirect to 404
   if (currentPath.includes('/the-beach/') && !url.searchParams.has('preview') && !hasQParam) {
     window.location.replace('https://slotsparadise.com/404/');
