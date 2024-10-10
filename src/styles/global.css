@@ -917,6 +917,7 @@ header .header-background {
 
   h2 {
     font-size: 26px;
+    
   }
   h3 {
     font-size: 22px;
@@ -1619,3 +1620,18 @@ strong {
 .bpress-sidebar div:nth-child(8) {
   display: none;
 } */
+h2, h3 {
+  color: #ff688b;
+  font-weight: 900;
+  font-family: Gilroy-ExtraBold;
+  padding-bottom: 10px;
+}
+
+h2 {
+  font-size: 26px;
+}
+
+h3 {
+  font-size: 22px;
+}
+
