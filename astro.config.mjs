@@ -15,7 +15,7 @@ console.log("endpoint is", GRAPHQL_ENDPOINT);
 export default defineConfig({
   integrations: [tailwind()],
   base: "/the-beach",
-  trailingSlash: "ignore",
+  trailingSlash: "always",
   output: "server",
   adapter: node({
     mode: "standalone",

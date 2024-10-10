@@ -1,44 +1,55 @@
-<div id="search-container" class='max-w-md mx-auto mt-2'>
-    <div class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden">
+<div id="search-container" class="max-w-md mx-auto mt-2">
+    <div
+        class="relative flex items-center w-full h-12 rounded-lg focus-within:shadow-lg bg-white overflow-hidden"
+    >
         <div class="grid place-items-center h-full w-12 text-gray-300">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+            >
+                <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
             </svg>
         </div>
         <form class="form w-full">
-        <input
-        class="peer h-full w-full outline-none text-base text-[#666] pr-2 font-giloryRegular font-semibold"
-        type="text"
-        name="search"
-        id="search"
-        placeholder="Search something.." /> 
+            <input
+                class="peer h-full w-full outline-none text-base text-[#666] pr-2 font-giloryRegular font-semibold"
+                type="text"
+                name="search"
+                id="search"
+                placeholder="Search something.."
+            />
         </form>
     </div>
 </div>
 
-
-
 <script>
-  import DOMPurify from 'dompurify';
+    import DOMPurify from "dompurify";
 
-  const form = document.querySelector("form");
-  form?.addEventListener("submit", (e)=> {
-  e.preventDefault();
-  //console.log(e.target);
+    const form = document.querySelector("form");
+    form?.addEventListener("submit", (e) => {
+        e.preventDefault();
+        //console.log(e.target);
 
-  const formData = new FormData(form);
-  //console.log(formData);
+        const formData = new FormData(form);
+        //console.log(formData);
 
-  const searchTerm = DOMPurify.sanitize(formData.get("search")?.toString());
-  if(!searchTerm || searchTerm.length === 0) return;
+        const searchTerm = DOMPurify.sanitize(
+            formData.get("search")?.toString(),
+        );
+        console.log(searchTerm);
+        if (!searchTerm || searchTerm.length === 0) return;
 
-  const url = new URL("/the-beach/search", window.location.origin);
+        const url = new URL("the-beach/search/", window.location.origin);
 
-  url.searchParams.set("q", searchTerm);
+        url.searchParams.set("q", searchTerm);
 
-  window.location.assign(url.toString());
-})
-
+        window.location.assign(url.toString());
+    });
 </script>
-
-

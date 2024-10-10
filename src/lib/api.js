@@ -1,18 +1,18 @@
 export const prerender = true;
 
 import { GRAPHQL_ENDPOINT } from "../data/endpoints";
-import { getCachedData, setCachedData } from '../lib/cache.js';
+import { getCachedData, setCachedData } from "../lib/cache.js";
 
 // Helper function to decode base64 and extract term ID
 function decodeBase64(base64String) {
   try {
-     // Decode base64
+    // Decode base64
     const decodedString = atob(base64String);
     // Extract the term ID after "term:"
-    const termId = decodedString.split(':')[1]; 
+    const termId = decodedString.split(":")[1];
     return termId;
   } catch (e) {
-    console.error('Error decoding base64 string:', base64String, e);
+    console.error("Error decoding base64 string:", base64String, e);
     return null;
   }
 }
@@ -47,7 +47,9 @@ export async function GuideSidebar() {
   const { data: graphQLData } = await graphQLResponse.json();
 
   // Fetch basepress positions from custom REST API
-  const restResponse = await fetch('https://slotsparadise.com/wp-json/custom/v1/positions');
+  const restResponse = await fetch(
+    "https://slotsparadise.com/wp-json/custom/v1/positions"
+  );
   const positionsData = await restResponse.json();
 
   // Convert positionsData to a map for easier access
@@ -56,13 +58,12 @@ export async function GuideSidebar() {
     return acc;
   }, {});
 
- 
-
   // Merge the GraphQL data with basepress_position from the custom API
   const sections = graphQLData.sectionsBasepress.edges.map((section) => {
     const termId = decodeBase64(section.node.id);
     //if not found then default set to 9999
-    const basepress_position = positionMap[termId] !== undefined ? positionMap[termId] : 9999; 
+    const basepress_position =
+      positionMap[termId] !== undefined ? positionMap[termId] : 9999;
 
     return {
       ...section.node,
@@ -70,19 +71,15 @@ export async function GuideSidebar() {
     };
   });
 
-
   // Sort sections by basepress_position
   sections.sort((a, b) => {
-    if (a.basepress_position === 9999) return 1; 
-    if (b.basepress_position === 9999) return -1; 
-    return a.basepress_position - b.basepress_position; 
+    if (a.basepress_position === 9999) return 1;
+    if (b.basepress_position === 9999) return -1;
+    return a.basepress_position - b.basepress_position;
   });
-
 
   return sections;
 }
-
-
 
 export async function CasinoGuidesArticles() {
   const response = await fetch(GRAPHQL_ENDPOINT, {
@@ -126,11 +123,11 @@ export async function getNodeByURI(uri) {
   if (cachedData) {
     return cachedData;
   } else {
-  const response = await fetch(GRAPHQL_ENDPOINT, {
-    method: "post",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      query: `query GetNodeByURI($uri: String!) {
+    const response = await fetch(GRAPHQL_ENDPOINT, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: `query GetNodeByURI($uri: String!) {
             nodeByUri(uri: $uri) {
               __typename
               isContentNode
@@ -368,16 +365,15 @@ export async function getNodeByURI(uri) {
             }
           }
           `,
-      variables: {
-        uri: uri,
-      },
-    }),
-  });
-  const { data } = await response.json();
-      
-      setCachedData(cacheKey, data); // Cache the fetched data
-      return data;
-   
+        variables: {
+          uri: uri,
+        },
+      }),
+    });
+    const { data } = await response.json();
+
+    setCachedData(cacheKey, data); // Cache the fetched data
+    return data;
   }
 }
 
@@ -530,6 +526,7 @@ export async function BasepressForSearch() {
                       title
                       uri
                       excerpt
+                      date
                     }
                   }
                 }
