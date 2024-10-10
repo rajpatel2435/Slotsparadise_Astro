@@ -14,7 +14,7 @@ async function getPosts() {
 
 // Define the GET handler
 export async function GET() {
-  console.log("API called");
+  //console.log("API called");
   const posts = await getPosts();
   return new Response(JSON.stringify(posts), {
     status: 200,

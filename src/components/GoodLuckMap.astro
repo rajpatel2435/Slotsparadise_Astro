@@ -661,9 +661,9 @@
   zoomIn.addEventListener("click", () => updateZoom(currentZoom + zoomStep));
   zoomOut.addEventListener("click", () => updateZoom(currentZoom - zoomStep));
 
-  d3.xml("https://wordpress-1233981-4586437.cloudwaysapps.com/the-beach/images/2024/10/map.svg").then((data) => {
+  d3.xml("https://slotsparadise.com/the-beach/images/2024/10/map.svg").then((data) => {
     const mapSvg = data.documentElement;
-    const container = mapContainer.querySelector("#good-luck-map-svg");
+    const container = mapContainer.querySelector("#good-luck-map-svg"); 
     container.innerHTML = ""; // Clear existing content
     container.appendChild(mapSvg);
 
@@ -1877,9 +1877,9 @@
     ];
 
     const iconArray = {
-      wishbone: "https://wordpress-1233981-4586437.cloudwaysapps.com/the-beach/images/2024/10/wishbone-map-icon.svg",
-      "four-leaf-clover": "https://wordpress-1233981-4586437.cloudwaysapps.com/the-beach/images/2024/10/four-leaf-clover-map-icon.svg",
-      "beginners-luck": "https://wordpress-1233981-4586437.cloudwaysapps.com/the-beach/images/2024/10/beginners-luck-map-icon.svg",
+      wishbone: "https://slotsparadise.com/the-beach/images/2024/10/wishbone-map-icon.svg",
+      "four-leaf-clover": "https://slotsparadise.com/the-beach/images/2024/10/four-leaf-clover-map-icon.svg",
+      "beginners-luck": "https://slotsparadise.com/the-beach/images/2024/10/beginners-luck-map-icon.svg",
     };
 
     function updateMap() {
