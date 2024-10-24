@@ -8,7 +8,7 @@ pipelines:
             # Install dependencies and build assets
             - npm install
             - npx update-browserslist-db@latest
-            - echo GRAPHQL_ENDPOINT=https://slotsparadise.com/wp-graphql >> .env.production
+            - echo GRAPHQL_ENDPOINT=https://slotsparadise.com/wp-graphql/ >> .env.production
             - echo ADMIN_AJAX_ENDPOINT=https://slotsparadise.com/wp-admin/admin-ajax.php >> .env.production
             - npm run build
             # Save build assets as an artifact
@@ -64,7 +64,7 @@ pipelines:
             # Install dependencies and build assets
             - npm install
             - npx update-browserslist-db@latest
-            - echo GRAPHQL_ENDPOINT=https://wordpress-1233981-4586437.cloudwaysapps.com/wp-graphql >> .env.development
+            - echo GRAPHQL_ENDPOINT=https://wordpress-1233981-4586437.cloudwaysapps.com/wp-graphql/ >> .env.development
             - echo ADMIN_AJAX_ENDPOINT=https://wordpress-1233981-4586437.cloudwaysapps.com/wp-admin/admin-ajax.php >> .env.development
             - npm run build-dev
             # Save build assets as an artifact
