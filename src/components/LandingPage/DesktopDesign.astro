@@ -1,43 +1,64 @@
 ---
 import TermsAndConditions from "./TermsAndConditions.astro";
-const { h1, h2, logo_image, bg_image, footer_image, bg_btn } = Astro.props;
-
-/*  console.log(h1);
-console.log(bg_btn);
-console.log(bg_image);
-console.log(h2)  */
+const { h1, h2, logo_image, bg_image, bg_image_tab, bg_image_mob, footer_image, footer_image_1, footer_image_2, bg_btn } = Astro.props;
 ---
 
-<div
-  class="content-container relative bg-cover bg-center h-screen"
-  style={{ backgroundImage: `url(${bg_image})` }}
->
-  <div class="header-content pl-[8%] pt-2 2xl:pt-[8%]">
+
+<div class="content-container relative h-screen bg-cover bg-center">
+  <style
+    define:vars={{
+      desktopImage: `url("${bg_image}")`,
+      mobileImage: `url("${bg_image_mob}")`,
+      tabImage: `url("${bg_image_tab}")`,
+    }}
+    >
+      @media (min-width: 768px) {
+    .content-container {
+      background-image: var(--tabImage);
+    }
+    }
+    @media (max-width: 767px) {
+      .content-container {
+        background-image: var(--mobileImage);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .content-container {
+        background-image: var(--desktopImage);
+      }
+    }
+</style>
+
+  <div class="header-content pl-[8%] pt-2 2xl:pt-[8%] sm:max-lg:flex sm:max-lg:p-[0] items-center flex-col">
     <img width="420" height="143" title="logo" alt="logo" src={logo_image} />
     <div class="et_pb_header_content_wrapper">
-      <div class="content max-w-[400px]">
-        <h1
-          class="text-[125px] 2xl:text-[170px] 2xl:leading-[209px] text-center font-giloryExtrabold text-white tracking-[-5.13px] drop-shadow-xl"
-        >
-          {h1}
-        </h1>
-        <h2
-          class="sub_heading text-[65px] tracking-[-2.04px] leading-[83px] text-center font-giloryExtrabold text-white mt-[-50px]"
-        >
-          {h2}
-        </h2>
+      <div class="content lg:max-w-[400px]  w-full">
+        <div>
+          <h1
+            class="text-[110px] 2xl:text-[170px] 2xl:leading-[209px] text-center font-giloryExtrabold text-white tracking-[-5.13px] drop-shadow-xl md:max-lg:inline"
+          >
+         {h1}
+          </h1>
+          <h2
+            class="sub_heading lg:text-[65px] text-[48px] md:text-[110px] tracking-[-2.04px] leading-[83px] text-center font-giloryExtrabold text-white mt-[-50px] md:max-lg:inline"
+          >
+          <span class="md:inline-block md:w-[55px] lg:w-[auto] md:max-lg:text-2xl"> UP TO</span>
+            {h2}
+          </h2>
+      </div>
         <a
           class={`join-now block text-white mx-auto w-[330px] text-center text-4xl tracking-[0px] uppercase font-giloryBold py-5 px-16 rounded-[50px] ${bg_btn}`}
           href="https://slotsparadise.com/#register">Join Now</a
         >
         <a
-          class="terms button block text-white text-center mt-5 2xl:mt-12 text-2xl tracking-normal cursor-pointer font-giloryRegular"
+          class="terms button block text-white text-center mt-5 2xl:mt-12 text-2xl tracking-normal cursor-pointer font-giloryRegular absolute lg:relative left-0 right-0 m-auto max-w-[1024px] md:left-0 md:right-0 md:m-auto bottom-0"
           id="desk-popup"
           href="#">Terms &amp; Conditions</a
         >
       </div>
       <TermsAndConditions />
-      <div class="footer-img pr-5 absolute bottom-5">
+      <div class="footer-img pr-5 absolute bottom-5 lg:block hidden">
         <img
           class="w-full rounded-[40px]"
           width="800"
@@ -46,6 +67,24 @@ console.log(h2)  */
           title="Support"
         />
       </div>
+
+      <div class="lg:hidden absolute bottom-9 left-0 right-0 ">
+      <img
+          class="w-full rounded-[40px] max-w-[840px] mx-auto mb-2"
+          width="800"
+          height="200"
+          srcset={footer_image_1}
+          title="Support"
+        />
+        <img
+          class="w-full rounded-[40px]  max-w-[840px] mx-auto"
+          width="800"
+          height="200"
+          srcset={footer_image_2}
+          title="Support"
+        />
+        </div>
+
     </div>
   </div>
 </div>
