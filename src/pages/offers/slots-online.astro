@@ -3,8 +3,6 @@
 import LayoutLandingPage from "../../layouts/LayoutLandingPage.astro";
 import HeaderLandingPage from "../../components/LandingPage/HeaderLandingPage.astro";
 import DesktopDesign from "../../components/LandingPage/DesktopDesign.astro";
-import TabLandingPage from "../../components/LandingPage/TabLandingPage.astro";
-import MobileLandingPage from "../../components/LandingPage/MobileLandingPage.astro";
 ---
 
 <LayoutLandingPage title="slots-online" />
@@ -14,35 +12,15 @@ import MobileLandingPage from "../../components/LandingPage/MobileLandingPage.as
     <HeaderLandingPage />
   </div>
   <div class="main-content w-full">
-    <div class="desktop-design hidden lg:block">
+    <div class="desktop-design">
       <DesktopDesign
-        h1="250%"
-        h2="UP TO $2,500"
-        logo_image="https://slotsparadise.com/the-beach/images/2023/01/Group-2.png"
-        bg_image="https://slotsparadise.com/wp-content/uploads/2023/01/PANTALLAS-2.png"
-        footer_image="https://slotsparadise.com/wp-content/uploads/2023/01/crypto_contact.png"
-        bg_btn="bg-[#ea728c]"
-      />
-    </div>
-
-    <div class="tab-design hidden md:block lg:hidden">
-      <TabLandingPage
         h1="250%"
         h2="$2,500"
         logo_image="https://slotsparadise.com/the-beach/images/2023/01/Group-2.png"
-        bg_image="https://slotsparadise.com/wp-content/uploads/2023/01/ipad1.png"
-        footer_image_1="https://slotsparadise.com/the-beach/images/2023/01/support.png"
-        footer_image_2="https://slotsparadise.com/the-beach/images/2023/01/crypto-currency.png"
-        bg_btn="bg-[#ea728c]"
-      />
-    </div>
-
-    <div class="mobile-design block md:hidden">
-      <MobileLandingPage
-        h1="250%"
-        h2="UP TO $2,500"
-        logo_image="https://slotsparadise.com/the-beach/images/2023/01/Group-2.png"
-        bg_image="https://slotsparadise.com/wp-content/uploads/2023/01/PANTALLAS-2-mob.png"
+        bg_image="https://slotsparadise.com/wp-content/uploads/2023/01/PANTALLAS-2.png"
+        bg_image_tab="https://slotsparadise.com/wp-content/uploads/2023/01/ipad1.png"
+        bg_image_mob="https://slotsparadise.com/wp-content/uploads/2023/01/PANTALLAS-2-mob.png"
+        footer_image="https://slotsparadise.com/wp-content/uploads/2023/01/crypto_contact.png"
         footer_image_1="https://slotsparadise.com/the-beach/images/2023/01/support.png"
         footer_image_2="https://slotsparadise.com/the-beach/images/2023/01/crypto-currency.png"
         bg_btn="bg-[#ea728c]"
