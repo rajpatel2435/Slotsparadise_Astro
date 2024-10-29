@@ -17,7 +17,8 @@ import HeaderLandingPage from "../components/LandingPage/HeaderLandingPage.astro
               md:bg-[url('https://slotsparadise.com/the-beach/images/2023/07/medium-slots.png')] 
               lg:bg-[url('https://slotsparadise.com/the-beach/images/2023/07/PANTALLAS-3.png')]"
       >
-      <div class="header-content pl-[8%] pt-4% lg:pt-[8%] text-center lg:text-left flex flex-col items-center lg:items-start">
+      <div class="header-content pt-[4%] lg:pl-[8%] lg:pt-[8%] text-center lg:text-left flex flex-col items-center lg:items-start">
+        
         <img
           width="420"
           height="143"
@@ -54,7 +55,7 @@ import HeaderLandingPage from "../components/LandingPage/HeaderLandingPage.astro
                 href="https://slotsparadise.com/#register">Join Now</a
               >
               <a
-                class="terms button block text-white text-center lg:text-left mt-5 text-xl lg:text-2xl cursor-pointer font-giloryRegular hidden lg:block"
+                class="terms button block text-white text-center lg:text-left mt-5 text-xl lg:text-2xl cursor-pointer font-giloryRegular lg:block absolute lg:relative left-0 right-0 m-auto max-w-[1024px] md:left-0 md:right-0 md:m-auto md:bottom-0 bottom-3"
                 id="popup-trigger"
                 href="#">Terms & Conditions</a
               >
@@ -77,7 +78,7 @@ import HeaderLandingPage from "../components/LandingPage/HeaderLandingPage.astro
 
         <!-- Footer Image for Tablet and Mobile -->
         <div
-          class="footer-img absolute bottom-2 left-1/2 transform -translate-x-1/2 w-full max-w-[840px] px-2 lg:hidden"
+          class="footer-img absolute bottom-10 left-1/2 transform -translate-x-1/2 w-full max-w-[840px] px-2 lg:hidden"
         >
           <img
             class="rounded-[40px] w-full max-w-[840px] mx-auto mb-2"
@@ -95,16 +96,8 @@ import HeaderLandingPage from "../components/LandingPage/HeaderLandingPage.astro
             title="currency"
             alt="currency"
           />
-          <a
-            class="terms button block text-white text-center mt-12 text-2xl tracking-normal cursor-pointer font-giloryRegular underline"
-            id="desk-popup"
-            href="#"
-          >
-            Terms &amp; Conditions
-          </a>
+
         </div>
-
-
       </div>
     </div>
   </div>
@@ -115,7 +108,7 @@ import HeaderLandingPage from "../components/LandingPage/HeaderLandingPage.astro
   class="popup w-11/12 lg:w-1/2 bg-white fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 hidden transition-all overflow-auto"
   id="popup-section"
 >
-  <div class="popup__content overflow-auto px-4 lg:px-12 py-6 lg:py-12 text-black text-base">
+  <div class="popup__content overflow-auto px-4 lg:px-12 py-6 lg:py-12 text-black md:text-base sm:p-12 text-[12px]">
     <div class="close absolute right-5 top-5 cursor-pointer" id="closeButton">
       <p class="font-bold">&#x2715;</p>
     </div>
@@ -163,7 +156,7 @@ import HeaderLandingPage from "../components/LandingPage/HeaderLandingPage.astro
   </div>
 </section>
 
-<!-- <script>
+<script>
   const popupTrigger = document.getElementById('popup-trigger');
   const popupSection = document.getElementById('popup-section');
   const closeButton = document.getElementById('closeButton');
@@ -176,4 +169,4 @@ import HeaderLandingPage from "../components/LandingPage/HeaderLandingPage.astro
   closeButton.addEventListener('click', () => {
     popupSection.classList.add('hidden');
   });
-</script> -->
+</script>
