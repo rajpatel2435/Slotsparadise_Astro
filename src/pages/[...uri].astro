@@ -24,6 +24,7 @@ try {
   const credentials =
     "bmthaXJvQHBhY2lmaWNkZXYuY29tOlFBNzMgMG5nbCBjSVM0IHV5U20gQnRlOCBvUjJR";
   let cachedRedirects = cache.get("redirectCache");
+  
 
   try {
     if (!cachedRedirects) {
@@ -43,7 +44,7 @@ try {
 
       const responseData = await response.json();
       cachedRedirects = JSON.parse(responseData.data);
-      cache.set("redirectCache", cachedRedirects, 900);
+      cache.set("redirectCache", cachedRedirects, 60);
     }
 
     const redirect = cachedRedirects.redirects.find(
@@ -52,6 +53,10 @@ try {
         item.url === requestedPathWithBeach ||
         requestedPath.includes("/the-beach"),
     );
+
+    console.log("Requested path:", requestedPath);
+    console.log("Redirect found:", redirect);
+
 
     if (redirect && redirect.enabled) {
       return Astro.redirect(redirect.action_data.url, 301);
