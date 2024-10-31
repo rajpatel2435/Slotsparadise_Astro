@@ -2,11 +2,9 @@
 const { node } = Astro.props;
 import SidebarArticles from "../SidebarArticles.astro";
 import { generateBreadcrumbs } from "../../scripts/utils";
-//console.log("text 2" + node.content);
-//console.log(node.uri);
+import spCasinoBanner from "../../assets/news-banners/SP_Header_CasinoNews_Desk_1890x200.webp";
 
 const breadcrumb = generateBreadcrumbs(node.uri);
-//console.log(breadcrumb);
 ---
 
 <div class="post-bread font-semibold px-10 text-black max-w-[1440px] mx-auto">
@@ -19,7 +17,8 @@ const breadcrumb = generateBreadcrumbs(node.uri);
   </div>
 </div>
 <div
-  class="header-background header-bg bg-cover bg-center bg-[url('https://slotsparadise.com/wp-content/uploads/2022/08/casino-guides-header-v23.jpg')] text-white font-giloryRegular py-20"
+  class="header-background header-bg bg-cover bg-center text-white font-giloryRegular py-20"
+  style={`background-image: url('${spCasinoBanner.src}');`}
 >
   <div class="header-content-row max-w-[1440px] mx-auto px-4">
     <div class="header-content">
@@ -107,6 +106,10 @@ const breadcrumb = generateBreadcrumbs(node.uri);
     .post-bread {
       color: black;
       margin-top: 20px;
+    }
+
+    .header-background {
+      background-image: none !important;
     }
   }
 </style>

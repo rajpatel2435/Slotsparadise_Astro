@@ -17,6 +17,14 @@ const { title } = Astro.props;
   <head>
     <script src="../scripts/login.js"></script>
     <script src="../scripts/script.js"></script>
+    <script
+      src="https://slotsparadise.com/wp-shared-header-footer/common/lib/js/global.min.js?v=1.0.9"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://slotsparadise.com/wp-shared-header-footer/common/lib/styles/global.min.css?v=1.0.9"
+    />
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link
@@ -350,11 +358,13 @@ const { title } = Astro.props;
         width="0"
         style="display:none;visibility:hidden"></iframe></noscript
     >
-    <!-- Begin Comm100 Live Chat Code-->
+    <!--  Comm100 Live Chat Code -->
     <div id="comm100-button-dynamic"></div>
     <script type="text/javascript">
       var Comm100API = Comm100API || {};
-      (function (t) {
+
+      function loadLiveChat() {
+        var t = Comm100API;
         function e(e) {
           var a = document.createElement("script"),
             c = document.getElementsByTagName("script")[0];
@@ -371,9 +381,28 @@ const { title } = Astro.props;
           setTimeout(function () {
             t.loaded ||
               e("https://standby.comm100vue.com/livechat.ashx?siteId=");
-          }, 5e3);
-      })(Comm100API || {});
+          }, 15000);
+      }
+      // Function to check scroll and load chat
+      function checkScroll() {
+        var scrollTop = window.scrollY || document.documentElement.scrollTop;
+        var windowHeight =
+          window.innerHeight || document.documentElement.clientHeight;
+        var documentHeight = document.documentElement.scrollHeight;
+
+        if (documentHeight - (scrollTop + windowHeight) < 100) {
+          window.removeEventListener("scroll", checkScroll);
+          loadLiveChat();
+        }
+      }
+      window.addEventListener("scroll", checkScroll);
+
+      // Fallback to load chat after a period if no scroll
+      setTimeout(function () {
+        window.removeEventListener("scroll", checkScroll);
+        loadLiveChat();
+      }, 15000);
     </script>
-    <!--End Comm100 Live Chat Code-->
+    <!-- End Comm100 Live Chat Code -->
   </body>
 </html>

@@ -13,7 +13,6 @@ import GuidesSectionArchive from "../components/templates/GuidesSectionArchive.a
 import { cache } from "../cacheUtils.js";
 
 const uri = `/${Astro.params.uri}/`;
-console.log("uri  is", uri);
 let node = null;
 let Template = Archive;
 
@@ -27,7 +26,6 @@ try {
 
   try {
     if (!cachedRedirects) {
-      console.log("Fetching redirects");
       const response = await fetch(
         "https://slotsparadise.com/wp-json/redirection/v1/export/all/json",
         {
@@ -43,7 +41,7 @@ try {
 
       const responseData = await response.json();
       cachedRedirects = JSON.parse(responseData.data);
-      cache.set("redirectCache", cachedRedirects, 900);
+      cache.set("redirectCache", cachedRedirects, 60);
     }
 
     const redirect = cachedRedirects.redirects.find(
@@ -69,8 +67,6 @@ try {
 
   const data = await getNodeByURI(uri);
   node = data.nodeByUri;
-
-  //console.log("value is" , node);
 
   if (!node || node === null) {
     console.error("Node not found");
