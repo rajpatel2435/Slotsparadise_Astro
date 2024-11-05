@@ -26,242 +26,251 @@ export async function seoNodeByURI(uri) {
       }
     });
 
-  const response = await fetch(GRAPHQL_ENDPOINT, {
-    method: "post",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      query: `query seoUri($uri: String!) {
-              nodeByUri(uri: $uri) {
-                __typename
-                ... on Page {
-                  id
-                  title
-                  uri
-                  slug
-                  seo {
-                    opengraphSiteName
-                    breadcrumbs {
-                      text
-                      url
-                    }
-                    opengraphUrl
-                    canonical
-                    metaDesc
-                    metaRobotsNofollow
-                    metaRobotsNoindex
-                    title
-                    opengraphDescription
-                    opengraphPublishedTime
-                    opengraphModifiedTime
-                    opengraphImage {
-                      sourceUrl
-                      mimeType
-                      author {
-                        node {
-                          name
-                        }
-                      }
-                    }
-                    opengraphType
-                    readingTime
-                    schema {
-                      raw
-                    }
-                  }
-                }
-                ... on Post {
-                  id
-                  uri
-                  slug
-                  seo {
-                    opengraphSiteName
-                    breadcrumbs {
-                      text
-                      url
-                    }
-                    opengraphUrl
-                    canonical
-                    metaDesc
-                    metaRobotsNofollow
-                    metaRobotsNoindex
-                    title
-                    opengraphDescription
-                    opengraphPublishedTime
-                    opengraphModifiedTime
-                    opengraphImage {
-                      sourceUrl
-                      mimeType
-                      author {
-                        node {
-                          name
-                        }
-                      }
-                    }
-                    opengraphType
-                    readingTime
-                    schema {
-                      raw
-                    }
-                  }
-                }
-                ... on Category {
-                  id
-                  name
-                  uri
-                  slug
-                  seo {
-                    opengraphSiteName
-                    breadcrumbs {
-                      text
-                      url
-                    }
-                    opengraphUrl
-                    canonical
-                    metaDesc
-                    metaRobotsNofollow
-                    metaRobotsNoindex
-                    title
-                    opengraphDescription
-                    opengraphPublishedTime
-                    opengraphModifiedTime
-                    opengraphImage {
-                      sourceUrl
-                      mimeType
-                      author {
-                        node {
-                          name
-                        }
-                      }
-                    }
-                    opengraphType
-                    schema {
-                      raw
-                    }
-                  }
-                }
-                ... on Tag {
-                  id
-                  name
-                  uri
-                  seo {
-                    opengraphSiteName
-                    breadcrumbs {
-                      text
-                      url
-                    }
-                    opengraphUrl
-                    canonical
-                    metaDesc
-                    metaRobotsNofollow
-                    metaRobotsNoindex
-                    title
-                    opengraphDescription
-                    opengraphPublishedTime
-                    opengraphModifiedTime
-                    opengraphImage {
-                      sourceUrl
-                      mimeType
-                      author {
-                        node {
-                          name
-                        }
-                      }
-                    }
-                    opengraphType
-                    schema {
-                      raw
-                    }
-                  }
-                }
-
-                ... on Basepress {
-                  id
-                  title
-                  uri
-                  seo {
-                    opengraphSiteName
-                    breadcrumbs {
-                      text
-                      url
-                    }
-                    opengraphUrl
-                    canonical
-                    metaDesc
-                    metaRobotsNofollow
-                    metaRobotsNoindex
-                    title
-                    opengraphDescription
-                    opengraphPublishedTime
-                    opengraphModifiedTime
-                    opengraphImage {
-                      sourceUrl
-                      mimeType
-                      author {
-                        node {
-                          name
-                        }
-                      }
-                    }
-                    opengraphType
-                    readingTime
-                    schema {
-                      raw
-                    }
-                  }
-                }
-                ... on SectionBasepress {
-                  id
-                  name
-                  uri
-                  seo {
-                    opengraphSiteName
-                    breadcrumbs {
-                      text
-                      url
-                    }
-                    opengraphUrl
-                    canonical
-                    metaDesc
-                    metaRobotsNofollow
-                    metaRobotsNoindex
-                    title
-                    opengraphDescription
-                    opengraphPublishedTime
-                    opengraphModifiedTime
-                    opengraphImage {
-                      sourceUrl
-                      mimeType
-                      author {
-                        node {
-                          name
-                        }
-                      }
-                    }
-                    opengraphType
-                    schema {
-                      raw
-                    }
-                  }
-                }
-              }
-            }
-          
-            `,
-      variables: {
-        uri: uri,
-      },
-    }),
-  });
-  if (!response.ok) {
-    throw new Error("Network response was not ok");
+    const response = await fetch(GRAPHQL_ENDPOINT, {
+      method: "post",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: `
+  query 
+  seoUri($uri: String!) {
+   generalSettings {
+    title
+    url
   }
-  const { data } = await response.json();
-
-  // Cache the fetched data
-  setCachedData(cacheKey, data);
-  return data;
-} catch (error) {
-  console.error("Error fetching SEO data:", error);
-  return null; // Return null or handle the error in an appropriate way
+  nodeByUri(uri: $uri) {
+    __typename
+    ... on Page {
+      id
+      title
+      uri
+      content
+      author {
+        node {
+          name
+          id
+          avatar {
+            url
+          }
+        }
+      }
+      slug
+      date
+      featuredImage {
+        node {
+          srcSet
+          sourceUrl
+          altText
+          mimeType
+          caption
+          mediaDetails {
+            height
+            width
+          }
+        }
+      }
+      modified
+      seo {
+        canonicalUrl
+        opengraphTitle
+        metaRobotsBreadcrumbs
+        hasProLicense
+        metaDesc
+        proSchemasManual
+        metaRobotsNofollow
+        metaRobotsNoindex
+        metaTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+          mimeType
+          author {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+    ... on Post {
+      id
+      title
+      content
+      uri
+      author {
+        node {
+          name
+          id
+          avatar {
+            url
+          }
+        }
+      }
+      slug
+      date
+      modified
+      featuredImage {
+        node {
+          srcSet
+          sourceUrl
+          altText
+          mimeType
+          caption
+          mediaDetails {
+            height
+            width
+          }
+        }
+      }
+      seo {
+        proSchemas
+        opengraphTitle
+        metaRobotsBreadcrumbs
+        canonicalUrl
+        metaDesc
+        metaRobotsNofollow
+        metaRobotsNoindex
+        metaTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+          mimeType
+          author {
+            node {
+              name
+              id
+            }
+          }
+        }
+      }
+    }
+    ... on Category {
+      id
+      name
+      uri
+      slug
+      seo {
+        opengraphTitle
+        metaRobotsBreadcrumbs
+        canonicalUrl
+        metaDesc
+        metaRobotsNofollow
+        metaRobotsNoindex
+        metaTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+          mimeType
+          author {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+    ... on Tag {
+      id
+      name
+      uri
+      seo {
+        opengraphTitle
+        metaRobotsBreadcrumbs
+        canonicalUrl
+        metaDesc
+        metaRobotsNofollow
+        metaRobotsNoindex
+        metaTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+          mimeType
+          author {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+    ... on Basepress {
+      id
+      uri
+      slug
+      title
+      date
+      featuredImage {
+        node {
+          srcSet
+          sourceUrl
+          altText
+          mimeType
+          caption
+          mediaDetails {
+            height
+            width
+          }
+        }
+      }
+      modified
+      seo {
+        opengraphTitle
+        opengraphImage {
+          sourceUrl
+          mimeType
+          author {
+            node {
+              name
+            }
+          }
+        }
+        metaDesc
+        metaTitle
+        metaRobotsNoindex
+        metaRobotsNofollow
+        metaRobotsBreadcrumbs
+      }
+    }
+    ... on SectionBasepress {
+      id
+      name
+      uri
+      slug
+      description
+      seo {
+        metaDesc
+        metaTitle
+        metaRobotsNofollow
+        metaRobotsNoindex
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+          mimeType
+          author {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+  }
 }
+            `,
+        variables: {
+          uri: uri,
+        },
+      }),
+    });
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    const { data } = await response.json();
+
+    // Cache the fetched data
+    setCachedData(cacheKey, data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching SEO data:", error);
+    return null; // Return null or handle the error in an appropriate way
+  }
 }
