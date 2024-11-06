@@ -48,6 +48,8 @@ const seo = node ? node.seo : null;
 const siteName = data
   ? data.generalSettings?.title
   : "Slots Paradise Casino Guides - Best Online Casino Games";
+
+ 
 let canonicalUrl = seo?.canonical;
 for (const [key, value] of Object.entries(uriTransformations)) {
   if (canonicalUrl?.includes(value)) {
@@ -62,7 +64,7 @@ const metaDescription =
     seo?.metaDesc ||
     seo?.opengraphDescription ||
     node?.description) ??
-  "Best Online Casino Games";
+  "Slotsparadise - Best Online Casino Games";
 
 //Handle title for pagination and non pagination pages
 let pageTitleSuffix = " ";
@@ -73,7 +75,9 @@ if (pageParam) {
 
 const seoTitle: any = seo?.metaTitle
   ? `${seo.metaTitle}${pageTitleSuffix}`
-  : `${Astro.props.title || node?.slug.replace(/-/g, " ") + " - " + siteName}${pageTitleSuffix}`;
+  : `${ node?.slug.replace(/-/g, " ") + " - " + siteName}${pageTitleSuffix || Astro.props.title }`;
+
+
 
 const UrlWithPath = data.generalSettings?.url + Astro.url?.pathname;
 
@@ -155,7 +159,7 @@ const structureDataArticle = {
       contentUrl: node?.featuredImage?.node?.sourceUrl,
       width: node?.featuredImage?.node?.mediaDetails?.width || 1200,
       height: node?.featuredImage?.node?.mediaDetails?.height || 667,
-      caption: node?.featuredImage?.node?.caption,
+      caption: node?.featuredImage?.node?.caption?.replace(/<\/?[^>]+(>|$)/g, ""),
     },
     {
       "@type": "BreadcrumbList",
@@ -381,7 +385,7 @@ const BasePressSchema = {
       contentUrl: node.featuredImage?.node?.sourceUrl,
       width: node?.featuredImage?.node?.mediaDetails?.width || 1200,
       height: node?.featuredImage?.node?.mediaDetails?.height || 667,
-      caption: node?.featuredImage?.node?.caption,
+      caption: node?.featuredImage?.node?.caption?.replace(/<\/?[^>]+(>|$)/g, ""),
     },
     {
       "@type": "BreadcrumbList",
