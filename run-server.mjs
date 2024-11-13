@@ -7,15 +7,6 @@ const app = express();
 const base = "/";
 app.use(base, express.static("dist/client/"));
 app.use(ssrHandler);
-
-// Remove the salshes middleware
-app.use((req, res, next) => {
-
-  console.log(req.url);
-  req.url = req.url.replace(/\/+/g, '/');
-  next();
-});
-
 /* app.use((req, res, next) => {
   // only called if astroSsrHandler didn't handle this request originally
   req.url = "/404";
