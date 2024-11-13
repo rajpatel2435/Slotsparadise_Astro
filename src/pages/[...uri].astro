@@ -13,8 +13,6 @@ import GuidesSectionArchive from "../components/templates/GuidesSectionArchive.a
 import { cache } from "../cacheUtils.js";
 
 const uri = `/${Astro.params.uri}/`;
-
-console.log("main uri is"+uri);
 let node = null;
 let Template = Archive;
 
@@ -68,8 +66,6 @@ try {
   }
 
   const data = await getNodeByURI(uri);
-
-
   node = data.nodeByUri;
 
   if (!node || node === null) {
@@ -115,8 +111,6 @@ function resolveContentTemplate(node) {
       return Single;
   }
 }
-
-
 ---
 
 <Layout title={node ? node.title || node.name : "Page Not Found"}>
