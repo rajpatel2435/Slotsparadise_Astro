@@ -12,17 +12,22 @@ interface Props {
 const { title } = Astro.props;
 
 const fullUrl = Astro.request.url;
+
+console.log(Astro.request.url);
 const url = new URL(fullUrl);
 const searchParams = url.searchParams;
 
 const pageParam = searchParams.get("page");
 const pageTitleSuffix = pageParam
-  ? ` - Vegas Aces Casino Guides - Best Online Casino Games - Page ${pageParam}`
+  ? ` - Slots Paradise - Best Online Casino Games - Page ${pageParam}`
   : "";
 
 const seoTitle = seo?.metaTitle
   ? `${seo.metaTitle}${pageTitleSuffix}`
   : `${title}${pageTitleSuffix}`;
+
+
+  
 ---
 
 <!doctype html>
@@ -40,11 +45,11 @@ const seoTitle = seo?.metaTitle
 
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link
+    <!-- <link
       rel="icon"
       type="image/svg+xml"
       href="/content/img/favicons/favicon.png?v=1711485276"
-    />
+    /> -->
     <meta name="generator" content={Astro.generator} />
     <title>{seoTitle}</title>
     <SeoTags />
@@ -120,6 +125,38 @@ const seoTitle = seo?.metaTitle
         font-display: swap;
       }
     </style>
+
+<!-- <script>
+  // Remove multiple slashes from URL paths
+  document.addEventListener("DOMContentLoaded", () => {
+  // Clean up any multiple slashes in the pathname (except for the first one)
+  const cleanPathname = window.location.pathname.replace(/\/{2,}/g, "/");
+
+  // Check if the pathname needs to be cleaned
+  if (cleanPathname !== window.location.pathname) {
+    // Construct the full cleaned URL
+    const cleanUrl = `${window.location.origin}${cleanPathname}${window.location.search}`;
+
+    // Redirect to the cleaned URL with a 301 status
+    window.location.replace(cleanUrl); // This mimics a 301 redirect
+  }
+
+
+
+});
+
+</script> -->
+<!-- <script>
+  const originalUrl = new URL(window.location.href);
+  const cleanPathname = originalUrl.pathname.replace(/\/{2,}/g, "/");
+  if (cleanPathname !== originalUrl.pathname) {
+    const cleanUrl = new URL(cleanPathname, originalUrl.origin);
+    cleanUrl.search = originalUrl.search;
+    window.location.href = cleanUrl.href;
+    // Set the HTTP status code to 301
+    window.history.pushState({ status: 301 }, "", cleanUrl.href);
+  }
+</script> -->
 
     <!-- Google Tag Manager -->
     <script>
