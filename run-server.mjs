@@ -6,7 +6,11 @@ const app = express();
 // They should match. The default value is "/".
 const base = "/";
 app.use(base, express.static("dist/client/"));
-
 app.use(ssrHandler);
+/* app.use((req, res, next) => {
+  // only called if astroSsrHandler didn't handle this request originally
+  req.url = "/404";
+  ssrHandler(req, res, next);
+}); */
 
 app.listen(8080);
