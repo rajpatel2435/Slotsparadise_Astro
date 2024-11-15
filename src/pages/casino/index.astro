@@ -20,20 +20,23 @@ const seo = await getSeoData(Astro);
     <div
         class="main_games_container font-giloryRegular font-semibold text-[#2f0536]"
     >
-        <div
-            class="header-background bg-[url('https://slotsparadise.com/the-beach/images/2023/03/game-review-mob.webp')]
-       md:bg-[url('https://slotsparadise.com/the-beach/images/2023/03/game-review-desk.webp')] bg-cover bg-center h-52 flex items-center text-white font-giloryRegular"
-        >
-            <div class="header-content-row w-[80%] mx-auto">
-                <div class="page-title">
-                    <h1
-                        class="entry-title text-2xl md:text-3xl font-giloryExtrabold mb-2"
-                    >
-                        Casino Games
-                    </h1>
-                </div>
-            </div>
-        </div>
+    <div class="header-background relative h-52 flex items-center text-white font-giloryRegular">
+        <!-- Mobile Background Image -->
+        <img
+            src="/wp-content/uploads/2024/11/sp_header_menu_mob_1504x645_casinogames.webp"
+            class="absolute inset-0 w-full h-full sm:object-cover  block xl:hidden"
+            alt="Casino Games Banner for Mobile"
+        />
+        
+        <!-- Desktop Background Image -->
+        <img
+            src="/wp-content/uploads/2024/11/sp_header_menu_desk_1920x200_casinogames.webp"
+            class="absolute inset-0 w-full h-full object-cover  hidden xl:block"
+            alt="Casino Games Banner for Desktop"
+        />
+    
+ 
+    </div>
 
         <div class="page_main_content">
             <div class="first_block max-w-[1440px] mx-auto px-4 my-10">
@@ -49,6 +52,15 @@ const seo = await getSeoData(Astro);
                     <div
                         class="content w-full md:w-1/2 space-y-4 min-h-[450px]"
                     >
+
+                    <div class="page-title">
+                        <h1
+                            class="entry-title text-2xl md:text-5xl font-giloryExtrabold    text-[#ff688b] wp-block-heading"
+                        >
+                            Casino Games
+                        </h1>
+                    </div>
+
                         <p>
                             Welcome to our casino games reviews section, where
                             we’ll be giving you the lowdown on the hottest and
