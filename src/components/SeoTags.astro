@@ -1,38 +1,42 @@
 ---
-import { seoNodeByURI } from '../lib/seo';
+import { seoNodeByURI } from "../lib/seo";
 
 // Set the URI based on whether it's the main page or a specific URI
 // Get the full URL from Astro.request.url
 const fullUrl = Astro.request.url;
+const url = new URL(fullUrl);
 
 // Extract the path from the URL
-const path = new URL(fullUrl).pathname;
+const path = url.pathname;
+const searchParams = url.searchParams;
+
+let pageParam = searchParams.get("page");
+const isPaginated = !!pageParam;
 
 // Define a mapping of URI patterns to their transformed equivalents
 const uriTransformations = {
-  'casino/slots': 'casino/casino_slots',
-  'casino/jackpot-games': 'casino/casino_jackpot-games',
-  'casino/video-poker': 'casino/casino_video-poker',
-  'casino/table-games': 'casino/casino_table-games',
-  'casino/roulette' : 'casino/casino_roulette',
-  'casino/blackjack': 'casino/casino_blackjack',
-  'casino/live-dealer': 'casino/casino_live-dealer',
+  "casino/slots": "casino_slots",
+  "casino/jackpot-games": "casino_jackpot-games",
+  "casino/video-poker": "casino_video-poker",
+  "casino/table-games": "casino_table-games",
+  "casino/roulette": "casino_roulette",
+  "casino/blackjack": "casino_blackjack",
+  "casino/live-dealer": "casino_live-dealer",
 };
-
 
 //  URI based on the path
 let uri;
-if (path === '/') {
-  uri = '/';
+if (path === "/") {
+  uri = "/";
 } else {
-  uri = path.endsWith('/') ? path : `${path}/`;
+  uri = path.endsWith("/") ? path : `${path}/`;
 }
 
 // Transform the URI based on the defined mapping
 for (const [key, value] of Object.entries(uriTransformations)) {
   if (uri.includes(key)) {
     uri = uri.replace(key, value);
-    break;  // Stop once a match is found and replaced
+    break; // Stop once a match is found and replaced
   }
 }
 
@@ -41,40 +45,499 @@ const data = await seoNodeByURI(uri);
 const node = data.nodeByUri && data.nodeByUri.seo ? data.nodeByUri : null;
 
 const seo = node ? node.seo : null;
+const siteName = data
+  ? data.generalSettings?.title
+  : "Slots Paradise Casino Guides - Best Online Casino Games";
 
+ 
 let canonicalUrl = seo?.canonical;
 for (const [key, value] of Object.entries(uriTransformations)) {
   if (canonicalUrl?.includes(value)) {
     canonicalUrl = canonicalUrl.replace(value, key);
-    break;  // Stop once a match is found and replaced
+    break; // Stop once a match is found and replaced
   }
 }
 
+// Handle meta description
+const metaDescription =
+  (Astro.props.metaDescription ||
+    seo?.metaDesc ||
+    seo?.opengraphDescription ||
+    node?.description) ??
+  "Slotsparadise - Best Online Casino Games";
+
+//Handle title for pagination and non pagination pages
+let pageTitleSuffix = " ";
+
+if (pageParam) {
+  pageTitleSuffix = `- Page ${pageParam}`;
+}
+
+const seoTitle: any = seo?.metaTitle
+  ? `${seo.metaTitle}${pageTitleSuffix}`
+  : `${ node?.slug.replace(/-/g, " ") + " - " + siteName}${pageTitleSuffix || Astro.props.title }`;
 
 
-//console.log(seo);
+
+const UrlWithPath = data.generalSettings?.url + Astro.url?.pathname;
+
+const originUrl = data.generalSettings?.url;
+
+const structureDataArticle = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": node?.__typename == "Post" ? "Article" : "WebPage",
+      "@id": `${UrlWithPath}#article`,
+      isPartOf: {
+        "@id": UrlWithPath,
+      },
+      author: {
+        name:
+          node?.author?.node?.name || seo?.opengraphImage?.author?.node?.name,
+        "@id": `${originUrl}/#/schema/person/${seo?.opengraphImage?.author?.node?.id || node?.author?.node?.id}`,
+      },
+      headline: seoTitle || node?.title,
+      thumbnailUrl: node.featuredImage?.node?.sourceUrl,
+      datePublished: node?.date,
+      dateModified: node?.modified,
+
+      mainEntityOfPage: {
+        "@id": UrlWithPath,
+      },
+      wordCount:
+        node?.content
+          ?.replace(/<\/?[^>]+(>|$)/g, "")
+          .trim()
+          .split(/\s+/).length || 600,
+
+      publisher: {
+        "@id": `${originUrl}/#organization`,
+      },
+      image: {
+        "@id": `${UrlWithPath}#primaryimage`,
+      },
+
+      articleSection: [node?.uri.split("/")[2]],
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "WebPage",
+      "@id": UrlWithPath,
+      url: UrlWithPath,
+      name: node?.title || seoTitle,
+      isPartOf: {
+        "@id": `${originUrl}/#website`,
+      },
+      primaryImageOfPage: {
+        "@id": `${UrlWithPath}#primaryimage`,
+      },
+      image: {
+        "@id": `${UrlWithPath}#primaryimage`,
+      },
+      thumbnailUrl: node.featuredImage?.node?.sourceUrl,
+      datePublished: node?.date,
+      dateModified: node?.modified,
+      description:
+        metaDescription || seo?.metaDesc || seo?.opengraphDescription,
+      breadcrumb: {
+        "@id": `${UrlWithPath}#breadcrumb`,
+      },
+      inLanguage: "en-US",
+      potentialAction: [
+        {
+          "@type": "ReadAction",
+          target: [UrlWithPath],
+        },
+      ],
+    },
+    {
+      "@type": "ImageObject",
+      inLanguage: "en-US",
+      "@id": `${UrlWithPath}#primaryimage`,
+      url: node?.featuredImage?.node?.sourceUrl,
+      contentUrl: node?.featuredImage?.node?.sourceUrl,
+      width: node?.featuredImage?.node?.mediaDetails?.width || 1200,
+      height: node?.featuredImage?.node?.mediaDetails?.height || 667,
+      caption: node?.featuredImage?.node?.caption?.replace(/<\/?[^>]+(>|$)/g, ""),
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${UrlWithPath}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: originUrl,
+        },
+        ...node?.uri
+          .split("/")
+          .filter((uri) => uri !== "")
+          .map((uri, index, array) => {
+            const oldUrl = array.slice(0, index + 1).join("/");
+            return {
+              "@type": "ListItem",
+              position: index + 2, // increment position by 1
+              name: uri,
+              item: `${originUrl}/${oldUrl}`,
+            };
+          }),
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${originUrl}/#website`,
+      url: originUrl,
+      name: node?.siteName || siteName,
+      description: "Best Online Casino Games",
+      publisher: {
+        "@id": `${originUrl}/#organization`,
+      },
+      potentialAction: [
+        {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${originUrl}/?s={search_term_string}`,
+          },
+          "query-input": {
+            "@type": "PropertyValueSpecification",
+            valueRequired: true,
+            valueName: "search_term_string",
+          },
+        },
+      ],
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "Organization",
+      "@id": `${originUrl}/#organization`,
+      name: "Slots Paradise Casino",
+      url: originUrl,
+      logo: {
+        "@type": "ImageObject",
+        inLanguage: "en-US",
+        "@id": `${originUrl}/#/schema/logo/image/`,
+        url: "https://slotsparadise.com/the-beach/images/2022/03/footer2-logo.png",
+        contentUrl:
+          "https://slotsparadise.com/the-beach/images/2022/03/footer2-logo.png",
+        width: 250,
+        height: 250,
+        caption: "Slots Paradise Casino",
+      },
+      image: {
+        "@id": `${originUrl}/#/schema/logo/image/`,
+      },
+      sameAs: [
+        "https://www.facebook.com/Slots-Paradise-Online-Casino-102884869007853",
+        "https://x.com/SlotsParadiseOC",
+      ],
+    },
+    {
+      "@type": "Person",
+      "@id": `${originUrl}/#/schema/person/${seo?.opengraphImage?.author?.node?.id || node?.author?.node?.id}`,
+      name: seo?.opengraphImage?.author?.node?.name || node?.author?.node?.name,
+      image: {
+        "@type": "ImageObject",
+        inLanguage: "en-US",
+        "@id": `${originUrl}/#/schema/person/image/`,
+        url: node?.author?.node?.avatar?.url,
+        contentUrl: node?.author?.node?.avatar?.url,
+        caption:
+          seo?.opengraphImage?.author?.node?.name || node?.author?.node?.name,
+      },
+    },
+  ],
+};
+
+const CollectionPageSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": UrlWithPath,
+      url: UrlWithPath,
+      name: "Slots Paradise Online Casino Real Money - Games, Guides & More",
+      isPartOf: {
+        "@id": `${originUrl}/#website`,
+      },
+      description: seo?.metaDesc || seo?.opengraphDescription,
+      breadcrumb: {
+        "@id": `${UrlWithPath}#breadcrumb`,
+      },
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${UrlWithPath}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: originUrl,
+        },
+        ...node?.uri
+          .split("/")
+          .filter((uri) => uri !== "")
+          .map((uri, index, array) => {
+            const oldUrl = array.slice(0, index + 1).join("/");
+            return {
+              "@type": "ListItem",
+              position: index + 2, // increment position by 1
+              name: uri,
+              item: `${originUrl}/${oldUrl}`,
+            };
+          }),
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${originUrl}/#website`,
+      url: originUrl,
+      name: "Slots Paradise Casino - Best Online Casino Games",
+      description: "Best Online Casino Games",
+      publisher: {
+        "@id": `${originUrl}/#organization`,
+      },
+      potentialAction: [
+        {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${originUrl}/?s={search_term_string}`,
+          },
+          "query-input": {
+            "@type": "PropertyValueSpecification",
+            valueRequired: true,
+            valueName: "search_term_string",
+          },
+        },
+      ],
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "Organization",
+      "@id": `${originUrl}/#organization`,
+      name: "Slots Paradise Casino",
+      url: originUrl,
+      logo: {
+        "@type": "ImageObject",
+        inLanguage: "en-US",
+        "@id": `${originUrl}/#/schema/logo/image/`,
+        url: "https://slotsparadise.com/the-beach/images/2022/03/footer2-logo.png",
+        contentUrl:
+          "https://slotsparadise.com/the-beach/images/2022/03/footer2-logo.png",
+        width: 250,
+        height: 250,
+        caption: "Slots Paradise Casino",
+      },
+      image: {
+        "@id": `${originUrl}/#/schema/logo/image/`,
+      },
+      sameAs: [
+        "https://www.facebook.com/Slots-Paradise-Online-Casino-102884869007853",
+        "https://x.com/SlotsParadiseOC",
+      ],
+    },
+  ],
+};
+
+const BasePressSchema = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": UrlWithPath,
+      url: UrlWithPath,
+      name: seoTitle || node?.title,
+      isPartOf: {
+        "@id": `${originUrl}/#website`,
+      },
+      primaryImageOfPage: {
+        "@id": `${UrlWithPath}/#primaryimage`,
+      },
+      image: {
+        "@id": `${UrlWithPath}/#primaryimage`,
+      },
+      thumbnailUrl: node.featuredImage?.node?.sourceUrl,
+      datePublished: node?.date,
+      dateModified: node?.modified,
+      description:
+        metaDescription || seo?.metaDesc || seo?.opengraphDescription,
+      breadcrumb: {
+        "@id": `${UrlWithPath}#breadcrumb`,
+      },
+      inLanguage: "en-US",
+      potentialAction: [
+        {
+          "@type": "ReadAction",
+          target: [UrlWithPath],
+        },
+      ],
+    },
+    {
+      "@type": "ImageObject",
+      inLanguage: "en-US",
+      "@id": `${UrlWithPath}/#primaryimage`,
+      url: node.featuredImage?.node?.sourceUrl,
+      contentUrl: node.featuredImage?.node?.sourceUrl,
+      width: node?.featuredImage?.node?.mediaDetails?.width || 1200,
+      height: node?.featuredImage?.node?.mediaDetails?.height || 667,
+      caption: node?.featuredImage?.node?.caption?.replace(/<\/?[^>]+(>|$)/g, ""),
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${UrlWithPath}#breadcrumb`,
+      itemListElement: [
+        {
+          "@type": "ListItem",
+          position: 1,
+          name: "Home",
+          item: originUrl,
+        },
+        ...node?.uri
+          .split("/")
+          .filter((uri) => uri !== "")
+          .map((uri, index, array) => {
+            const oldUrl = array.slice(0, index + 1).join("/");
+            return {
+              "@type": "ListItem",
+              position: index + 2, // increment position by 1
+              name: uri,
+              item: `${originUrl}/${oldUrl}`,
+            };
+          }),
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${originUrl}/#website`,
+      url: originUrl,
+      name: "Slots Paradise Casino - Best Online Casino Games",
+      description: "Best Online Casino Games",
+      publisher: {
+        "@id": `${originUrl}/#organization`,
+      },
+      potentialAction: [
+        {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${originUrl}/?s={search_term_string}`,
+          },
+          "query-input": {
+            "@type": "PropertyValueSpecification",
+            valueRequired: true,
+            valueName: "search_term_string",
+          },
+        },
+      ],
+      inLanguage: "en-US",
+    },
+    {
+      "@type": "Organization",
+      "@id": `${originUrl}/#organization`,
+      name: "Slots Paradise Casino",
+      url: originUrl,
+      logo: {
+        "@type": "ImageObject",
+        inLanguage: "en-US",
+        "@id": `${originUrl}/#/schema/logo/image/`,
+        url: "https://slotsparadise.com/the-beach/images/2022/03/footer2-logo.png",
+        contentUrl:
+          "https://slotsparadise.com/the-beach/images/2022/03/footer2-logo.png",
+        width: 250,
+        height: 250,
+        caption: "Slots Paradise Casino",
+      },
+      image: {
+        "@id": `${originUrl}/#/schema/logo/image/`,
+      },
+      sameAs: [
+        "https://www.facebook.com/Slots-Paradise-Online-Casino-102884869007853",
+        "https://x.com/SlotsParadiseOC",
+      ],
+    },
+  ],
+};
 ---
 
-<meta name="description" content={seo?.metaDesc} />
-<link rel="canonical" href={canonicalUrl} />
+<meta name="title" content={seoTitle || node?.slug + " - " + siteName} />
+<meta name="description" content={metaDescription} />
+
+{!isPaginated && <link rel="canonical" href={UrlWithPath || canonicalUrl} />}
+
 <meta property="og:locale" content="en_US" />
-<meta name="robots" content=`${seo?.metaRobotsNofollow},${seo?.metaRobotsNoindex}` />
-<meta property="og:type" content={seo?.opengraphType} />
-<meta property="og:title" content={seo?.title} />
-<meta property="og:description" content={seo?.opengraphDescription} />
-<meta property="og:url" content={seo?.opengraphUrl} />
-<meta property="og:site_name" content={seo?.opengraphSiteName} />
-<meta property="article:published_time" content={seo?.opengraphPublishedTime} />
-<meta property="article:modified_time" content={seo?.opengraphModifiedTime} />
+<meta
+  name="robots"
+  content={`${seo?.metaRobotsNofollow ? "nofollow" : "follow"},${seo?.metaRobotsNoindex ? "noindex" : "index"}`}
+/>
+<meta
+  property="og:type"
+  content={node?.__typename == "Post" ||
+  node?.__typename == "Basepress" ||
+  node?.__typename == "SectionBasepress" ||
+  node?.__typename == "Category"
+    ? "article"
+    : "website"}
+/>
+<meta property="og:title" content={seoTitle || node?.slug + " - " + siteName} />
+<meta property="og:description" content={seo?.metaDesc || node?.description} />
+<meta property="og:url" content={UrlWithPath || canonicalUrl} />
+<meta property="og:site_name" content={siteName} />
+<meta property="article:published_time" content={node?.date} />
+<meta property="article:modified_time" content={node?.modified} />
 <meta property="og:image" content={seo?.opengraphImage?.sourceUrl} />
-<meta property="og:image:width" content="1200" />
-<meta property="og:image:height" content="667" />
-<meta property="og:image:type" content={seo?.opengraphImage?.mimeType} />
-<meta name="author" content={seo?.opengraphImage?.author?.node?.name} />
+<meta
+  property="og:image:width"
+  content={node?.featuredImage?.node?.mediaDetails?.width || 1200}
+/>
+<meta
+  property="og:image:height"
+  content={node?.featuredImage?.node?.mediaDetails?.height || 667}
+/>
+<meta property="og:image:type" content={node?.featuredImage?.node?.mimeType} />
+<meta
+  name="author"
+  content={seo?.opengraphImage?.author?.node?.name || node?.author?.node?.name}
+/>
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:label1" content="Written by" />
 <meta name="twitter:data1" content={seo?.opengraphImage?.author?.node?.name} />
-<meta name="twitter:label2" content="Est. reading time" />
-<meta name="twitter:data2" content=`${seo?.readingTime} minutes` />
-<script type="application/ld+json" class="yoast-schema-graph" set:html={seo?.schema.raw}>
-</script>
+
+<script src="../scripts/faqSchema.js"></script>
+{
+  node?.__typename == "Post" && (
+    <script
+      type="application/ld+json"
+      is:raw
+      class="seopress-schema-graph"
+      set:html={JSON.stringify(structureDataArticle)}
+    />
+  )
+}
+
+{
+  (node?.__typename === "Category" ||
+    node?.__typename === "SectionBasepress") && (
+    <script
+      type="application/ld+json"
+      is:raw
+      class="seopress-schema-graph"
+      set:html={JSON.stringify(CollectionPageSchema)}
+    />
+  )
+}
+
+{
+  node?.__typename === "Basepress" && (
+    <script
+      type="application/ld+json"
+      is:raw
+      class="seopress-schema-graph"
+      set:html={JSON.stringify(BasePressSchema)}
+    />
+  )
+}

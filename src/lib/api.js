@@ -128,242 +128,209 @@ export async function getNodeByURI(uri) {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         query: `query GetNodeByURI($uri: String!) {
-            nodeByUri(uri: $uri) {
-              __typename
-              isContentNode
-              isTermNode
-              ... on Post {
-                id
-                title
-                date
-                uri
-                slug
-                excerpt
-                content
-                categories {
-                  nodes {
-                    name
-                    uri
-                  }
-                }
-                featuredImage {
-                  node {
-                    srcSet
-                    sourceUrl
-                    altText
-                    mediaDetails {
-                      height
-                      width
-                    }
-                  }
-                }
-                seo {
-                  opengraphSiteName
-                  breadcrumbs {
-                    text
-                    url
-                  }
-                  opengraphUrl
-                  canonical
-                  metaDesc
+  generalSettings {
+    title
+    url
+  }
+  nodeByUri(uri: $uri) {
+    __typename
+    isContentNode
+    isTermNode
+    ... on Post {
+      id
+      title
+      date
+      uri
+      slug
+      excerpt
+      author {
+        node {
+          name
+          id
+          avatar {
+            url
+          }
+        }
+      }
+      content
+      categories {
+        nodes {
+          name
+          uri
+        }
+      }
+      featuredImage {
+        node {
+          srcSet
+          sourceUrl
+          altText
+          mediaDetails {
+            height
+            width
+          }
+        }
+      }
+      seo {
+        metaDesc
+        metaTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+          mimeType
+          author {
+            node {
+              name
+            }
+          }
+        }
+        proSchemasManual
+        proSchemas
+      }
+    }
+    ... on Page {
+      id
+      title
+      uri
+      slug
+      date
+      content
+      author {
+        node {
+          name
+          id
+          avatar {
+            url
+          }
+        }
+      }
+      featuredImage {
+        node {
+          sourceUrl
+          altText
+        }
+      }
+      seo {
+        canonicalUrl
+        metaDesc
+        metaTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+          mimeType
+          author {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+    ... on Category {
+      id
+      name
+      slug
+      uri
+      children {
+        edges {
+          node {
+            name
+            posts {
+              edges {
+                node {
                   title
-                  opengraphDescription
-                  opengraphPublishedTime
-                  opengraphModifiedTime
-                  opengraphImage {
-                    sourceUrl
-                    mimeType
-                    author {
-                      node {
-                        name
-                      }
-                    }
-                  }
-                  opengraphType
-                  readingTime
-                  schema {
-                    raw
-                  }
-                }
-              }
-              ... on Page {
-                id
-                title
-                uri
-                slug
-                date
-                content
-                seo {
-                  opengraphSiteName
-                  breadcrumbs {
-                    text
-                    url
-                  }
-                  opengraphUrl
-                  canonical
-                  metaDesc
-                  title
-                  opengraphDescription
-                  opengraphPublishedTime
-                  opengraphModifiedTime
-                  opengraphImage {
-                    sourceUrl
-                    mimeType
-                    author {
-                      node {
-                        name
-                      }
-                    }
-                  }
-                  opengraphType
-                  readingTime
-                  schema {
-                    raw
-                  }
-                }
-              }
-              ... on Category {
-                id
-                name
-                uri
-                slug
-                children {
-                  edges {
+                  uri
+                  excerpt
+                  featuredImage {
                     node {
-                      name
-                      posts {
-                        edges {
-                          node {
-                            title
-                            uri
-                            excerpt
-                            featuredImage {
-                              node {
-                                sourceUrl
-                                altText
-                              }
-                            }
-                          }
-                        }
-                      }
-                      seo {
-                        breadcrumbs {
-                          text
-                          url
-                        }
-                      }
+                      sourceUrl
+                      altText
                     }
                   }
                 }
-                seo {
-                  opengraphSiteName
-                  breadcrumbs {
-                    text
-                    url
-                  }
-                  opengraphUrl
-                  canonical
-                  metaDesc
-                  title
-                  opengraphDescription
-                  opengraphPublishedTime
-                  opengraphModifiedTime
-                  opengraphImage {
-                    sourceUrl
-                    mimeType
-                    author {
-                      node {
-                        name
-                      }
-                    }
-                  }
-                  opengraphType
-                  schema {
-                    raw
-                  }
-                }
-              }
-              ... on Basepress {
-                id
-                title
-                uri
-                slug
-                date
-                databaseId
-                content
-                seo {
-                  opengraphSiteName
-                  breadcrumbs {
-                    text
-                    url
-                  }
-                  opengraphUrl
-                  canonical
-                  metaDesc
-                  title
-                  opengraphDescription
-                  opengraphPublishedTime
-                  opengraphModifiedTime
-                  opengraphImage {
-                    sourceUrl
-                    mimeType
-                    author {
-                      node {
-                        name
-                      }
-                    }
-                  }
-                  opengraphType
-                  readingTime
-                  schema {
-                    raw
-                  }
-                }
-              }
-              ... on SectionBasepress {
-                id
-                name
-                slug
-                uri
-                basepress(first: 100) {
-                  edges {
-                    node {
-                      title
-                      uri
-                    }
-                  }
-                }
-                seo {
-                  opengraphSiteName
-                  breadcrumbs {
-                    text
-                    url
-                  }
-                  opengraphUrl
-                  canonical
-                  metaDesc
-                  title
-                  opengraphDescription
-                  opengraphPublishedTime
-                  opengraphModifiedTime
-                  opengraphImage {
-                    sourceUrl
-                    mimeType
-                    author {
-                      node {
-                        name
-                      }
-                    }
-                  }
-                  opengraphType
-                  schema {
-                    raw
-                  }
-                }
-                count
               }
             }
           }
+        }
+      }
+      seo {
+        metaDesc
+        metaTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+          mimeType
+          author {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+    ... on Basepress {
+      id
+      title
+      uri
+      slug
+      date
+      databaseId
+      content
+      author {
+        node {
+          name
+          id
+          avatar {
+            url
+          }
+        }
+      }
+      seo {
+        metaDesc
+        metaTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+          mimeType
+          author {
+            node {
+              name
+            }
+          }
+        }
+      }
+    }
+    ... on SectionBasepress {
+      id
+      name
+      slug
+      uri
+      
+      basepress(first: 100) {
+        edges {
+          node {
+            title
+            uri
+          }
+        }
+      }
+      seo {
+        metaDesc
+        metaTitle
+        opengraphDescription
+        opengraphImage {
+          sourceUrl
+          mimeType
+          author {
+            node {
+              name
+            }
+          }
+        }
+      }
+      count
+    }
+  }
+}
           `,
         variables: {
           uri: uri,

@@ -8,11 +8,11 @@ import { getSeoData } from "../lib/seoUtils";
 const seo = await getSeoData(Astro);
 
 const data = await CasinoGuidesArticles();
-//console.log(data);
+
 const sections = data.sectionsBasepress.edges;
 ---
 
-<Layout title={seo?.title}>
+<Layout title={seo?.title || "Online Casino Guides Archives - Slots Paradise"}>
   <div
     class="header-background bg-[url('https://slotsparadise.com/wp-content/uploads/2022/07/thebeach-guides.jpg')] bg-cover bg-center py-16 flex items-center text-white font-giloryRegular"
   >

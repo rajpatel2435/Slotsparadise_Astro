@@ -13,6 +13,9 @@ export async function getSeoData(Astro) {
   // Fetch the SEO data
   const data = await seoNodeByURI(uri);
 
+
+
+
   // Extract the relevant SEO data
   const node = data.nodeByUri && data.nodeByUri.seo ? data.nodeByUri : null;
   const seo = node ? node.seo : null;
