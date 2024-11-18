@@ -58,14 +58,29 @@ pipelines:
 
     dev:
       - step:
+          name: Notify MatterMost
+          script:
+            # Send message to MatterMost
+            - COMMIT_MESSAGE=$(git log --format=%B -n 1 $BITBUCKET_COMMIT)
+            - COMMIT_DATE=$(git log -n 1 --pretty=format:'%ci' $BITBUCKET_COMMIT)
+            - COMMIT_AUTHOR=$(git log -n 1 --pretty=format:'%an' $BITBUCKET_COMMIT)
+            - >
+              curl -d '{
+                  "channel": "wp-team-activity",
+                  "username": "Bitbucket Pipelines",
+                  "text": "New commit deployed to #SlotsParadise **dev** branch on ```Astro slotsparadise``` with the following message: \n ```\n'"$COMMIT_MESSAGE"' \nEnv: AstroSlotsParadise\nDate: '"$COMMIT_DATE"'\nAuthor: '"$COMMIT_AUTHOR"'\n ```"
+                }' -H "Content-Type: application/json" -X POST https://matter.dblexchange.com/hooks/t34yjuo6a3refeeafr3itdauge
+
+    stg:
+      - step:
           name: Build assets
           image: node:20.11.1
           script:
             # Install dependencies and build assets
             - npm install
             - npx update-browserslist-db@latest
-            - echo GRAPHQL_ENDPOINT=https://wordpress-1233981-4586437.cloudwaysapps.com/wp-graphql/ >> .env.development
-            - echo ADMIN_AJAX_ENDPOINT=https://wordpress-1233981-4586437.cloudwaysapps.com/wp-admin/admin-ajax.php >> .env.development
+            - echo GRAPHQL_ENDPOINT=https://slots-stg.hstreetmedia.net/wp-graphql/ >> .env.development
+            - echo ADMIN_AJAX_ENDPOINT=https://slots-stg.hstreetmedia.net/wp-admin/admin-ajax.php >> .env.development
             - npm run build-dev
             # Save build assets as an artifact
           artifacts:
@@ -108,5 +123,6 @@ pipelines:
               curl -d '{
                   "channel": "wp-team-activity",
                   "username": "Bitbucket Pipelines",
-                  "text": "New commit deployed to #SlotsParadise **dev** branch on ```Astro slotsparadise``` with the following message: \n ```\n'"$COMMIT_MESSAGE"' \nEnv: AstroSlotsParadise\nDate: '"$COMMIT_DATE"'\nAuthor: '"$COMMIT_AUTHOR"'\n ```"
+                  "text": "New commit deployed to #SlotsParadise **stg** branch on ```Astro slotsparadise``` with the following message: \n ```\n'"$COMMIT_MESSAGE"' \nEnv: AstroSlotsParadise\nDate: '"$COMMIT_DATE"'\nAuthor: '"$COMMIT_AUTHOR"'\n ```"
                 }' -H "Content-Type: application/json" -X POST https://matter.dblexchange.com/hooks/t34yjuo6a3refeeafr3itdauge
+
